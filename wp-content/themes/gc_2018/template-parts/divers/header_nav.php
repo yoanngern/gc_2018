@@ -17,8 +17,6 @@
 
 	<a href="<?php echo pll_home_url(); ?>" id="simple_logo"></a>
 
-    <a href="<?php echo pll_home_url(); ?>" id="mobile_esbs">ESBS</a>
-
 
 	<?php if ( is_user_logged_in() ) : ?>
 		<div id="language">
@@ -44,6 +42,23 @@
 		</div>
 	<?php endif; ?>
 
+    <div id="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="top-nav">
+		<?php
+
+		wp_nav_menu( array(
+			'theme_location' => 'top'
+		) );
+
+		?>
+    </div>
+
 	<div class="principal-nav">
 		<?php
 
@@ -54,6 +69,6 @@
 		?>
 	</div>
 
-	<a href="/" id="burger"></a>
+
 
 </header>

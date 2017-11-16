@@ -1,138 +1,90 @@
 #content {
-    margin: 0;
-    min-height: 300px;
-    background-color: $white;
 
-    &.hide {
-        display: none !important;
+    article.title {
+        height: 65vh;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+        div.title {
+            position: relative;
+            z-index: 10;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            white-space: normal;
+            margin: 0 auto;
+            max-width: 1200px;
+
+            h1 {
+                color: $white;
+                text-align: center;
+                text-transform: uppercase;
+                font-size: 3em;
+                font-family: $radikal-black;
+                letter-spacing: 0.13em;
+                line-height: 1.7em;
+
+                span {
+                    border-bottom: 8px solid $red;
+                    padding: 0 6px;
+                    text-align: center;
+                }
+            }
+        }
+
     }
 
-    div.platter {
+    .platter {
         max-width: 1440px;
-        margin: 0 auto;
+        margin: 20px auto 0;
         padding: 20px 20px;
         position: relative;
 
         article.content-page {
-
             min-height: 350px;
             padding: 40px 4%;
             max-width: 960px;
             margin: 0 auto;
 
-            h1 {
-                font-size: 1.6em;
-                text-transform: uppercase;
-                letter-spacing: 0.2em;
-                line-height: 2em;
-                padding-bottom: 10px;
-                color: $gold;
-            }
-
             p {
+                font-family: $corbel;
+                line-height: 1.3em;
+                padding-bottom: 20px;
+                font-size: 1.2em;
+                letter-spacing: 0.01em;
 
             }
 
-        }
+            a {
+                color: $gray;
+                text-decoration-style: dotted;
+                -webkit-text-decoration-style: dotted;
+                -moz-text-decoration-style: dotted;
+                transition: all 100ms ease;
 
-        & > article {
-            blockquote {
-                margin: 40px 30px;
-                text-align: center;
-
-                &::before,
-                &::after {
-                    height: 1px;
-                    width: 80px;
-                    content: " ";
-                    margin: 0 auto;
-                    display: block;
-                    background-color: $gold_dark;
-                }
-
-                &::before {
-                    margin-bottom: 18px;
-                }
-
-                &::after {
-                    margin-top: 18px;
-                }
-
-                p {
-                    color: $gold-dark;
-                    font-family: $dido-i;
-                    font-size: 1.3em;
-                    line-height: 1.6em;
-                    letter-spacing: 0.1em;
-
+                &:hover {
+                    color: $red;
+                    text-decoration-style: solid;
+                    -webkit-text-decoration-style: solid;
+                    -moz-text-decoration-style: solid;
                 }
             }
+
+        }
+    }
+
+    @media only screen and (max-width: 1000px) {
+        .platter {
+            article.content-page {
+                padding: 40px 0;
+            }
+        }
+
+        .platter {
+            padding: 0;
         }
     }
 }
 
-.page-template-default {
-    #content {
-        //margin-top: 120px;
-        display: block;
-        padding: 0;
-    }
-}
-
-section.player {
-    width: 100%;
-    background-color: #000;
-    margin: 0 auto;
-
-    div.container {
-        height: 0;
-        padding-bottom: 56.2%;
-        width: 100%;
-        margin: 0 auto;
-        position: relative;
-
-        iframe {
-            margin: 0 auto;
-            display: block;
-            width: 100%;
-            height: 100%;
-            position: absolute
-        }
-    }
-}
-
-h1, h2, h3, h4 {
-    font-family: $dido-head;
-}
-
-h5, h6 {
-    font-family: $dido-bold;
-}
-
-p {
-    font-family: $avenir;
-    letter-spacing: 0.05em;
-    line-height: 1.3em;
-    color: $black;
-}
-
-a.button {
-    border: 1px solid $gold;
-    text-align: center;
-    padding: 10px 15px 5px 15px;
-    text-decoration: none;
-    text-transform: uppercase;
-    display: inline-block;
-    margin: 5px 0 5px 20px;
-
-}
-
-@media only screen and (max-width: 767px) {
-
-    #content {
-
-        div.platter {
-            padding: 40px 4%;
-        }
-    }
-}

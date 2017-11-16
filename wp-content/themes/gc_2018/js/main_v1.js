@@ -9,6 +9,7 @@ $(document).ready(function () {
 
     }
 
+    /*
 
     $("body > header").on("click", "#burger", function (event) {
         event.preventDefault();
@@ -21,6 +22,13 @@ $(document).ready(function () {
         } else {
             openNav();
         }
+    });
+
+    */
+
+
+    $('#burger').click(function () {
+        $('body > header').toggleClass('open_nav');
     });
 
 
@@ -211,29 +219,4 @@ function scrollEvent() {
 
     var scrollPos = $(document).scrollTop();
 
-}
-
-
-function openNav() {
-
-
-    $("body > header ul").addClass("show");
-    $("body > header #burger").addClass("open");
-
-    $("body > #content").addClass("hide");
-    $("body > footer").addClass("hide");
-    $("body").addClass("black");
-
-}
-
-
-function closeNav() {
-
-
-    $("body > header ul").removeClass("show");
-    $("body > header #burger").removeClass("open");
-
-    $("body > #content").removeClass("hide");
-    $("body > footer").removeClass("hide");
-    $("body").removeClass("black");
 }

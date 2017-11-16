@@ -15,10 +15,40 @@ function themeslug_enqueue_script() {
 add_action( 'wp_enqueue_scripts', 'themeslug_enqueue_style' );
 add_action( 'wp_enqueue_scripts', 'themeslug_enqueue_script' );
 
+require_once( __DIR__ . '/includes/gc_date.php' );
+
+require_once( __DIR__ . '/options.php' );
+
+
+global $blog_id;
+
+$blog_gc_id = 1;
+$blog_tv_id = 4;
+
+
+if ( $blog_id == $blog_tv_id ) {
+
+	require_once( __DIR__ . '/includes/gc_talk.php' );
+
+	require_once( __DIR__ . '/includes/gc_people.php' );
+
+}
+
+
+if ( ($blog_id != $blog_gc_id) && $blog_id != $blog_tv_id) {
+	require_once( __DIR__ . '/includes/gc_service.php' );
+
+	require_once( __DIR__ . '/includes/gc_event.php' );
+
+	require_once( __DIR__ . '/includes/gc_location.php' );
+}
+
 
 function register_my_menu() {
 	register_nav_menu( 'principal', __( 'Menu principal', 'gc_2018' ) );
+	register_nav_menu( 'top', __( 'Menu header', 'gc_2018' ) );
 	register_nav_menu( 'admin', __( 'Menu admin', 'gc_2018' ) );
+	register_nav_menu( 'footer', __( 'Menu footer', 'gc_2018' ) );
 }
 
 add_action( 'init', 'register_my_menu' );
@@ -33,9 +63,8 @@ add_image_size( 'full_hd', 1920, 1080, true );
 add_image_size( 'hd', 1280, 720, true );
 add_image_size( 'blog', 328, 244, true );
 add_image_size( 'social', 1920, 1080, true );
-
-
-
+add_image_size( 'header', 1600, 800, true );
+add_image_size( 'square', 300, 300, true );
 
 
 /**
@@ -162,15 +191,13 @@ function my_wp_nav_menu_objects_sub_menu( $sorted_menu_items, $args ) {
 	}
 }
 
-function get_field_or_parent( $field, $post_id, $taxonomy = 'category' ) {
+function get_field_or_parent( $field, $post, $taxonomy = 'category' ) {
 
-	if ( $post_id === null ) {
-		global $post;
-	} else {
-		$post = get_post( $post_id );
+	if ( is_int( $post ) ) {
+		$post = get_post( $post );
 	}
 
-	$field_return = get_field( $field, $post->ID );
+	$field_return = get_field( $field, $post );
 
 	if ( ! $field_return ) :
 
@@ -298,3 +325,8 @@ function get_related_posts( $post, $nb = 3 ) {
 
 	return $posts;
 }
+
+
+
+
+

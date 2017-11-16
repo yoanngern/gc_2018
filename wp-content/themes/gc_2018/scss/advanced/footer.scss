@@ -1,60 +1,8 @@
 footer {
-    text-align: center;
-    background-color: $gray;
+
+    background-color: $black;
+    height: 100px;
+    width: 100%;
     display: block;
-    position: relative;
-    padding-bottom: 30px;
 
-    &.hide {
-        display: none;
-    }
-
-    #logo_footer {
-        display: block;
-        width: 180px;
-        height: 120px;
-        position: relative;
-        background-image: url('images/logo_esbs_white.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
-        margin: 40px auto;
-    }
-
-    a.button {
-        display: inline-block;
-        margin: 0 0 30px;
-
-        border: 1px solid darken($white, 30);
-        color: darken($white, 30);
-
-        -webkit-transition: 0.3s ease-in-out;
-        -o-transition: 0.3s ease-in-out;
-        -moz-transition: 0.3s ease-in-out;
-        transition: 0.3s ease-in-out;
-
-        &:hover {
-            border: 1px solid $white;
-            color: $white;
-        }
-    }
-
-    p {
-        color: darken($white, 30);
-        margin-bottom: 30px;
-        line-height: 1.6em;
-
-        em {
-            font-family: $avenir-blk;
-        }
-
-        a {
-            color: darken($white, 30);
-            text-decoration: none;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-    }
 }
