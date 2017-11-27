@@ -4,7 +4,6 @@ body.page-template-default {
 
         article.title {
 
-
             a.logo {
 
             }
@@ -15,14 +14,11 @@ body.page-template-default {
 
             h1 {
 
-
             }
 
             div.button {
 
-
                 a.button {
-
 
                     &:hover {
 
@@ -30,7 +26,6 @@ body.page-template-default {
 
                 }
             }
-
 
         }
 
@@ -41,7 +36,9 @@ body.page-template-default {
         div.platter {
 
             article.content-page {
-
+                max-width: 809px;
+                padding-left: 20px;
+                padding-right: 20px;
 
                 h1 {
 
@@ -49,14 +46,12 @@ body.page-template-default {
 
                 div.lead {
 
-
                     p {
 
                     }
                 }
 
                 div.content {
-
 
                     div.col2 {
                         margin-bottom: 60px;
@@ -101,7 +96,6 @@ body.page-template-default {
 
                     ul, ol {
 
-
                         li {
 
                         }
@@ -109,9 +103,7 @@ body.page-template-default {
 
                     p {
 
-
                         a {
-
 
                             &:hover {
 
@@ -127,7 +119,6 @@ body.page-template-default {
                     blockquote {
 
                         p {
-
 
                         }
                     }

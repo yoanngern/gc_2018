@@ -41,12 +41,14 @@
 	?>
 
 
-    <article class="title"
-             style="background-image: url('<?php echo $bg_image['sizes']['header']; ?>')">
+    <article class="title">
+        <div class="image" style="background-image: url('<?php echo $bg_image['sizes']['header']; ?>')"></div>
         <div class="title">
 
-
-            <h1 class="page-title"><span><?php echo $title; ?></span></h1>
+            <h1 class="page-title">
+                <span class="txt"><?php echo $title; ?></span>
+                <span class="underline"></span>
+            </h1>
 
 
         </div>
@@ -60,14 +62,17 @@
 
             <div class="content">
 
-                <a class="all_categories" href="<?php echo get_post_type_archive_link( 'gc_event' ); ?>">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </a>
-
                 <ul class="event_categories">
 					<?php
+
+					$queried_object = get_queried_object();
+
+					$curr_cat = null;
+
+					if ( $queried_object instanceof WP_Term ) {
+						$curr_cat = $queried_object;
+					}
+
 
 					$exclude    = array();
 					$categories = get_terms( array(
@@ -76,6 +81,7 @@
 					) );
 
 					$cat_other = get_term_by( 'slug', 'other', 'gc_eventcategory' );
+
 
 					foreach ( $categories as $category ) {
 
@@ -135,8 +141,6 @@
 						'exclude'  => $exclude,
 					) );
 
-					//var_dump( $cat_list );
-
 
 					foreach ( $cat_list as $cat ) {
 
@@ -145,6 +149,14 @@
 						$link     = get_term_link( $cat );
 						$acronym  = get_field( 'acronym', $cat );
 						$bg_image = get_field( 'bg_image', $cat )['sizes']['social'];
+						$class    = '';
+
+						$is_current = false;
+
+						if ( $curr_cat->term_id == $cat->term_id ) {
+							$is_current = true;
+							$link = get_post_type_archive_link( 'gc_event' );
+						}
 
 						if ( $acronym == null ) {
 							$s = $name;
@@ -166,10 +178,16 @@
 							$name = substr( $name, 0, 12 ) . "...";
 						}
 
+
+						if ( $is_current ) {
+							$class .= " current";
+						}
+
 						echo "
-					<li id='category-item-$id'>
+					<li id='category-item-$id' class='$class'>
 					    <a href='$link'>
-					        <div class='round' style='background-image: url(\" $bg_image \")'>
+					        <div class='round'>
+					        <div class='image' style='background-image: url(\" $bg_image \")'></div>
 					            <span>$acronym</span>
                             </div>
 					        <div class='name'>$name</div>

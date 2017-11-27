@@ -4,12 +4,16 @@
 
 	<?php if ( get_field( 'bg_image' ) ): ?>
 
-        <article class="title"
-                 style="background-image: url('<?php echo get_field( 'bg_image' )['sizes']['header']; ?>')">
+        <article class="title">
+            <div class="image"
+                 style="background-image: url('<?php echo get_field( 'bg_image' )['sizes']['header']; ?>')"></div>
             <div class="title">
 
 
-                <h1 class="page-title"><span><?php echo get_the_title(); ?></span></h1>
+                <h1 class="page-title">
+                    <span class="txt"><?php echo get_the_title(); ?></span>
+                    <span class="underline"></span>
+                </h1>
 
 
             </div>

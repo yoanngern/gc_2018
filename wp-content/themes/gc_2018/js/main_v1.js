@@ -11,20 +11,20 @@ $(document).ready(function () {
 
     /*
 
-    $("body > header").on("click", "#burger", function (event) {
-        event.preventDefault();
+     $("body > header").on("click", "#burger", function (event) {
+     event.preventDefault();
 
 
-        if ($("body > header #burger").hasClass("open")) {
-            closeNav();
+     if ($("body > header #burger").hasClass("open")) {
+     closeNav();
 
-            closeForm();
-        } else {
-            openNav();
-        }
-    });
+     closeForm();
+     } else {
+     openNav();
+     }
+     });
 
-    */
+     */
 
 
     $('#burger').click(function () {
@@ -47,8 +47,10 @@ $(document).ready(function () {
         console.log("width: " + iframe_width);
         console.log("height: " + iframe_height);
 
+        var ratio = 100 * ( parseInt(iframe_height) / parseInt(iframe_width) );
 
-        var container = ' <section class="player" style="max-width: ' + iframe_width + 'px" data-width="' + iframe_width + '"><div class="container"></div></section> ';
+
+        var container = ' <section class="player" style="max-width: ' + iframe_width + 'px" data-width="' + iframe_width + '"><div class="container" style="padding-bottom: '+ ratio +'%"></div></section> ';
 
         $(this).wrapAll(container);
 
