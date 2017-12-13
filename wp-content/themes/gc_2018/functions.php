@@ -65,6 +65,7 @@ add_image_size( 'blog', 328, 244, true );
 add_image_size( 'social', 1920, 1080, true );
 add_image_size( 'header', 1600, 800, true );
 add_image_size( 'square', 450, 450, true );
+add_image_size( 'summary', 770, 433, true );
 
 
 /**

@@ -90,7 +90,7 @@ body > header {
         top: 0;
         z-index: 100;
         position: absolute;
-        margin: 30px 120px 0 0;
+        margin: 32px 120px 0 0;
         transition: all 250ms ease;
         -webkit-transition: all 250ms ease;
         -moz-transition: all 250ms ease;
@@ -104,18 +104,47 @@ body > header {
                 a {
                     color: $white;
                     text-decoration: none;
-                    font-size: 1.15em;
-                    line-height: 2.2em;
-                    padding: 2px;
-                    transition: all 200ms ease;
+                    font-size: 1em;
+                    line-height: 2em;
+                    padding: 2px 2px 5px;
                     opacity: 0.96;
                     font-family: $radikal;
-                    letter-spacing: 0.07em;
+                    letter-spacing: 0.08em;
                     text-transform: uppercase;
+                    position: relative;
 
                     &:hover {
-                        border-bottom: 2px solid $white;
-                        opacity: 1;
+
+                        &::before {
+                            width: 100%;
+                            transition: all 0ms ease-in-out 150ms;
+                        }
+
+                        &::after {
+                            width: 100%;
+                            transition: all 150ms ease-in-out 0s;
+                        }
+                    }
+
+                    &::after,
+                    &::before {
+                        position: absolute;
+                        content: "";
+                        height: 2px;
+                        background-color: $white;
+                        display: block;
+                        bottom: 0;
+                        width: 0;
+                    }
+
+                    &::before {
+                        right: 0;
+                        transition: all 150ms ease-in-out 150ms;
+                    }
+
+                    &::after {
+                        left: 0;
+                        transition: all 0ms ease-in-out 0s;
                     }
 
                 }
@@ -137,9 +166,9 @@ body > header {
         top: 0;
         bottom: 0;
         z-index: 1000;
-        -webkit-transition: all 250ms ease;
-        -moz-transition: all 250ms ease;
-        -o-transition: all 250ms ease;
+        -webkit-transition: all 400ms ease;
+        -moz-transition: all 400ms ease;
+        -o-transition: all 400ms ease;
         background-color: $white;
         box-shadow: -6px 0px 10px -10px rgba($black, 0.5);
 

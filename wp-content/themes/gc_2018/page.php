@@ -27,6 +27,15 @@
 	<?php endif; ?>
 
     <div class="platter">
+        <nav class="sub-nav">
+		    <?php
+
+		    wp_nav_menu( array(
+			    'theme_location' => 'principal'
+		    ) );
+
+		    ?>
+        </nav>
 
 		<?php
 		// TO SHOW THE PAGE CONTENTS

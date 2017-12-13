@@ -1,0 +1,106 @@
+nav.sub-nav {
+    width: 100%;
+    background-color: $gray5;
+    div > ul > li {
+        display: none;
+
+        &.current-menu-item,
+        &.current-menu-parent {
+            display: block;
+
+            & > a {
+                display: none;
+            }
+
+            ul {
+                text-align: center;
+                white-space: nowrap;
+                overflow: auto;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                overflow-scrolling: touch;
+
+                li {
+                    display: inline-block;
+                    padding: 0 15px;
+                    overflow: scroll;
+
+                    &.current_page_item {
+                        a {
+                            color: $gray4;
+                        }
+                    }
+
+                    a {
+                        font-size: 1.1em;
+                        line-height: 44px;
+                        text-decoration: none;
+                        color: $gray;
+                        text-transform: uppercase;
+                        font-family: $radikal-bold;
+                        padding: 0 2px;
+                        letter-spacing: 0.05em;
+                        position: relative;
+
+                        &:hover {
+
+                            &::before {
+                                width: 100%;
+                                transition: all 0ms ease-in-out 150ms;
+                            }
+
+                            &::after {
+                                width: 100%;
+                                transition: all 150ms ease-in-out 0s;
+                            }
+                        }
+
+                        &::after,
+                        &::before {
+                            position: absolute;
+                            content: "";
+                            height: 2px;
+                            background-color: $gray;
+                            display: block;
+                            bottom: 0;
+                            width: 0;
+                        }
+
+                        &::before {
+                            right: 0;
+                            transition: all 150ms ease-in-out 150ms;
+                        }
+
+                        &::after {
+                            left: 0;
+                            transition: all 0ms ease-in-out 0s;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 500px) {
+        div > ul > li {
+
+            &.current-menu-item,
+            &.current-menu-parent {
+
+                ul {
+                    padding: 0 10px;
+
+                    li {
+                        padding: 0 5px;
+
+                        a {
+                            font-size: 1em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

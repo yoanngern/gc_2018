@@ -41,24 +41,79 @@
 	?>
 
 
-    <article class="title">
-        <div class="image" style="background-image: url('<?php echo $bg_image['sizes']['header']; ?>')"></div>
-        <div class="title">
-
-            <h1 class="page-title">
-                <span class="txt"><?php echo $title; ?></span>
-                <span class="underline"></span>
-            </h1>
 
 
-        </div>
+	<?php
 
-    </article>
+	$query = new WP_Query( array(
+		'post_type'  => 'gc_event',
+		'showposts'  => 1,
+		'meta_key'   => 'main_event',
+		'meta_value' => true
+	) );
+
+	$events = $query->get_posts();
+
+
+	if ( $events[0] instanceof WP_Post ) :
+
+		$event = $events[0];
+
+		$id    = $event->ID;
+		$title = $event->post_title;
+		$link  = esc_url( $event->guid );
+		$image = get_field_or_parent( 'bg_image', $event, 'gc_eventcategory' )['sizes']['header'];
+		$date  = complex_date( get_field( 'start', $event ), get_field( 'end', $event ) );
+		$time  = time_trans( new DateTime( get_field( 'start', $event ) ) );
+
+		?>
+
+        <article class="title main_event">
+
+            <div id="<?php echo $id; ?>" class="image"
+                 style="background-image: url('<?php echo $image; ?>')"></div>
+
+            <div class="title">
+
+                <h4>Événement spécial</h4>
+                <h1 class="page-title">
+
+                    <span class="txt"><?php echo $title; ?></span>
+                    <span class="underline"></span>
+
+
+                </h1>
+                <h3><?php echo $date; ?></h3>
+                <a href="<?php echo $link; ?>" class="button"><span>En savoir plus</span></a>
+
+
+            </div>
+        </article>
+
+	<?php else: ?>
+        <article class="title">
+
+            <div class="image"
+                 style="background-image: url('<?php echo $bg_image['sizes']['header']; ?>')"></div>
+            <div class="title">
+
+                <h1 class="page-title">
+                    <span class="txt"><?php echo $title; ?></span>
+                    <span class="underline"></span>
+                </h1>
+
+            </div>
+        </article>
+
+
+	<?php endif; ?>
 
 
     <div class="platter">
 
         <section id="events_header">
+
+            <h1>Prochains événements</h1>
 
             <div class="content">
 
@@ -142,6 +197,7 @@
 					) );
 
 
+
 					foreach ( $cat_list as $cat ) {
 
 						$name     = $cat->name;
@@ -155,7 +211,7 @@
 
 						if ( $curr_cat->term_id == $cat->term_id ) {
 							$is_current = true;
-							$link = get_post_type_archive_link( 'gc_event' );
+							$link       = get_post_type_archive_link( 'gc_event' );
 						}
 
 						if ( $acronym == null ) {
@@ -181,7 +237,9 @@
 
 						if ( $is_current ) {
 							$class .= " current";
-						}
+						} else if($curr_cat != null) {
+							$class .= " not_current";
+                        }
 
 						echo "
 					<li id='category-item-$id' class='$class'>
@@ -211,7 +269,7 @@
 
 
             <section id="listOfEvents" class="small" data-nb="3">
-                <article class="content-page">
+                <article class="content-page events_table">
 
 
 					<?php

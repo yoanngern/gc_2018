@@ -1143,6 +1143,28 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/rs_facebook.png": {
+		"ft": 32768,
+		"iS": 1271,
+		"oA": 0,
+		"oAP": "\/images\/rs_facebook.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/rs_twitter.png": {
+		"ft": 32768,
+		"iS": 2541,
+		"oA": 0,
+		"oAP": "\/images\/rs_twitter.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
 	"\/images\/search.png": {
 		"ft": 32768,
 		"iS": 851,
@@ -3702,6 +3724,13 @@
 		"oAP": "\/page-elementor.php",
 		"oF": 0
 		},
+	"\/page-summary.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/page-summary.php",
+		"oF": 0
+		},
 	"\/page.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -4167,6 +4196,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/advanced\/events.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/events.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/advanced\/footer.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -4189,6 +4231,32 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/scss\/header.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/advanced\/sub_nav.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/sub_nav.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/advanced\/summary.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/summary.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
@@ -4444,6 +4512,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/event\/list_old.php",
+		"oF": 0
+		},
+	"\/template-parts\/event\/main_events.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/event\/main_events.php",
 		"oF": 0
 		},
 	"\/template-parts\/event\/none.php": {

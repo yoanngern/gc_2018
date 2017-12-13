@@ -16,6 +16,68 @@ body.gc_event-template-default {
 
 }
 
+#content article.title {
+
+    &.main_event {
+        height: 90vh;
+    }
+
+    h4 {
+        color: $white;
+        font-family: $radikal-black;
+        text-transform: uppercase;
+        font-size: 1.2em;
+        line-height: 1.8em;
+        letter-spacing: 0.08em;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        color: $white;
+        margin: 40px 0 40px;
+        font-size: 1.4em;
+    }
+
+    a.button {
+        display: inline-block;
+        color: $white;
+        background-color: transparent;
+        padding: 8px 30px 10px;
+        border: 1px solid $white;
+        font-size: 1em;
+        line-height: 2.5em;
+        font-family: $radikal-bold;
+        text-transform: uppercase;
+        text-align: center;
+        letter-spacing: 0.17em;
+        margin: 10px 0;
+        transition: all 200ms ease;
+        position: relative;
+        text-decoration: none;
+
+        &::before {
+            content: "";
+            display: block;
+            height: 3px;
+            position: absolute;
+            bottom: 15px;
+            left: 30px;
+            width: auto;
+            right: 100%;
+            background-color: $white;
+            transition: all 300ms ease-in-out 0s;
+        }
+
+        &:hover {
+
+            &::before {
+                right: 30px;
+                transition: all 300ms ease-in-out 0s;
+            }
+        }
+    }
+}
+
 body.single-gc_event {
 
     #content {
@@ -23,7 +85,6 @@ body.single-gc_event {
             height: 60vh;
 
             div.title {
-                //background-color: red;
                 top: 40%;
             }
         }
@@ -37,10 +98,29 @@ body.single-gc_event {
         z-index: 200;
 
         .nav {
-            max-width: 900px;
+            display: block;
+            width: 100%;
+            max-width: 1000px;
+            padding: 60px 0 20px;
             margin: 0 auto;
-            position: absolute;
-            display: none;
+
+            a {
+                text-transform: uppercase;
+                font-size: 1em;
+                letter-spacing: 0.15em;
+                text-decoration: none;
+                color: $gray5;
+                transition: all 200ms ease-in-out 0s;
+
+                &::before {
+                    content: "◀︎";
+                    padding-right: 7px;
+                }
+
+                &:hover {
+                    color: $gray4;
+                }
+            }
         }
 
         .content-page {
@@ -49,7 +129,7 @@ body.single-gc_event {
             display: table;
             width: 100%;
             min-height: inherit;
-            padding: 90px 0 60px;
+            padding: 20px 0 60px;
 
             main,
             aside {
@@ -75,7 +155,7 @@ body.single-gc_event {
 
                     margin: 40px 0 10px;
 
-                    .social {
+                    div.social {
                         margin: 30px 0 0;
                     }
                 }
@@ -87,6 +167,7 @@ body.single-gc_event {
                 min-width: 180px;
                 border-left: 5px solid $red;
                 padding-left: 25px;
+                vertical-align: top;
 
                 .content {
 
@@ -159,10 +240,9 @@ body.single-gc_event {
                         display: block;
                         transition: all 300ms ease-in-out 150ms;
                         position: relative;
-                        padding: 25px  25px  25px  25px ;
+                        padding: 25px 25px 25px 25px;
                         margin-right: 20px;
                         background-color: $gray-light;
-
 
                         time {
                             display: block;
@@ -182,459 +262,98 @@ body.single-gc_event {
                         }
 
                         &:hover {
-                            background-color: $red;
-                            color: $white;
 
-                            &::before {
-                                height: 100%;
+                            span {
+
+                                &.top,
+                                &.bottom {
+                                    width: 100%;
+                                }
+
+                                &.right,
+                                &.left {
+                                    height: 100%;
+                                }
+
+                                &.left,
+                                &.bottom {
+                                    background-color: $red;
+                                }
+
+                                &.top {
+                                    transition: all 300ms ease-in-out 100ms;
+                                }
+
+                                &.right {
+                                    transition: all 200ms ease-in-out 150ms;
+                                }
+
+                                &.left {
+                                    transition: all 100ms ease-in-out 0s;
+                                }
+
+                                &.bottom {
+                                    transition: all 150ms ease-in-out 0s;
+                                }
+                            }
+
+                        }
+
+                        span {
+                            display: block;
+                            position: absolute;
+
+                            &.top,
+                            &.right {
                                 background-color: $red;
                             }
 
-                            &::after {
-                                width: 100%;
-                                background-color: $red;
+                            &.left,
+                            &.bottom {
+                                background-color: $gray4;
+                                bottom: 0;
+                            }
+
+                            &.top,
+                            &.bottom {
+                                height: 2px;
+                                left: 0;
+                            }
+
+                            &.left,
+                            &.right {
+                                width: 2px;
+                                bottom: 0;
+                            }
+
+                            &.top {
+                                width: 0%;
+                                top: 0;
+                                transition: all 300ms ease-in-out 0s;
+                            }
+
+                            &.right {
+                                height: 0%;
+                                right: 0;
+                                transition: all 200ms ease-in-out 0s;
+                            }
+
+                            &.left {
+                                height: 50%;
+                                left: 0;
+                                transition: all 100ms ease-in-out 300ms;
+                            }
+
+                            &.bottom {
+                                width: 50%;
+                                transition: all 200ms ease-in-out 200ms;
                             }
                         }
 
-                        &::before {
-                            content: '';
-                            height: 50%;
-                            width: 2px;
-                            bottom: 0;
-                            left: 0;
-                            background-color: $gray4;
-                            display: block;
-                            position: absolute;
-                            transition: all 100ms ease;
-                        }
-
-                        &::after {
-                            content: '';
-                            height: 2px;
-                            width: 50%;
-                            background-color: $gray4;
-                            display: block;
-                            position: absolute;
-                            bottom: 0;
-                            left: 0;
-                            transition: all 150ms ease;
-                        }
                     }
                 }
             }
         }
     }
 
-
-
-}
-
-.platter #events_header {
-    display: block;
-    max-width: 960px;
-    padding: 20px 4% 10px;
-    margin: 0 auto;
-
-    div.content {
-        position: relative;
-        height: 80px;
-        margin: 5px 1.33333%;
-    }
-
-    a.all_categories {
-        width: 33px;
-        height: 40px;
-        display: inline-block;
-        cursor: pointer;
-        position: absolute;
-        margin: 15px 0 0 0;
-        vertical-align: top;
-
-        span {
-            display: block;
-            position: absolute;
-            height: 4px;
-            background: lighten($black, 15);
-            opacity: 1;
-            left: 0;
-
-            &:nth-child(1) {
-                top: 0;
-                width: 100%;
-            }
-
-            &:nth-child(2) {
-                top: 30%;
-                width: 80%;
-            }
-
-            &:nth-child(3) {
-                top: 60%;
-                width: 60%;
-            }
-
-        }
-    }
-
-    ul.event_categories {
-        display: inline-block;
-        white-space: nowrap;
-        overflow: auto;
-        vertical-align: top;
-        left: 0;
-        right: 0;
-        position: absolute;
-        padding-bottom: 10px;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        overflow-scrolling: touch;
-        text-align: center;
-
-        li {
-            display: inline-block;
-            margin-right: 5px;
-
-            &.current a div.round .image {
-                filter: saturate(1) brightness(110%) contrast(110%) grayscale(0);
-            }
-
-            a {
-                display: block;
-                color: $gray;
-                text-decoration: none;
-
-                &:hover {
-                    div.round .image {
-                        filter: saturate(1) brightness(110%) contrast(120%) grayscale(0);
-                    }
-                }
-
-                div.round {
-                    width: 58px;
-                    height: 58px;
-                    @include border-radius(29px);
-                    margin: 0 5px;
-                    position: relative;
-
-                    .image {
-                        background-position: center;
-                        background-repeat: no-repeat;
-                        background-size: cover;
-                        filter: saturate(0.9) brightness(132%) contrast(80%) grayscale(1);
-                        width: 100%;
-                        height: 100%;
-                        @include border-radius(29px);
-                        position: absolute;
-                    }
-
-                    span {
-                        color: $white;
-                        text-transform: uppercase;
-                        line-height: 58px;
-                        text-align: center;
-                        padding: 0 3px;
-                        display: block;
-                        font-family: $radikal-bold;
-                        font-size: 1.3em;
-                        letter-spacing: 0.1em;
-                        filter: saturate(1) brightness(100%) contrast(100%);
-                        text-shadow: 0 0 6px rgba(black, 0.3);
-                    }
-                }
-
-                div.name {
-                    font-size: 0.63em;
-                    text-align: center;
-                    padding-top: 4px;
-                }
-            }
-        }
-    }
-
-    @media only screen and (max-width: 1000px) {
-
-        padding: 10px 0;
-
-    }
-
-    @media only screen and (max-width: 900px) {
-
-        div.content {
-            margin: 5px 2%;
-        }
-
-    }
-
-    @media only screen and (max-width: 800px) {
-        div.content {
-            margin: 5px 1%;
-        }
-    }
-
-    @media only screen and (max-width: 680px) {
-        div.content {
-            margin: 5px 5%;
-        }
-
-        ul.event_categories {
-            //left: 45px;
-        }
-    }
-
-    @media only screen and (max-width: 376px) {
-        div.content {
-            margin: 5px 2%;
-        }
-    }
-}
-
-.platter #listOfEvents {
-    margin: 0 auto;
-    padding: 0 4.5px;
-    position: relative;
-    background-color: $gray-light;
-
-    article {
-        display: table;
-        width: 100%;
-
-        .event {
-            width: 20%;
-            float: left;
-            text-align: left;
-            vertical-align: top;
-            cursor: pointer;
-
-            a {
-                margin: 4.5px;
-                padding: 0 0 0 0;
-                width: auto;
-                display: block;
-                overflow: hidden;
-                transition: all 300ms ease;
-                color: $black;
-                text-decoration: none;
-
-                &:hover {
-                    color: $black;
-
-                    .image {
-                        //background-color: $red;
-                        //background-image: none !important;
-                        //filter: brightness(100%) saturate(1) contrast(100%);
-
-                        -webkit-filter: brightness(80%) saturate(1.1) contrast(105%) blur(3px);
-                    }
-
-                    .hover {
-                        opacity: 1;
-                    }
-                }
-
-                .hover {
-                    opacity: 0;
-                    position: absolute;
-                    z-index: 200;
-                    color: $white;
-                    background-color: rgba(black, 0.3);
-                    width: 100%;
-                    height: 100%;
-                    -webkit-transition: all 400ms ease;
-                    -moz-transition: all 400ms ease;
-                    -o-transition: all 400ms ease;
-
-                    span {
-                        text-align: center;
-                        width: 100%;
-                        display: block;
-                        top: 50%;
-                        -webkit-transform: translateY(-50%);
-                        -ms-transform: translateY(-50%);
-                        transform: translateY(-50%);
-                        position: relative;
-                    }
-                }
-
-                .content {
-                    display: block;
-                    width: 100%;
-                    padding-bottom: 100%;
-                    position: relative;
-                }
-
-                .image {
-                    display: block;
-                    width: 110%;
-                    height: 110%;
-                    top: -5%;
-                    bottom: -5%;
-                    left: -5%;
-                    right: -5%;
-                    position: absolute;
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    background-size: cover;
-
-                    -moz-transition: all 0.4s ease;
-                    -webkit-transition: all 0.4s ease;
-                    -o-transition: all 0.4s ease;
-                    -ms-transition: all 0.4s ease;
-                    transition: all 0.4s ease;
-
-                    -webkit-filter: brightness(80%) saturate(1.1) contrast(105%) blur(0);
-
-                    -webkit-animation: 1s linear infinite;
-
-                }
-
-                h2 {
-                    display: block;
-                    position: absolute;
-                    //-webkit-transform: translateY(-50%);
-                    //-ms-transform: translateY(-50%);
-                    //transform: translateY(-50%);
-                    white-space: normal;
-                    margin: 0 auto;
-                    color: $white;
-                    font-family: $radikal-black;
-                    text-transform: uppercase;
-                    font-size: 2.6em;
-                    line-height: 1.1em;
-                    padding: 7% 10% 0 7%;
-                    text-align: left;
-                    width: 80%;
-                    letter-spacing: 0.08em;
-                    z-index: 300;
-                }
-
-                .txt {
-                    position: absolute;
-                    bottom: 7%;
-                    left: 7%;
-                    right: 0;
-                    display: block;
-                    color: $white;
-                    z-index: 300;
-
-                    h3 {
-                        font-family: $radikal-bold;
-                        font-size: 1.2em;
-                        line-height: 1.1em;
-                        letter-spacing: 0.01em;
-                        padding-bottom: 3px;
-                        color: $white;
-                    }
-
-                    h4 {
-                        font-family: $radikal;
-                        font-size: 1.1em;
-                        line-height: 1.1em;
-                        letter-spacing: 0.01em;
-                        color: $white;
-                    }
-                }
-
-            }
-        }
-    }
-
-
-    @media only screen and (max-width: 1921px) {
-
-        article {
-            .event {
-                width: 25%;
-            }
-        }
-
-    }
-
-    @media only screen and (max-width: 1400px) {
-
-        article {
-            .event {
-                width: 33.3333%;
-            }
-        }
-
-    }
-
-    @media only screen and (max-width: 900px) {
-
-        article {
-            .event {
-                width: 50%;
-            }
-        }
-
-    }
-
-    @media only screen and (max-width: 800px) {
-
-        article {
-            .event {
-                a {
-                    margin: 10px 2% 0 1%;
-                    width: 97%;
-                }
-
-                &:nth-of-type(2n+1) a {
-                    margin: 10px 1% 0 2%;
-                }
-            }
-        }
-
-    }
-
-    @media only screen and (max-width: 680px) {
-
-        article.content-page {
-            padding: 10px 0;
-        }
-
-        article {
-            .event {
-                width: 100%;
-
-                a {
-                    margin: 10px 5% 0;
-                    width: 90%;
-
-                    .image {
-                        h2 {
-                            font-size: 3em;
-                        }
-                    }
-                }
-
-                &:nth-of-type(2n+1) a {
-                    margin: 10px 5% 0;
-                }
-            }
-        }
-
-    }
-
-    @media only screen and (max-width: 376px) {
-
-        article {
-            .event {
-                width: 100%;
-
-                a {
-                    margin: 10px 0 0;
-                    width: 100%;
-
-                    h3 {
-                        padding: 10px;
-                    }
-                }
-
-                &:nth-of-type(2n+1) a {
-                    margin: 10px 0 0;
-                }
-            }
-        }
-
-    }
 }
