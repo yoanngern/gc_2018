@@ -506,7 +506,7 @@
     @media only screen and (max-width: 640px) {
 
         article.title {
-            padding-bottom: 75%;
+            padding-bottom: 70%;
 
             div.title {
 
@@ -549,13 +549,22 @@
     // Smartphone
     @media only screen and (max-width: 380px) {
 
-        article.title {
+        .platter {
+            article.content-page,
+            section.content-default {
+                p {
+                    letter-spacing: 0.05em;
+                    line-height: 1.45em;
+                    font-size: 1.3em;
+                }
+            }
+        }
 
+        article.title {
 
             div.title {
 
                 h1 {
-
 
                     span.underline {
 
