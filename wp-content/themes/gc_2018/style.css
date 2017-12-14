@@ -1034,7 +1034,8 @@ body.single-gc_event #content .platter {
             display: none; }
           body.single-gc_event #content .platter .content-page div.container aside div.location {
             display: block;
-            position: relative; }
+            position: relative;
+            margin-bottom: 30px; }
             body.single-gc_event #content .platter .content-page div.container aside div.location h3 {
               border-bottom: 1px solid #979797;
               text-align: left; }
@@ -1054,6 +1055,8 @@ body.single-gc_event #content .platter {
               margin: 0; }
           body.single-gc_event #content .platter .content-page div.container aside a.button {
             display: block; }
+          body.single-gc_event #content .platter .content-page div.container aside a.small {
+            margin: 10px 0 10px; }
     body.single-gc_event #content .platter #related_events ul li {
       width: 50%;
       margin-bottom: 20px; } }
