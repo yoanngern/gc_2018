@@ -108,6 +108,34 @@ body > header {
     z-index: 300; }
     body > header #simple_logo:hover {
       opacity: 1; }
+  body > header #logo_mini {
+    display: none;
+    margin: 37px 0 0 40px;
+    opacity: 0.92;
+    transition: all 100ms ease;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 300;
+    fill: #FFFFFF;
+    vertical-align: middle; }
+    body > header #logo_mini svg {
+      width: 28px;
+      height: 27px;
+      display: inline-block;
+      float: left;
+      vertical-align: middle; }
+    body > header #logo_mini span {
+      display: inline-block;
+      vertical-align: middle;
+      float: left;
+      color: #FFFFFF;
+      font-family: "Radikal", sans-serif;
+      font-size: 1.4em;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 20px;
+      padding: 6px 0 0 10px; }
   body > header #language {
     display: none; }
   body > header #burger {
@@ -287,7 +315,16 @@ body > header {
     right: 0; }
   @media only screen and (max-width: 800px) {
     body > header div.top-nav {
-      display: none; } }
+      display: none; }
+    body > header #simple_logo {
+      display: none; }
+    body > header #logo_mini {
+      display: inline-block; } }
+  @media only screen and (max-width: 480px) {
+    body > header #logo_mini {
+      margin: 10px 0 0 15px; }
+    body > header #burger {
+      margin: 12px 15px 0 0; } }
   @media only screen and (max-width: 400px) {
     body > header div.principal-nav {
       max-width: inherit; } }
@@ -304,13 +341,13 @@ footer {
   display: block; }
 
 #content article.title {
-  height: 80vh;
+  height: 0;
   position: relative;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   overflow: hidden;
-  min-height: 500px; }
+  padding-bottom: 45%; }
   #content article.title .image {
     display: block;
     background-repeat: no-repeat;
@@ -338,14 +375,15 @@ footer {
   #content article.title div.title {
     position: relative;
     z-index: 10;
-    top: 40%;
+    top: 38%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     white-space: normal;
     margin: 0 auto;
     max-width: 1200px;
-    text-align: center; }
+    text-align: center;
+    width: 90%; }
     #content article.title div.title h1 {
       color: #FFFFFF;
       text-align: center;
@@ -364,6 +402,49 @@ footer {
         width: 50%;
         margin: 0 auto 0;
         display: block; }
+    #content article.title div.title h4 {
+      color: #FFFFFF;
+      font-family: "Radikal-Black", "Radikal-Bold", "Radikal", sans-serif;
+      text-transform: uppercase;
+      font-size: 1.2em;
+      line-height: 1.8em;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px; }
+    #content article.title div.title h3 {
+      color: #FFFFFF;
+      margin: 35px 0 36px;
+      font-size: 1.4em;
+      line-height: 1.4em; }
+    #content article.title div.title a.button {
+      display: inline-block;
+      color: #FFFFFF;
+      background-color: transparent;
+      padding: 8px 30px 10px;
+      border: 1px solid #FFFFFF;
+      font-size: 1em;
+      line-height: 2.5em;
+      font-family: "Radikal-Bold", "Radikal", sans-serif;
+      text-transform: uppercase;
+      text-align: center;
+      letter-spacing: 0.17em;
+      margin: 10px 0;
+      transition: all 200ms ease;
+      position: relative;
+      text-decoration: none; }
+      #content article.title div.title a.button::before {
+        content: "";
+        display: block;
+        height: 3px;
+        position: absolute;
+        bottom: 15px;
+        left: 30px;
+        width: auto;
+        right: 100%;
+        background-color: #FFFFFF;
+        transition: all 300ms ease-in-out 0s; }
+      #content article.title div.title a.button:hover::before {
+        right: 30px;
+        transition: all 300ms ease-in-out 0s; }
 
 #content .platter {
   position: relative;
@@ -618,21 +699,38 @@ footer {
   #content .platter {
     padding: 20px 100px; } }
 
-@media only screen and (max-width: 1200px) {
-  #content .platter {
-    padding: 20px 30px; } }
+@media only screen and (max-width: 1150px) {
+  #content article.title div.title h1 {
+    font-size: 2.4em; }
+    #content article.title div.title h1 span.underline {
+      height: 5px; }
+  #content article.title div.title h3 {
+    font-size: 1.3em;
+    margin: 20px 0 10px; }
+  #content article.title div.title h4 {
+    margin-bottom: 10px; }
+  #content article.title div.title a.button {
+    font-size: 0.9em;
+    padding: 5px 20px 4px; } }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 800px) {
+  #content article.title div.title {
+    top: 50%; }
   #content .platter {
-    padding: 0; }
+    margin: 0;
+    top: inherit; }
     #content .platter article.content-page {
-      padding: 40px 0; } }
+      padding: 20px 0; } }
 
 @media only screen and (max-width: 640px) {
-  #content .platter {
-    padding: 0; }
-    #content .platter article.content-page blockquote {
-      width: 94%; } }
+  #content .platter article.content-page blockquote {
+    width: 94%; } }
+
+@media only screen and (max-width: 380px) {
+  #content article.title div.title h1 {
+    font-size: 1.8em; }
+    #content article.title div.title h1 span.underline {
+      height: 4px; } }
 
 .radikal h1, .radikal h2, .radikal h3, .radikal h4, .radikal h5, .radikal h6, .radikal p, .radikal a {
   font-family: "Radikal", sans-serif !important; }
@@ -698,54 +796,6 @@ body.page-template-default #content div.platter article.content-page {
     position: relative; }
     body.gc_event-template-default #content article.title div.title {
       position: absolute; } }
-
-#content article.title.main_event {
-  height: 90vh; }
-
-#content article.title h4 {
-  color: #FFFFFF;
-  font-family: "Radikal-Black", "Radikal-Bold", "Radikal", sans-serif;
-  text-transform: uppercase;
-  font-size: 1.2em;
-  line-height: 1.8em;
-  letter-spacing: 0.08em;
-  margin-bottom: 20px; }
-
-#content article.title h3 {
-  color: #FFFFFF;
-  margin: 40px 0 40px;
-  font-size: 1.4em; }
-
-#content article.title a.button {
-  display: inline-block;
-  color: #FFFFFF;
-  background-color: transparent;
-  padding: 8px 30px 10px;
-  border: 1px solid #FFFFFF;
-  font-size: 1em;
-  line-height: 2.5em;
-  font-family: "Radikal-Bold", "Radikal", sans-serif;
-  text-transform: uppercase;
-  text-align: center;
-  letter-spacing: 0.17em;
-  margin: 10px 0;
-  transition: all 200ms ease;
-  position: relative;
-  text-decoration: none; }
-  #content article.title a.button::before {
-    content: "";
-    display: block;
-    height: 3px;
-    position: absolute;
-    bottom: 15px;
-    left: 30px;
-    width: auto;
-    right: 100%;
-    background-color: #FFFFFF;
-    transition: all 300ms ease-in-out 0s; }
-  #content article.title a.button:hover::before {
-    right: 30px;
-    transition: all 300ms ease-in-out 0s; }
 
 body.single-gc_event #content article.title {
   height: 60vh; }
@@ -919,6 +969,29 @@ body.post-type-archive-gc_event #content .platter {
   z-index: 200; }
   body.post-type-archive-gc_event #content .platter article.content-page {
     padding: 10px 0 20px; }
+
+@media only screen and (max-width: 800px) {
+  body.post-type-archive-gc_event #content article.title div.title {
+    top: 50%; }
+  body.post-type-archive-gc_event #content .platter {
+    margin: 0;
+    top: inherit; } }
+
+#content article.title.main_event {
+  padding-bottom: 50%; }
+  #content article.title.main_event div.title {
+    top: 40%; }
+  @media only screen and (max-width: 1150px) {
+    #content article.title.main_event {
+      padding-bottom: 60%; }
+      #content article.title.main_event div.title {
+        top: 45%; } }
+  @media only screen and (max-width: 800px) {
+    #content article.title.main_event {
+      padding-bottom: 80%; } }
+  @media only screen and (max-width: 660px) {
+    #content article.title.main_event {
+      padding-bottom: 100%; } }
 
 .platter #events_header {
   display: block;
@@ -1459,6 +1532,9 @@ body.post-type-archive-gc_event #content .platter {
         padding: 40px 0 20px; }
     #content .platter#summary section.sections article .pic {
       width: 100%; } }
+  @media only screen and (max-width: 380px) {
+    #content .platter#summary section.sections article {
+      padding: 12px; } }
 
 nav.sub-nav {
   width: 100%;

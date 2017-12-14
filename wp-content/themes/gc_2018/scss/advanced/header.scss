@@ -1,4 +1,3 @@
-
 body > header {
 
     top: 0;
@@ -26,6 +25,41 @@ body > header {
 
         &:hover {
             opacity: 1;
+        }
+    }
+
+    #logo_mini {
+        display: none;
+        margin: 37px 0 0 40px;
+        opacity: 0.92;
+        transition: all 100ms ease;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 300;
+        fill: $white;
+        vertical-align: middle;
+
+        svg {
+            width: 28px;
+            height: 27px;
+            display: inline-block;
+            float: left;
+            vertical-align: middle;
+        }
+
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            float: left;
+            color: $white;
+            font-family: $radikal;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 20px;
+            padding: 6px 0 0 10px;
+
         }
     }
 
@@ -308,14 +342,37 @@ body > header {
             display: none;
 
         }
+
+        #simple_logo {
+            display: none;
+        }
+
+        #logo_mini {
+            display: inline-block;
+        }
+
+    }
+
+
+    @media only screen and (max-width: 480px) {
+        #logo_mini {
+            margin: 10px 0 0 15px;
+        }
+
+        #burger {
+            margin: 12px 15px 0 0;
+        }
     }
 
     @media only screen and (max-width: 400px) {
         div.principal-nav {
             max-width: inherit;
-
         }
     }
+
+
+
+
 }
 
 body.tax-gc_eventcategory,

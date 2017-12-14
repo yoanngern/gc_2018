@@ -192,4 +192,22 @@
         }
 
     }
+
+    // Smartphone
+    @media only screen and (max-width: 380px) {
+
+        section.sections {
+            article {
+                padding: 12px;
+                .content {
+
+
+                }
+
+                .pic {
+
+                }
+            }
+        }
+    }
 }

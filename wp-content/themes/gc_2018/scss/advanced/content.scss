@@ -1,17 +1,16 @@
 #content {
 
     article.title {
-        height: 80vh;
+        height: 0;
         position: relative;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
         overflow: hidden;
-        min-height: 500px;
+        padding-bottom: 45%;
 
         .image {
             display: block;
-
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
@@ -43,7 +42,7 @@
         div.title {
             position: relative;
             z-index: 10;
-            top: 40%;
+            top: 38%;
             -webkit-transform: translateY(-50%);
             -ms-transform: translateY(-50%);
             transform: translateY(-50%);
@@ -51,6 +50,7 @@
             margin: 0 auto;
             max-width: 1200px;
             text-align: center;
+            width: 90%;
 
             h1 {
                 color: $white;
@@ -75,14 +75,67 @@
                     display: block;
                 }
             }
+
+            h4 {
+                color: $white;
+                font-family: $radikal-black;
+                text-transform: uppercase;
+                font-size: 1.2em;
+                line-height: 1.8em;
+                letter-spacing: 0.08em;
+                margin-bottom: 20px;
+            }
+
+            h3 {
+                color: $white;
+                margin: 35px 0 36px;
+                font-size: 1.4em;
+                line-height: 1.4em;
+            }
+
+            a.button {
+                display: inline-block;
+                color: $white;
+                background-color: transparent;
+                padding: 8px 30px 10px;
+                border: 1px solid $white;
+                font-size: 1em;
+                line-height: 2.5em;
+                font-family: $radikal-bold;
+                text-transform: uppercase;
+                text-align: center;
+                letter-spacing: 0.17em;
+                margin: 10px 0;
+                transition: all 200ms ease;
+                position: relative;
+                text-decoration: none;
+
+                &::before {
+                    content: "";
+                    display: block;
+                    height: 3px;
+                    position: absolute;
+                    bottom: 15px;
+                    left: 30px;
+                    width: auto;
+                    right: 100%;
+                    background-color: $white;
+                    transition: all 300ms ease-in-out 0s;
+                }
+
+                &:hover {
+
+                    &::before {
+                        right: 30px;
+                        transition: all 300ms ease-in-out 0s;
+                    }
+                }
+            }
         }
 
     }
 
     .platter {
-        //max-width: 1440px;
-        // margin: 20px auto 0;
-        //padding: 20px 4.5px;
         position: relative;
         margin: 0 20px;
         width: auto;
@@ -94,7 +147,6 @@
         section.content-default {
             min-height: 350px;
             padding: 60px 0 20px;
-            //max-width: 960px;
             margin: 0 auto;
 
             p {
@@ -403,29 +455,77 @@
         }
     }
 
-    @media only screen and (max-width: 1200px) {
-        .platter {
-            padding: 20px 30px;
+    @media only screen and (max-width: 1150px) {
+        article.title {
+            div.title {
+
+                h1 {
+                    font-size: 2.4em;
+
+                    span.underline {
+                        height: 5px;
+                    }
+                }
+
+                h3 {
+                    font-size: 1.3em;
+                    margin: 20px 0 10px;
+                }
+
+                h4 {
+                    margin-bottom: 10px;
+                }
+
+                a.button {
+                    font-size: 0.9em;
+                    padding: 5px 20px 4px;
+                }
+            }
         }
     }
 
-    @media only screen and (max-width: 1000px) {
+    // Tablet
+    @media only screen and (max-width: 800px) {
+
+        article.title {
+            div.title {
+                top: 50%;
+            }
+        }
+
         .platter {
-            padding: 0;
+            margin: 0;
+            top: inherit;
 
             article.content-page {
-                padding: 40px 0;
+                padding: 20px 0;
             }
         }
     }
 
     @media only screen and (max-width: 640px) {
         .platter {
-            padding: 0;
 
             article.content-page {
                 blockquote {
                     width: 94%;
+                }
+            }
+        }
+    }
+
+    // Smartphone
+    @media only screen and (max-width: 380px) {
+
+        article.title {
+            div.title {
+
+                h1 {
+                    font-size: 1.8em;
+
+                    span.underline {
+                        height: 4px;
+                    }
                 }
             }
         }

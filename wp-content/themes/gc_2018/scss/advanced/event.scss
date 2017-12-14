@@ -16,67 +16,6 @@ body.gc_event-template-default {
 
 }
 
-#content article.title {
-
-    &.main_event {
-        height: 90vh;
-    }
-
-    h4 {
-        color: $white;
-        font-family: $radikal-black;
-        text-transform: uppercase;
-        font-size: 1.2em;
-        line-height: 1.8em;
-        letter-spacing: 0.08em;
-        margin-bottom: 20px;
-    }
-
-    h3 {
-        color: $white;
-        margin: 40px 0 40px;
-        font-size: 1.4em;
-    }
-
-    a.button {
-        display: inline-block;
-        color: $white;
-        background-color: transparent;
-        padding: 8px 30px 10px;
-        border: 1px solid $white;
-        font-size: 1em;
-        line-height: 2.5em;
-        font-family: $radikal-bold;
-        text-transform: uppercase;
-        text-align: center;
-        letter-spacing: 0.17em;
-        margin: 10px 0;
-        transition: all 200ms ease;
-        position: relative;
-        text-decoration: none;
-
-        &::before {
-            content: "";
-            display: block;
-            height: 3px;
-            position: absolute;
-            bottom: 15px;
-            left: 30px;
-            width: auto;
-            right: 100%;
-            background-color: $white;
-            transition: all 300ms ease-in-out 0s;
-        }
-
-        &:hover {
-
-            &::before {
-                right: 30px;
-                transition: all 300ms ease-in-out 0s;
-            }
-        }
-    }
-}
 
 body.single-gc_event {
 

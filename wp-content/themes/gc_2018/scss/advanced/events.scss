@@ -2,7 +2,6 @@
 body.post-type-archive-gc_event {
     #content .platter {
         background-color: $gray-light;
-
         margin: 0 20px;
         width: auto;
         top: -15vh;
@@ -11,6 +10,56 @@ body.post-type-archive-gc_event {
 
         article.content-page {
             padding: 10px 0 20px;
+        }
+    }
+
+    // Tablet
+    @media only screen and (max-width: 800px) {
+
+        #content article.title {
+            //padding-bottom: 100%;
+
+            div.title {
+                top: 50%;
+            }
+        }
+
+        #content .platter {
+            margin: 0;
+            top: inherit;
+        }
+    }
+}
+
+#content article.title {
+
+    &.main_event {
+        padding-bottom: 50%;
+
+        div.title {
+            top: 40%;
+        }
+
+
+        @media only screen and (max-width: 1150px) {
+
+            padding-bottom: 60%;
+
+            div.title {
+                top: 45%;
+            }
+        }
+
+        // Tablet
+        @media only screen and (max-width: 800px) {
+
+            padding-bottom: 80%;
+        }
+
+        // Smartphone
+        @media only screen and (max-width: 660px) {
+
+            padding-bottom: 100%;
         }
     }
 }
@@ -210,7 +259,9 @@ body.post-type-archive-gc_event {
 
     }
 
+    // Tablet
     @media only screen and (max-width: 800px) {
+
         div.content {
             margin: 5px 1%;
         }
