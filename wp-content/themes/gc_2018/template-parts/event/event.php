@@ -91,59 +91,68 @@
 
         <article class="content-page">
 
-            <main>
-                <div class="content">
-                    <h1><?php echo $subtitle; ?></h1>
-					<?php echo $description; ?>
-                </div>
-                <div class="video">
-
-					<?php echo $video; ?>
-                </div>
-
-                <div class="more">
-
-
-					<?php if ( $pres_page != null ): ?>
-                        <a class="dynamic"
-                           href="<?php echo $pres_page->guid; ?>"><?php pll_e( 'découvrir' ) ?><?php echo " " . $pres_page->post_title; ?></a>
-					<?php endif; ?>
-
-                    <div class="social">
-                        <a class="social" id="facebook" target="_blank"
-                           href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode( get_permalink() ) ?>">Facebook</a>
-                        <a class="social" id="twitter" target="_blank"
-                           href="https://twitter.com/intent/tweet?url=<?php echo urlencode( get_permalink() ) ?>&text=<?php echo $title . ' // ' . $dates ?>&original_referer=<?php echo urlencode( get_permalink() ) ?>">Twitter</a>
+            <div class="container">
+                <main>
+                    <div class="content">
+                        <h1><?php echo $subtitle; ?></h1>
+                        <div class="mobile">
+                            <time class="date"><?php echo $dates; ?></time>
+                            <time class="time"><?php echo $times; ?></time>
+                        </div>
+						<?php echo $description; ?>
                     </div>
-                </div>
-            </main>
+                    <div class="video">
 
-            <aside>
-                <div class="content">
-                    <time class="date"><?php echo $dates; ?></time>
-                    <time class="time"><?php echo $times; ?></time>
+						<?php echo $video; ?>
+                    </div>
 
-					<?php if ( $location_obj != null ): ?>
-                        <h3><?php pll_e( 'Lieu' ) ?></h3>
-                        <p class="address"><?php echo $location; ?></p>
-
-                        <a target="_blank" class="direction" href=""><?php pll_e( 'Itinéraire' ) ?></a>
-					<?php endif; ?>
+                    <div class="more">
 
 
+						<?php if ( $pres_page != null ): ?>
+                            <a class="dynamic"
+                               href="<?php echo $pres_page->guid; ?>"><?php pll_e( 'découvrir' ) ?><?php echo " " . $pres_page->post_title; ?></a>
+						<?php endif; ?>
 
-					<?php if ( $button_url != null ): ?>
-                        <a target="_blank" class="button"
-                           href="<?php echo $button_url ?>"><?php echo $button_label ?></a>
-					<?php endif; ?>
+                        <div class="social">
+                            <a class="social" id="facebook" target="_blank"
+                               href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode( get_permalink() ) ?>">Facebook</a>
+                            <a class="social" id="twitter" target="_blank"
+                               href="https://twitter.com/intent/tweet?url=<?php echo urlencode( get_permalink() ) ?>&text=<?php echo $title . ' // ' . $dates ?>&original_referer=<?php echo urlencode( get_permalink() ) ?>">Twitter</a>
+                        </div>
+                    </div>
+                </main>
 
-					<?php if ( $location_obj != null ): ?>
-                        <a target="_blank" class="small" href=""><?php pll_e( 'ajouter au calendrier' ) ?></a>
-					<?php endif; ?>
+                <aside>
+                    <div class="content">
+                        <time class="date"><?php echo $dates; ?></time>
+                        <time class="time"><?php echo $times; ?></time>
+
+						<?php if ( $location_obj != null ): ?>
+                            <div class="location">
+                                <h3><?php pll_e( 'Lieu' ) ?></h3>
+                                <p class="address"><?php echo $location; ?></p>
+
+                                <a target="_blank" class="direction" href=""><?php pll_e( 'Itinéraire' ) ?></a>
+                            </div>
+						<?php endif; ?>
 
 
-                </div>
-            </aside>
+
+						<?php if ( $button_url != null ): ?>
+                            <a target="_blank" class="button"
+                               href="<?php echo $button_url ?>"><?php echo $button_label ?></a>
+						<?php endif; ?>
+
+						<?php if ( $location_obj != null ): ?>
+                            <a target="_blank" class="small" href=""><?php pll_e( 'ajouter au calendrier' ) ?></a>
+						<?php endif; ?>
+
+
+                    </div>
+                </aside>
+
+            </div>
 
 
         </article>

@@ -132,7 +132,7 @@ body > header {
       text-transform: uppercase;
       letter-spacing: 0.1em;
       line-height: 20px;
-      padding: 5px 0 0 8px; }
+      padding: 6px 0 0 8px; }
   body > header #language {
     display: none; }
   body > header #burger {
@@ -840,25 +840,41 @@ body.single-gc_event #content .platter {
       body.single-gc_event #content .platter .nav a:hover {
         color: #979797; }
   body.single-gc_event #content .platter .content-page {
-    max-width: 1000px;
     margin: 0 auto;
-    display: table;
-    width: 100%;
+    max-width: 1000px;
     min-height: inherit;
-    padding: 20px 0 60px; }
+    padding: 20px 0 60px;
+    position: relative;
+    display: block; }
+    body.single-gc_event #content .platter .content-page div.container {
+      display: flex;
+      margin: 0;
+      padding: 0; }
     body.single-gc_event #content .platter .content-page main,
     body.single-gc_event #content .platter .content-page aside {
-      display: table-cell; }
+      display: inline-block; }
     body.single-gc_event #content .platter .content-page main {
-      margin: 50px 0 0;
+      margin: 0;
       max-width: 800px;
       width: 100%;
       padding-right: 45px; }
+      body.single-gc_event #content .platter .content-page main .mobile {
+        display: none; }
       body.single-gc_event #content .platter .content-page main h1 {
         margin-top: 0;
         margin-bottom: 20px; }
       body.single-gc_event #content .platter .content-page main .content {
         max-width: 600px; }
+      body.single-gc_event #content .platter .content-page main div.video {
+        width: 100%;
+        overflow: auto;
+        display: block; }
+        body.single-gc_event #content .platter .content-page main div.video div {
+          width: 100% !important; }
+          body.single-gc_event #content .platter .content-page main div.video div span {
+            width: 100% !important; }
+            body.single-gc_event #content .platter .content-page main div.video div span iframe {
+              width: 100% !important; }
       body.single-gc_event #content .platter .content-page main .more {
         margin: 40px 0 10px; }
         body.single-gc_event #content .platter .content-page main .more div.social {
@@ -972,6 +988,89 @@ body.single-gc_event #content .platter {
             body.single-gc_event #content .platter #related_events ul li a span.bottom {
               width: 50%;
               transition: all 200ms ease-in-out 200ms; }
+  @media only screen and (max-width: 1150px) {
+    body.single-gc_event #content .platter .nav {
+      margin: 0 20px;
+      padding: 40px 0 10px;
+      width: auto; }
+    body.single-gc_event #content .platter .content-page {
+      margin: 0 20px; }
+    body.single-gc_event #content .platter #related_events {
+      margin: 0 20px;
+      width: auto; } }
+  @media only screen and (max-width: 800px) {
+    body.single-gc_event #content .platter {
+      top: inherit;
+      margin: 0; }
+      body.single-gc_event #content .platter #related_events ul {
+        display: table; }
+        body.single-gc_event #content .platter #related_events ul li {
+          width: 33.33%; } }
+  @media only screen and (max-width: 760px) {
+    body.single-gc_event #content .platter .content-page div.container {
+      display: block; }
+      body.single-gc_event #content .platter .content-page div.container main,
+      body.single-gc_event #content .platter .content-page div.container aside {
+        display: block;
+        padding: 0;
+        margin: 0;
+        width: 100%; }
+      body.single-gc_event #content .platter .content-page div.container main .mobile {
+        display: block; }
+        body.single-gc_event #content .platter .content-page div.container main .mobile time {
+          display: block; }
+          body.single-gc_event #content .platter .content-page div.container main .mobile time.date {
+            font-family: "Radikal", sans-serif;
+            font-size: 1.3em;
+            line-height: 1.2em;
+            letter-spacing: 0.06em; }
+          body.single-gc_event #content .platter .content-page div.container main .mobile time.time {
+            font-family: "Radikal-Light", "Radikal", sans-serif;
+            font-size: 1em;
+            line-height: 2.5em;
+            letter-spacing: 0.06em; }
+      body.single-gc_event #content .platter .content-page div.container aside {
+        border-left: none;
+        text-align: center; }
+        body.single-gc_event #content .platter .content-page div.container aside time {
+          display: none; }
+        body.single-gc_event #content .platter .content-page div.container aside div.location {
+          display: block;
+          position: relative; }
+          body.single-gc_event #content .platter .content-page div.container aside div.location h3 {
+            border-bottom: 1px solid #979797;
+            text-align: left; }
+          body.single-gc_event #content .platter .content-page div.container aside div.location p.address {
+            margin-top: 8px; }
+            body.single-gc_event #content .platter .content-page div.container aside div.location p.address br {
+              display: inline-block;
+              content: ""; }
+              body.single-gc_event #content .platter .content-page div.container aside div.location p.address br:after {
+                content: ",";
+                padding-right: 3px;
+                display: block; }
+          body.single-gc_event #content .platter .content-page div.container aside div.location a {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0; }
+        body.single-gc_event #content .platter .content-page div.container aside a.button {
+          display: block; }
+    body.single-gc_event #content .platter #related_events ul li {
+      width: 50%;
+      margin-bottom: 20px; } }
+  @media only screen and (max-width: 480px) {
+    body.single-gc_event #content .platter .content-page main h1 {
+      font-size: 1.8em; }
+    body.single-gc_event #content .platter .content-page main p {
+      letter-spacing: 0.05em;
+      line-height: 1.45em;
+      font-size: 1.3em; }
+    body.single-gc_event #content .platter #related_events h1 {
+      font-size: 1.8em; } }
+  @media only screen and (max-width: 360px) {
+    body.single-gc_event #content .platter #related_events ul li {
+      width: 100%; } }
 
 body.post-type-archive-gc_event #content .platter {
   background-color: #F8F8F8;
