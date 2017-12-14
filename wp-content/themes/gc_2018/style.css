@@ -237,11 +237,17 @@ body > header {
     -moz-transition: all 400ms ease;
     -o-transition: all 400ms ease;
     background-color: #FFFFFF;
-    box-shadow: -6px 0px 10px -10px rgba(51, 51, 51, 0.5); }
+    box-shadow: -6px 0px 10px -10px rgba(51, 51, 51, 0.5);
+    white-space: nowrap;
+    overflow: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch; }
     body > header div.principal-nav div {
       margin-top: 70px; }
     body > header div.principal-nav div > ul {
-      padding: 5px 10px 20px 20px; }
+      padding: 5px 10px 20px 20px;
+      overflow: scroll; }
       body > header div.principal-nav div > ul li {
         display: block; }
         body > header div.principal-nav div > ul li a {
@@ -799,11 +805,6 @@ body.page-template-default #content div.platter article.content-page {
     position: relative; }
     body.gc_event-template-default #content article.title div.title {
       position: absolute; } }
-
-body.single-gc_event #content article.title {
-  height: 60vh; }
-  body.single-gc_event #content article.title div.title {
-    top: 40%; }
 
 body.single-gc_event #content .platter {
   margin: 0 20px;

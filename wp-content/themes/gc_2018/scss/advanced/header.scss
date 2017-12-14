@@ -205,6 +205,12 @@ body > header {
         -o-transition: all 400ms ease;
         background-color: $white;
         box-shadow: -6px 0px 10px -10px rgba($black, 0.5);
+        white-space: nowrap;
+        overflow: auto;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+
 
         div {
             margin-top: 70px;
@@ -212,6 +218,7 @@ body > header {
 
         div > ul {
             padding: 5px 10px 20px 20px;
+            overflow: scroll;
 
             li {
                 display: block;
