@@ -330,6 +330,10 @@ body.single-gc_event {
 
         @media only screen and (max-width: 760px) {
 
+            .nav {
+                display: none;
+            }
+
             .content-page {
 
                 div.container {
@@ -352,7 +356,7 @@ body.single-gc_event {
 
                                 &.date {
                                     font-family: $radikal;
-                                    font-size: 1.3em;
+                                    font-size: 1.4em;
                                     line-height: 1.2em;
                                     letter-spacing: 0.06em;
                                 }
