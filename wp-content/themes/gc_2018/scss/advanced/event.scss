@@ -335,6 +335,7 @@ body.single-gc_event {
             }
 
             .content-page {
+                margin-top: 10px;
 
                 div.container {
                     display: block;
@@ -368,6 +369,10 @@ body.single-gc_event {
                                     letter-spacing: 0.06em;
                                 }
                             }
+                        }
+
+                        .more {
+                            margin-bottom: 30px;
                         }
                     }
 
@@ -455,7 +460,7 @@ body.single-gc_event {
             }
         }
 
-        @media only screen and (max-width: 360px) {
+        @media only screen and (max-width: 380px) {
             #related_events {
                 ul {
 

@@ -1001,55 +1001,59 @@ body.single-gc_event #content .platter {
   @media only screen and (max-width: 760px) {
     body.single-gc_event #content .platter .nav {
       display: none; }
-    body.single-gc_event #content .platter .content-page div.container {
-      display: block; }
-      body.single-gc_event #content .platter .content-page div.container main,
-      body.single-gc_event #content .platter .content-page div.container aside {
-        display: block;
-        padding: 0;
-        margin: 0;
-        width: 100%; }
-      body.single-gc_event #content .platter .content-page div.container main .mobile {
+    body.single-gc_event #content .platter .content-page {
+      margin-top: 10px; }
+      body.single-gc_event #content .platter .content-page div.container {
         display: block; }
-        body.single-gc_event #content .platter .content-page div.container main .mobile time {
-          display: block; }
-          body.single-gc_event #content .platter .content-page div.container main .mobile time.date {
-            font-family: "Radikal", sans-serif;
-            font-size: 1.4em;
-            line-height: 1.2em;
-            letter-spacing: 0.06em; }
-          body.single-gc_event #content .platter .content-page div.container main .mobile time.time {
-            font-family: "Radikal-Light", "Radikal", sans-serif;
-            font-size: 1em;
-            line-height: 2.5em;
-            letter-spacing: 0.06em; }
-      body.single-gc_event #content .platter .content-page div.container aside {
-        border-left: none;
-        text-align: center; }
-        body.single-gc_event #content .platter .content-page div.container aside time {
-          display: none; }
-        body.single-gc_event #content .platter .content-page div.container aside div.location {
+        body.single-gc_event #content .platter .content-page div.container main,
+        body.single-gc_event #content .platter .content-page div.container aside {
           display: block;
-          position: relative; }
-          body.single-gc_event #content .platter .content-page div.container aside div.location h3 {
-            border-bottom: 1px solid #979797;
-            text-align: left; }
-          body.single-gc_event #content .platter .content-page div.container aside div.location p.address {
-            margin-top: 8px; }
-            body.single-gc_event #content .platter .content-page div.container aside div.location p.address br {
-              display: inline-block;
-              content: ""; }
-              body.single-gc_event #content .platter .content-page div.container aside div.location p.address br:after {
-                content: ",";
-                padding-right: 3px;
-                display: block; }
-          body.single-gc_event #content .platter .content-page div.container aside div.location a {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin: 0; }
-        body.single-gc_event #content .platter .content-page div.container aside a.button {
+          padding: 0;
+          margin: 0;
+          width: 100%; }
+        body.single-gc_event #content .platter .content-page div.container main .mobile {
           display: block; }
+          body.single-gc_event #content .platter .content-page div.container main .mobile time {
+            display: block; }
+            body.single-gc_event #content .platter .content-page div.container main .mobile time.date {
+              font-family: "Radikal", sans-serif;
+              font-size: 1.4em;
+              line-height: 1.2em;
+              letter-spacing: 0.06em; }
+            body.single-gc_event #content .platter .content-page div.container main .mobile time.time {
+              font-family: "Radikal-Light", "Radikal", sans-serif;
+              font-size: 1em;
+              line-height: 2.5em;
+              letter-spacing: 0.06em; }
+        body.single-gc_event #content .platter .content-page div.container main .more {
+          margin-bottom: 30px; }
+        body.single-gc_event #content .platter .content-page div.container aside {
+          border-left: none;
+          text-align: center; }
+          body.single-gc_event #content .platter .content-page div.container aside time {
+            display: none; }
+          body.single-gc_event #content .platter .content-page div.container aside div.location {
+            display: block;
+            position: relative; }
+            body.single-gc_event #content .platter .content-page div.container aside div.location h3 {
+              border-bottom: 1px solid #979797;
+              text-align: left; }
+            body.single-gc_event #content .platter .content-page div.container aside div.location p.address {
+              margin-top: 8px; }
+              body.single-gc_event #content .platter .content-page div.container aside div.location p.address br {
+                display: inline-block;
+                content: ""; }
+                body.single-gc_event #content .platter .content-page div.container aside div.location p.address br:after {
+                  content: ",";
+                  padding-right: 3px;
+                  display: block; }
+            body.single-gc_event #content .platter .content-page div.container aside div.location a {
+              position: absolute;
+              top: 0;
+              right: 0;
+              margin: 0; }
+          body.single-gc_event #content .platter .content-page div.container aside a.button {
+            display: block; }
     body.single-gc_event #content .platter #related_events ul li {
       width: 50%;
       margin-bottom: 20px; } }
@@ -1062,7 +1066,7 @@ body.single-gc_event #content .platter {
       font-size: 1.3em; }
     body.single-gc_event #content .platter #related_events h1 {
       font-size: 1.8em; } }
-  @media only screen and (max-width: 360px) {
+  @media only screen and (max-width: 380px) {
     body.single-gc_event #content .platter #related_events ul li {
       width: 100%; } }
 
