@@ -112,22 +112,19 @@ body > header {
     display: none;
     margin: 37px 0 0 40px;
     opacity: 0.92;
-    transition: all 100ms ease;
     position: absolute;
     left: 0;
     top: 0;
     z-index: 300;
     fill: #FFFFFF;
-    vertical-align: middle; }
+    transition: all 300ms ease-in-out 0s; }
     body > header #logo_mini svg {
       width: 28px;
       height: 27px;
       display: inline-block;
-      float: left;
-      vertical-align: middle; }
+      float: left; }
     body > header #logo_mini span {
       display: inline-block;
-      vertical-align: middle;
       float: left;
       color: #FFFFFF;
       font-family: "Radikal", sans-serif;
@@ -135,7 +132,7 @@ body > header {
       text-transform: uppercase;
       letter-spacing: 0.1em;
       line-height: 20px;
-      padding: 6px 0 0 10px; }
+      padding: 6px 0 0 8px; }
   body > header #language {
     display: none; }
   body > header #burger {
@@ -322,9 +319,9 @@ body > header {
       display: inline-block; } }
   @media only screen and (max-width: 480px) {
     body > header #logo_mini {
-      margin: 10px 0 0 15px; }
+      margin: 13px 0 0 15px; }
     body > header #burger {
-      margin: 12px 15px 0 0; } }
+      margin: 15px 15px 0 0; } }
   @media only screen and (max-width: 400px) {
     body > header div.principal-nav {
       max-width: inherit; } }

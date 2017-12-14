@@ -32,25 +32,22 @@ body > header {
         display: none;
         margin: 37px 0 0 40px;
         opacity: 0.92;
-        transition: all 100ms ease;
         position: absolute;
         left: 0;
         top: 0;
         z-index: 300;
         fill: $white;
-        vertical-align: middle;
+        transition: all 300ms ease-in-out 0s;
 
         svg {
             width: 28px;
             height: 27px;
             display: inline-block;
             float: left;
-            vertical-align: middle;
         }
 
         span {
             display: inline-block;
-            vertical-align: middle;
             float: left;
             color: $white;
             font-family: $radikal;
@@ -58,7 +55,7 @@ body > header {
             text-transform: uppercase;
             letter-spacing: 0.1em;
             line-height: 20px;
-            padding: 6px 0 0 10px;
+            padding: 6px 0 0 8px;
 
         }
     }
@@ -353,7 +350,6 @@ body > header {
 
     }
 
-
     @media only screen and (max-width: 480px) {
         #logo_mini {
             margin: 13px 0 0 15px;
@@ -369,9 +365,6 @@ body > header {
             max-width: inherit;
         }
     }
-
-
-
 
 }
 
