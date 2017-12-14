@@ -128,11 +128,11 @@ body > header {
       float: left;
       color: #FFFFFF;
       font-family: "Radikal", sans-serif;
-      font-size: 1.4em;
+      font-size: 1.3em;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       line-height: 20px;
-      padding: 6px 0 0 8px; }
+      padding: 5px 0 0 8px; }
   body > header #language {
     display: none; }
   body > header #burger {
