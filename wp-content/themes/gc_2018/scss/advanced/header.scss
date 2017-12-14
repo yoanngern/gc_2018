@@ -13,7 +13,6 @@ body > header {
         display: inline-block;
         width: 160px;
         height: 70px;
-        background-image: url('images/gc_lausanne_white.png');
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
@@ -28,6 +27,10 @@ body > header {
         &:hover {
             opacity: 1;
         }
+    }
+
+    #language {
+        display: none;
     }
 
     #burger {

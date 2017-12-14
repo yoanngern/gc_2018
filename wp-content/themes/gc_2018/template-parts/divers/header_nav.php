@@ -15,7 +15,7 @@
 		</div>
 	<?php endif; ?>
 
-	<a href="<?php echo pll_home_url(); ?>" id="simple_logo"></a>
+	<a href="<?php echo pll_home_url(); ?>" id="simple_logo" style="background-image: url('<?php echo get_template_directory_uri() . '/images/gc_oron_white.png' ?>')"></a>
 
 
 	<?php if ( is_user_logged_in() ) : ?>

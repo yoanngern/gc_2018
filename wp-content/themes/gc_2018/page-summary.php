@@ -82,9 +82,25 @@
                                 <h2><?php the_sub_field( 'title' ); ?></h2>
                                 <p><?php the_sub_field( 'text' ); ?></p>
 
-								<?php if ( get_sub_field( 'url' ) != null ): ?>
-                                    <a href="<?php the_sub_field( 'url' ); ?>"
-                                       class="dynamic"><?php the_sub_field( 'button' ); ?></a>
+								<?php if ( get_sub_field( 'link_page' ) != null || get_sub_field( 'link_url' ) != null ):
+
+									$link_url = get_sub_field( 'link_url' );
+									$link_page = get_sub_field( 'link_page' );
+									$button_text = get_sub_field( 'button' );
+
+									if ( $link_page != null ) {
+										$button_url = $link_page;
+
+										$target = "_self";
+									} else {
+										$button_url = $link_url;
+
+										$target = "_blank";
+									}
+
+									?>
+                                    <a target="<?php echo $target; ?>" href="<?php echo $button_url; ?>"
+                                       class="dynamic"><?php echo $button_text; ?></a>
 
 								<?php endif; ?>
                             </div>

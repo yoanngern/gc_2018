@@ -268,344 +268,11 @@
 		"oAP": "\/header.php",
 		"oF": 0
 		},
-	"\/images\/android-icon-144x144.png": {
-		"ft": 32768,
-		"iS": 4841,
-		"oA": 0,
-		"oAP": "\/images\/android-icon-144x144.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/android-icon-192x192.png": {
-		"ft": 32768,
-		"iS": 10264,
-		"oA": 0,
-		"oAP": "\/images\/android-icon-192x192.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/android-icon-36x36.png": {
-		"ft": 32768,
-		"iS": 1782,
-		"oA": 0,
-		"oAP": "\/images\/android-icon-36x36.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/android-icon-48x48.png": {
-		"ft": 32768,
-		"iS": 1828,
-		"oA": 0,
-		"oAP": "\/images\/android-icon-48x48.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/android-icon-72x72.png": {
-		"ft": 32768,
-		"iS": 3203,
-		"oA": 0,
-		"oAP": "\/images\/android-icon-72x72.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/android-icon-96x96.png": {
-		"ft": 32768,
-		"iS": 3699,
-		"oA": 0,
-		"oAP": "\/images\/android-icon-96x96.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/apple-icon-114x114.png": {
-		"ft": 32768,
-		"iS": 4499,
-		"oA": 0,
-		"oAP": "\/images\/apple-icon-114x114.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/apple-icon-57x57.png": {
-		"ft": 32768,
-		"iS": 1619,
-		"oA": 0,
-		"oAP": "\/images\/apple-icon-57x57.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/apple-icon-60x60.png": {
-		"ft": 32768,
-		"iS": 2545,
-		"oA": 0,
-		"oAP": "\/images\/apple-icon-60x60.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/apple-icon-72x72.png": {
-		"ft": 32768,
-		"iS": 2773,
-		"oA": 0,
-		"oAP": "\/images\/apple-icon-72x72.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/apple-icon-76x76.png": {
-		"ft": 32768,
-		"iS": 2765,
-		"oA": 0,
-		"oAP": "\/images\/apple-icon-76x76.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/arcs.png": {
-		"ft": 32768,
-		"iS": 135714,
-		"oA": 0,
-		"oAP": "\/images\/arcs.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/arrow_down.png": {
-		"ft": 32768,
-		"iS": 382,
-		"oA": 0,
-		"oAP": "\/images\/arrow_down.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/arrow_down_blk.png": {
-		"ft": 32768,
-		"iS": 430,
-		"oA": 0,
-		"oAP": "\/images\/arrow_down_blk.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/arrow_up.png": {
-		"ft": 32768,
-		"iS": 382,
-		"oA": 0,
-		"oAP": "\/images\/arrow_up.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/arrow_up_blk.png": {
-		"ft": 32768,
-		"iS": 450,
-		"oA": 0,
-		"oAP": "\/images\/arrow_up_blk.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/arrowLeft.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "\/images\/arrowLeft.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"\/images\/arrowRight.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "\/images\/arrowRight.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"\/images\/bg_video.jpg": {
-		"ft": 16384,
-		"iS": 194224,
-		"oA": 0,
-		"oAP": "\/images\/bg_video.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 1,
-		"q": 100
-		},
-	"\/images\/bg_video_2.jpg": {
-		"ft": 16384,
-		"iS": 144295,
-		"oA": 0,
-		"oAP": "\/images\/bg_video_2.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
 	"\/images\/browserconfig.xml": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/images\/browserconfig.xml",
-		"oF": 0
-		},
-	"\/images\/burger.png": {
-		"ft": 32768,
-		"iS": 132,
-		"oA": 0,
-		"oAP": "\/images\/burger.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/burger_close.png": {
-		"ft": 32768,
-		"iS": 776,
-		"oA": 0,
-		"oAP": "\/images\/burger_close.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/burger_white.png": {
-		"ft": 32768,
-		"iS": 144,
-		"oA": 0,
-		"oAP": "\/images\/burger_white.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/close.png": {
-		"ft": 32768,
-		"iS": 2605,
-		"oA": 0,
-		"oAP": "\/images\/close.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/close_blue.png": {
-		"ft": 32768,
-		"iS": 741,
-		"oA": 0,
-		"oAP": "\/images\/close_blue.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/dropdown.png": {
-		"ft": 32768,
-		"iS": 561,
-		"oA": 0,
-		"oAP": "\/images\/dropdown.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/facebook_default_home.png": {
-		"ft": 32768,
-		"iS": 1019659,
-		"oA": 0,
-		"oAP": "\/images\/facebook_default_home.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/favicon-16x16.png": {
-		"ft": 32768,
-		"iS": 1359,
-		"oA": 0,
-		"oAP": "\/images\/favicon-16x16.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/favicon-32x32.png": {
-		"ft": 32768,
-		"iS": 1784,
-		"oA": 0,
-		"oAP": "\/images\/favicon-32x32.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/favicon-96x96.png": {
-		"ft": 32768,
-		"iS": 3699,
-		"oA": 0,
-		"oAP": "\/images\/favicon-96x96.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/favicon.ico": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/images\/favicon.ico",
 		"oF": 0
 		},
 	"\/images\/gc_lausanne_white.png": {
@@ -619,428 +286,11 @@
 		"oT": 1,
 		"q": 100
 		},
-	"\/images\/header_red.jpg": {
-		"ft": 16384,
-		"iS": 130004,
-		"oA": 0,
-		"oAP": "\/images\/header_red.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"\/images\/header_title_aimg.png": {
+	"\/images\/gc_oron_white.png": {
 		"ft": 32768,
-		"iS": 69439,
+		"iS": 14777,
 		"oA": 0,
-		"oAP": "\/images\/header_title_aimg.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_1_4.png": {
-		"ft": 32768,
-		"iS": 7009,
-		"oA": 0,
-		"oAP": "\/images\/icon_1_4.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_2_4.png": {
-		"ft": 32768,
-		"iS": 7884,
-		"oA": 0,
-		"oAP": "\/images\/icon_2_4.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_3_4.png": {
-		"ft": 32768,
-		"iS": 7203,
-		"oA": 0,
-		"oAP": "\/images\/icon_3_4.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_4_4.png": {
-		"ft": 32768,
-		"iS": 7620,
-		"oA": 0,
-		"oAP": "\/images\/icon_4_4.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_blog.png": {
-		"ft": 32768,
-		"iS": 2716,
-		"oA": 0,
-		"oAP": "\/images\/icon_blog.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_business.png": {
-		"ft": 32768,
-		"iS": 15460,
-		"oA": 0,
-		"oAP": "\/images\/icon_business.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_church.png": {
-		"ft": 32768,
-		"iS": 9766,
-		"oA": 0,
-		"oAP": "\/images\/icon_church.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_church_planting.png": {
-		"ft": 32768,
-		"iS": 7893,
-		"oA": 0,
-		"oAP": "\/images\/icon_church_planting.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_default.png": {
-		"ft": 32768,
-		"iS": 5691,
-		"oA": 0,
-		"oAP": "\/images\/icon_default.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_discipleship.png": {
-		"ft": 32768,
-		"iS": 15725,
-		"oA": 0,
-		"oAP": "\/images\/icon_discipleship.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_east.png": {
-		"ft": 32768,
-		"iS": 9663,
-		"oA": 0,
-		"oAP": "\/images\/icon_east.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_events.png": {
-		"ft": 32768,
-		"iS": 6027,
-		"oA": 0,
-		"oAP": "\/images\/icon_events.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_intercessor.png": {
-		"ft": 32768,
-		"iS": 9669,
-		"oA": 0,
-		"oAP": "\/images\/icon_intercessor.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_invite.png": {
-		"ft": 32768,
-		"iS": 5170,
-		"oA": 0,
-		"oAP": "\/images\/icon_invite.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_issues.png": {
-		"ft": 32768,
-		"iS": 10714,
-		"oA": 0,
-		"oAP": "\/images\/icon_issues.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_north.png": {
-		"ft": 32768,
-		"iS": 10841,
-		"oA": 0,
-		"oAP": "\/images\/icon_north.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_outreach.png": {
-		"ft": 32768,
-		"iS": 5312,
-		"oA": 0,
-		"oAP": "\/images\/icon_outreach.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_prayer.png": {
-		"ft": 32768,
-		"iS": 7729,
-		"oA": 0,
-		"oAP": "\/images\/icon_prayer.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_regions.png": {
-		"ft": 32768,
-		"iS": 10617,
-		"oA": 0,
-		"oAP": "\/images\/icon_regions.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_resources.png": {
-		"ft": 32768,
-		"iS": 4907,
-		"oA": 0,
-		"oAP": "\/images\/icon_resources.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_south.png": {
-		"ft": 32768,
-		"iS": 10414,
-		"oA": 0,
-		"oAP": "\/images\/icon_south.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_spheres.png": {
-		"ft": 32768,
-		"iS": 15573,
-		"oA": 0,
-		"oAP": "\/images\/icon_spheres.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_teams.png": {
-		"ft": 32768,
-		"iS": 8741,
-		"oA": 0,
-		"oAP": "\/images\/icon_teams.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_thumbs_up.png": {
-		"ft": 32768,
-		"iS": 7694,
-		"oA": 0,
-		"oAP": "\/images\/icon_thumbs_up.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_values.png": {
-		"ft": 32768,
-		"iS": 8686,
-		"oA": 0,
-		"oAP": "\/images\/icon_values.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_video.png": {
-		"ft": 32768,
-		"iS": 3294,
-		"oA": 0,
-		"oAP": "\/images\/icon_video.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_vision.png": {
-		"ft": 32768,
-		"iS": 3535,
-		"oA": 0,
-		"oAP": "\/images\/icon_vision.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/icon_west.png": {
-		"ft": 32768,
-		"iS": 10337,
-		"oA": 0,
-		"oAP": "\/images\/icon_west.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/left.png": {
-		"ft": 32768,
-		"iS": 1398,
-		"oA": 0,
-		"oAP": "\/images\/left.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/live_aimg_logo.png": {
-		"ft": 32768,
-		"iS": 33451,
-		"oA": 0,
-		"oAP": "\/images\/live_aimg_logo.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/logo_aimg.png": {
-		"ft": 32768,
-		"iS": 33451,
-		"oA": 0,
-		"oAP": "\/images\/logo_aimg.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/logo_esbs_white.png": {
-		"ft": 32768,
-		"iS": 7395,
-		"oA": 0,
-		"oAP": "\/images\/logo_esbs_white.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/logo_gw.png": {
-		"ft": 32768,
-		"iS": 9258,
-		"oA": 0,
-		"oAP": "\/images\/logo_gw.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/logo_gw_gray.png": {
-		"ft": 32768,
-		"iS": 17438,
-		"oA": 0,
-		"oAP": "\/images\/logo_gw_gray.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/logo_gw_white.png": {
-		"ft": 32768,
-		"iS": 11418,
-		"oA": 0,
-		"oAP": "\/images\/logo_gw_white.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/logo_iahm.png": {
-		"ft": 32768,
-		"iS": 29889,
-		"oA": 0,
-		"oAP": "\/images\/logo_iahm.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/logo_simple.png": {
-		"ft": 32768,
-		"iS": 3621,
-		"oA": 0,
-		"oAP": "\/images\/logo_simple.png",
+		"oAP": "\/images\/gc_oron_white.png",
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 0,
@@ -1054,94 +304,6 @@
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
-		},
-	"\/images\/ms-icon-144x144.png": {
-		"ft": 32768,
-		"iS": 9389,
-		"oA": 0,
-		"oAP": "\/images\/ms-icon-144x144.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/ms-icon-150x150.png": {
-		"ft": 32768,
-		"iS": 9851,
-		"oA": 0,
-		"oAP": "\/images\/ms-icon-150x150.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/ms-icon-310x310.png": {
-		"ft": 32768,
-		"iS": 24641,
-		"oA": 0,
-		"oAP": "\/images\/ms-icon-310x310.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/ms-icon-70x70.png": {
-		"ft": 32768,
-		"iS": 3110,
-		"oA": 0,
-		"oAP": "\/images\/ms-icon-70x70.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/next_white.png": {
-		"ft": 32768,
-		"iS": 736,
-		"oA": 0,
-		"oAP": "\/images\/next_white.png",
-		"oF": 0,
-		"oIPL": 1,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/play.png": {
-		"ft": 32768,
-		"iS": 4719,
-		"oA": 0,
-		"oAP": "\/images\/play.png",
-		"oF": 0,
-		"oIPL": 1,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/prev_white.png": {
-		"ft": 32768,
-		"iS": 682,
-		"oA": 0,
-		"oAP": "\/images\/prev_white.png",
-		"oF": 0,
-		"oIPL": 1,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/right.png": {
-		"ft": 32768,
-		"iS": 1294,
-		"oA": 0,
-		"oAP": "\/images\/right.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
 		},
 	"\/images\/rs_facebook.png": {
 		"ft": 32768,
@@ -1165,26 +327,68 @@
 		"oT": 1,
 		"q": 100
 		},
-	"\/images\/search.png": {
-		"ft": 32768,
-		"iS": 851,
-		"oA": 0,
-		"oAP": "\/images\/search.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
+	"\/includes\/acf\/date.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/date.php",
+		"oF": 0
 		},
-	"\/images\/share.jpg": {
-		"ft": 16384,
-		"iS": 103450,
-		"oA": 0,
-		"oAP": "\/images\/share.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
+	"\/includes\/acf\/event.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/event.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/event_category.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/event_category.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/header.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/header.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/location.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/location.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/recurrence.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/recurrence.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/service.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/service.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/summary.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/summary.php",
+		"oF": 0
+		},
+	"\/includes\/acf_fields.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf_fields.php",
+		"oF": 0
 		},
 	"\/includes\/gc_date.php": {
 		"cB": 0,
@@ -5969,7 +5173,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http:\/\/gc-lausanne.org",
+	"externalServerAddress": "http:\/\/dev.gc-lausanne.org",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",

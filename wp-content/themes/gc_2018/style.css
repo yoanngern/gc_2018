@@ -96,7 +96,6 @@ body > header {
     display: inline-block;
     width: 160px;
     height: 70px;
-    background-image: url("images/gc_lausanne_white.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -109,6 +108,8 @@ body > header {
     z-index: 300; }
     body > header #simple_logo:hover {
       opacity: 1; }
+  body > header #language {
+    display: none; }
   body > header #burger {
     margin: 39px 55px 0 0;
     width: 28px;
@@ -1373,7 +1374,7 @@ body.post-type-archive-gc_event #content .platter {
         width: 43%;
         float: left; }
         #content .platter#summary section.sections article .content .txt {
-          padding: 60px 100px 60px 40px; }
+          padding: 30px 100px 30px 40px; }
         #content .platter#summary section.sections article .content h2 {
           font-family: "Radikal-Black", "Radikal-Bold", "Radikal", sans-serif;
           font-size: 2.4em;

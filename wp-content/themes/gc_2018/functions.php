@@ -35,7 +35,7 @@ if ( $blog_id == $blog_tv_id ) {
 }
 
 
-if ( ($blog_id != $blog_gc_id) && $blog_id != $blog_tv_id) {
+if ( ($blog_id != $blog_gc_id) && ($blog_id != $blog_tv_id)) {
 	require_once( __DIR__ . '/includes/gc_service.php' );
 
 	require_once( __DIR__ . '/includes/gc_event.php' );
@@ -329,5 +329,5 @@ function get_related_posts( $post, $nb = 3 ) {
 
 
 
-
+require_once( __DIR__ . '/includes/acf_fields.php' );
 
