@@ -836,10 +836,10 @@ body.single-gc_event #content .platter {
     body.single-gc_event #content .platter #related_events h1 {
       margin-bottom: 40px; }
     body.single-gc_event #content .platter #related_events ul {
-      display: table; }
+      display: flex; }
       body.single-gc_event #content .platter #related_events ul li {
         list-style: none;
-        display: table-cell;
+        display: inline-block;
         width: 25%;
         padding: 0;
         text-indent: 0; }

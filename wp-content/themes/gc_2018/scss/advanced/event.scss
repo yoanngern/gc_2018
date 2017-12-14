@@ -222,11 +222,11 @@ body.single-gc_event {
             }
 
             ul {
-                display: table;
+                display: flex;
 
                 li {
                     list-style: none;
-                    display: table-cell;
+                    display: inline-block;
                     width: 25%;
                     padding: 0;
                     text-indent: 0;
