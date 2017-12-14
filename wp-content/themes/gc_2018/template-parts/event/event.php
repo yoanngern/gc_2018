@@ -179,30 +179,32 @@
 		?>
 
 
-        <section class="content-default" id="related_events">
-            <h1><?php pll_e( 'prochaines dates à venir' ) ?></h1>
+		<?php if ( $events != null ): ?>
+            <section class="content-default" id="related_events">
+                <h1><?php pll_e( 'prochaines dates à venir' ) ?></h1>
 
-            <ul>
-				<?php foreach ( $events as $event ):
+                <ul>
+					<?php foreach ( $events as $event ):
 
-					$e_dates = complex_date( get_field( 'start', $event ), get_field( 'end', $event ) );
-					$e_times = "9h30-10h30";
-					$e_link = $event->guid;
+						$e_dates = complex_date( get_field( 'start', $event ), get_field( 'end', $event ) );
+						$e_times = "9h30-10h30";
+						$e_link = $event->guid;
 
-					?>
-                    <li>
-                        <a href="<?php echo $e_link; ?>">
-                            <time class="date"><?php echo $e_dates; ?></time>
-                            <time class="time"><?php echo $e_times; ?></time>
-                            <span class="top"></span>
-                            <span class="right"></span>
-                            <span class="bottom"></span>
-                            <span class="left"></span>
-                        </a>
-                    </li>
-				<?php endforeach; ?>
-            </ul>
-        </section>
+						?>
+                        <li>
+                            <a href="<?php echo $e_link; ?>">
+                                <time class="date"><?php echo $e_dates; ?></time>
+                                <time class="time"><?php echo $e_times; ?></time>
+                                <span class="top"></span>
+                                <span class="right"></span>
+                                <span class="bottom"></span>
+                                <span class="left"></span>
+                            </a>
+                        </li>
+					<?php endforeach; ?>
+                </ul>
+            </section>
+		<?php endif; ?>
 
 
     </div>
