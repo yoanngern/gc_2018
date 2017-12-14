@@ -720,14 +720,20 @@ footer {
       padding: 20px 0; } }
 
 @media only screen and (max-width: 640px) {
-  #content .platter article.content-page blockquote {
-    width: 94%; } }
-
-@media only screen and (max-width: 380px) {
   #content article.title div.title h1 {
     font-size: 1.8em; }
     #content article.title div.title h1 span.underline {
-      height: 4px; } }
+      height: 3px; }
+  #content article.title div.title h3 {
+    font-size: 1.1em; }
+  #content article.title div.title h4 {
+    font-size: 0.8em;
+    margin-bottom: 5px; }
+  #content article.title div.title a.button {
+    font-size: 0.6em;
+    padding: 2px 10px 2px; }
+  #content .platter article.content-page blockquote {
+    width: 94%; } }
 
 .radikal h1, .radikal h2, .radikal h3, .radikal h4, .radikal h5, .radikal h6, .radikal p, .radikal a {
   font-family: "Radikal", sans-serif !important; }
