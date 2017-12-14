@@ -1398,6 +1398,12 @@ body.post-type-archive-gc_event #content .platter {
         .platter #listOfEvents .events_table .event a .image h2,
         .main-events .events_table .event a .image h2 {
           font-size: 3em; }
+        .platter #listOfEvents .events_table .event a .bottom .button,
+        .main-events .events_table .event a .bottom .button {
+          display: none; }
+        .platter #listOfEvents .events_table .event a .bottom .txt,
+        .main-events .events_table .event a .bottom .txt {
+          right: 0; }
       .platter #listOfEvents .events_table .event:nth-of-type(2n+1) a,
       .main-events .events_table .event:nth-of-type(2n+1) a {
         margin: 10px 5% 0; } }
@@ -1409,9 +1415,6 @@ body.post-type-archive-gc_event #content .platter {
       .main-events .events_table .event a {
         margin: 10px 0 0;
         width: 100%; }
-        .platter #listOfEvents .events_table .event a h3,
-        .main-events .events_table .event a h3 {
-          padding: 10px; }
       .platter #listOfEvents .events_table .event:nth-of-type(2n+1) a,
       .main-events .events_table .event:nth-of-type(2n+1) a {
         margin: 10px 0 0; } }
