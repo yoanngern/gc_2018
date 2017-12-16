@@ -451,16 +451,18 @@ footer {
 
 #content .platter {
   position: relative;
-  margin: 0 20px;
+  margin: 0 20px -10vh;
   width: auto;
   top: -15vh;
   z-index: 200;
   background-color: #F8F8F8; }
   #content .platter article.content-page,
   #content .platter section.content-default {
-    min-height: 350px;
-    padding: 60px 0 20px;
+    padding: 60px 0 40px;
     margin: 0 auto; }
+    #content .platter article.content-page > .content,
+    #content .platter section.content-default > .content {
+      min-height: 300px; }
     #content .platter article.content-page p,
     #content .platter section.content-default p {
       font-family: "Corbel", sans-serif;
@@ -1250,16 +1252,19 @@ body.post-type-archive-gc_event #content .platter {
       margin: 5px 2%; } }
 
 .platter #listOfEvents,
+.related_events #listOfEvents,
 .main-events {
   margin: 0 auto;
   padding: 0 13.5px;
   position: relative;
   background-color: #F8F8F8; }
   .platter #listOfEvents .events_table,
+  .related_events #listOfEvents .events_table,
   .main-events .events_table {
     display: table;
     width: 100%; }
     .platter #listOfEvents .events_table .event,
+    .related_events #listOfEvents .events_table .event,
     .main-events .events_table .event {
       width: 20%;
       float: left;
@@ -1267,6 +1272,7 @@ body.post-type-archive-gc_event #content .platter {
       vertical-align: top;
       cursor: pointer; }
       .platter #listOfEvents .events_table .event a,
+      .related_events #listOfEvents .events_table .event a,
       .main-events .events_table .event a {
         margin: 4.5px;
         padding: 0 0 0 0;
@@ -1305,30 +1311,38 @@ body.post-type-archive-gc_event #content .platter {
                 }
                 */ }
         .platter #listOfEvents .events_table .event a:hover,
+        .related_events #listOfEvents .events_table .event a:hover,
         .main-events .events_table .event a:hover {
           color: #333333; }
           .platter #listOfEvents .events_table .event a:hover .image,
+          .related_events #listOfEvents .events_table .event a:hover .image,
           .main-events .events_table .event a:hover .image {
             -webkit-filter: brightness(80%) saturate(1.1) contrast(105%) blur(3px); }
           .platter #listOfEvents .events_table .event a:hover .hover,
+          .related_events #listOfEvents .events_table .event a:hover .hover,
           .main-events .events_table .event a:hover .hover {
             opacity: 0.8;
             height: 100%; }
             .platter #listOfEvents .events_table .event a:hover .hover::after,
+            .related_events #listOfEvents .events_table .event a:hover .hover::after,
             .main-events .events_table .event a:hover .hover::after {
               transition: all 300ms ease-in-out 0s; }
           .platter #listOfEvents .events_table .event a:hover .txt,
+          .related_events #listOfEvents .events_table .event a:hover .txt,
           .main-events .events_table .event a:hover .txt {
             opacity: 0.4;
             transition: all 300ms ease-in-out 0s; }
           .platter #listOfEvents .events_table .event a:hover .button span,
+          .related_events #listOfEvents .events_table .event a:hover .button span,
           .main-events .events_table .event a:hover .button span {
             opacity: 1;
             transition: all 300ms ease-in-out 0s; }
             .platter #listOfEvents .events_table .event a:hover .button span::before,
+            .related_events #listOfEvents .events_table .event a:hover .button span::before,
             .main-events .events_table .event a:hover .button span::before {
               transition: all 300ms ease-in-out 200ms; }
         .platter #listOfEvents .events_table .event a .hover,
+        .related_events #listOfEvents .events_table .event a .hover,
         .main-events .events_table .event a .hover {
           opacity: 0;
           position: absolute;
@@ -1342,6 +1356,7 @@ body.post-type-archive-gc_event #content .platter {
           -o-transition: all 400ms ease;
           text-align: center; }
           .platter #listOfEvents .events_table .event a .hover::after,
+          .related_events #listOfEvents .events_table .event a .hover::after,
           .main-events .events_table .event a .hover::after {
             height: 12px;
             background-color: #FFFFFF;
@@ -1353,12 +1368,14 @@ body.post-type-archive-gc_event #content .platter {
             position: absolute;
             transition: all 300ms ease-in-out 0s; }
         .platter #listOfEvents .events_table .event a .content,
+        .related_events #listOfEvents .events_table .event a .content,
         .main-events .events_table .event a .content {
           display: block;
           width: 100%;
           padding-bottom: 100%;
           position: relative; }
         .platter #listOfEvents .events_table .event a .image,
+        .related_events #listOfEvents .events_table .event a .image,
         .main-events .events_table .event a .image {
           display: block;
           width: 110%;
@@ -1379,6 +1396,7 @@ body.post-type-archive-gc_event #content .platter {
           -webkit-filter: brightness(60%) saturate(1.1) contrast(105%) blur(0);
           -webkit-animation: 1s linear infinite; }
         .platter #listOfEvents .events_table .event a h2,
+        .related_events #listOfEvents .events_table .event a h2,
         .main-events .events_table .event a h2 {
           display: block;
           opacity: 1;
@@ -1396,6 +1414,7 @@ body.post-type-archive-gc_event #content .platter {
           letter-spacing: 0.08em;
           z-index: 300; }
         .platter #listOfEvents .events_table .event a .bottom,
+        .related_events #listOfEvents .events_table .event a .bottom,
         .main-events .events_table .event a .bottom {
           bottom: 3%;
           right: 6%;
@@ -1405,6 +1424,7 @@ body.post-type-archive-gc_event #content .platter {
           z-index: 300;
           top: 78%; }
         .platter #listOfEvents .events_table .event a .txt,
+        .related_events #listOfEvents .events_table .event a .txt,
         .main-events .events_table .event a .txt {
           position: absolute;
           opacity: 1;
@@ -1419,6 +1439,7 @@ body.post-type-archive-gc_event #content .platter {
           transform: translateY(-50%);
           transition: all 300ms ease-in-out 0s; }
           .platter #listOfEvents .events_table .event a .txt h3,
+          .related_events #listOfEvents .events_table .event a .txt h3,
           .main-events .events_table .event a .txt h3 {
             font-family: "Radikal-Bold", "Radikal", sans-serif;
             font-size: 1.2em;
@@ -1428,6 +1449,7 @@ body.post-type-archive-gc_event #content .platter {
             color: #FFFFFF;
             margin: 0; }
           .platter #listOfEvents .events_table .event a .txt h4,
+          .related_events #listOfEvents .events_table .event a .txt h4,
           .main-events .events_table .event a .txt h4 {
             font-family: "Radikal", sans-serif;
             font-size: 1.2em;
@@ -1435,6 +1457,7 @@ body.post-type-archive-gc_event #content .platter {
             letter-spacing: 0.01em;
             color: #FFFFFF; }
         .platter #listOfEvents .events_table .event a .button,
+        .related_events #listOfEvents .events_table .event a .button,
         .main-events .events_table .event a .button {
           right: 0;
           position: absolute;
@@ -1447,6 +1470,7 @@ body.post-type-archive-gc_event #content .platter {
           -ms-transform: translateY(-50%);
           transform: translateY(-50%); }
           .platter #listOfEvents .events_table .event a .button span,
+          .related_events #listOfEvents .events_table .event a .button span,
           .main-events .events_table .event a .button span {
             opacity: 0;
             text-align: center;
@@ -1463,6 +1487,7 @@ body.post-type-archive-gc_event #content .platter {
             transition: all 300ms ease-in-out 0s;
             position: relative; }
             .platter #listOfEvents .events_table .event a .button span::before,
+            .related_events #listOfEvents .events_table .event a .button span::before,
             .main-events .events_table .event a .button span::before {
               content: "";
               display: block;
@@ -1476,58 +1501,92 @@ body.post-type-archive-gc_event #content .platter {
               transition: all 300ms ease-in-out 0s; }
   @media only screen and (max-width: 1921px) {
     .platter #listOfEvents .events_table .event,
+    .related_events #listOfEvents .events_table .event,
     .main-events .events_table .event {
       width: 25%; } }
   @media only screen and (max-width: 1400px) {
     .platter #listOfEvents .events_table .event,
+    .related_events #listOfEvents .events_table .event,
     .main-events .events_table .event {
       width: 33.3333%; } }
   @media only screen and (max-width: 900px) {
     .platter #listOfEvents .events_table .event,
+    .related_events #listOfEvents .events_table .event,
     .main-events .events_table .event {
       width: 50%; } }
   @media only screen and (max-width: 800px) {
     .platter #listOfEvents .events_table .event a,
+    .related_events #listOfEvents .events_table .event a,
     .main-events .events_table .event a {
       margin: 10px 2% 0 1%;
       width: 97%; }
     .platter #listOfEvents .events_table .event:nth-of-type(2n+1) a,
+    .related_events #listOfEvents .events_table .event:nth-of-type(2n+1) a,
     .main-events .events_table .event:nth-of-type(2n+1) a {
       margin: 10px 1% 0 2%; } }
   @media only screen and (max-width: 680px) {
     .platter #listOfEvents article.content-page,
+    .related_events #listOfEvents article.content-page,
     .main-events article.content-page {
       padding: 10px 0; }
     .platter #listOfEvents .events_table .event,
+    .related_events #listOfEvents .events_table .event,
     .main-events .events_table .event {
       width: 100%; }
       .platter #listOfEvents .events_table .event a,
+      .related_events #listOfEvents .events_table .event a,
       .main-events .events_table .event a {
         margin: 10px 5% 0;
         width: 90%; }
         .platter #listOfEvents .events_table .event a .image h2,
+        .related_events #listOfEvents .events_table .event a .image h2,
         .main-events .events_table .event a .image h2 {
           font-size: 3em; }
         .platter #listOfEvents .events_table .event a .bottom .button,
+        .related_events #listOfEvents .events_table .event a .bottom .button,
         .main-events .events_table .event a .bottom .button {
           display: none; }
         .platter #listOfEvents .events_table .event a .bottom .txt,
+        .related_events #listOfEvents .events_table .event a .bottom .txt,
         .main-events .events_table .event a .bottom .txt {
           right: 0; }
       .platter #listOfEvents .events_table .event:nth-of-type(2n+1) a,
+      .related_events #listOfEvents .events_table .event:nth-of-type(2n+1) a,
       .main-events .events_table .event:nth-of-type(2n+1) a {
         margin: 10px 5% 0; } }
   @media only screen and (max-width: 376px) {
     .platter #listOfEvents .events_table .event,
+    .related_events #listOfEvents .events_table .event,
     .main-events .events_table .event {
       width: 100%; }
       .platter #listOfEvents .events_table .event a,
+      .related_events #listOfEvents .events_table .event a,
       .main-events .events_table .event a {
         margin: 10px 0 0;
         width: 100%; }
       .platter #listOfEvents .events_table .event:nth-of-type(2n+1) a,
+      .related_events #listOfEvents .events_table .event:nth-of-type(2n+1) a,
       .main-events .events_table .event:nth-of-type(2n+1) a {
         margin: 10px 0 0; } }
+
+.related_events {
+  background-color: #333333;
+  margin: 150px 0 30px; }
+  .related_events #listOfEvents {
+    top: -90px;
+    background-color: transparent;
+    width: 80%; }
+    .related_events #listOfEvents h1 {
+      text-transform: uppercase;
+      color: #E52639;
+      font-family: "Radikal-Bold", "Radikal", sans-serif;
+      font-size: 20px;
+      text-align: center;
+      display: block;
+      padding: 0;
+      letter-spacing: 0.1em;
+      line-height: 1.2em;
+      margin: 10px auto 30px; }
 
 #content .platter#summary {
   background-color: #FFFFFF; }

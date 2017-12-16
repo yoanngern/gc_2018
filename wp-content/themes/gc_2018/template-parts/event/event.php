@@ -15,7 +15,7 @@
 	$dates       = complex_date( get_field( 'start' ), get_field( 'end' ) );
 	$description = get_field( 'description', $_POST );
 	$subtitle    = get_field( 'event_subtitle', $_POST );
-	$times       = "9h30-10h30";
+	$times       = complex_time( get_field( 'start' ), get_field( 'end' ) );
 
 
 	$video = get_field( 'event_video', $_POST );
@@ -196,7 +196,7 @@
 					<?php foreach ( $events as $event ):
 
 						$e_dates = complex_date( get_field( 'start', $event ), get_field( 'end', $event ) );
-						$e_times = "9h30-10h30";
+						$e_times = complex_time( get_field( 'start', $event ), get_field( 'end', $event ) );
 						$e_link = $event->guid;
 
 						?>

@@ -136,7 +136,7 @@ if( function_exists('acf_add_local_field_group') ):
 					'id' => '',
 				),
 				'return_format' => 'array',
-				'preview_size' => 'banner',
+				'preview_size' => 'header',
 				'library' => 'all',
 				'min_width' => '',
 				'min_height' => '',

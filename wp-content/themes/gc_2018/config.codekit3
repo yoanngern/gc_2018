@@ -369,6 +369,13 @@
 		"oAP": "\/includes\/acf\/recurrence.php",
 		"oF": 0
 		},
+	"\/includes\/acf\/Related_events.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/related_events.php",
+		"oF": 0
+		},
 	"\/includes\/acf\/service.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -3730,6 +3737,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/event\/none.php",
+		"oF": 0
+		},
+	"\/template-parts\/event\/related_events.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/event\/related_events.php",
 		"oF": 0
 		},
 	"\/template-parts\/event\/single.php": {

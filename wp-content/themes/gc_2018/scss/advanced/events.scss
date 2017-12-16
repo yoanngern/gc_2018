@@ -284,6 +284,7 @@ body.post-type-archive-gc_event {
 }
 
 .platter #listOfEvents,
+.related_events #listOfEvents,
 .main-events {
     margin: 0 auto;
     padding: 0 13.5px;
@@ -662,5 +663,31 @@ body.post-type-archive-gc_event {
             }
         }
 
+    }
+}
+
+
+.related_events {
+    background-color: $black;
+    margin: 150px 0 30px;
+
+    #listOfEvents {
+        top: -90px;
+
+        background-color: transparent;
+        width: 80%;
+
+        h1 {
+            text-transform: uppercase;
+            color: $red;
+            font-family: $radikal-bold;
+            font-size: 20px;
+            text-align: center;
+            display: block;
+            padding: 0;
+            letter-spacing: 0.1em;
+            line-height: 1.2em;
+            margin: 10px auto 30px;
+        }
     }
 }

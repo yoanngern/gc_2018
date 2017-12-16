@@ -180,6 +180,50 @@ function complex_date( $start, $end ) {
 
 
 /**
+ * @param $start
+ * @param $end
+ */
+function complex_time( $start, $end ) {
+
+
+	$time = "";
+
+	$start = new DateTime( $start );
+	$end   = new DateTime( $end );
+
+
+	$start_t = $start->getTimestamp();
+	$end_t   = $end->getTimestamp();
+
+
+	if ( get_locale() == "fr_FR" ) {
+		$time_format = 'G\hi';
+	} else {
+		$time_format = 'g:i a';
+	}
+
+
+	if ( ( date( 'Gi', $start_t ) == '000' ) && ( date( 'Gi', $end_t ) == '000' ) ):
+
+		$time = "";
+
+	elseif ( date( 'Gi', $start_t ) == date( 'Gi', $end_t ) ) :
+
+		$time = date( $time_format, $start_t );
+
+	else:
+
+		$time = date( $time_format, $start_t ) . " - " . date( $time_format, $end_t );
+
+	endif;
+
+
+	return $time;
+
+}
+
+
+/**
  * @param $date
  *
  * @return string

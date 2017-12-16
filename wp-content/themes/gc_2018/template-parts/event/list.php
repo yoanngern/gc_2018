@@ -45,11 +45,22 @@
 
 	<?php
 
+	$today = date( 'Y-m-d H:i:s' );
+
 	$query = new WP_Query( array(
 		'post_type'  => 'gc_event',
 		'showposts'  => 1,
 		'meta_key'   => 'main_event',
-		'meta_value' => true
+		'meta_value' => true,
+		'orderby'          => 'meta_value',
+		'order'            => 'asc',
+		'meta_query'       => array(
+			array(
+				'key'     => 'end',
+				'compare' => '>=',
+				'value'   => $today,
+			)
+		),
 	) );
 
 	$events = $query->get_posts();
@@ -277,6 +288,8 @@
 					/* Start the Loop */
 					while ( have_posts() ) :
 						the_post();
+
+						set_query_var( 'event', $_POST );
 
 						get_template_part( 'template-parts/event/item' );
 

@@ -1,11 +1,11 @@
 <?php
 
-$id    = get_the_ID();
-$title = get_the_title();
-$link  = esc_url( get_permalink() );
-$image = get_field_or_parent( 'bg_image', $_POST, 'gc_eventcategory' )['sizes']['square'];
-$date  = complex_date( get_field( 'start' ), get_field( 'end' ) );
-$time  = time_trans( new DateTime( get_field( 'start' ) ) );
+$id    = $event->id;
+$title = get_the_title($event);
+$link  = esc_url( get_permalink($event) );
+$image = get_field_or_parent( 'bg_image', $event, 'gc_eventcategory' )['sizes']['square'];
+$date  = complex_date( get_field( 'start', $event ), get_field( 'end', $event ) );
+$time = complex_time(get_field( 'start', $event ), get_field( 'end', $event ) );
 
 ?>
 

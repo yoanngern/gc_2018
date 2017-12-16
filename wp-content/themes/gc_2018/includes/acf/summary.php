@@ -53,7 +53,7 @@ if( function_exists('acf_add_local_field_group') ):
 						'required' => 0,
 						'conditional_logic' => 0,
 						'wrapper' => array(
-							'width' => '',
+							'width' => '51',
 							'class' => '',
 							'id' => '',
 						),
@@ -72,12 +72,12 @@ if( function_exists('acf_add_local_field_group') ):
 						'required' => 0,
 						'conditional_logic' => 0,
 						'wrapper' => array(
-							'width' => '',
+							'width' => '49',
 							'class' => '',
 							'id' => '',
 						),
 						'return_format' => 'array',
-						'preview_size' => 'thumbnail',
+						'preview_size' => 'summary',
 						'library' => 'all',
 						'min_width' => '',
 						'min_height' => '',
@@ -96,7 +96,7 @@ if( function_exists('acf_add_local_field_group') ):
 						'required' => 0,
 						'conditional_logic' => 0,
 						'wrapper' => array(
-							'width' => '50',
+							'width' => '51',
 							'class' => '',
 							'id' => '',
 						),
@@ -115,7 +115,7 @@ if( function_exists('acf_add_local_field_group') ):
 						'required' => 0,
 						'conditional_logic' => 0,
 						'wrapper' => array(
-							'width' => '50',
+							'width' => '49',
 							'class' => '',
 							'id' => '',
 						),
