@@ -299,9 +299,9 @@
             </section>
 
 
-            <nav class="nav_bottom">
-                <div class="nav-previous alignleft"><?php previous_posts_link( 'Previous' ); ?></div>
-                <div class="nav-next alignright"><?php next_posts_link( 'Next' ); ?></div>
+            <nav class="nav">
+                <div class="previous"><?php previous_posts_link( 'Previous' ); ?></div>
+                <div class="next"><?php next_posts_link( 'Next' ); ?></div>
             </nav>
 
 			<?php

@@ -84,9 +84,9 @@
     <div class="platter">
 
         <div class="nav">
-            <a href="<?php echo get_post_type_archive_link( 'gc_event' ); ?>"
-               class="back"><?php pll_e( 'Back' ) ?></a>
-
+            <div class="back">
+                <a href="<?php echo get_post_type_archive_link( 'gc_event' ); ?>"><?php pll_e( 'Back' ) ?></a>
+            </div>
         </div>
 
         <article class="content-page">

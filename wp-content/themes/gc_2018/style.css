@@ -456,6 +456,28 @@ footer {
   top: -15vh;
   z-index: 200;
   background-color: #F8F8F8; }
+  #content .platter .nav {
+    display: block;
+    padding: 60px 0 20px;
+    margin: 0 auto; }
+    #content .platter .nav .back a::before,
+    #content .platter .nav .previous a::before {
+      content: "◀︎";
+      padding-right: 7px; }
+    #content .platter .nav .next {
+      text-align: right; }
+      #content .platter .nav .next a::after {
+        content: "▶︎";
+        padding-left: 7px; }
+    #content .platter .nav a {
+      text-transform: uppercase;
+      font-size: 1em;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      color: #d7d7d7;
+      transition: all 200ms ease-in-out 0s; }
+      #content .platter .nav a:hover {
+        color: #979797; }
   #content .platter article.content-page,
   #content .platter section.content-default {
     padding: 60px 0 40px;
@@ -816,23 +838,7 @@ body.single-gc_event #content .platter {
   background-color: #F8F8F8;
   z-index: 200; }
   body.single-gc_event #content .platter .nav {
-    display: block;
-    width: 100%;
-    max-width: 1000px;
-    padding: 60px 0 20px;
-    margin: 0 auto; }
-    body.single-gc_event #content .platter .nav a {
-      text-transform: uppercase;
-      font-size: 1em;
-      letter-spacing: 0.15em;
-      text-decoration: none;
-      color: #d7d7d7;
-      transition: all 200ms ease-in-out 0s; }
-      body.single-gc_event #content .platter .nav a::before {
-        content: "◀︎";
-        padding-right: 7px; }
-      body.single-gc_event #content .platter .nav a:hover {
-        color: #979797; }
+    max-width: 1000px; }
   body.single-gc_event #content .platter .content-page {
     margin: 0 auto;
     max-width: 1000px;
@@ -1082,6 +1088,8 @@ body.post-type-archive-gc_event #content .platter {
   top: -15vh;
   position: relative;
   z-index: 200; }
+  body.post-type-archive-gc_event #content .platter .nav {
+    padding: 40px 13.5px 40px; }
   body.post-type-archive-gc_event #content .platter article.content-page {
     padding: 10px 0 20px; }
 

@@ -8,29 +8,7 @@ body.single-gc_event {
         z-index: 200;
 
         .nav {
-            display: block;
-            width: 100%;
             max-width: 1000px;
-            padding: 60px 0 20px;
-            margin: 0 auto;
-
-            a {
-                text-transform: uppercase;
-                font-size: 1em;
-                letter-spacing: 0.15em;
-                text-decoration: none;
-                color: $gray5;
-                transition: all 200ms ease-in-out 0s;
-
-                &::before {
-                    content: "◀︎";
-                    padding-right: 7px;
-                }
-
-                &:hover {
-                    color: $gray4;
-                }
-            }
         }
 
         .content-page {
@@ -424,9 +402,6 @@ body.single-gc_event {
                         a.small {
                             margin: 10px 0 10px;
                         }
-
-
-
 
                     }
                 }
