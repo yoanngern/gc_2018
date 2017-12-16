@@ -1,6 +1,6 @@
 <?php
 
-if(function_exists(pll__())) {
+if(function_exists('pll__')) {
 
 	require_once( __DIR__ . '/acf/date.php' );
 	require_once( __DIR__ . '/acf/event.php' );
