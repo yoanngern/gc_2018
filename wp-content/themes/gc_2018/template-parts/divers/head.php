@@ -5,13 +5,13 @@
 	<?php
 
 	if ( is_single() ):
-		echo "<title>" . get_the_title() . "</title>";
+		echo "<title>" . get_field( 'short_name', 'option' ) . " - " . get_the_title() . "</title>";
 
 		if ( get_the_excerpt() ): ?>
             <meta name="Description" content="<?php echo strip_tags( get_the_excerpt() ); ?>"/>
 		<?php endif;
 	else:
-		echo "<title>" . get_bloginfo( 'title' ) . "</title>";
+		echo "<title>" . get_field( 'short_name', 'option' ) . " - " . get_the_title() . "</title>";
 		echo '<meta name="description" content="' . get_bloginfo( 'description' ) . '">';
 	endif; ?>
 

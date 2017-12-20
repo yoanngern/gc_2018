@@ -6,12 +6,30 @@ function my_acf_init() {
 
 	if ( function_exists( 'acf_add_options_page' ) ) {
 
-		$option = acf_add_options_sub_page( array(
+
+		/**
+		 * Recurrence
+		 */
+		acf_add_options_sub_page( array(
 			'page_title'  => __( 'Recurrence', 'my_text_domain' ),
 			'menu_title'  => __( 'Recurrence', 'my_text_domain' ),
 			'parent_slug' => 'edit.php?post_type=gc_service',
 			'menu_slug'   => 'recurrence',
 			'capability'  => 'edit_posts',
+			'autoload'    => true,
+
+		) );
+
+
+		/**
+		 * Gospel Center - Settings
+		 */
+		acf_add_options_sub_page( array(
+			'page_title'  => __( 'Gospel Center - Settings', 'my_text_domain' ),
+			'menu_title'  => __( 'Gospel Center', 'my_text_domain' ),
+			'parent_slug' => 'options-general.php',
+			'menu_slug'   => 'gc',
+			'capability'  => 'manage_options',
 			'autoload'    => true,
 
 		) );

@@ -348,6 +348,13 @@
 		"oAP": "\/includes\/acf\/event_category.php",
 		"oF": 0
 		},
+	"\/includes\/acf\/gc_settings.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/gc_settings.php",
+		"oF": 0
+		},
 	"\/includes\/acf\/header.php": {
 		"cB": 0,
 		"ft": 8192,
