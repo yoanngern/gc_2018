@@ -1,0 +1,151 @@
+#weekend {
+    .content-page {
+        max-width: 1600px;
+    }
+}
+
+section.weekend {
+    background-color: $red;
+    color: $white;
+    padding: 50px 0;
+
+    div.container {
+        max-width: 1600px;
+        margin: 0 auto;
+        display: table;
+        width: 100%;
+    }
+
+    div.empty {
+        width: 100%;
+        margin: 20px;
+
+        h1 {
+            text-align: center;
+            font-family: $radikal-bold;
+            margin: 10px 0 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 1.2em;
+            line-height: 1.2em;
+        }
+    }
+
+    article {
+        display: table-cell;
+        width: 33.333%;
+        text-align: center;
+        vertical-align: top;
+        height: 100%;
+        border-left: 1px solid rgba($white, 0.8);
+
+        &:first-of-type {
+            border-left: none;
+        }
+
+        header {
+
+            div {
+                text-align: center;
+                vertical-align: top;
+                height: 100%;
+                border-left: 1px solid rgba($white, 0.8);
+                padding: 0 0 10px;
+
+                &:first-of-type {
+                    border-left: none;
+                }
+
+                h1 {
+                    font-family: $radikal-bold;
+                    font-size: 18px;
+                    border: 2px solid $white;
+                    display: inline-block;
+                    line-height: 30px;
+                    padding: 6px 14px 3px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    margin: 10px 0 10px;
+                }
+
+                time {
+                    display: block;
+                }
+            }
+        }
+
+        div.content {
+            height: 100%;
+            width: 75%;
+            margin: 0 auto;
+
+            .item {
+                border-top: 1px solid rgba($white, 0.8);
+                padding: 40px 0;
+
+                &:first-of-type {
+                    border-top: none;
+                }
+
+                time {
+                    font-family: $radikal-black;
+                    text-transform: uppercase;
+                    display: block;
+                    font-size: 40px;
+                    line-height: 35px;
+                    letter-spacing: 0.1em;
+                    margin: 10px 0 10px;
+                }
+
+                h2 {
+                    font-family: $radikal-bold;
+                    margin: 10px 0 5px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.06em;
+                    font-size: 1.2em;
+                    line-height: 1.2em;
+                }
+
+                p {
+                    font-size: 0.8em;
+                    margin: 10px 0 5px;
+                    letter-spacing: 0.06em;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 760px) {
+        padding: 10px 0;
+
+        div.container {
+            display: block;
+
+            article {
+                display: block;
+                width: 90%;
+                margin: 0 auto;
+                border-bottom: 1px solid rgba($white, 0.8);
+                border-left: none;
+
+                &:last-of-type {
+                    border-bottom: none;
+                }
+
+                header {
+                    margin-top: 30px;
+                }
+
+                div.content {
+                    width: 90%;
+
+                    .item {
+                        padding: 35px 0;
+
+                        border-top: none;
+                    }
+                }
+            }
+        }
+    }
+}

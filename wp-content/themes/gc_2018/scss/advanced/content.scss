@@ -192,7 +192,7 @@
             margin: 0 auto;
 
             & > .content {
-                min-height: 300px;
+                //min-height: 300px;
             }
 
             p {
@@ -495,11 +495,7 @@
         }
     }
 
-    @media only screen and (min-width: 2200px) {
-        .platter {
-            padding: 20px 100px;
-        }
-    }
+
 
     @media only screen and (max-width: 1150px) {
         article.title {
