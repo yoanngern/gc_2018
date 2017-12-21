@@ -117,82 +117,85 @@
 			);
 
 
-			foreach ( $events as $event ):
+			if ( $events != null ):
+				foreach ( $events as $event ):
 
-				$start = get_field( 'start', $event );
-				$end   = get_field( 'end', $event );
+					$start = get_field( 'start', $event );
+					$end   = get_field( 'end', $event );
 
-				if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['friday']['date'] ) ) {
-					$days['friday']['show'] = true;
-				}
+					if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['friday']['date'] ) ) {
+						$days['friday']['show'] = true;
+					}
 
-				if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['saturday']['date'] ) ) {
-					$days['saturday']['show'] = true;
-				}
+					if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['saturday']['date'] ) ) {
+						$days['saturday']['show'] = true;
+					}
 
-				if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['sunday']['date'] ) ) {
-					$days['sunday']['show'] = true;
-				}
+					if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['sunday']['date'] ) ) {
+						$days['sunday']['show'] = true;
+					}
 
-				$location_obj = get_field( 'location', $event );
+					$location_obj = get_field( 'location', $event );
 
-				if ( $location_obj != null ) {
-					$location = get_the_title( $location_obj );
-				} else {
-					$location = "";
-				}
+					if ( $location_obj != null ) {
+						$location = get_the_title( $location_obj );
+					} else {
+						$location = "";
+					}
 
-				$item = array(
-					'title'    => $event->post_title,
-					'start'    => get_field( 'start', $event ),
-					'end'      => get_field( 'end', $event ),
-					'time'     => date( 'G:i', strtotime( get_field( 'start', $event ) ) ),
-					'location' => $location,
-					'object'   => $event,
-				);
+					$item = array(
+						'title'    => $event->post_title,
+						'start'    => get_field( 'start', $event ),
+						'end'      => get_field( 'end', $event ),
+						'time'     => date( 'G:i', strtotime( get_field( 'start', $event ) ) ),
+						'location' => $location,
+						'object'   => $event,
+					);
 
-				$items[] = $item;
+					$items[] = $item;
 
-			endforeach;
+				endforeach;
+			endif;
 
-			foreach ( $services as $service ):
+			if ( $services != null ):
+				foreach ( $services as $service ):
 
-				$start = get_field( 'start', $service );
-				$end   = get_field( 'end', $service );
+					$start = get_field( 'start', $service );
+					$end   = get_field( 'end', $service );
 
-				if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['friday']['date'] ) ) {
-					$days['friday']['show'] = true;
-				}
+					if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['friday']['date'] ) ) {
+						$days['friday']['show'] = true;
+					}
 
-				if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['saturday']['date'] ) ) {
-					$days['saturday']['show'] = true;
-				}
+					if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['saturday']['date'] ) ) {
+						$days['saturday']['show'] = true;
+					}
 
-				if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['sunday']['date'] ) ) {
-					$days['sunday']['show'] = true;
-				}
+					if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['sunday']['date'] ) ) {
+						$days['sunday']['show'] = true;
+					}
 
-				$location_obj = get_field( 'location', $service );
+					$location_obj = get_field( 'location', $service );
 
-				if ( $location_obj != null ) {
-					$location = get_the_title( $location_obj );
-				} else {
-					$location = "";
-				}
+					if ( $location_obj != null ) {
+						$location = get_the_title( $location_obj );
+					} else {
+						$location = "";
+					}
 
-				$item = array(
-					'title'    => $service->post_title,
-					'start'    => get_field( 'start', $service ),
-					'end'      => get_field( 'end', $service ),
-					'time'     => date( 'G:i', strtotime( get_field( 'start', $service ) ) ),
-					'location' => $location,
-					'object'   => $service,
-				);
+					$item = array(
+						'title'    => $service->post_title,
+						'start'    => get_field( 'start', $service ),
+						'end'      => get_field( 'end', $service ),
+						'time'     => date( 'G:i', strtotime( get_field( 'start', $service ) ) ),
+						'location' => $location,
+						'object'   => $service,
+					);
 
-				$items[] = $item;
+					$items[] = $item;
 
-			endforeach;
-
+				endforeach;
+			endif;
 
 			?>
 
