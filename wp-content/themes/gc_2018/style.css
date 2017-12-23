@@ -2272,6 +2272,9 @@ body.page-template-page-home #content .platter {
   body.page-template-page-home #content .platter article.home-default {
     padding: 50px 0;
     margin: 0 10px; }
+    body.page-template-page-home #content .platter article.home-default h1 {
+      margin: 40px auto 60px;
+      width: 85%; }
   body.page-template-page-home #content .platter article#gcfamily ul.dynamic li {
     width: 80%;
     margin: 30px 10%; }
