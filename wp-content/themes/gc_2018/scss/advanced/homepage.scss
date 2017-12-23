@@ -272,6 +272,11 @@ body.page-template-page-home {
                             li {
                                 width: 80%;
                                 margin: 30px 10%;
+
+
+                                a {
+                                    margin-right: 0;
+                                }
                             }
                         }
                     }
@@ -298,6 +303,25 @@ body.page-template-page-home {
                             }
                         }
                     }
+                }
+            }
+
+        }
+
+
+        @media only screen and (max-width: 480px) {
+
+            .platter {
+
+                article {
+
+                    &.home-default {
+
+                        h1 {
+                            font-size: 1.6em;
+                        }
+                    }
+
                 }
             }
 
