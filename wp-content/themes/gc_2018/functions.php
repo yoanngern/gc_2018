@@ -59,14 +59,18 @@ add_action( 'init', 'register_my_menu' );
 add_theme_support( 'post-thumbnails' );
 
 
-add_image_size( 'full_hd', 1920, 1080, true );
-add_image_size( 'hd', 1280, 720, true );
-add_image_size( 'blog', 328, 244, true );
-add_image_size( 'social', 1920, 1080, true );
-add_image_size( 'header', 1600, 720, true );
+add_image_size( 'header', 800, 360, true );
+add_image_size( 'home', 800, 450, true );
+
 add_image_size( 'square', 450, 450, true );
 add_image_size( 'summary', 770, 433, true );
 add_image_size( 'logo', 160, 70, true );
+
+add_image_size( 'full_hd', 1920, 1080, true );
+add_image_size( 'hd', 1280, 720, true );
+
+add_image_size( 'social', 1920, 1080, true );
+
 
 
 /**

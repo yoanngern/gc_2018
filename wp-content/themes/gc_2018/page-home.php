@@ -8,7 +8,7 @@
 
         <article class="title">
             <div class="image"
-                 style="background-image: url('<?php echo get_field( 'bg_image' )['sizes']['header']; ?>')"></div>
+                 style="background-image: url('<?php echo get_field( 'bg_image' )['sizes']['home']; ?>')"></div>
             <div class="title">
 
                 <h1 class="page-title">
@@ -126,7 +126,7 @@
 
 						$link  = get_sub_field( 'link' );
 						$title = get_sub_field( 'title' );
-						$image = get_sub_field( 'image' )['sizes']['social'];
+						$image = get_sub_field( 'image' )['sizes']['summary'];
 
 						?>
 

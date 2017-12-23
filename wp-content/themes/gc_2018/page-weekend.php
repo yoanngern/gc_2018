@@ -223,7 +223,9 @@
                                         <div class="item">
                                             <time><?php echo $item['time'] ?></time>
                                             <h2><?php echo $item['title'] ?></h2>
-                                            <p class="location"><?php echo $item['location'] ?></p>
+											<?php if ( $item['location'] != "" ): ?>
+                                                <p class="location"><?php echo $item['location'] ?></p>
+											<?php endif; ?>
                                         </div>
 
 
@@ -257,7 +259,9 @@
                                         <div class="item">
                                             <time><?php echo $item['time'] ?></time>
                                             <h2><?php echo $item['title'] ?></h2>
-                                            <p class="location"><?php echo $item['location'] ?></p>
+	                                        <?php if ( $item['location'] != "" ): ?>
+                                                <p class="location"><?php echo $item['location'] ?></p>
+	                                        <?php endif; ?>
                                         </div>
 
 
@@ -290,7 +294,9 @@
                                         <div class="item">
                                             <time><?php echo $item['time'] ?></time>
                                             <h2><?php echo $item['title'] ?></h2>
-                                            <p class="location"><?php echo $item['location'] ?></p>
+	                                        <?php if ( $item['location'] != "" ): ?>
+                                                <p class="location"><?php echo $item['location'] ?></p>
+	                                        <?php endif; ?>
                                         </div>
 
 									<?php endif;
