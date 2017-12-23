@@ -110,6 +110,25 @@ section.weekend {
                     font-size: 0.8em;
                     margin: 10px 0 5px;
                     letter-spacing: 0.06em;
+                    line-height: 16px;
+
+                    &.location {
+                        vertical-align: top;
+                        padding-right: 20px;
+
+                        &::before {
+                            display: inline-block;
+                            vertical-align: top;
+                            width: 12px;
+                            height: 12px;
+                            padding: 0 12px 0 0;
+                            content: "";
+                            background-image: url('images/map_point.png');
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                        }
+                    }
                 }
             }
         }

@@ -1,0 +1,303 @@
+body.page-template-page-home {
+
+    #content {
+        article.title {
+            padding-bottom: 100vh;
+
+            div.title {
+                top: 50%;
+                opacity: 0;
+
+                animation: fadein 1s ease-in 0.7s;
+                -moz-animation: fadein 1s ease-in 0.7s;
+                -webkit-animation: fadein 1s ease-in 0.7s;
+                -o-animation: fadein 1s ease-in 0.7s;
+
+                animation-fill-mode: forwards;
+                -moz-animation-fill-mode: forwards;
+                -webkit-animation-fill-mode: forwards;
+                -o-animation-fill-mode: forwards;
+
+                a.button {
+                    margin-top: 50px;
+                    padding: 3px 13px 0;
+                    line-height: 1.8em;
+                    border-width: 2px;
+
+                    &::before {
+                        display: none;
+                    }
+
+                    &:hover {
+                        opacity: 0.8;
+                    }
+                }
+            }
+
+            .footer {
+                bottom: 12px;
+                position: absolute;
+                z-index: 100;
+                text-align: center;
+                width: 100%;
+
+                opacity: 0;
+
+                animation: fadein 1s ease-in 2s;
+                -moz-animation: fadein 1s ease-in 2s;
+                -webkit-animation: fadein 1s ease-in 2s;
+                -o-animation: fadein 1s ease-in 2s;
+
+                animation-fill-mode: forwards;
+                -moz-animation-fill-mode: forwards;
+                -webkit-animation-fill-mode: forwards;
+                -o-animation-fill-mode: forwards;
+
+                a {
+                    color: $white;
+                    display: inline-block;
+                    width: 17px;
+                    height: 27px;
+                    background-image: url('images/arrow_down.png');
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    opacity: 0.7;
+                }
+            }
+        }
+
+        .platter {
+            top: 0;
+            margin: 0;
+            background-color: $white;
+
+            article {
+                &.home-default {
+                    text-align: center;
+                    padding: 90px 0;
+                    margin: 0 20px;
+                }
+
+                & > h4 {
+                    font-size: 1.8em;
+                    color: $gray3;
+                    letter-spacing: 0.06em;
+                    max-width: 960px;
+                    margin: 0 auto;
+                    line-height: 1.4em;
+                    width: 90%;
+                }
+
+                &#events {
+                    background-color: $gray-light;
+
+                    #listOfEvents .events_table {
+                        width: 90%;
+                        padding: 20px 0 50px;
+                    }
+                }
+
+                &#gcfamily {
+
+                    ul.dynamic {
+                        text-align: left;
+                        margin: 60px auto 30px;
+                        max-width: 1200px;
+
+                        li {
+                            width: 29.333%;
+                            text-align: center;
+                            margin: 30px 2%;
+
+                            h1 {
+                                font-family: $radikal-black;
+                                color: $gray3;
+                                text-transform: uppercase;
+                                margin-bottom: 5px;
+                            }
+
+                            h2 {
+                                color: $gray3;
+                                font-size: 1.2em;
+                            }
+                        }
+                    }
+                }
+
+                &#next_step {
+                    background-color: $gray-light;
+
+                    & > h4 {
+                        color: $gray;
+                    }
+
+                    ul.wall_image {
+                        margin: 90px 0 40px;
+                        left: -20px;
+                        width: 100vw;
+                    }
+
+                }
+
+                &#tv {
+                    background-color: $gray-dark;
+                    margin: 20px;
+
+                    h1 {
+                        color: $white;
+
+                        &.title span {
+                            border-color: $white;
+                        }
+                    }
+
+                    em {
+                        color: $white;
+                    }
+                }
+
+                &#church_life {
+                    max-width: 1200px;
+                    margin: 40px auto;
+                    display: table;
+                    width: 100%;
+
+                    div {
+                        display: inline-block;
+                        width: 50%;
+                        vertical-align: middle;
+
+                        h1 {
+                            text-transform: inherit;
+                            font-family: $radikal-black;
+                            letter-spacing: 0.07em;
+                            font-size: 2.2em;
+                        }
+
+                        p {
+                            text-align: center;
+
+                            a {
+                                display: inline-block;
+                                border: 3px solid $gray;
+                                color: $gray;
+                                font-family: $radikal-bold;
+                                font-size: 1.3em;
+                                line-height: 1.8em;
+                                text-transform: uppercase;
+                                padding: 5px 25px 2px;
+                                transition: all 300ms ease;
+
+                                &:hover {
+                                    color: $gray-dark;
+                                    border-color: $gray-dark;
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+
+                &#news {
+                    background-color: $gray3;
+
+                    h1 {
+                        color: $white;
+                        line-height: 0.9em;
+                        font-family: $radikal-black;
+                    }
+
+                    em {
+                        color: $white;
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: 940px) {
+
+            .platter {
+                article {
+                    &#events {
+
+                        #listOfEvents .events_table {
+                            width: 100%;
+                            text-align: left;
+                        }
+                    }
+
+                    &#gcfamily {
+                        ul.dynamic {
+                            li {
+                                width: 44%;
+                                margin: 30px 3%;
+                            }
+                        }
+                    }
+
+                    &#next_step {
+
+                    }
+                }
+            }
+
+        }
+
+        @media only screen and (max-width: 600px) {
+
+            .platter {
+
+                article {
+
+                    &.home-default {
+                        padding: 50px 0;
+                        margin: 0 10px;
+                    }
+
+                    &#events {
+
+                        #listOfEvents .events_table {
+
+                        }
+                    }
+
+                    &#gcfamily {
+                        ul.dynamic {
+                            li {
+                                width: 80%;
+                                margin: 30px 10%;
+                            }
+                        }
+                    }
+
+                    &#next_step {
+
+                        ul.wall_image {
+
+                            left: -10px;
+
+                        }
+
+                    }
+
+                    &#church_life {
+                        display: block;
+                        div {
+                            display: block;
+                            width: 100%;
+
+                            p {
+                                display: inline-block;
+                                margin: 20px 10px;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+
+}

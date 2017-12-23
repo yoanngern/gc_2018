@@ -15,8 +15,7 @@
 @import "advanced/summary";
 @import "advanced/sub_nav";
 @import "advanced/weekend";
-
-
+@import "advanced/homepage";
 
 body {
     font-family: $radikal;
@@ -26,9 +25,41 @@ body {
     color: $black;
     background-color: $white;
 
-
     &.black {
         background-color: $black;
     }
 
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
 }

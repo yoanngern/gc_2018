@@ -192,7 +192,7 @@
             <section class="content-default" id="related_events">
                 <h1><?php pll_e( 'prochaines dates à venir' ) ?></h1>
 
-                <ul>
+                <ul class="dynamic">
 					<?php foreach ( $events as $event ):
 
 						$e_dates = complex_date( get_field( 'start', $event ), get_field( 'end', $event ) );
@@ -202,8 +202,8 @@
 						?>
                         <li>
                             <a href="<?php echo $e_link; ?>">
-                                <time class="date"><?php echo $e_dates; ?></time>
-                                <time class="time"><?php echo $e_times; ?></time>
+                                <h1 class="date"><?php echo $e_dates; ?></h1>
+                                <h2 class="time"><?php echo $e_times; ?></h2>
                                 <span class="top"></span>
                                 <span class="right"></span>
                                 <span class="bottom"></span>

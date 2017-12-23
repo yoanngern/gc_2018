@@ -16,7 +16,6 @@
                     <span class="underline"></span>
                 </h1>
 
-
             </div>
 
         </article>
@@ -224,7 +223,7 @@
                                         <div class="item">
                                             <time><?php echo $item['time'] ?></time>
                                             <h2><?php echo $item['title'] ?></h2>
-                                            <p><?php echo $item['location'] ?></p>
+                                            <p class="location"><?php echo $item['location'] ?></p>
                                         </div>
 
 
@@ -258,7 +257,7 @@
                                         <div class="item">
                                             <time><?php echo $item['time'] ?></time>
                                             <h2><?php echo $item['title'] ?></h2>
-                                            <p><?php echo $item['location'] ?></p>
+                                            <p class="location"><?php echo $item['location'] ?></p>
                                         </div>
 
 
@@ -291,7 +290,7 @@
                                         <div class="item">
                                             <time><?php echo $item['time'] ?></time>
                                             <h2><?php echo $item['title'] ?></h2>
-                                            <p><?php echo $item['location'] ?></p>
+                                            <p class="location"><?php echo $item['location'] ?></p>
                                         </div>
 
 									<?php endif;
