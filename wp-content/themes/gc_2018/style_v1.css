@@ -405,33 +405,35 @@ footer {
       max-width: 800px;
       display: table;
       width: 100%; }
-      footer section.bottom ul li a {
-        color: #FFFFFF;
-        text-decoration: none;
-        display: block; }
-        footer section.bottom ul li a::before {
-          content: "";
-          display: block;
-          width: 51px;
-          height: 41px;
-          background-repeat: no-repeat;
-          background-size: contain;
-          margin: 0 auto 25px; }
-        footer section.bottom ul li a h1 {
-          font-family: "Radikal-Bold", "Radikal", sans-serif;
-          font-size: 1.2em;
-          line-height: 1.2em;
-          text-transform: uppercase;
-          margin-bottom: 7px; }
-        footer section.bottom ul li a p {
-          font-size: 1.1em;
-          line-height: 1.1em; }
-      footer section.bottom ul li.email a::before {
-        background-image: url("images/footer_email.png"); }
-      footer section.bottom ul li.location a::before {
-        background-image: url("images/footer_location.png"); }
-      footer section.bottom ul li.time a::before {
-        background-image: url("images/footer_time.png"); }
+      footer section.bottom ul li {
+        vertical-align: top; }
+        footer section.bottom ul li a {
+          color: #FFFFFF;
+          text-decoration: none;
+          display: block; }
+          footer section.bottom ul li a::before {
+            content: "";
+            display: block;
+            width: 51px;
+            height: 41px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin: 0 auto 25px; }
+          footer section.bottom ul li a h1 {
+            font-family: "Radikal-Bold", "Radikal", sans-serif;
+            font-size: 1.2em;
+            line-height: 1.2em;
+            text-transform: uppercase;
+            margin-bottom: 7px; }
+          footer section.bottom ul li a p {
+            font-size: 1.1em;
+            line-height: 1.1em; }
+        footer section.bottom ul li.email a::before {
+          background-image: url("images/footer_email.png"); }
+        footer section.bottom ul li.location a::before {
+          background-image: url("images/footer_location.png"); }
+        footer section.bottom ul li.time a::before {
+          background-image: url("images/footer_time.png"); }
 
 #content article.title {
   height: 0;
