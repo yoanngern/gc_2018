@@ -338,10 +338,100 @@ body.single-gc_event > header div.principal-nav div > ul li.menu-item-object-gc_
   border-left: 3px solid #E52639; }
 
 footer {
-  background-color: #333333;
-  height: 100px;
   width: 100%;
-  display: block; }
+  display: block;
+  margin-top: 50px;
+  color: #FFFFFF; }
+  footer section ul {
+    margin: 0 auto;
+    text-align: center; }
+    footer section ul li {
+      display: inline-block;
+      width: 33.333%; }
+  footer section.top {
+    background-color: #EEEEEE;
+    text-align: center; }
+    footer section.top div.content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 0;
+      display: table;
+      width: 100%;
+      position: relative; }
+      footer section.top div.content div.logo,
+      footer section.top div.content div.center,
+      footer section.top div.content ul {
+        display: inline-block;
+        text-align: center;
+        width: 33.333%;
+        vertical-align: middle; }
+    footer section.top div.logo {
+      display: inline-block; }
+      footer section.top div.logo #simple_logo {
+        display: inline-block;
+        width: 160px;
+        height: 70px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        z-index: 300; }
+    footer section.top ul {
+      display: inline-block; }
+      footer section.top ul li {
+        text-align: center;
+        width: auto; }
+        footer section.top ul li a {
+          width: 34px;
+          height: 30px;
+          display: inline-block;
+          white-space: nowrap;
+          text-indent: -9999px;
+          margin: 0 10px;
+          background-repeat: no-repeat;
+          background-size: contain;
+          opacity: 1; }
+          footer section.top ul li a#facebook {
+            background-image: url("images/rs_facebook.png"); }
+          footer section.top ul li a#twitter {
+            background-image: url("images/rs_twitter.png"); }
+          footer section.top ul li a#instagram {
+            background-image: url("images/rs_instagram.png"); }
+          footer section.top ul li a:hover {
+            opacity: 0.8; }
+  footer section.bottom {
+    padding: 50px 0;
+    background-color: #333333; }
+    footer section.bottom ul {
+      max-width: 800px;
+      display: table;
+      width: 100%; }
+      footer section.bottom ul li a {
+        color: #FFFFFF;
+        text-decoration: none;
+        display: block; }
+        footer section.bottom ul li a::before {
+          content: "";
+          display: block;
+          width: 51px;
+          height: 41px;
+          background-repeat: no-repeat;
+          background-size: contain;
+          margin: 0 auto 25px; }
+        footer section.bottom ul li a h1 {
+          font-family: "Radikal-Bold", "Radikal", sans-serif;
+          font-size: 1.2em;
+          line-height: 1.2em;
+          text-transform: uppercase;
+          margin-bottom: 7px; }
+        footer section.bottom ul li a p {
+          font-size: 1.1em;
+          line-height: 1.1em; }
+      footer section.bottom ul li.email a::before {
+        background-image: url("images/footer_email.png"); }
+      footer section.bottom ul li.location a::before {
+        background-image: url("images/footer_location.png"); }
+      footer section.bottom ul li.time a::before {
+        background-image: url("images/footer_time.png"); }
 
 #content article.title {
   height: 0;
@@ -571,7 +661,7 @@ footer {
         margin: 0 20px 0 0;
         background-repeat: no-repeat;
         background-size: contain;
-        opacity: 0.5; }
+        opacity: 0.3; }
         #content .platter article.content-page a.social#facebook,
         #content .platter article.home-default a.social#facebook,
         #content .platter section.content-default a.social#facebook {
@@ -583,7 +673,7 @@ footer {
         #content .platter article.content-page a.social:hover,
         #content .platter article.home-default a.social:hover,
         #content .platter section.content-default a.social:hover {
-          opacity: 1; }
+          opacity: 0.7; }
       #content .platter article.content-page a.small,
       #content .platter article.home-default a.small,
       #content .platter section.content-default a.small {

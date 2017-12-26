@@ -16,9 +16,9 @@
 	<?php endif; ?>
 
 
-    <?php if(get_field( 'logo', 'option' ) != null): ?>
+    <?php if(get_field( 'logo_white', 'option' ) != null): ?>
     <a href="<?php echo pll_home_url(); ?>" id="simple_logo"
-       style="background-image: url('<?php echo get_field( 'logo', 'option' )['sizes']['header']; ?>')"></a>
+       style="background-image: url('<?php echo get_field( 'logo_white', 'option' )['sizes']['header']; ?>')"></a>
     <?php endif; ?>
 
     <a href="<?php echo pll_home_url(); ?>" id="logo_mini">

@@ -286,6 +286,39 @@
 		"oAP": "\/images\/browserconfig.xml",
 		"oF": 0
 		},
+	"\/images\/footer_email.png": {
+		"ft": 32768,
+		"iS": 2233,
+		"oA": 0,
+		"oAP": "\/images\/footer_email.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/footer_location.png": {
+		"ft": 32768,
+		"iS": 3470,
+		"oA": 0,
+		"oAP": "\/images\/footer_location.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/footer_time.png": {
+		"ft": 32768,
+		"iS": 3538,
+		"oA": 0,
+		"oAP": "\/images\/footer_time.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
 	"\/images\/gc_lausanne_white.png": {
 		"ft": 32768,
 		"iS": 12168,
@@ -335,6 +368,17 @@
 		"oF": 0,
 		"oIPL": 1,
 		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/rs_instagram.png": {
+		"ft": 32768,
+		"iS": 2352,
+		"oA": 0,
+		"oAP": "\/images\/rs_instagram.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
 		"oT": 1,
 		"q": 100
 		},
@@ -3672,6 +3716,16 @@
 		"ma": 0,
 		"oA": 0,
 		"oAP": "\/style-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"\/style_v1.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/style_v1-min.css",
 		"oF": 0,
 		"oS": 3
 		},

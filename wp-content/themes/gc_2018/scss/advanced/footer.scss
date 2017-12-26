@@ -1,8 +1,165 @@
 footer {
-
-    background-color: $black;
-    height: 100px;
     width: 100%;
     display: block;
+    margin-top: 50px;
+    color: $white;
+
+    section {
+
+        ul {
+            margin: 0 auto;
+            text-align: center;
+
+            li {
+                display: inline-block;
+                width: 33.333%;
+            }
+        }
+    }
+
+    section.top {
+        background-color: $gray6;
+        text-align: center;
+
+        div.content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 0;
+            display: table;
+            width: 100%;
+            position: relative;
+
+            div.logo,
+            div.center,
+            ul {
+                display: inline-block;
+                text-align: center;
+                width: 33.333%;
+                vertical-align: middle;
+            }
+        }
+
+        div.logo {
+            display: inline-block;
+
+
+            #simple_logo {
+                display: inline-block;
+                width: 160px;
+                height: 70px;
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+                z-index: 300;
+
+            }
+        }
+
+        ul {
+            display: inline-block;
+
+            //position: absolute;
+            //right: 0;
+            //top: 50%;
+            //-webkit-transform: translateY(-50%);
+            //-ms-transform: translateY(-50%);
+            //transform: translateY(-50%);
+
+            li {
+                text-align: center;
+                width: auto;
+
+                a {
+                    width: 34px;
+                    height: 30px;
+                    display: inline-block;
+                    white-space: nowrap;
+                    text-indent: -9999px;
+                    margin: 0 10px;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    opacity: 1;
+
+                    &#facebook {
+                        background-image: url('images/rs_facebook.png');
+                    }
+
+                    &#twitter {
+                        background-image: url('images/rs_twitter.png');
+                    }
+
+                    &#instagram {
+                        background-image: url('images/rs_instagram.png');
+                    }
+
+                    &:hover {
+                        opacity: 0.8;
+                    }
+                }
+            }
+        }
+    }
+
+    section.bottom {
+        padding: 50px 0;
+        background-color: $black;
+
+        ul {
+            max-width: 800px;
+            display: table;
+            width: 100%;
+
+            li {
+
+                a {
+                    color: $white;
+                    text-decoration: none;
+                    display: block;
+
+                    &::before {
+                        content: "";
+                        display: block;
+                        width: 51px;
+                        height: 41px;
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        margin: 0 auto 25px;
+                    }
+
+                    h1 {
+                        font-family: $radikal-bold;
+                        font-size: 1.2em;
+                        line-height: 1.2em;
+                        text-transform: uppercase;
+                        margin-bottom: 7px;
+                    }
+
+                    p {
+                        font-size: 1.1em;
+                        line-height: 1.1em;
+                    }
+
+                }
+
+                &.email {
+                    a::before {
+                        background-image: url('images/footer_email.png');
+                    }
+                }
+
+                &.location {
+                    a::before {
+                        background-image: url('images/footer_location.png');
+                    }
+                }
+
+                &.time {
+                    a::before {
+                        background-image: url('images/footer_time.png');
+                    }
+                }
+            }
+        }
+    }
 
 }
