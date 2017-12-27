@@ -63,7 +63,7 @@
 					?>
 
                     <li class="<?php echo $icon; ?>">
-                        <a href="<?php echo $link; ?>">
+                        <a target="<?php echo $link['target']; ?>" href="<?php echo $link['url']; ?>">
                             <h1><?php echo $title; ?></h1>
                             <p><?php echo $subtitle; ?></p>
                         </a>
