@@ -73,9 +73,14 @@
 		$id    = $event->ID;
 		$title = $event->post_title;
 		$link  = esc_url( $event->guid );
-		$image = get_field_or_parent( 'bg_image', $event, 'gc_eventcategory' )['sizes']['header'];
 		$date  = complex_date( get_field( 'start', $event ), get_field( 'end', $event ) );
 		$time  = time_trans( new DateTime( get_field( 'start', $event ) ) );
+
+		if ( get_field_or_parent( 'bg_image', $event, 'gc_eventcategory' ) ) {
+			$image = get_field_or_parent( 'bg_image', $event, 'gc_eventcategory' );
+		} else {
+			$image = get_field_or_parent( 'event_picture', $event, 'gc_eventcategory' );
+		}
 
 		?>
 
@@ -216,12 +221,22 @@
 
 						foreach ( $cat_list as $cat ) {
 
-							$name     = $cat->name;
-							$id       = $cat->term_id;
-							$link     = get_term_link( $cat );
-							$acronym  = get_field( 'acronym', $cat );
-							$bg_image = get_field( 'bg_image', $cat )['sizes']['social'];
-							$class    = '';
+							$name    = $cat->name;
+							$id      = $cat->term_id;
+							$link    = get_term_link( $cat );
+							$acronym = get_field( 'acronym', $cat );
+							$class   = '';
+
+
+							if ( get_field( 'event_picture', $cat ) ) {
+								$image = get_field( 'event_picture', $cat );
+							} else {
+								$image = get_field( 'bg_image', $cat );
+							}
+
+
+							$bg_image = $image['sizes']['square'];
+
 
 							$is_current = false;
 

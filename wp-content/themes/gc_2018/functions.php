@@ -35,7 +35,7 @@ if ( $blog_id == $blog_tv_id ) {
 }
 
 
-if ( ($blog_id != $blog_gc_id) && ($blog_id != $blog_tv_id)) {
+if ( ( $blog_id != $blog_gc_id ) && ( $blog_id != $blog_tv_id ) ) {
 	require_once( __DIR__ . '/includes/gc_service.php' );
 
 	require_once( __DIR__ . '/includes/gc_event.php' );
@@ -70,7 +70,6 @@ add_image_size( 'full_hd', 1920, 1080, true );
 add_image_size( 'hd', 1280, 720, true );
 
 add_image_size( 'social', 1920, 1080, true );
-
 
 
 /**
@@ -205,6 +204,7 @@ function get_field_or_parent( $field, $post, $taxonomy = 'category' ) {
 
 	$field_return = get_field( $field, $post );
 
+
 	if ( ! $field_return ) :
 
 
@@ -214,7 +214,9 @@ function get_field_or_parent( $field, $post, $taxonomy = 'category' ) {
 
 			$field_return = get_field( $field, $category );
 
-			if ( $field_return ) {
+
+
+			if ( $field_return) {
 				break;
 			}
 
@@ -331,7 +333,6 @@ function get_related_posts( $post, $nb = 3 ) {
 
 	return $posts;
 }
-
 
 
 require_once( __DIR__ . '/includes/acf_fields.php' );

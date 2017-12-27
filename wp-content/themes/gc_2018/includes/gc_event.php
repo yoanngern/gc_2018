@@ -65,6 +65,7 @@ function create_eventcategory_taxonomy() {
 		'label'        => __( 'Event Category' ),
 		'labels'       => $labels,
 		'hierarchical' => true,
+		'description' => null,
 		'show_ui'      => true,
 		'query_var'    => true,
 		'rewrite'      => array( 'slug' => 'event-category' ),

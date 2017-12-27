@@ -2,7 +2,7 @@
 
 	<?php
 
-	$location_obj = get_field( 'location', $_POST );
+	$location_obj = get_field_or_parent( 'location', $_POST, 'gc_eventcategory' );
 
 	if ( $location_obj != null ) {
 		$location = get_the_title( $location_obj ) . "<br/>" . get_field( 'address', $location_obj ) . "<br/>" . get_field( 'zip_code', $location_obj ) . " " . get_field( 'city', $location_obj ) . "<br/>" . get_field( 'country', $location_obj );
@@ -11,11 +11,14 @@
 	}
 
 
-	$title       = get_the_title();
-	$dates       = complex_date( get_field( 'start' ), get_field( 'end' ) );
-	$description = get_field( 'description', $_POST );
-	$subtitle    = get_field( 'event_subtitle', $_POST );
-	$times       = complex_time( get_field( 'start' ), get_field( 'end' ) );
+	$title = get_the_title();
+	$dates = complex_date( get_field( 'start' ), get_field( 'end' ) );
+	//$description = get_field( 'description', $_POST );
+
+	$description = get_field_or_parent( 'description', $_POST, 'gc_eventcategory' );
+
+	$subtitle = get_field( 'event_subtitle', $_POST );
+	$times    = complex_time( get_field( 'start' ), get_field( 'end' ) );
 
 
 	$video = get_field( 'event_video', $_POST );
@@ -50,10 +53,14 @@
 	$button_url   = get_field( 'button_url', $_POST );
 	$button_label = get_field( 'button_label', $_POST );
 
-	$pres_page = get_field( 'presentation_page', $_POST );
+	$pres_page = get_field_or_parent( 'presentation_page', $_POST, 'gc_eventcategory' );
 
 
-	$bg_image = get_field_or_parent( 'bg_image', $_POST, 'gc_eventcategory' );
+	if ( get_field_or_parent( 'bg_image', $_POST, 'gc_eventcategory' ) ) {
+		$bg_image = get_field_or_parent( 'bg_image', $_POST, 'gc_eventcategory' );
+	} else {
+		$bg_image = get_field_or_parent( 'event_picture', $_POST, 'gc_eventcategory' );
+	}
 
 	if ( ! $bg_image ) {
 
