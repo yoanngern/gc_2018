@@ -2162,7 +2162,7 @@ section.weekend {
     display: table;
     width: 100%; }
   section.weekend div.empty {
-    width: 100%;
+    width: auto;
     margin: 20px; }
     section.weekend div.empty h1 {
       text-align: center;
