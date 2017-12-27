@@ -8,13 +8,18 @@
  *
  * @return mixed
  */
-function order_dates( $query, $post_type = 'gc_event', $post_cat = 'gc_eventcategory' ) {
+function order_dates( $query, $post_type = 'gc_event', $post_cat = 'gc_eventcategory', $post_status = 'publish' ) {
 
+	if ( $post_status == 'all' ) {
+		$post_status = array( 'publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit' );
+	}
 
 	if ( is_admin() && isset( $query->query_vars['post_type'] ) && $query->query_vars['post_type'] == $post_type ) {
 		$query->set( 'orderby', 'meta_value' );
 		$query->set( 'meta_key', 'start' );
 		$query->set( 'meta_key', 'end' );
+		$query->set( 'order', 'desc' );
+		$query->set( 'post_status', $post_status );
 
 		return $query;
 	}
@@ -24,7 +29,7 @@ function order_dates( $query, $post_type = 'gc_event', $post_cat = 'gc_eventcate
 		return $query;
 	}
 
-// only modify queries for category
+	// only modify queries for category
 	if ( isset( $query->query_vars[ $post_cat ] ) ) {
 		$query->set( 'orderby', 'meta_value' );
 		$query->set( 'meta_key', 'start' );
@@ -44,7 +49,7 @@ function order_dates( $query, $post_type = 'gc_event', $post_cat = 'gc_eventcate
 		return $query;
 	}
 
-// only modify queries for 'gc_event' post type
+	// only modify queries for 'gc_event' post type
 	if ( ! is_single() && isset( $query->query_vars['post_type'] ) && $query->query_vars['post_type'] == $post_type ) {
 
 		$query->set( 'orderby', 'meta_value' );

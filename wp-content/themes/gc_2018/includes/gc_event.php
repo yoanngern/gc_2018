@@ -87,6 +87,9 @@ function gc_event_remove_custom_taxonomy() {
 add_action( 'admin_menu', 'gc_event_remove_custom_taxonomy' );
 
 
+
+
+
 /**
  * Update Event
  *
@@ -94,11 +97,12 @@ add_action( 'admin_menu', 'gc_event_remove_custom_taxonomy' );
  */
 function update_event( $post_id ) {
 
+
 	$post_type = get_post_type( $post_id );
 
 
-	if ( $post_type != "gc_event" ) {
-		return;
+	if ( ( $post_type != "gc_event" ) || ( empty( $_POST ) ) ) {
+		return $post_id;
 	}
 
 	$cat = get_the_terms( $post_id, array( 'taxonomy' => 'gc_eventcategory' ) )[0];
@@ -251,7 +255,13 @@ add_filter( 'manage_edit-gc_event_sortable_columns', 'gc_event_sort_column' );
  */
 function gc_order_events( $query ) {
 
-	$query = order_dates( $query, 'gc_event', 'gc_eventcategory' );
+	$post_status = $_GET['post_status'];
+
+	if ( $post_status == '' ) {
+		$post_status = 'all';
+	}
+
+	$query = order_dates( $query, 'gc_event', 'gc_eventcategory', $post_status );
 
 	return $query;
 

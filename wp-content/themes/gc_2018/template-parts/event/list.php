@@ -20,7 +20,7 @@
 		$title = get_queried_object()->name;
 
 
-	elseif ( $post->post_type == "gc_event" ):
+	elseif ( get_queried_object()->name == "gc_event" ):
 
 		$default_cat = get_term_by( 'slug', 'other', 'gc_eventcategory' );
 
@@ -52,9 +52,9 @@
 		'showposts'  => 1,
 		'meta_key'   => 'main_event',
 		'meta_value' => true,
-		'orderby'          => 'meta_value',
-		'order'            => 'asc',
-		'meta_query'       => array(
+		'orderby'    => 'meta_value',
+		'order'      => 'asc',
+		'meta_query' => array(
 			array(
 				'key'     => 'end',
 				'compare' => '>=',
@@ -122,137 +122,142 @@
 
     <div class="platter">
 
-        <section id="events_header">
 
-            <h1>Prochains événements</h1>
-
-            <div class="content">
-
-                <ul class="event_categories">
-					<?php
-
-					$queried_object = get_queried_object();
-
-					$curr_cat = null;
-
-					if ( $queried_object instanceof WP_Term ) {
-						$curr_cat = $queried_object;
-					}
+		<?php
 
 
-					$exclude    = array();
-					$categories = get_terms( array(
-						'taxonomy'   => 'gc_eventcategory',
-						'hide_empty' => 1,
-					) );
+		if ( have_posts() ) : ?>
 
-					$cat_other = get_term_by( 'slug', 'other', 'gc_eventcategory' );
+            <section id="events_header">
+
+                <h1>Prochains événements</h1>
+
+                <div class="content">
+
+                    <ul class="event_categories">
+						<?php
+
+						$queried_object = get_queried_object();
+
+						$curr_cat = null;
+
+						if ( $queried_object instanceof WP_Term ) {
+							$curr_cat = $queried_object;
+						}
 
 
-					foreach ( $categories as $category ) {
-
-
-						$events = get_posts( array(
-							'post_type'   => 'gc_event',
-							'numberposts' => - 1,
-							'tax_query'   => array(
-								array(
-									'taxonomy'         => 'gc_eventcategory',
-									'field'            => 'id',
-									'terms'            => $category->term_id, // Where term_id of Term 1 is "1".
-									'include_children' => true
-								)
-							)
+						$exclude    = array();
+						$categories = get_terms( array(
+							'taxonomy'   => 'gc_eventcategory',
+							'hide_empty' => 1,
 						) );
 
-						foreach ( $events as $key => $event ) {
-
-							$end_date = get_field( "end_date", $event );
+						$cat_other = get_term_by( 'slug', 'other', 'gc_eventcategory' );
 
 
-							if ( $end_date < date( 'Y-m-d' ) ) {
-								unset( $events[ $key ] );
-							}
-						}
-
-						if ( ! count( $events ) ) {
-
-							$exclude[] = $category->term_id;
-						}
-
-					}
-
-					$exclude[] = $cat_other->term_id;
+						foreach ( $categories as $category ) {
 
 
-					/*
-					wp_list_categories( array(
-						'show_option_all' => pll__( 'Filter events' ),
-						'value_field'     => 'slug',
-						'hide_if_empty'   => false,
-						'title_li'        => "",
-						'hide_empty'      => 1,
-						'hierarchical'    => 1,
-						'exclude'         => $exclude,
-						'taxonomy'        => 'gc_eventcategory',
-						'selected'        => get_queried_object()->slug
-					) );
-					*/
+							$events = get_posts( array(
+								'post_type'   => 'gc_event',
+								'numberposts' => - 1,
+								'tax_query'   => array(
+									array(
+										'taxonomy'         => 'gc_eventcategory',
+										'field'            => 'id',
+										'terms'            => $category->term_id, // Where term_id of Term 1 is "1".
+										'include_children' => true
+									)
+								)
+							) );
+
+							foreach ( $events as $key => $event ) {
+
+								$end_date = get_field( "end_date", $event );
 
 
-					$cat_list = get_categories( array(
-						'taxonomy' => 'gc_eventcategory',
-						'orderby'  => 'name',
-						'order'    => 'ASC',
-						'exclude'  => $exclude,
-					) );
-
-
-
-					foreach ( $cat_list as $cat ) {
-
-						$name     = $cat->name;
-						$id       = $cat->term_id;
-						$link     = get_term_link( $cat );
-						$acronym  = get_field( 'acronym', $cat );
-						$bg_image = get_field( 'bg_image', $cat )['sizes']['social'];
-						$class    = '';
-
-						$is_current = false;
-
-						if ( $curr_cat->term_id == $cat->term_id ) {
-							$is_current = true;
-							$link       = get_post_type_archive_link( 'gc_event' );
-						}
-
-						if ( $acronym == null ) {
-							$s = $name;
-
-							if ( preg_match_all( '/\b(\w)/', strtoupper( $s ), $m ) ) {
-								$v = implode( '', $m[1] ); // $v is now SOQTU
+								if ( $end_date < date( 'Y-m-d' ) ) {
+									unset( $events[ $key ] );
+								}
 							}
 
+							if ( ! count( $events ) ) {
 
-							if ( strlen( $v ) <= 1 ) {
-								$acronym = substr( $name, 0, 3 );
-							} else {
-								$acronym = substr( $v, 0, 3 );
+								$exclude[] = $category->term_id;
 							}
 
 						}
 
-						if ( strlen( $name ) >= 15 ) {
-							$name = substr( $name, 0, 12 ) . "...";
-						}
+						$exclude[] = $cat_other->term_id;
 
 
-						if ( $is_current ) {
-							$class .= " current";
-						} else if($curr_cat != null) {
-							$class .= " not_current";
-                        }
+						/*
+						wp_list_categories( array(
+							'show_option_all' => pll__( 'Filter events' ),
+							'value_field'     => 'slug',
+							'hide_if_empty'   => false,
+							'title_li'        => "",
+							'hide_empty'      => 1,
+							'hierarchical'    => 1,
+							'exclude'         => $exclude,
+							'taxonomy'        => 'gc_eventcategory',
+							'selected'        => get_queried_object()->slug
+						) );
+						*/
 
-						echo "
+
+						$cat_list = get_categories( array(
+							'taxonomy' => 'gc_eventcategory',
+							'orderby'  => 'name',
+							'order'    => 'ASC',
+							'exclude'  => $exclude,
+						) );
+
+
+						foreach ( $cat_list as $cat ) {
+
+							$name     = $cat->name;
+							$id       = $cat->term_id;
+							$link     = get_term_link( $cat );
+							$acronym  = get_field( 'acronym', $cat );
+							$bg_image = get_field( 'bg_image', $cat )['sizes']['social'];
+							$class    = '';
+
+							$is_current = false;
+
+							if ( $curr_cat->term_id == $cat->term_id ) {
+								$is_current = true;
+								$link       = get_post_type_archive_link( 'gc_event' );
+							}
+
+							if ( $acronym == null ) {
+								$s = $name;
+
+								if ( preg_match_all( '/\b(\w)/', strtoupper( $s ), $m ) ) {
+									$v = implode( '', $m[1] ); // $v is now SOQTU
+								}
+
+
+								if ( strlen( $v ) <= 1 ) {
+									$acronym = substr( $name, 0, 3 );
+								} else {
+									$acronym = substr( $v, 0, 3 );
+								}
+
+							}
+
+							if ( strlen( $name ) >= 15 ) {
+								$name = substr( $name, 0, 12 ) . "...";
+							}
+
+
+							if ( $is_current ) {
+								$class .= " current";
+							} else if ( $curr_cat != null ) {
+								$class .= " not_current";
+							}
+
+							echo "
 					<li id='category-item-$id' class='$class'>
 					    <a href='$link'>
 					        <div class='round'>
@@ -263,20 +268,15 @@
 					        
 					    </a>
 					</li>";
-					}
+						}
 
-					?>
-
-
-                </ul>
-            </div>
-
-        </section>
-
-		<?php
+						?>
 
 
-		if ( have_posts() ) : ?>
+                    </ul>
+                </div>
+
+            </section>
 
 
             <section id="listOfEvents" class="small" data-nb="3">

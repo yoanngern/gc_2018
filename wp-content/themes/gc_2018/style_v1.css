@@ -630,6 +630,11 @@ footer {
   #content .platter section.content-default {
     padding: 60px 0 40px;
     margin: 0 auto; }
+    #content .platter article.content-page > h1,
+    #content .platter article.home-default > h1,
+    #content .platter section.content-default > h1 {
+      text-align: center;
+      width: 90%; }
     #content .platter article.content-page p,
     #content .platter article.home-default p,
     #content .platter section.content-default p {
@@ -804,7 +809,7 @@ footer {
       text-transform: uppercase;
       line-height: 1.2em;
       letter-spacing: 0.125em;
-      margin: 40px 0 60px; }
+      margin: 40px auto 60px; }
       #content .platter article.content-page h1.title,
       #content .platter article.home-default h1.title,
       #content .platter section.content-default h1.title {

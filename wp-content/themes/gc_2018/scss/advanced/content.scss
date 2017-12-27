@@ -196,6 +196,11 @@
                 //min-height: 300px;
             }
 
+            & > h1 {
+                text-align: center;
+                width: 90%;
+            }
+
             p {
                 font-family: $corbel;
                 line-height: 1.54em;
@@ -377,7 +382,7 @@
                 text-transform: uppercase;
                 line-height: 1.2em;
                 letter-spacing: 0.125em;
-                margin: 40px 0 60px;
+                margin: 40px auto 60px;
 
                 &.title {
                     font-family: $radikal-black;
