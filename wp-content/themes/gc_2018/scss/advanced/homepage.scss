@@ -303,6 +303,10 @@ body.page-template-page-home {
                             }
                         }
                     }
+
+                    &#tv {
+                        margin: 10px;
+                    }
                 }
             }
 
@@ -310,6 +314,14 @@ body.page-template-page-home {
 
 
         @media only screen and (max-width: 480px) {
+
+            article.title {
+                padding-bottom: 90vh;
+
+                .footer {
+                    display: none;
+                }
+            }
 
             .platter {
 

@@ -418,7 +418,8 @@ footer {
             height: 41px;
             background-repeat: no-repeat;
             background-size: contain;
-            margin: 0 auto 25px; }
+            margin: 0 auto 25px;
+            background-position: center bottom; }
           footer section.bottom ul li a h1 {
             font-family: "Radikal-Bold", "Radikal", sans-serif;
             font-size: 1.2em;
@@ -434,6 +435,55 @@ footer {
           background-image: url("images/footer_location.png"); }
         footer section.bottom ul li.time a::before {
           background-image: url("images/footer_time.png"); }
+  @media only screen and (max-width: 800px) {
+    footer section.top {
+      padding: 0 20px; }
+    footer section.bottom {
+      padding: 50px 20px; } }
+  @media only screen and (max-width: 530px) {
+    footer section.top {
+      padding: 0 20px; }
+      footer section.top div.content div.logo,
+      footer section.top div.content ul.social {
+        width: 50%; }
+      footer section.top div.content div.center {
+        width: 0; }
+      footer section.top div.content ul.social {
+        text-align: right; }
+      footer section.top div.content div.logo {
+        text-align: left; }
+    footer section.bottom {
+      padding: 30px 10px; }
+      footer section.bottom ul li a::before {
+        width: 40px;
+        height: 30px;
+        margin-bottom: 15px; }
+      footer section.bottom ul li a h1 {
+        font-size: 0.9em; }
+      footer section.bottom ul li a p {
+        font-size: 0.8em; } }
+  @media only screen and (max-width: 350px) {
+    footer section.top {
+      padding: 0 10px; }
+      footer section.top div.content {
+        padding: 20px 0;
+        display: block; }
+        footer section.top div.content div.logo,
+        footer section.top div.content ul.social {
+          display: block;
+          width: 100%;
+          text-align: center;
+          margin: 10px auto; }
+    footer section.bottom {
+      padding: 10px; }
+      footer section.bottom ul {
+        display: block;
+        text-align: center; }
+        footer section.bottom ul li {
+          display: block;
+          text-align: center;
+          width: 100%;
+          margin: 20px auto; } }
 
 #content article.title {
   height: 0;
@@ -2381,9 +2431,15 @@ body.page-template-page-home #content .platter {
       width: 100%; }
       body.page-template-page-home #content .platter article#church_life div p {
         display: inline-block;
-        margin: 20px 10px; } }
+        margin: 20px 10px; }
+  body.page-template-page-home #content .platter article#tv {
+    margin: 10px; } }
 
 @media only screen and (max-width: 480px) {
+  body.page-template-page-home #content article.title {
+    padding-bottom: 90vh; }
+    body.page-template-page-home #content article.title .footer {
+      display: none; }
   body.page-template-page-home #content .platter article.home-default h1 {
     font-size: 1.6em; } }
 

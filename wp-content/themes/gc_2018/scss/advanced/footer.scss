@@ -42,7 +42,6 @@ footer {
         div.logo {
             display: inline-block;
 
-
             #simple_logo {
                 display: inline-block;
                 width: 160px;
@@ -125,6 +124,7 @@ footer {
                         background-repeat: no-repeat;
                         background-size: contain;
                         margin: 0 auto 25px;
+                        background-position: center bottom;
                     }
 
                     h1 {
@@ -158,6 +158,106 @@ footer {
                     a::before {
                         background-image: url('images/footer_time.png');
                     }
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 800px) {
+
+        section.top {
+            padding: 0 20px;
+        }
+
+        section.bottom {
+            padding: 50px 20px;
+        }
+
+    }
+
+    @media only screen and (max-width: 530px) {
+
+        section.top {
+            padding: 0 20px;
+
+            div.content {
+                div.logo,
+                ul.social {
+                    width: 50%;
+                }
+
+                div.center {
+                    width: 0;
+                }
+
+                ul.social {
+                    text-align: right;
+                }
+
+                div.logo {
+                    text-align: left;
+                }
+            }
+        }
+
+        section.bottom {
+            padding: 30px 10px;
+
+            ul {
+                li {
+                    a {
+
+                        &::before {
+                            width: 40px;
+                            height: 30px;
+                            margin-bottom: 15px;
+                        }
+
+                        h1 {
+                            font-size: 0.9em;
+                        }
+
+                        p {
+                            font-size: 0.8em;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    @media only screen and (max-width: 350px) {
+
+        section.top {
+            padding: 0 10px;
+
+            div.content {
+                padding: 20px 0;
+                display: block;
+
+                div.logo,
+                ul.social {
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                    margin: 10px auto;
+                }
+            }
+        }
+
+        section.bottom {
+            padding: 10px;
+
+            ul {
+                display: block;
+                text-align: center;
+
+                li {
+                    display: block;
+                    text-align: center;
+                    width: 100%;
+                    margin: 20px auto;
                 }
             }
         }
