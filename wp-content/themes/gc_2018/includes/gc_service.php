@@ -193,21 +193,27 @@ function gc_service_custom_column( $column ) {
 
 	} elseif ( $column == 'service_speaker' ) {
 
-		foreach ( get_field( 'service_speaker', $post ) as $speaker ) {
+		if(get_field( 'service_speaker', $post )) {
+			foreach ( get_field( 'service_speaker', $post ) as $speaker ) {
 
 
-			if ( is_array( $speaker ) ) {
+				if ( is_array( $speaker ) ) {
 
-				echo $speaker['label'] . "<br/>";
+					echo $speaker['label'] . "<br/>";
 
-			} else {
+				} else {
 
-				echo get_field( 'service_speaker', $post )['label'];
+					echo get_field( 'service_speaker', $post )['label'];
 
-				return;
+					return;
+				}
+
 			}
-
+		} else {
+			echo "-";
 		}
+
+
 
 	}
 }
