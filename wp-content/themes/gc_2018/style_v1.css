@@ -453,15 +453,17 @@ footer {
       footer section.top div.content div.logo {
         text-align: left; }
     footer section.bottom {
-      padding: 30px 10px; }
-      footer section.bottom ul li a::before {
-        width: 40px;
-        height: 30px;
-        margin-bottom: 15px; }
-      footer section.bottom ul li a h1 {
-        font-size: 0.9em; }
-      footer section.bottom ul li a p {
-        font-size: 0.8em; } }
+      padding: 30px 5px; }
+      footer section.bottom ul li a {
+        padding: 0 5px; }
+        footer section.bottom ul li a::before {
+          width: 40px;
+          height: 30px;
+          margin-bottom: 15px; }
+        footer section.bottom ul li a h1 {
+          font-size: 0.9em; }
+        footer section.bottom ul li a p {
+          font-size: 0.75em; } }
   @media only screen and (max-width: 350px) {
     footer section.top {
       padding: 0 10px; }
