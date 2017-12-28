@@ -228,7 +228,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'placeholder' => '',
 				'maxlength' => '',
 				'rows' => '',
-				'new_lines' => '',
+				'new_lines' => 'br',
 			),
 			array(
 				'key' => 'field_5a3d107d58f8d',
@@ -321,7 +321,7 @@ if( function_exists('acf_add_local_field_group') ):
 			),
 			array(
 				'key' => 'field_5a3e1c4d97586',
-				'label' => 'Next step',
+				'label' => 'Next steps',
 				'name' => '',
 				'type' => 'tab',
 				'instructions' => '',
@@ -375,7 +375,7 @@ if( function_exists('acf_add_local_field_group') ):
 					'class' => '',
 					'id' => '',
 				),
-				'default_value' => 'Next step',
+				'default_value' => 'Next steps',
 				'placeholder' => '',
 				'prepend' => '',
 				'append' => '',
@@ -406,7 +406,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'placeholder' => '',
 				'maxlength' => '',
 				'rows' => '',
-				'new_lines' => '',
+				'new_lines' => 'br',
 			),
 			array(
 				'key' => 'field_5a3d270945db6',
