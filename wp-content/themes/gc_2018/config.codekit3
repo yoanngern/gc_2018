@@ -393,6 +393,17 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/rs_youtube.png": {
+		"ft": 32768,
+		"iS": 1832,
+		"oA": 0,
+		"oAP": "\/images\/rs_youtube.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"\/includes\/acf\/date.php": {
 		"cB": 0,
 		"ft": 8192,

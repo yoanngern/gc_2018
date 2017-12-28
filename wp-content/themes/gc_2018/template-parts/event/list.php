@@ -87,7 +87,7 @@
         <article class="title main_event">
 
             <div id="<?php echo $id; ?>" class="image"
-                 style="background-image: url('<?php echo $image; ?>')"></div>
+                 style="background-image: url('<?php echo $image['sizes']['header']; ?>')"></div>
 
             <div class="title">
 

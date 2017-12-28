@@ -396,6 +396,8 @@ footer {
             background-image: url("images/rs_twitter.png"); }
           footer section.top ul li a#instagram {
             background-image: url("images/rs_instagram.png"); }
+          footer section.top ul li a#youtube {
+            background-image: url("images/rs_youtube.png"); }
           footer section.top ul li a:hover {
             opacity: 0.8; }
   footer section.bottom {
