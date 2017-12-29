@@ -98,6 +98,7 @@ function update_service( $post_id ) {
 		return;
 	}
 
+
 	$my_post = array(
 		'ID'         => $post_id,
 		//'post_title' => date_i18n( get_option( 'date_format' ), strtotime( get_field( 'start', $post_id ) ) ),

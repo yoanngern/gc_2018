@@ -42,10 +42,16 @@ function my_acf_init() {
 function add_service( $fields ) {
 
 
+	$type = get_term_by( 'id', $fields['type'], 'gc_servicecategory' );
+
 	// Create post object
 	$my_post = array(
 		'post_status' => 'publish',
 		'post_type'   => 'gc_service',
+		'post_title'  => $type->name,
+		'tax_input'   => array(
+			'gc_servicecategory' => array($type->term_id),
+		),
 	);
 
 	$start_date = date_format( $fields['start'], 'Ymd' );
@@ -57,7 +63,7 @@ function add_service( $fields ) {
 	$new_post_id = wp_insert_post( $my_post );
 
 	// Update service type
-	wp_set_object_terms( $new_post_id, $fields['type'], 'gc_servicecategory' );
+	//$term_id = wp_set_object_terms( $new_post_id, $fields['type'], 'gc_servicecategory' );
 
 	// Update location
 	update_field( 'location', $fields['location'], $new_post_id );
