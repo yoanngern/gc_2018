@@ -2452,6 +2452,17 @@ body.page-template-page-home #content .platter {
   body.page-template-page-home #content .platter article.home-default h1 {
     font-size: 1.6em; } }
 
+body.page-template-page-calendar #content article.title {
+  padding-bottom: 30%; }
+  body.page-template-page-calendar #content article.title div.title {
+    top: 42%; }
+
+@media only screen and (max-width: 800px) {
+  body.page-template-page-calendar #content article.title {
+    padding-bottom: 30%; }
+    body.page-template-page-calendar #content article.title div.title {
+      top: 50%; } }
+
 article.calendar {
   padding: 30px;
   display: block; }
