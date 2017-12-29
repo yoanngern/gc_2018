@@ -85,6 +85,16 @@ function wpdocs_custom_excerpt_length( $length ) {
 
 add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
 
+
+
+// get the the role object
+$role_object = get_role( 'editor' );
+
+// add $cap capability to this role object
+$role_object->add_cap( 'edit_theme_options' );
+
+
+
 function my_theme_archive_title( $title ) {
 	if ( is_category() ) {
 		$title = single_cat_title( '', false );

@@ -29,7 +29,7 @@ function my_acf_init() {
 			'menu_title'  => __( 'Gospel Center', 'my_text_domain' ),
 			'parent_slug' => 'options-general.php',
 			'menu_slug'   => 'gc',
-			'capability'  => 'manage_options',
+			'capability'  => 'delete_pages',
 			'autoload'    => true,
 
 		) );
