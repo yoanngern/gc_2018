@@ -6,7 +6,7 @@
 function create_services() {
 	register_post_type( 'gc_service',
 		array(
-			'labels'                => array(
+			'labels'              => array(
 				'name'          => __( 'Services' ),
 				'singular_name' => __( 'Service' ),
 				'add_new'       => 'Add a service',
@@ -14,27 +14,24 @@ function create_services() {
 				'add_new_item'  => 'Add New Service',
 				'edit_item'     => 'Edit Service',
 			),
-			'public'                => true,
-			'can_export'            => true,
-			'show_ui'               => true,
-			'show_in_rest'          => true,
-			'rest_base'             => 'services',
-			'rest_controller_class' => 'WP_REST_Posts_Controller',
-			'_builtin'              => false,
-			'has_archive'           => true,
-			'publicly_queryable'    => true,
-			'query_var'             => true,
-			'rewrite'               => array(
+			'public'              => true,
+			'can_export'          => true,
+			'show_ui'             => true,
+			'_builtin'            => false,
+			'has_archive'         => true,
+			'publicly_queryable'  => true,
+			'query_var'           => true,
+			'rewrite'             => array(
 				"slug"       => "services",
 				'with_front' => false
 			),
-			'capability_type'       => 'post',
-			'hierarchical'          => false,
-			'menu_position'         => null,
-			'supports'              => false,
-			'menu_icon'             => 'dashicons-megaphone',
-			'taxonomies'            => array( 'gc_servicecategory' ),
-			'exclude_from_search'   => false,
+			'capability_type'     => 'post',
+			'hierarchical'        => false,
+			'menu_position'       => null,
+			'supports'            => false,
+			'menu_icon'           => 'dashicons-megaphone',
+			'taxonomies'          => array( 'gc_servicecategory' ),
+			'exclude_from_search' => false,
 		)
 	);
 }
@@ -193,7 +190,7 @@ function gc_service_custom_column( $column ) {
 
 	} elseif ( $column == 'service_speaker' ) {
 
-		if(get_field( 'service_speaker', $post )) {
+		if ( get_field( 'service_speaker', $post ) ) {
 			foreach ( get_field( 'service_speaker', $post ) as $speaker ) {
 
 
@@ -212,7 +209,6 @@ function gc_service_custom_column( $column ) {
 		} else {
 			echo "-";
 		}
-
 
 
 	}

@@ -2452,6 +2452,226 @@ body.page-template-page-home #content .platter {
   body.page-template-page-home #content .platter article.home-default h1 {
     font-size: 1.6em; } }
 
+article.calendar {
+  padding: 30px;
+  display: block; }
+  article.calendar div.title {
+    width: 100%;
+    margin: 10px 0 20px;
+    display: flex; }
+    article.calendar div.title h1 {
+      font-family: "Radikal-Bold", "Radikal", sans-serif;
+      font-size: 2em;
+      line-height: 2em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: left; }
+    article.calendar div.title a.go_today {
+      color: #333333;
+      font-family: "Radikal-Bold", "Radikal", sans-serif;
+      text-decoration: none;
+      line-height: 40px;
+      display: inline-block;
+      margin: 0 5px;
+      border: 1px solid #d7d7d7;
+      padding: 0 10px;
+      background-color: #fdfdfd;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      -ms-border-radius: 3px;
+      -o-border-radius: 3px;
+      border-radius: 3px;
+      transition: all 200ms ease; }
+      article.calendar div.title a.go_today:hover {
+        background-color: #EEEEEE; }
+    article.calendar div.title div.left,
+    article.calendar div.title div.center,
+    article.calendar div.title div.right {
+      display: inline-block;
+      width: 25%; }
+    article.calendar div.title div.left {
+      text-align: left; }
+      article.calendar div.title div.left a.go_today::before {
+        content: '<';
+        display: inline-block;
+        padding-right: 5px;
+        line-height: 40px; }
+    article.calendar div.title div.right {
+      text-align: right; }
+      article.calendar div.title div.right a.go_today::after {
+        content: '>';
+        display: inline-block;
+        padding-left: 5px;
+        line-height: 40px; }
+    article.calendar div.title div.center {
+      width: 50%; }
+      article.calendar div.title div.center div.select_week {
+        display: table;
+        margin: 0 auto;
+        border: 1px solid #d7d7d7;
+        height: 40px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        -o-border-radius: 3px;
+        border-radius: 3px; }
+        article.calendar div.title div.center div.select_week a.prev,
+        article.calendar div.title div.center div.select_week a.next {
+          display: inline-block;
+          height: 100%;
+          width: 40px;
+          vertical-align: top;
+          background-color: #fdfdfd;
+          text-decoration: none;
+          transition: all 200ms ease; }
+          article.calendar div.title div.center div.select_week a.prev:hover,
+          article.calendar div.title div.center div.select_week a.next:hover {
+            background-color: #EEEEEE; }
+          article.calendar div.title div.center div.select_week a.prev::before,
+          article.calendar div.title div.center div.select_week a.next::before {
+            color: #979797;
+            display: block;
+            font-size: 30px;
+            line-height: 40px;
+            font-family: "Radikal-Light", "Radikal", sans-serif;
+            text-align: center;
+            width: 100%; }
+        article.calendar div.title div.center div.select_week a.prev::before {
+          content: "<"; }
+        article.calendar div.title div.center div.select_week a.next::before {
+          content: ">"; }
+        article.calendar div.title div.center div.select_week div.week {
+          display: inline-block;
+          vertical-align: top;
+          height: 100%;
+          border-left: 1px solid #d7d7d7;
+          border-right: 1px solid #d7d7d7;
+          background-color: #FFFFFF; }
+          article.calendar div.title div.center div.select_week div.week span {
+            text-align: center;
+            padding: 0 20px;
+            vertical-align: middle;
+            display: inline-block;
+            line-height: 40px; }
+  article.calendar div.flex {
+    width: 100%;
+    display: flex; }
+    article.calendar div.flex div.day {
+      display: inline-block;
+      width: 14.3%;
+      vertical-align: top;
+      margin: 4px; }
+      article.calendar div.flex div.day.today div.head {
+        border-bottom: 4px solid #E52639;
+        padding-bottom: 0; }
+      article.calendar div.flex div.day.weekend div.head,
+      article.calendar div.flex div.day.weekend div.content a.date {
+        background-color: #EEEEEE; }
+      article.calendar div.flex div.day.weekend div.content a.date:hover {
+        background-color: #d7d7d7; }
+      article.calendar div.flex div.day div.head {
+        font-family: "Radikal-Bold", "Radikal", sans-serif;
+        background-color: #FFFFFF;
+        padding: 10px 10px 2px;
+        margin-bottom: 8px;
+        border-bottom: 2px solid #979797; }
+        article.calendar div.flex div.day div.head h1 {
+          text-align: left;
+          text-transform: uppercase;
+          font-size: 1.3em;
+          letter-spacing: 0.06em;
+          line-height: 1.3em;
+          padding: 2px 0 0; }
+        article.calendar div.flex div.day div.head time {
+          font-family: "Radikal", sans-serif;
+          font-size: 0.9em;
+          text-align: left;
+          display: block;
+          padding: 5px 0 4px; }
+          article.calendar div.flex div.day div.head time span {
+            display: inline-block; }
+            article.calendar div.flex div.day div.head time span.day {
+              padding-right: 3px; }
+            article.calendar div.flex div.day div.head time span.month_short {
+              display: none; }
+      article.calendar div.flex div.day div.content a.date {
+        padding: 15px 10px;
+        background-color: #FFFFFF;
+        margin-bottom: 8px;
+        color: #333333;
+        text-decoration: none;
+        display: block;
+        transition: all 200ms ease; }
+        article.calendar div.flex div.day div.content a.date:hover {
+          background-color: #EEEEEE; }
+        article.calendar div.flex div.day div.content a.date h1 {
+          font-family: "Radikal-Bold", "Radikal", sans-serif;
+          padding: 3px 0 5px;
+          letter-spacing: 0.02em;
+          font-size: 1.1em;
+          line-height: 1.2em; }
+        article.calendar div.flex div.day div.content a.date time {
+          color: #777777;
+          font-size: 0.9em;
+          padding: 3px 0;
+          letter-spacing: 0.06em; }
+  @media only screen and (max-width: 900px) {
+    article.calendar {
+      padding: 20px 10px; }
+      article.calendar div.flex div.day div.head time span.month {
+        display: none; }
+      article.calendar div.flex div.day div.head time span.month_short {
+        display: inline-block; } }
+  @media only screen and (max-width: 640px) {
+    article.calendar {
+      padding: 20px 3% 10px; }
+      article.calendar div.title {
+        display: block; }
+        article.calendar div.title div.left,
+        article.calendar div.title div.center,
+        article.calendar div.title div.right {
+          display: block;
+          width: 100%;
+          margin: 10px 0;
+          text-align: center; }
+      article.calendar div.flex {
+        display: block; }
+        article.calendar div.flex div.day {
+          display: block;
+          width: 100%;
+          margin: 0 0 20px 0;
+          border-bottom: 1px solid #EEEEEE;
+          background-color: #FFFFFF; }
+          article.calendar div.flex div.day.today div.head {
+            border-bottom: none;
+            border-left: 3px solid #E52639;
+            padding: 10px 2%; }
+          article.calendar div.flex div.day.weekend div.head,
+          article.calendar div.flex div.day.weekend div.content a.date {
+            background-color: #FFFFFF; }
+          article.calendar div.flex div.day div.head {
+            border-bottom: none;
+            margin: 0;
+            padding: 10px 2%;
+            border-left: 3px solid #FFFFFF; }
+            article.calendar div.flex div.day div.head h1 {
+              display: inline-block;
+              font-size: 1em;
+              padding: 0;
+              margin-right: 4px; }
+            article.calendar div.flex div.day div.head time {
+              display: inline-block;
+              padding: 0; }
+              article.calendar div.flex div.day div.head time span.month {
+                display: inline-block; }
+              article.calendar div.flex div.day div.head time span.month_short {
+                display: none; }
+          article.calendar div.flex div.day div.content {
+            margin-left: 4%; }
+            article.calendar div.flex div.day div.content a.date {
+              border-top: 1px solid #EEEEEE;
+              padding: 10px 3px; } }
+
 body {
   font-family: "Radikal", sans-serif;
   -webkit-font-smoothing: antialiased;

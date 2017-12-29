@@ -3012,11 +3012,11 @@
 		"oAP": "\/options.php",
 		"oF": 0
 		},
-	"\/page-custom.php": {
+	"\/page-calendar.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/page-custom.php",
+		"oAP": "\/page-calendar.php",
 		"oF": 0
 		},
 	"\/page-elementor.php": {
@@ -3469,6 +3469,19 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/scss\/blog.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/advanced\/calendar.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/calendar.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1

@@ -35,58 +35,7 @@
 	$last = date( "Y-m-d", strtotime( 'next sunday' ) ) . ' 23:59:59';
 
 
-	$events = wp_get_recent_posts( array(
-		'numberposts'      => 12,
-		'offset'           => 0,
-		'orderby'          => 'meta_value',
-		'meta_key'         => 'start',
-		'order'            => 'asc',
-		'meta_query'       => array(
-			'relation' => 'AND',
-			array(
-				'key'     => 'end',
-				'compare' => '>=',
-				'value'   => $first,
-			),
-			array(
-				'key'     => 'start',
-				'compare' => '<=',
-				'value'   => $last,
-			),
-			array(
-				'key'     => 'weekend_prog',
-				'compare' => '=',
-				'value'   => true,
-			)
-		),
-		'post_type'        => 'gc_event',
-		'suppress_filters' => true
-
-	), OBJECT );
-
-	$services = wp_get_recent_posts( array(
-		'numberposts'      => 12,
-		'offset'           => 0,
-		'orderby'          => 'meta_value',
-		'meta_key'         => 'start',
-		'order'            => 'asc',
-		'meta_query'       => array(
-			'relation' => 'AND',
-			array(
-				'key'     => 'end',
-				'compare' => '>=',
-				'value'   => $first,
-			),
-			array(
-				'key'     => 'start',
-				'compare' => '<=',
-				'value'   => $last,
-			)
-		),
-		'post_type'        => 'gc_service',
-		'suppress_filters' => true
-
-	), OBJECT );
+	$dates = get_dates( $first, $last, false, false, true );
 
 
 	?>
@@ -116,51 +65,12 @@
 			);
 
 
-			if ( $events != null ):
-				foreach ( $events as $event ):
+			if ( $dates != null ):
 
-					$start = get_field( 'start', $event );
-					$end   = get_field( 'end', $event );
+				foreach ( $dates as $date ):
 
-					if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['friday']['date'] ) ) {
-						$days['friday']['show'] = true;
-					}
-
-					if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['saturday']['date'] ) ) {
-						$days['saturday']['show'] = true;
-					}
-
-					if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['sunday']['date'] ) ) {
-						$days['sunday']['show'] = true;
-					}
-
-					$location_obj = get_field( 'location', $event );
-
-					if ( $location_obj != null ) {
-						$location = get_the_title( $location_obj );
-					} else {
-						$location = "";
-					}
-
-					$item = array(
-						'title'    => $event->post_title,
-						'start'    => get_field( 'start', $event ),
-						'end'      => get_field( 'end', $event ),
-						'time'     => date( 'G:i', strtotime( get_field( 'start', $event ) ) ),
-						'location' => $location,
-						'object'   => $event,
-					);
-
-					$items[] = $item;
-
-				endforeach;
-			endif;
-
-			if ( $services != null ):
-				foreach ( $services as $service ):
-
-					$start = get_field( 'start', $service );
-					$end   = get_field( 'end', $service );
+					$start = get_field( 'start', $date );
+					$end   = get_field( 'end', $date );
 
 					if ( date( 'Y-m-d', strtotime( $start ) ) == date( 'Y-m-d', $days['friday']['date'] ) ) {
 						$days['friday']['show'] = true;
@@ -174,7 +84,7 @@
 						$days['sunday']['show'] = true;
 					}
 
-					$location_obj = get_field( 'location', $service );
+					$location_obj = get_field( 'location', $date );
 
 					if ( $location_obj != null ) {
 						$location = get_the_title( $location_obj );
@@ -183,18 +93,20 @@
 					}
 
 					$item = array(
-						'title'    => $service->post_title,
-						'start'    => get_field( 'start', $service ),
-						'end'      => get_field( 'end', $service ),
-						'time'     => date( 'G:i', strtotime( get_field( 'start', $service ) ) ),
+						'title'    => $date->post_title,
+						'start'    => get_field( 'start', $date ),
+						'end'      => get_field( 'end', $date ),
+						'time'     => date( 'G:i', strtotime( get_field( 'start', $date ) ) ),
 						'location' => $location,
-						'object'   => $service,
+						'object'   => $date,
 					);
 
 					$items[] = $item;
 
 				endforeach;
+
 			endif;
+
 
 			?>
 
@@ -259,9 +171,9 @@
                                         <div class="item">
                                             <time><?php echo $item['time'] ?></time>
                                             <h2><?php echo $item['title'] ?></h2>
-	                                        <?php if ( $item['location'] != "" ): ?>
+											<?php if ( $item['location'] != "" ): ?>
                                                 <p class="location"><?php echo $item['location'] ?></p>
-	                                        <?php endif; ?>
+											<?php endif; ?>
                                         </div>
 
 
@@ -294,9 +206,9 @@
                                         <div class="item">
                                             <time><?php echo $item['time'] ?></time>
                                             <h2><?php echo $item['title'] ?></h2>
-	                                        <?php if ( $item['location'] != "" ): ?>
+											<?php if ( $item['location'] != "" ): ?>
                                                 <p class="location"><?php echo $item['location'] ?></p>
-	                                        <?php endif; ?>
+											<?php endif; ?>
                                         </div>
 
 									<?php endif;

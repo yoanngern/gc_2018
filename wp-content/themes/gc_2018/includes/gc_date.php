@@ -253,3 +253,104 @@ function time_trans( $date ) {
 	return $time;
 }
 
+
+/**
+ * @param $start
+ * @param $end
+ *
+ * @return array
+ */
+function get_dates( $start, $end, $event_cat = array(), $service_cat = array() , $weekend = false) {
+
+
+	if ( ! $event_cat ) {
+
+		$terms = get_terms( array(
+			'taxonomy' => 'gc_eventcategory',
+		) );
+
+		foreach ( $terms as $term ) {
+
+			$event_cat[] = $term->slug;
+		}
+
+	}
+
+
+	if ( ! $service_cat ) {
+
+		$terms = get_terms( array(
+			'taxonomy' => 'gc_servicecategory',
+		) );
+
+		foreach ( $terms as $term ) {
+
+			$service_cat[] = $term->slug;
+		}
+	}
+
+	if($weekend) {
+		$weekend_query = array(
+			'relation' => 'OR',
+			array(
+				'key' => 'service_type',
+				'compare' => 'EXISTS',
+			),
+			array(
+				'key'     => 'weekend_prog',
+				'compare' => '=',
+				'value'   => true,
+			)
+		);
+	}
+
+
+	$args = array(
+		'posts_per_page' => 50,
+		'orderby'        => 'meta_value',
+		'meta_key'       => 'start',
+		'order'          => 'asc',
+		'tax_query'      => array(
+			'relation' => 'OR',
+			array(
+				'taxonomy' => 'gc_eventcategory',
+				'field'    => 'slug',
+				'terms'    => $event_cat,
+			),
+			array(
+				'taxonomy' => 'gc_servicecategory',
+				'field'    => 'slug',
+				'terms'    => $service_cat,
+			),
+		),
+		'meta_query'     => array(
+			'relation' => 'AND',
+			array(
+				'key'     => 'end',
+				'compare' => '>=',
+				'value'   => $start,
+			),
+			array(
+				'key'     => 'start',
+				'compare' => '<=',
+				'value'   => $end,
+			),
+			$weekend_query
+
+		),
+
+	);
+
+
+	// The Query
+	$query = new WP_Query( $args );
+
+	$dates_return = $query->get_posts();
+
+	/* Restore original Post Data */
+	wp_reset_postdata();
+
+
+	return $dates_return;
+
+}
