@@ -89,12 +89,12 @@
                 </div>
 
                 <div class="right">
-	                <?php if ( strtotime( $this_monday ) > strtotime( $start ) ): ?>
+					<?php if ( strtotime( $this_monday ) > strtotime( $start ) ): ?>
                         <a class="go_today" href="<?php echo add_query_arg( array(
-			                'week' => $this_monday,
-		                ), $curr_url ); ?>">Go to today</a>
+							'week' => $this_monday,
+						), $curr_url ); ?>">Go to today</a>
 
-	                <?php endif; ?>
+					<?php endif; ?>
                 </div>
 
             </div>
@@ -103,11 +103,17 @@
 
 				<?php
 
-				$index = 0;
+				$index             = 0;
+				$first_multi_index = false;
 
 				while ( strtotime( $day ) <= strtotime( $end ) ) :
 
 					$day_class = 'day';
+
+					if ( $first_multi_index !== false ) {
+						$index = $first_multi_index;
+
+					}
 
 					if ( strtotime( date( 'Y-m-d' ) ) == strtotime( $day ) ) {
 						$day_class .= ' today';
@@ -131,33 +137,52 @@
                         <div class="content">
 							<?php
 
-
-							while ( strtotime( date( 'Y-m-d', strtotime( get_field( 'start', $dates[ $index ] ) ) ) ) == strtotime( $day ) ) : ?>
+							while ( $index < sizeof( $dates ) ) : ?>
 
 								<?php
 
 								$date = $dates[ $index ];
+								$date_class = 'date';
 
-								$date_start = get_field( 'start', $date );
-								$date_title = $date->post_title;
+								if ( date( 'Y-m-d', strtotime( get_field( 'start', $date ) ) ) != date( 'Y-m-d', strtotime( get_field( 'end', $date ) ) ) ) {
+									$date_class .= ' multi';
 
-								$date_time = complex_time( get_field( 'start', $date ), get_field( 'end', $date ) );
+									if ( $first_multi_index === false ) {
+										$first_multi_index = $index;
 
-								if ( $date->post_type == 'gc_event' ) {
-									$url = esc_url( get_permalink( $date ) );;
-								} else {
-									$url = '/weekend';
+									}
 								}
 
+								if ( ( strtotime( $day ) >= strtotime( date( 'Y-m-d', strtotime( get_field( 'start', $dates[ $index ] ) ) ) ) ) && ( strtotime( $day ) <= strtotime( date( 'Y-m-d', strtotime( get_field( 'end', $dates[ $index ] ) ) ) ) ) ) :
+
+
+
+
+									$date_start = get_field( 'start', $date );
+									$date_title = $date->post_title;
+
+									$date_time = complex_time( get_field( 'start', $date ), get_field( 'end', $date ) );
+
+									if ( $date->post_type == 'gc_event' ) {
+										$url = esc_url( get_permalink( $date ) );
+									} else {
+										$url = '/weekend';
+									}
+
+									?>
+
+                                    <a href="<?php echo $url; ?>" class="<?php echo $date_class; ?>">
+                                        <h1><?php echo $date_title; ?></h1>
+                                        <time><?php echo $date_time ?></time>
+                                    </a>
+
+
+									<?php
+
+								endif;
+
+								$index ++;
 								?>
-
-                                <a href="<?php echo $url; ?>" class="date">
-                                    <h1><?php echo $date_title; ?></h1>
-                                    <time><?php echo $date_time ?></time>
-                                </a>
-
-
-								<?php $index ++; ?>
 							<?php endwhile; ?>
 
 

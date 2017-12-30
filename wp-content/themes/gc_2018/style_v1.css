@@ -2613,6 +2613,9 @@ article.calendar {
         text-decoration: none;
         display: block;
         transition: all 200ms ease; }
+        article.calendar div.flex div.day div.content a.date.multi {
+          padding-top: 5px;
+          padding-bottom: 3px; }
         article.calendar div.flex div.day div.content a.date:hover {
           background-color: #EEEEEE; }
         article.calendar div.flex div.day div.content a.date h1 {

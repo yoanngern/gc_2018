@@ -237,6 +237,11 @@ article.calendar {
                     display: block;
                     transition: all 200ms ease;
 
+                    &.multi {
+                        padding-top: 5px;
+                        padding-bottom: 3px;
+                    }
+
                     &:hover {
                         background-color: $gray6;
                     }
