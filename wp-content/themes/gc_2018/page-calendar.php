@@ -103,17 +103,12 @@
 
 				<?php
 
-				$index             = 0;
-				$first_multi_index = false;
 
 				while ( strtotime( $day ) <= strtotime( $end ) ) :
 
 					$day_class = 'day';
 
-					if ( $first_multi_index !== false ) {
-						$index = $first_multi_index;
-
-					}
+					$index             = 0;
 
 					if ( strtotime( date( 'Y-m-d' ) ) == strtotime( $day ) ) {
 						$day_class .= ' today';
@@ -141,21 +136,15 @@
 
 								<?php
 
-								$date = $dates[ $index ];
-								$date_class = 'date';
-
-								if ( date( 'Y-m-d', strtotime( get_field( 'start', $date ) ) ) != date( 'Y-m-d', strtotime( get_field( 'end', $date ) ) ) ) {
-									$date_class .= ' multi';
-
-									if ( $first_multi_index === false ) {
-										$first_multi_index = $index;
-
-									}
-								}
 
 								if ( ( strtotime( $day ) >= strtotime( date( 'Y-m-d', strtotime( get_field( 'start', $dates[ $index ] ) ) ) ) ) && ( strtotime( $day ) <= strtotime( date( 'Y-m-d', strtotime( get_field( 'end', $dates[ $index ] ) ) ) ) ) ) :
 
+									$date           = $dates[ $index ];
+									$date_class     = 'date';
 
+									if ( date( 'Y-m-d', strtotime( get_field( 'start', $date ) ) ) != date( 'Y-m-d', strtotime( get_field( 'end', $date ) ) ) ) {
+										$date_class .= ' multi';
+									}
 
 
 									$date_start = get_field( 'start', $date );
