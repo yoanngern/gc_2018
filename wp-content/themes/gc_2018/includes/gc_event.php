@@ -65,7 +65,7 @@ function create_eventcategory_taxonomy() {
 		'label'        => __( 'Event Category' ),
 		'labels'       => $labels,
 		'hierarchical' => true,
-		'description' => null,
+		'description'  => null,
 		'show_ui'      => true,
 		'query_var'    => true,
 		'rewrite'      => array( 'slug' => 'event-category' ),
@@ -88,9 +88,6 @@ function gc_event_remove_custom_taxonomy() {
 add_action( 'admin_menu', 'gc_event_remove_custom_taxonomy' );
 
 
-
-
-
 /**
  * Update Event
  *
@@ -109,6 +106,44 @@ function update_event( $post_id ) {
 	$cat = get_the_terms( $post_id, array( 'taxonomy' => 'gc_eventcategory' ) )[0];
 
 	$event_title = get_field( 'event_title', $post_id );
+
+
+	switch ( get_field( 'weekend_prog', $post_id ) ) {
+		case 'category':
+
+			if ( get_field( 'weekend_prog', $cat ) ) {
+				$weekend_show = true;
+			} else {
+				$weekend_show = false;
+			}
+
+			break;
+		case 'show':
+			$weekend_show = true;
+			break;
+		default:
+			$weekend_show = false;
+			break;
+	}
+
+	switch ( get_field( 'events_page', $post_id ) ) {
+		case 'category':
+
+			if ( get_field( 'events_page', $cat ) ) {
+				$events_show = true;
+			} else {
+				$events_show = false;
+			}
+
+			break;
+		case 'show':
+			$events_show = true;
+			break;
+		default:
+			$events_show = false;
+			break;
+	}
+
 
 	if ( $event_title == null ) {
 		$title = $cat->name;
@@ -131,6 +166,10 @@ function update_event( $post_id ) {
 	// update the post, which calls save_post again
 	wp_update_post( $my_post );
 
+	update_field( 'weekend_show', $weekend_show, $post_id );
+
+	update_field( 'events_show', $events_show, $post_id );
+
 	// re-hook this function
 	add_action( 'save_post', 'update_event' );
 
@@ -139,6 +178,61 @@ function update_event( $post_id ) {
 
 add_action( 'save_post', 'update_event' );
 
+
+/**
+ * Custom redirect on taxonomy term update, keeps users on the term page for additional updates
+ *
+ * @param $term_id
+ * @param $taxonomy
+ */
+function post_save_cat_event( $term_id, $taxonomy ) {
+
+	$my_taxonomy_slug = 'gc_eventcategory';
+
+
+	$args = array(
+		'numberposts' => 100,
+		'post_type' >= 'any',
+		'tax_query'   => array(
+			array(
+				'taxonomy' => $my_taxonomy_slug,
+				'field'    => 'term_id',
+				'terms'    => $term_id,
+			)
+		)
+	);
+
+
+	$query = new WP_Query( $args );
+
+	$events = $query->get_posts();
+
+	/* Restore original Post Data */
+	wp_reset_postdata();
+
+
+	foreach ( $events as $event ) {
+
+		$id = $my_taxonomy_slug . '_' . $term_id;
+
+
+		if ( get_field( 'weekend_prog', $event ) == 'category' ) {
+			update_field( 'weekend_show', get_field( 'weekend_prog', $id ), $event->ID );
+		}
+
+		if ( get_field( 'events_page', $event ) == 'category' ) {
+			update_field( 'events_show', get_field( 'events_page', $id ), $event->ID );
+		}
+
+		//var_dump( $event );
+	}
+
+	wp_safe_redirect( admin_url( 'edit-tags.php?action=edit&taxonomy=' . $my_taxonomy_slug . '&&post_type=gc_event&tag_ID=' . $term_id . '&notice=success' ) );
+
+	exit;
+}
+
+add_action( 'edited_gc_eventcategory', 'post_save_cat_event', 10, 2 );
 
 /**
  * Event column
@@ -272,3 +366,15 @@ function gc_order_events( $query ) {
 add_action( 'pre_get_posts', 'gc_order_events' );
 
 
+function default_content_event( $content, $post ) {
+
+	if ( $post->post_type != 'gc_event' ) {
+		return $content;
+	}
+
+	return $content;
+
+
+}
+
+add_filter( 'default_content', 'default_content_event', 10, 2 );

@@ -60,10 +60,16 @@ function order_dates( $query, $post_type = 'gc_event', $post_cat = 'gc_eventcate
 		$today = date( 'Y-m-d H:i:s' );
 
 		$query->set( 'meta_query', array(
+			'relation' => 'AND',
 			array(
 				'key'     => 'end',
 				'compare' => '>=',
 				'value'   => $today,
+			),
+			array(
+				'key'     => 'events_show',
+				'compare' => '=',
+				'value'   => true,
 			)
 		) );
 
@@ -260,7 +266,7 @@ function time_trans( $date ) {
  *
  * @return array
  */
-function get_dates( $start, $end, $event_cat = array(), $service_cat = array() , $weekend = false) {
+function get_dates( $start, $end, $event_cat = array(), $service_cat = array(), $weekend = false ) {
 
 
 	if ( ! $event_cat ) {
@@ -289,19 +295,21 @@ function get_dates( $start, $end, $event_cat = array(), $service_cat = array() ,
 		}
 	}
 
-	if($weekend) {
+	if ( $weekend ) {
 		$weekend_query = array(
 			'relation' => 'OR',
 			array(
-				'key' => 'service_type',
+				'key'     => 'service_type',
 				'compare' => 'EXISTS',
 			),
 			array(
-				'key'     => 'weekend_prog',
+				'key'     => 'weekend_show',
 				'compare' => '=',
 				'value'   => true,
 			)
 		);
+	} else {
+		$weekend_query = '';
 	}
 
 

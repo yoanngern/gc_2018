@@ -55,6 +55,11 @@
 					'key'     => 'end',
 					'compare' => '>=',
 					'value'   => $today,
+				),
+				array(
+					'key'     => 'events_show',
+					'compare' => '=',
+					'value'   => true,
 				)
 			),
 			'post_type'        => 'gc_event',

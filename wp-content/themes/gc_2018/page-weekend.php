@@ -30,13 +30,12 @@
 	<?php
 
 
-	$first = date( "Y-m-d H:i:s", strtotime( 'last monday' ) );
+	$first = date( "Y-m-d H:i:s", strtotime( 'monday this week' ) );
 
-	$last = date( "Y-m-d", strtotime( 'next sunday' ) ) . ' 23:59:59';
+	$last = date( "Y-m-d", strtotime( 'sunday this week' ) ) . ' 23:59:59';
 
 
 	$dates = get_dates( $first, $last, false, false, true );
-
 
 	?>
 
@@ -52,15 +51,15 @@
 			$days = array(
 				'friday'   => array(
 					'show' => false,
-					'date' => strtotime( 'next friday' ),
+					'date' => strtotime( 'friday this week' ),
 				),
 				'saturday' => array(
 					'show' => false,
-					'date' => strtotime( 'next saturday' ),
+					'date' => strtotime( 'saturday this week' ),
 				),
 				'sunday'   => array(
 					'show' => false,
-					'date' => strtotime( 'next sunday' ),
+					'date' => strtotime( 'sunday this week' ),
 				),
 			);
 
