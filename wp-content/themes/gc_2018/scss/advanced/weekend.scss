@@ -177,6 +177,13 @@ section.weekend {
     max-width: 1500px;
     padding: 20px;
 
+    & > div.header {
+
+        position: relative;
+        height: 80px;
+        margin: 0 1.33333% 20px;
+    }
+
     div.content {
         display: table;
         width: 100%;
@@ -332,6 +339,78 @@ section.weekend {
                         bottom: 0;
                     }
 
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 1100px) {
+
+        padding: 0.8vw;
+
+        div.content {
+
+            article {
+                width: 33.333%;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 760px) {
+
+        div.content {
+
+            article {
+                width: 50%;
+
+                div.container {
+
+                    div.text {
+                        padding: 10px;
+                    }
+
+                    div.location {
+                        margin: 0 0 10px;
+
+                        &::before {
+                            margin: 0 10px 10px 10px;
+                        }
+
+                        &::after {
+                            left: 10px;
+                            right: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 360px) {
+
+        div.content {
+
+            article {
+                width: 100%;
+
+                div.container {
+
+                    div.text {
+                        padding: 15px;
+                    }
+
+                    div.location {
+                        margin: 0 0 15px;
+
+                        &::before {
+                            margin: 0 15px 15px 15px;
+                        }
+
+                        &::after {
+                            left: 15px;
+                            right: 15px;
+                        }
+                    }
                 }
             }
         }

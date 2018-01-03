@@ -108,7 +108,7 @@
 
 					$day_class = 'day';
 
-					$index             = 0;
+					$index = 0;
 
 					if ( strtotime( date( 'Y-m-d' ) ) == strtotime( $day ) ) {
 						$day_class .= ' today';
@@ -139,8 +139,8 @@
 
 								if ( ( strtotime( $day ) >= strtotime( date( 'Y-m-d', strtotime( get_field( 'start', $dates[ $index ] ) ) ) ) ) && ( strtotime( $day ) <= strtotime( date( 'Y-m-d', strtotime( get_field( 'end', $dates[ $index ] ) ) ) ) ) ) :
 
-									$date           = $dates[ $index ];
-									$date_class     = 'date';
+									$date = $dates[ $index ];
+									$date_class = 'date';
 
 									if ( date( 'Y-m-d', strtotime( get_field( 'start', $date ) ) ) != date( 'Y-m-d', strtotime( get_field( 'end', $date ) ) ) ) {
 										$date_class .= ' multi';
@@ -155,7 +155,13 @@
 									if ( $date->post_type == 'gc_event' ) {
 										$url = esc_url( get_permalink( $date ) );
 									} else {
-										$url = '/weekend?service=' . $date->ID;
+
+										$cats = wp_get_post_terms( $date->ID, 'gc_servicecategory');
+
+										$url = add_query_arg( array(
+											'service' => $date->ID,
+											'category' => $cats[0]->slug,
+										), 'weekend' );
 									}
 
 									?>

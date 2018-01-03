@@ -140,7 +140,7 @@
 
                 <div class="content">
 
-                    <ul class="event_categories">
+                    <ul class="event_categories category_filter">
 						<?php
 
 						$queried_object = get_queried_object();

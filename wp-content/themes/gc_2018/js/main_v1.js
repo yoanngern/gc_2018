@@ -11,6 +11,7 @@ $(document).ready(function () {
 
 
     var service = getUrlParameter('service');
+    var category = getUrlParameter('category');
 
     if (service) {
 
@@ -25,6 +26,10 @@ $(document).ready(function () {
 
         });
 
+    } else if (category) {
+
+        moveToAnchor('services');
+
     }
 
     $('#services article.service').click(function () {
@@ -36,18 +41,12 @@ $(document).ready(function () {
 
         id = id.replace('service-', '');
 
-        console.log(id);
 
-
-        var newUrl = '?service=' + id;
-
-        console.log(newUrl);
-
-        history.pushState({}, null, newUrl);
+        updateQueryStringParam('service', id);
 
     });
 
-    $('a[href^="#"]').on('click',function (e) {
+    $('a[href^="#"]').on('click', function (e) {
         e.preventDefault();
 
         var target = this.hash;
@@ -57,7 +56,6 @@ $(document).ready(function () {
         $("#services article.service#" + target).addClass('current');
 
         scrollToAnchor(target);
-
 
     });
 
@@ -151,3 +149,24 @@ function scrollEvent() {
     var scrollPos = $(document).scrollTop();
 
 }
+
+
+var updateQueryStringParam = function (key, value) {
+    var baseUrl = [location.protocol, '//', location.host, location.pathname].join(''),
+        urlQueryString = document.location.search,
+        newParam = key + '=' + value,
+        params = '?' + newParam;
+
+    // If the "search" string exists, then build params from it
+    if (urlQueryString) {
+        keyRegex = new RegExp('([\?&])' + key + '[^&]*');
+
+        // If param exists already, update it
+        if (urlQueryString.match(keyRegex) !== null) {
+            params = urlQueryString.replace(keyRegex, "$1" + newParam);
+        } else { // Otherwise, add it to end of query string
+            params = urlQueryString + '&' + newParam;
+        }
+    }
+    window.history.replaceState({}, "", baseUrl + params);
+};

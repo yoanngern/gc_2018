@@ -269,18 +269,111 @@
 
 		<?php
 
+		if ( isset( $_GET['category'] ) ) {
+			$curr_cat = $_GET['category'];
+		} else {
+			$curr_cat = 'celebration';
+		}
+
 
 		$start = date( "Y-m-d", strtotime( 'monday this week' ) ) . ' 00:00:00';
 
 		$end = date( "Y-m-d", strtotime( "+1 year", strtotime( 'today' ) ) ) . ' 23:59:59';
 
-		$services = get_dates( $start, $end, array(), array( 'celebration' ), false );
+		$services = get_dates( $start, $end, array(), array( $curr_cat ), false );
+
+		global $wp;
+		$curr_url = home_url( $wp->request );
 
 		?>
 
 
         <section class="program" id="services">
-            <div class="header"></div>
+            <div class="header">
+
+				<?php
+
+				$categories = get_terms( array(
+					'taxonomy'   => 'gc_servicecategory',
+					'hide_empty' => 1,
+				) );
+
+				?>
+
+                <ul class="category_filter">
+					<?php foreach ( $categories as $cat ): ?>
+
+						<?php
+
+						$name    = $cat->name;
+						$id      = $cat->term_id;
+
+						$link = add_query_arg( array(
+							'category' => $cat->slug,
+						), $curr_url );
+
+						$acronym = get_field( 'acronym', $cat );
+						$class   = '';
+
+
+						$image = get_field( 'service_picture', $cat );
+
+
+						$bg_image = $image['sizes']['square'];
+
+
+						$is_current = false;
+
+						if ( $curr_cat == $cat->slug ) {
+							$is_current = true;
+						}
+
+						if ( $acronym == null ) {
+							$s = $name;
+
+							if ( preg_match_all( '/\b(\w)/', strtoupper( $s ), $m ) ) {
+								$v = implode( '', $m[1] ); // $v is now SOQTU
+							}
+
+
+							if ( strlen( $v ) <= 1 ) {
+								$acronym = substr( $name, 0, 3 );
+							} else {
+								$acronym = substr( $v, 0, 3 );
+							}
+
+						}
+
+						if ( strlen( $name ) >= 15 ) {
+							$name = substr( $name, 0, 12 ) . "...";
+						}
+
+
+						if ( $is_current ) {
+							$class .= " current";
+						} else if ( $curr_cat != null ) {
+							$class .= " not_current";
+						}
+
+						echo "
+                        <li id='category-item-$id' class='$class'>
+                            <a href='$link'>
+                                <div class='round'>
+                                    <div class='image' style='background-image: url(\" $bg_image \")'></div>
+                                    <span>$acronym</span>
+                                </div>
+                                <div class='name'>$name</div>
+
+                            </a>
+                        </li>";
+
+
+						?>
+
+					<?php endforeach; ?>
+
+                </ul>
+            </div>
             <div class="content ">
 				<?php foreach ( $services as $service ):
 
@@ -296,9 +389,9 @@
 
 					if ( ! $image ) {
 
-					    if( $speakers != null ) {
-						    $image = get_people( $speakers[0]['value'] )['picture'];
-                        }
+						if ( $speakers != null ) {
+							$image = get_people( $speakers[0]['value'] )['picture'];
+						}
 
 
 						if ( ! $image ) {

@@ -3511,6 +3511,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/advanced\/category_filter.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/category_filter.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/advanced\/content.scss": {
 		"aP": 0,
 		"bl": 0,
