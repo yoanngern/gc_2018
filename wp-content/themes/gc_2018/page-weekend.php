@@ -318,11 +318,13 @@
 
                         <div class="container">
                             <div class="header">
-                                <div class="speaker">
-									<?php foreach ( $speakers as $speaker ): ?>
-                                        <h1><?php echo $speaker['label']; ?></h1>
-									<?php endforeach; ?>
-                                </div>
+								<?php if ( sizeof( $speakers ) ): ?>
+                                    <div class="speaker">
+										<?php foreach ( $speakers as $speaker ): ?>
+                                            <h1><?php echo $speaker['label']; ?></h1>
+										<?php endforeach; ?>
+                                    </div>
+								<?php endif; ?>
                                 <div class="image"
                                      style="background-image: url('<?php echo $image['sizes']['summary']; ?>')"></div>
                             </div>
