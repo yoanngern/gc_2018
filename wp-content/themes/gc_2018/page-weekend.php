@@ -296,7 +296,7 @@
 
 					if ( ! $image ) {
 
-					    if($speakers !== null ) {
+					    if( $speakers != null ) {
 						    $image = get_people( $speakers[0]['value'] )['picture'];
                         }
 
@@ -322,7 +322,7 @@
 
                         <div class="container">
                             <div class="header">
-								<?php if ( $speakers !== null ): ?>
+								<?php if ( $speakers != null ): ?>
                                     <div class="speaker">
 										<?php foreach ( $speakers as $speaker ): ?>
                                             <h1><?php echo $speaker['label']; ?></h1>
