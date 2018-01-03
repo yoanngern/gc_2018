@@ -924,7 +924,8 @@ footer {
     #content .platter article.content-page ul.dynamic,
     #content .platter article.home-default ul.dynamic,
     #content .platter section.content-default ul.dynamic {
-      display: table; }
+      display: table;
+      width: 100%; }
       #content .platter article.content-page ul.dynamic li,
       #content .platter article.home-default ul.dynamic li,
       #content .platter section.content-default ul.dynamic li {
