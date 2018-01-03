@@ -295,7 +295,11 @@
 
 
 					if ( ! $image ) {
-						$image = get_people( $speakers[0]['value'] )['picture'];
+
+					    if(sizeof($speakers)) {
+						    $image = get_people( $speakers[0]['value'] )['picture'];
+                        }
+
 
 						if ( ! $image ) {
 							$image = get_field_or_parent( 'service_picture', $service, 'gc_servicecategory' );
