@@ -82,6 +82,9 @@ section.weekend {
             .item {
                 border-top: 1px solid rgba($white, 0.8);
                 padding: 40px 0;
+                display: block;
+                color: $white;
+                text-decoration: none;
 
                 &:first-of-type {
                     border-top: none;
@@ -163,6 +166,172 @@ section.weekend {
 
                         border-top: none;
                     }
+                }
+            }
+        }
+    }
+}
+
+#content section.program {
+    margin: 0 auto;
+    max-width: 1500px;
+    padding: 20px;
+
+    div.content {
+        display: table;
+        width: 100%;
+
+        article {
+            width: 25%;
+            display: inline-block;
+            vertical-align: top;
+            cursor: pointer;
+
+            &.current {
+                div.container {
+                    background-color: $red;
+                    color: $white;
+
+                    div.header {
+                        div.image {
+                            -webkit-filter: brightness(110%) saturate(0) contrast(80%) blur(0);
+                        }
+                    }
+
+                    div.text {
+                        p {
+                            color: $white;
+                        }
+                    }
+
+                    div.location {
+                        color: $white;
+
+                        &::before {
+                            background-image: url('images/map_point.png');
+                        }
+
+                        &::after {
+                            background-color: $white;
+                        }
+
+                    }
+                }
+            }
+
+            div.container {
+                @include border-radius(4px);
+                background-color: $white;
+                margin: 0.8vw;
+                overflow: hidden;
+                color: $gray-dark;
+                border: 1px solid $gray6;
+
+                div.header {
+                    padding-bottom: 65%;
+                    width: 100%;
+                    height: 0;
+                    position: relative;
+
+                    .speaker {
+                        position: absolute;
+                        bottom: 0;
+                        z-index: 10;
+                        padding: 10px 15px;
+
+                        h1 {
+                            color: $white;
+                            font-family: $radikal-black;
+                            text-transform: uppercase;
+                            letter-spacing: 0.06em;
+                            font-size: 1.6em;
+                            line-height: 1.2em;
+
+                        }
+                    }
+
+                    .image {
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        z-index: 0;
+                        background-color: $gray4;
+                    }
+                }
+
+                div.text {
+                    padding: 20px 15px 0;
+
+                    h1 {
+                        font-family: $radikal-bold;
+                        font-size: 1.2em;
+                        letter-spacing: 0.01em;
+                        line-height: 1.2em;
+                        margin: 0 0 15px;
+                    }
+
+                    time {
+                        display: block;
+                        padding: 3px 0;
+
+                        &.date {
+                            font-family: $radikal-bold;
+                            text-transform: uppercase;
+                            font-size: 0.9em;
+                        }
+
+                        &.time {
+                            font-size: 0.9em;
+                        }
+                    }
+
+                    p {
+                        margin: 20px 0 0;
+                        font-size: 0.9em;
+                        color: $gray2;
+                    }
+                }
+
+                div.location {
+                    position: relative;
+                    padding-top: 31px;
+                    font-size: 0.8em;
+                    color: $gray2;
+                    margin: 0 0 15px;
+
+                    &::after {
+
+                        height: 1px;
+                        background-color: $gray5;
+                        display: block;
+                        content: "";
+                        margin: 10px auto 20px;
+                        position: absolute;
+                        top: 0;
+                        right: 15px;
+                        left: 15px;
+                    }
+
+                    &::before {
+                        display: inline-block;
+                        vertical-align: top;
+                        width: 30px;
+                        height: 50px;
+                        margin: 0 15px 15px 15px;
+                        content: "";
+                        background-image: url('images/map_point_black.png');
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        float: left;
+                        left: 0;
+                        bottom: 0;
+                    }
+
                 }
             }
         }

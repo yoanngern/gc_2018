@@ -83,7 +83,7 @@
 						$days['sunday']['show'] = true;
 					}
 
-					$location_obj = get_field( 'location', $date );
+					$location_obj = get_field_or_parent( 'location', $date, 'gc_servicecategory' );
 
 					if ( $location_obj != null ) {
 						$location = get_the_title( $location_obj );
@@ -91,11 +91,18 @@
 						$location = "";
 					}
 
+					if ( $date->post_type == 'gc_event' ) {
+						$url = esc_url( get_permalink( $date ) );
+					} else {
+						$url = '#service-' . $date->ID;
+					}
+
 					$item = array(
 						'title'    => $date->post_title,
 						'start'    => get_field( 'start', $date ),
 						'end'      => get_field( 'end', $date ),
 						'time'     => date( 'G:i', strtotime( get_field( 'start', $date ) ) ),
+						'url'      => $url,
 						'location' => $location,
 						'object'   => $date,
 					);
@@ -131,13 +138,13 @@
 
 										?>
 
-                                        <div class="item">
+                                        <a class="item" href="<?php echo $item['url'] ?>">
                                             <time><?php echo $item['time'] ?></time>
                                             <h2><?php echo $item['title'] ?></h2>
 											<?php if ( $item['location'] != "" ): ?>
                                                 <p class="location"><?php echo $item['location'] ?></p>
 											<?php endif; ?>
-                                        </div>
+                                        </a>
 
 
 									<?php endif;
@@ -167,13 +174,13 @@
 
 										?>
 
-                                        <div class="item">
+                                        <a class="item" href="<?php echo $item['url'] ?>">
                                             <time><?php echo $item['time'] ?></time>
                                             <h2><?php echo $item['title'] ?></h2>
 											<?php if ( $item['location'] != "" ): ?>
                                                 <p class="location"><?php echo $item['location'] ?></p>
 											<?php endif; ?>
-                                        </div>
+                                        </a>
 
 
 									<?php endif;
@@ -202,13 +209,13 @@
 
 										?>
 
-                                        <div class="item">
+                                        <a class="item" href="<?php echo $item['url'] ?>">
                                             <time><?php echo $item['time'] ?></time>
                                             <h2><?php echo $item['title'] ?></h2>
 											<?php if ( $item['location'] != "" ): ?>
                                                 <p class="location"><?php echo $item['location'] ?></p>
 											<?php endif; ?>
-                                        </div>
+                                        </a>
 
 									<?php endif;
 
@@ -259,6 +266,79 @@
 		wp_reset_query(); //resetting the page query
 		?>
 
+
+		<?php
+
+
+		$start = date( "Y-m-d", strtotime( 'monday this week' ) ) . ' 00:00:00';
+
+		$end = date( "Y-m-d", strtotime( "+1 year", strtotime( 'today' ) ) ) . ' 23:59:59';
+
+		$services = get_dates( $start, $end, array(), array( 'celebration' ), false );
+
+		?>
+
+
+        <section class="program" id="services">
+            <div class="header"></div>
+            <div class="content ">
+				<?php foreach ( $services as $service ):
+
+					$title = $service->post_title;
+					$date = date_i18n( 'j M. Y', strtotime( get_field( 'start', $service ) ) );
+					$time = complex_time( get_field( 'start', $service ), get_field( 'end', $service ) );
+					$speakers = get_field( 'service_speaker', $service );
+
+					$txt = get_field_or_parent( 'description', $service, 'gc_servicecategory' );
+
+					$image = get_field( 'service_picture', $service );
+
+
+					if ( ! $image ) {
+						$image = get_people( $speakers[0]['value'] )['picture'];
+
+						if ( ! $image ) {
+							$image = get_field_or_parent( 'service_picture', $service, 'gc_servicecategory' );
+						}
+
+					}
+
+
+					$location_obj = get_field_or_parent( 'location', $service, 'gc_servicecategory' );
+
+					if ( $location_obj != null ) {
+						$location = get_the_title( $location_obj ) . "<br/>" . get_field( 'address', $location_obj ) . "<br/>" . get_field( 'zip_code', $location_obj ) . " " . get_field( 'city', $location_obj ) . "<br/>" . get_field( 'country', $location_obj );
+					} else {
+						$location = "";
+					}
+
+
+					?>
+                    <article class="service" id="service-<?php echo $service->ID; ?>">
+
+                        <div class="container">
+                            <div class="header">
+                                <div class="speaker">
+									<?php foreach ( $speakers as $speaker ): ?>
+                                        <h1><?php echo $speaker['label']; ?></h1>
+									<?php endforeach; ?>
+                                </div>
+                                <div class="image"
+                                     style="background-image: url('<?php echo $image['sizes']['summary']; ?>')"></div>
+                            </div>
+                            <div class="text">
+                                <h1><?php echo $title; ?></h1>
+                                <time class="date"><?php echo $date; ?></time>
+                                <time class="time"><?php echo $time; ?></time>
+                                <p><?php echo $txt; ?></p>
+                            </div>
+                            <div class="location"><?php echo $location ?></div>
+                        </div>
+                    </article>
+				<?php endforeach; ?>
+            </div>
+
+        </section>
 
     </div>
 

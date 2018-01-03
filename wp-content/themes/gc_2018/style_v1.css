@@ -1995,7 +1995,7 @@ body.post-type-archive-gc_event #content .platter {
       margin-bottom: 30px;
       padding: 25px;
       position: relative;
-      overflow: none;
+      overflow: hidden;
       display: table;
       vertical-align: middle; }
       #content .platter#summary section.sections article .content,
@@ -2214,7 +2214,10 @@ section.weekend {
       margin: 0 auto; }
       section.weekend article div.content .item {
         border-top: 1px solid rgba(255, 255, 255, 0.8);
-        padding: 40px 0; }
+        padding: 40px 0;
+        display: block;
+        color: #FFFFFF;
+        text-decoration: none; }
         section.weekend article div.content .item:first-of-type {
           border-top: none; }
         section.weekend article div.content .item time {
@@ -2271,6 +2274,121 @@ section.weekend {
             section.weekend div.container article div.content .item {
               padding: 35px 0;
               border-top: none; } }
+
+#content section.program {
+  margin: 0 auto;
+  max-width: 1500px;
+  padding: 20px; }
+  #content section.program div.content {
+    display: table;
+    width: 100%; }
+    #content section.program div.content article {
+      width: 25%;
+      display: inline-block;
+      vertical-align: top;
+      cursor: pointer; }
+      #content section.program div.content article.current div.container {
+        background-color: #E52639;
+        color: #FFFFFF; }
+        #content section.program div.content article.current div.container div.header div.image {
+          -webkit-filter: brightness(110%) saturate(0) contrast(80%) blur(0); }
+        #content section.program div.content article.current div.container div.text p {
+          color: #FFFFFF; }
+        #content section.program div.content article.current div.container div.location {
+          color: #FFFFFF; }
+          #content section.program div.content article.current div.container div.location::before {
+            background-image: url("images/map_point.png"); }
+          #content section.program div.content article.current div.container div.location::after {
+            background-color: #FFFFFF; }
+      #content section.program div.content article div.container {
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        border-radius: 4px;
+        background-color: #FFFFFF;
+        margin: 0.8vw;
+        overflow: hidden;
+        color: #545454;
+        border: 1px solid #EEEEEE; }
+        #content section.program div.content article div.container div.header {
+          padding-bottom: 65%;
+          width: 100%;
+          height: 0;
+          position: relative; }
+          #content section.program div.content article div.container div.header .speaker {
+            position: absolute;
+            bottom: 0;
+            z-index: 10;
+            padding: 10px 15px; }
+            #content section.program div.content article div.container div.header .speaker h1 {
+              color: #FFFFFF;
+              font-family: "Radikal-Black", "Radikal-Bold", "Radikal", sans-serif;
+              text-transform: uppercase;
+              letter-spacing: 0.06em;
+              font-size: 1.6em;
+              line-height: 1.2em; }
+          #content section.program div.content article div.container div.header .image {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 0;
+            background-color: #979797; }
+        #content section.program div.content article div.container div.text {
+          padding: 20px 15px 0; }
+          #content section.program div.content article div.container div.text h1 {
+            font-family: "Radikal-Bold", "Radikal", sans-serif;
+            font-size: 1.2em;
+            letter-spacing: 0.01em;
+            line-height: 1.2em;
+            margin: 0 0 15px; }
+          #content section.program div.content article div.container div.text time {
+            display: block;
+            padding: 3px 0; }
+            #content section.program div.content article div.container div.text time.date {
+              font-family: "Radikal-Bold", "Radikal", sans-serif;
+              text-transform: uppercase;
+              font-size: 0.9em; }
+            #content section.program div.content article div.container div.text time.time {
+              font-size: 0.9em; }
+          #content section.program div.content article div.container div.text p {
+            margin: 20px 0 0;
+            font-size: 0.9em;
+            color: #6E6E6E; }
+        #content section.program div.content article div.container div.location {
+          position: relative;
+          padding-top: 31px;
+          font-size: 0.8em;
+          color: #6E6E6E;
+          margin: 0 0 15px; }
+          #content section.program div.content article div.container div.location::after {
+            height: 1px;
+            background-color: #d7d7d7;
+            display: block;
+            content: "";
+            margin: 10px auto 20px;
+            position: absolute;
+            top: 0;
+            right: 15px;
+            left: 15px; }
+          #content section.program div.content article div.container div.location::before {
+            display: inline-block;
+            vertical-align: top;
+            width: 30px;
+            height: 50px;
+            margin: 0 15px 15px 15px;
+            content: "";
+            background-image: url("images/map_point_black.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            float: left;
+            left: 0;
+            bottom: 0; }
 
 body.page-template-page-home #content article.title {
   padding-bottom: 100vh; }
@@ -2465,7 +2583,9 @@ body.page-template-page-calendar #content article.title {
 
 article.calendar {
   padding: 30px;
-  display: block; }
+  display: block;
+  max-width: 1600px;
+  margin: 0 auto; }
   article.calendar div.title {
     width: 100%;
     margin: 10px 0 20px;

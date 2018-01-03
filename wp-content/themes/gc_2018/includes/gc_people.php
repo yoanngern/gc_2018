@@ -70,3 +70,5 @@ function update_people( $post_id ) {
 }
 
 add_action( 'save_post', 'update_people' );
+
+

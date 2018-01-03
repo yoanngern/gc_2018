@@ -263,13 +263,16 @@ function time_trans( $date ) {
 /**
  * @param $start
  * @param $end
+ * @param array $event_cat
+ * @param array $service_cat
+ * @param bool $weekend
  *
  * @return array
  */
 function get_dates( $start, $end, $event_cat = array(), $service_cat = array(), $weekend = false ) {
 
 
-	if ( ! $event_cat ) {
+	if ( $event_cat === false ) {
 
 		$terms = get_terms( array(
 			'taxonomy' => 'gc_eventcategory',
@@ -283,7 +286,7 @@ function get_dates( $start, $end, $event_cat = array(), $service_cat = array(), 
 	}
 
 
-	if ( ! $service_cat ) {
+	if ( $service_cat === false) {
 
 		$terms = get_terms( array(
 			'taxonomy' => 'gc_servicecategory',

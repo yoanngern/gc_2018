@@ -355,8 +355,19 @@
 		"oA": 0,
 		"oAP": "\/images\/map_point.png",
 		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/map_point_black.png": {
+		"ft": 32768,
+		"iS": 6624,
+		"oA": 0,
+		"oAP": "\/images\/map_point_black.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
 		"oT": 1,
 		"q": 100
 		},
@@ -453,6 +464,13 @@
 		"oAP": "\/includes\/acf\/location.php",
 		"oF": 0
 		},
+	"\/includes\/acf\/people.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/people.php",
+		"oF": 0
+		},
 	"\/includes\/acf\/recurrence.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -472,6 +490,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/includes\/acf\/service.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/service_type.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/service_type.php",
 		"oF": 0
 		},
 	"\/includes\/acf\/summary.php": {

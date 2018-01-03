@@ -13,5 +13,7 @@ if(function_exists('pll__')) {
 	require_once( __DIR__ . '/acf/service.php' );
 	require_once( __DIR__ . '/acf/summary.php' );
 	require_once( __DIR__ . '/acf/related_events.php' );
+	require_once( __DIR__ . '/acf/service_type.php' );
+	require_once( __DIR__ . '/acf/people.php' );
 
 }

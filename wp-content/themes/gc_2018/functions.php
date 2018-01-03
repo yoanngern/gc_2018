@@ -86,13 +86,11 @@ function wpdocs_custom_excerpt_length( $length ) {
 add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
 
 
-
 // get the the role object
 $role_object = get_role( 'editor' );
 
 // add $cap capability to this role object
 $role_object->add_cap( 'edit_theme_options' );
-
 
 
 function my_theme_archive_title( $title ) {
@@ -225,8 +223,7 @@ function get_field_or_parent( $field, $post, $taxonomy = 'category' ) {
 			$field_return = get_field( $field, $category );
 
 
-
-			if ( $field_return) {
+			if ( $field_return ) {
 				break;
 			}
 
@@ -347,3 +344,44 @@ function get_related_posts( $post, $nb = 3 ) {
 
 require_once( __DIR__ . '/includes/acf_fields.php' );
 
+/**
+ * @param int $people_id
+ *
+ * @return mixed
+ */
+function get_people( $people_id ) {
+
+
+	if ( ! is_int( $people_id ) ) {
+		$people_id = intval( $people_id );
+	}
+
+	// Get the current blog id
+	$original_blog_id = get_current_blog_id();
+
+
+	// GC TV
+	switch_to_blog( 4 );
+
+	$people = get_post( $people_id );
+
+
+	if ( $people->post_type == 'gc_people' ) {
+		$people_array = array(
+			'id'        => $people_id,
+			'title'     => $people->post_title,
+			'picture'   => get_field( 'picture', $people ),
+			'firstname' => get_field( 'firstname', $people ),
+			'lastname'  => get_field( 'lastname', $people ),
+			'bio'       => get_field( 'bio', $people ),
+		);
+
+	} else {
+		$people_array = null;
+	}
+
+	// Switch back to the current blog
+	switch_to_blog( $original_blog_id );
+
+	return $people_array;
+}

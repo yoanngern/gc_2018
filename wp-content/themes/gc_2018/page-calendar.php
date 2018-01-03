@@ -155,7 +155,7 @@
 									if ( $date->post_type == 'gc_event' ) {
 										$url = esc_url( get_permalink( $date ) );
 									} else {
-										$url = '/weekend';
+										$url = '/weekend?service=' . $date->ID;
 									}
 
 									?>

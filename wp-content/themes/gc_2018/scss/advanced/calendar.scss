@@ -26,6 +26,8 @@ body.page-template-page-calendar {
 article.calendar {
     padding: 30px;
     display: block;
+    max-width: 1600px;
+    margin: 0 auto;
 
     div.title {
         width: 100%;

@@ -66,7 +66,8 @@
 	$events = $query->get_posts();
 
 
-	if ( $events[0] instanceof WP_Post ) :
+
+	if ( $events[0] instanceof WP_Post && get_queried_object()->name == "gc_event") :
 
 		$event = $events[0];
 
