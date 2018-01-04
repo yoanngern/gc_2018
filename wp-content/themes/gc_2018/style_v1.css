@@ -3020,11 +3020,6 @@ body.single-gc_talk #content .platter {
     body.single-gc_talk #content .platter aside {
       width: 100%; } }
 
-@media only screen and (max-width: 800px) {
-  body.single-gc_talk div.header {
-    height: 80px;
-    background-color: #333333; } }
-
 @media only screen and (max-width: 480px) {
   body.single-gc_talk #content .platter {
     display: block;

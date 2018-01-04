@@ -37,12 +37,6 @@
 
 	?>
 
-
-    <div class="header">
-
-    </div>
-
-
     <div class="platter">
 
         <main>
@@ -70,8 +64,6 @@
                         </div>
                     </div>
                 </div>
-
-
 
 
             </article>

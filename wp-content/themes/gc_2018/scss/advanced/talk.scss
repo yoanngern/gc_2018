@@ -159,18 +159,11 @@ body.single-gc_talk {
                 main,
                 aside {
                     width: 100%;
+
                 }
             }
         }
 
-    }
-
-    @media only screen and (max-width: 800px) {
-
-        div.header {
-            height: 80px;
-            background-color: $black;
-        }
     }
 
     @media only screen and (max-width: 480px) {
