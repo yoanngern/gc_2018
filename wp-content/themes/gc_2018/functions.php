@@ -370,6 +370,7 @@ function get_people( $people_id ) {
 		$people_array = array(
 			'id'        => $people_id,
 			'title'     => $people->post_title,
+			'name'      => get_field( 'firstname', $people ) . ' ' . get_field( 'lastname', $people ),
 			'picture'   => get_field( 'picture', $people ),
 			'firstname' => get_field( 'firstname', $people ),
 			'lastname'  => get_field( 'lastname', $people ),
