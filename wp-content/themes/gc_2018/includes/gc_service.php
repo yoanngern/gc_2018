@@ -313,7 +313,8 @@ function my_acf_load_value( $field ) {
 
 	$speakers = get_posts(
 		array(
-			'post_type' => 'gc_people'
+			'post_type' => 'gc_people',
+			'numberposts' => 300,
 		)
 	);
 
