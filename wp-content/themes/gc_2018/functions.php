@@ -71,6 +71,8 @@ add_image_size( 'hd', 1280, 720, true );
 
 add_image_size( 'social', 1920, 1080, true );
 
+add_image_size( 'speaker', 350, 245, true );
+
 
 /**
  * Filter the except length to 20 words.

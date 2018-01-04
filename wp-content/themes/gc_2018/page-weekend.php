@@ -423,7 +423,7 @@
                                     </div>
 								<?php endif; ?>
                                 <div class="image"
-                                     style="background-image: url('<?php echo $image['sizes']['summary']; ?>')"></div>
+                                     style="background-image: url('<?php echo $image['sizes']['speaker']; ?>')"></div>
                             </div>
                             <div class="text">
                                 <h1><?php echo $title; ?></h1>
