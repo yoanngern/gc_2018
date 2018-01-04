@@ -247,7 +247,12 @@ body > header {
       margin-top: 70px; }
     body > header div.principal-nav div > ul {
       padding: 5px 10px 20px 20px;
-      overflow: scroll; }
+      overflow: scroll;
+      scroll-behavior: smooth;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overflow-scrolling: touch; }
       body > header div.principal-nav div > ul li {
         display: block; }
         body > header div.principal-nav div > ul li a {
@@ -2840,6 +2845,195 @@ ul.category_filter {
         font-size: 0.63em;
         text-align: center;
         padding-top: 4px; }
+
+#content.tv section.talk_list {
+  padding: 20px 15px 20px; }
+  #content.tv section.talk_list .header {
+    padding: 3px; }
+    #content.tv section.talk_list .header h1 {
+      font-family: "Radikal-Black", "Radikal-Bold", "Radikal", sans-serif;
+      text-transform: uppercase;
+      font-size: 1.4em;
+      line-height: 1.4em;
+      letter-spacing: 0.07em; }
+  #content.tv section.talk_list .list_container {
+    overflow-y: hidden; }
+    #content.tv section.talk_list .list_container .talks {
+      vertical-align: top;
+      scroll-behavior: smooth;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      overflow-scrolling: touch;
+      text-align: left;
+      white-space: nowrap; }
+      #content.tv section.talk_list .list_container .talks .talk {
+        display: inline-block;
+        width: 15.7%;
+        vertical-align: top; }
+        #content.tv section.talk_list .list_container .talks .talk .talk_container {
+          background-color: #FFFFFF;
+          margin: 0 0.4% 15px;
+          border: 1px solid #EEEEEE;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          -ms-border-radius: 3px;
+          -o-border-radius: 3px;
+          border-radius: 3px;
+          white-space: normal;
+          text-decoration: none;
+          display: block; }
+          #content.tv section.talk_list .list_container .talks .talk .talk_container .image {
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.2%;
+            position: relative; }
+            #content.tv section.talk_list .list_container .talks .talk .talk_container .image .bg {
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center;
+              background-color: #d7d7d7; }
+          #content.tv section.talk_list .list_container .talks .talk .talk_container .text {
+            display: block;
+            padding: 10px;
+            color: #545454; }
+            #content.tv section.talk_list .list_container .talks .talk .talk_container .text h1 {
+              padding-bottom: 5px;
+              line-height: 1.1em; }
+            #content.tv section.talk_list .list_container .talks .talk .talk_container .text time {
+              line-height: 1em;
+              font-size: 0.8em; }
+
+@media only screen and (max-width: 1600px) {
+  #content.tv section.talk_list .list_container .talks .talk {
+    width: 18.8%; } }
+
+@media only screen and (max-width: 1300px) {
+  #content.tv section.talk_list .list_container .talks .talk {
+    width: 23%; } }
+
+@media only screen and (max-width: 900px) {
+  #content.tv section.talk_list .list_container .talks .talk {
+    width: 30%; } }
+
+@media only screen and (max-width: 680px) {
+  #content.tv section.talk_list {
+    padding: 20px 0 0 10px; }
+    #content.tv section.talk_list .header {
+      padding: 3px 3px 3px 0; }
+    #content.tv section.talk_list .list_container .talks {
+      padding-right: 10px; }
+      #content.tv section.talk_list .list_container .talks .talk {
+        width: 43%; } }
+
+body.single-gc_talk > header {
+  background-color: #EEEEEE;
+  top: inherit;
+  left: inherit;
+  right: inherit;
+  bottom: inherit;
+  width: inherit;
+  padding: 0 10px; }
+  body.single-gc_talk > header > div {
+    max-width: 1700px;
+    margin: 0 auto; }
+  body.single-gc_talk > header #simple_logo {
+    display: none;
+    margin: 0 auto; }
+  body.single-gc_talk > header #logo_mini,
+  body.single-gc_talk > header div.top-nav,
+  body.single-gc_talk > header #burger {
+    display: inline-block;
+    position: relative;
+    top: inherit;
+    margin: 0; }
+  body.single-gc_talk > header #logo_mini {
+    margin: 10px 5px; }
+    body.single-gc_talk > header #logo_mini span {
+      color: #333333; }
+    body.single-gc_talk > header #logo_mini svg {
+      fill: #333333; }
+  body.single-gc_talk > header #burger {
+    float: right;
+    margin: 13px 5px; }
+    body.single-gc_talk > header #burger span {
+      background-color: #333333; }
+  body.single-gc_talk > header div.top-nav {
+    float: right;
+    margin: 5px 30px 0 0; }
+    body.single-gc_talk > header div.top-nav ul li a {
+      color: #333333; }
+      body.single-gc_talk > header div.top-nav ul li a::before, body.single-gc_talk > header div.top-nav ul li a::after {
+        background-color: #333333; }
+
+body.single-gc_talk #content .platter {
+  top: inherit;
+  margin: 50px auto;
+  display: flex;
+  max-width: 1700px; }
+  body.single-gc_talk #content .platter main,
+  body.single-gc_talk #content .platter aside {
+    width: 66.666%;
+    display: inline-block;
+    vertical-align: top; }
+  body.single-gc_talk #content .platter aside {
+    width: 33.333%; }
+  body.single-gc_talk #content .platter article.content-page {
+    padding: 0 0 20px 0; }
+    body.single-gc_talk #content .platter article.content-page div.video {
+      width: 100%;
+      overflow: auto;
+      display: block; }
+      body.single-gc_talk #content .platter article.content-page div.video section.player {
+        max-width: 100% !important; }
+        body.single-gc_talk #content .platter article.content-page div.video section.player div {
+          width: 100% !important; }
+          body.single-gc_talk #content .platter article.content-page div.video section.player div span {
+            width: 100% !important; }
+            body.single-gc_talk #content .platter article.content-page div.video section.player div span iframe {
+              width: 100% !important; }
+    body.single-gc_talk #content .platter article.content-page div.talk_desc {
+      padding: 10px 20px; }
+      body.single-gc_talk #content .platter article.content-page div.talk_desc h1 {
+        font-size: 1.4em;
+        letter-spacing: 0.08em;
+        margin: 10px 0; }
+      body.single-gc_talk #content .platter article.content-page div.talk_desc div.more {
+        margin: 20px 0; }
+
+@media only screen and (max-width: 1800px) {
+  body.single-gc_talk #content .platter {
+    margin-top: 20px; } }
+
+@media only screen and (max-width: 1700px) {
+  body.single-gc_talk #content .platter {
+    margin-top: 0; } }
+
+@media only screen and (max-width: 900px) {
+  body.single-gc_talk #content .platter {
+    display: block;
+    margin: 0; }
+    body.single-gc_talk #content .platter main,
+    body.single-gc_talk #content .platter aside {
+      width: 100%; } }
+
+@media only screen and (max-width: 800px) {
+  body.single-gc_talk div.header {
+    height: 80px;
+    background-color: #333333; } }
+
+@media only screen and (max-width: 480px) {
+  body.single-gc_talk #content .platter {
+    display: block;
+    margin: 0; }
+    body.single-gc_talk #content .platter main,
+    body.single-gc_talk #content .platter aside {
+      width: 100%; }
+    body.single-gc_talk #content .platter article.content-page div.talk_desc {
+      padding: 10px; } }
 
 body {
   font-family: "Radikal", sans-serif;

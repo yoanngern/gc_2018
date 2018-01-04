@@ -415,6 +415,13 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/includes\/acf\/city.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/city.php",
+		"oF": 0
+		},
 	"\/includes\/acf\/date.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -506,11 +513,32 @@
 		"oAP": "\/includes\/acf\/summary.php",
 		"oF": 0
 		},
+	"\/includes\/acf\/talk.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/talk.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/tv_page.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/tv_page.php",
+		"oF": 0
+		},
 	"\/includes\/acf_fields.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/includes\/acf_fields.php",
+		"oF": 0
+		},
+	"\/includes\/gc_city.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/gc_city.php",
 		"oF": 0
 		},
 	"\/includes\/gc_date.php": {
@@ -3065,6 +3093,13 @@
 		"oAP": "\/page-summary.php",
 		"oF": 0
 		},
+	"\/page-tv.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/page-tv.php",
+		"oF": 0
+		},
 	"\/page-weekend.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -3641,6 +3676,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/advanced\/talk.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/talk.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/advanced\/tmp_default.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -3650,6 +3698,19 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/scss\/tmp_default.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/advanced\/tv.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/tv.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
@@ -3840,6 +3901,41 @@
 		"oAP": "\/template-parts\/blog\/slider.php",
 		"oF": 0
 		},
+	"\/template-parts\/city\/city.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/city\/city.php",
+		"oF": 0
+		},
+	"\/template-parts\/city\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/city\/index.php",
+		"oF": 0
+		},
+	"\/template-parts\/city\/item.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/city\/item.php",
+		"oF": 0
+		},
+	"\/template-parts\/city\/list.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/city\/list.php",
+		"oF": 0
+		},
+	"\/template-parts\/city\/single.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/city\/single.php",
+		"oF": 0
+		},
 	"\/template-parts\/custom\/join.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -3964,6 +4060,34 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/people\/people_simple.php",
+		"oF": 0
+		},
+	"\/template-parts\/talk\/index.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/talk\/index.php",
+		"oF": 0
+		},
+	"\/template-parts\/talk\/none.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/talk\/none.php",
+		"oF": 0
+		},
+	"\/template-parts\/talk\/single.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/talk\/single.php",
+		"oF": 0
+		},
+	"\/template-parts\/talk\/talk.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/talk\/talk.php",
 		"oF": 0
 		},
 	"\/widgets\/complex-carousel.php": {
@@ -5379,7 +5503,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http:\/\/dev.gc-lausanne.org",
+	"externalServerAddress": "http:\/\/dev.gospel-center.tv",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",

@@ -15,5 +15,8 @@ if(function_exists('pll__')) {
 	require_once( __DIR__ . '/acf/related_events.php' );
 	require_once( __DIR__ . '/acf/service_type.php' );
 	require_once( __DIR__ . '/acf/people.php' );
+	require_once( __DIR__ . '/acf/talk.php' );
+	require_once( __DIR__ . '/acf/city.php' );
+	require_once( __DIR__ . '/acf/tv_page.php' );
 
 }

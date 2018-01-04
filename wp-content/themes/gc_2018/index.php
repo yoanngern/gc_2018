@@ -13,15 +13,26 @@ if ( get_queried_object() instanceof WP_Post_Type ) {
 }
 
 
-if ( $post_type == "gc_event" ):
+
+if ( $post_type == "gc_event" ) {
 
 	get_template_part( 'template-parts/event/index' );
 
-else:
+} else if ( $post_type == "gc_city" ) {
+
+	get_template_part( 'template-parts/city/index' );
+
+
+} else if ( $post_type == "gc_talk" ) {
+
+	get_template_part( 'template-parts/talk/index' );
+
+
+} else {
 
 	get_template_part( 'template-parts/blog/index' );
 
-endif;
+}
 
 ?>
 

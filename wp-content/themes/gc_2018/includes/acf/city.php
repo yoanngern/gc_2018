@@ -3,11 +3,11 @@
 if( function_exists('acf_add_local_field_group') ):
 
 	acf_add_local_field_group(array(
-		'key' => 'group_59f35cf1e5baa',
-		'title' => 'Header',
+		'key' => 'group_5a4e11c5a5c5e',
+		'title' => 'City',
 		'fields' => array(
 			array(
-				'key' => 'field_59f35d08bff4d',
+				'key' => 'field_5a4e11d99b23f',
 				'label' => 'Background',
 				'name' => 'bg_image',
 				'type' => 'image',
@@ -36,21 +36,11 @@ if( function_exists('acf_add_local_field_group') ):
 				array(
 					'param' => 'post_type',
 					'operator' => '==',
-					'value' => 'page',
-				),
-				array(
-					'param' => 'post_template',
-					'operator' => '!=',
-					'value' => 'page-home.php',
-				),
-				array(
-					'param' => 'post_template',
-					'operator' => '!=',
-					'value' => 'page-tv.php',
+					'value' => 'gc_city',
 				),
 			),
 		),
-		'menu_order' => 1,
+		'menu_order' => 0,
 		'position' => 'normal',
 		'style' => 'seamless',
 		'label_placement' => 'top',

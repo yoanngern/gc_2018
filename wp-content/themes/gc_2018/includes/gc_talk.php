@@ -73,3 +73,115 @@ function create_talkcategory_taxonomy() {
 }
 
 add_action( 'init', 'create_talkcategory_taxonomy', 0 );
+
+
+/**
+ * Update Service
+ *
+ * @param $post_id
+ */
+function update_talk( $post_id ) {
+
+	$post_type = get_post_type( $post_id );
+
+
+	if ( $post_type != "gc_talk" ) {
+		return;
+	}
+
+
+	$my_post = array(
+		'ID'         => $post_id,
+		'post_title' => date_i18n( get_option( 'date_format' ), strtotime( get_field( 'date', $post_id ) ) ),
+	);
+
+
+	// unhook this function so it doesn't loop infinitely
+	remove_action( 'save_post', 'update_talk' );
+
+	update_dates( $post_id );
+
+	// update the post, which calls save_post again
+	wp_update_post( $my_post );
+
+	// re-hook this function
+	add_action( 'save_post', 'update_talk' );
+
+
+}
+
+add_action( 'save_post', 'update_talk' );
+
+
+/**
+ * @param null $city
+ * @param null $speaker
+ * @param null $category
+ *
+ * @return array
+ */
+function get_talks( $nb = 12, $city = null, $speaker = null, $category = null ) {
+
+	$meta_query = array(
+		'relation' => 'AND',
+	);
+
+	$tax_query = array();
+
+
+	if ( $city !== null ) {
+
+		$meta_query[] = array(
+			'key'     => 'city',
+			'compare' => '=',
+			'value'   => $city->ID,
+		);
+
+	}
+
+	if ( $speaker !== null ) {
+
+		$meta_query[] = array(
+			'key'     => 'speaker',
+			'compare' => 'LIKE',
+			'value'   => $speaker->ID,
+		);
+
+
+	}
+
+
+	if ( $category !== null ) {
+
+		$tax_query[] = array(
+			'taxonomy' => 'gc_talkcategory',
+			'field'    => 'slug',
+			'terms'    => $category->slug,
+		);
+	}
+
+
+	$args = array(
+		'posts_per_page' => $nb,
+		'orderby'        => 'meta_value',
+		'meta_key'       => 'date',
+		'order'          => 'desc',
+		'post_type'      => 'gc_talk',
+		'tax_query'      => $tax_query,
+		'meta_query'     => $meta_query
+
+	);
+
+
+	// The Query
+	$query = new WP_Query( $args );
+
+	$talks_return = $query->get_posts();
+
+	/* Restore original Post Data */
+	wp_reset_postdata();
+
+
+	return $talks_return;
+
+}

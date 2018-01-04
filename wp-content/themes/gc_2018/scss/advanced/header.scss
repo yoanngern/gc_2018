@@ -58,7 +58,6 @@ body > header {
             line-height: 20px;
             padding: 6px 0 0 8px;
 
-
         }
     }
 
@@ -213,7 +212,6 @@ body > header {
         -webkit-overflow-scrolling: touch;
         overflow-scrolling: touch;
 
-
         div {
             margin-top: 70px;
         }
@@ -221,6 +219,11 @@ body > header {
         div > ul {
             padding: 5px 10px 20px 20px;
             overflow: scroll;
+            scroll-behavior: smooth;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            overflow-scrolling: touch;
 
             li {
                 display: block;

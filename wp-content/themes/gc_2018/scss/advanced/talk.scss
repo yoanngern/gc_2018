@@ -1,0 +1,198 @@
+body.single-gc_talk {
+
+    & > header {
+        background-color: $gray6;
+        top: inherit;
+        left: inherit;
+        right: inherit;
+        bottom: inherit;
+        width: inherit;
+        padding: 0 10px;
+
+        & > div {
+            max-width: 1700px;
+            margin: 0 auto;
+        }
+
+        #simple_logo {
+            display: none;
+            margin: 0 auto;
+        }
+
+        #logo_mini,
+        div.top-nav,
+        #burger {
+            display: inline-block;
+            position: relative;
+            top: inherit;
+            margin: 0;
+
+        }
+
+        #logo_mini {
+            margin: 10px 5px;
+
+            span {
+                color: $black;
+            }
+
+            svg {
+                fill: $black;
+            }
+        }
+
+        #burger {
+
+            float: right;
+
+            margin: 13px 5px;
+
+            span {
+                background-color: $black;
+            }
+        }
+
+        div.top-nav {
+            float: right;
+            margin: 5px 30px 0 0;
+
+            ul li a {
+                color: $black;
+
+                &::before,
+                &::after {
+                    background-color: $black;
+                }
+            }
+        }
+
+    }
+
+    div.header {
+
+    }
+
+    #content {
+        .platter {
+            top: inherit;
+            margin: 50px auto;
+            display: flex;
+            max-width: 1700px;
+
+            main,
+            aside {
+                width: 66.666%;
+                display: inline-block;
+                vertical-align: top;
+            }
+
+            aside {
+                width: 33.333%;
+            }
+
+            article.content-page {
+                padding: 0 0 20px 0;
+
+                div.video {
+                    width: 100%;
+                    overflow: auto;
+                    display: block;
+
+                    section.player {
+                        max-width: 100% !important;
+
+                        div {
+                            width: 100% !important;
+
+                            span {
+                                width: 100% !important;
+
+                                iframe {
+                                    width: 100% !important;
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+                div.talk_desc {
+                    padding: 10px 20px;
+                    h1 {
+                        font-size: 1.4em;
+                        letter-spacing: 0.08em;
+                        margin: 10px 0;
+                    }
+
+                    div.more {
+                        margin: 20px 0;
+                    }
+                }
+
+            }
+        }
+    }
+
+    @media only screen and (max-width: 1800px) {
+        #content {
+            .platter {
+                margin-top: 20px;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 1700px) {
+        #content {
+            .platter {
+                margin-top: 0;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 900px) {
+
+        #content {
+            .platter {
+                display: block;
+                margin: 0;
+
+                main,
+                aside {
+                    width: 100%;
+                }
+            }
+        }
+
+    }
+
+    @media only screen and (max-width: 800px) {
+
+        div.header {
+            height: 80px;
+            background-color: $black;
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+
+        #content {
+            .platter {
+                display: block;
+                margin: 0;
+
+                main,
+                aside {
+                    width: 100%;
+                }
+
+                article.content-page {
+                    div.talk_desc {
+                        padding: 10px;
+                    }
+                }
+            }
+        }
+
+    }
+
+}

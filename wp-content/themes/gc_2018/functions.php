@@ -32,6 +32,8 @@ if ( $blog_id == $blog_tv_id ) {
 
 	require_once( __DIR__ . '/includes/gc_people.php' );
 
+	require_once( __DIR__ . '/includes/gc_city.php' );
+
 }
 
 
