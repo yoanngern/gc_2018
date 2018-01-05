@@ -99,7 +99,13 @@ function update_talk( $post_id ) {
 	// unhook this function so it doesn't loop infinitely
 	remove_action( 'save_post', 'update_talk' );
 
-	update_dates( $post_id );
+
+	if ( get_field( 'video', $post_id ) ) {
+
+		update_service_picture( $post_id );
+
+	}
+
 
 	// update the post, which calls save_post again
 	wp_update_post( $my_post );
@@ -111,6 +117,115 @@ function update_talk( $post_id ) {
 }
 
 add_action( 'save_post', 'update_talk' );
+
+
+function update_service_picture( $post_id ) {
+
+	$talk_picture = get_field( 'talk_picture', $post_id );
+
+	if ( $talk_picture == null ) {
+
+		$video = get_field('video', false, false);
+
+		$image_url = "";
+
+		if ( videoType( $video ) == 'vimeo' ) {
+
+			if ( preg_match( '%^https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)(?:[?]?.*)$%im', $video, $regs ) ) {
+				$id = $regs[3];
+			}
+
+			$image_url = getVimeoThumb( $id );
+		}
+
+		$upload_file = crb_insert_attachment_from_url( $image_url, $post_id );
+
+		update_field( 'talk_picture', $upload_file, $post_id );
+
+	}
+
+}
+
+function getVimeoThumb( $id ) {
+
+	$url = "http://vimeo.com/api/v2/video/$id.php";
+
+	$vimeo = wp_remote_get( $url );
+
+	$image = unserialize( $vimeo['body'] )[0]['thumbnail_large'];
+
+	$image_url = str_replace( "640.jpg", "1080.jpg", $image );
+
+	return $image_url;
+}
+
+
+/**
+ * Insert an attachment from an URL address.
+ *
+ * @param  String $url
+ * @param  Int $post_id
+ * @param  Array $meta_data
+ *
+ * @return Int    Attachment ID
+ */
+function crb_insert_attachment_from_url( $url, $post_id = null ) {
+
+	if ( ! class_exists( 'WP_Http' ) ) {
+		include_once( ABSPATH . WPINC . '/class-http.php' );
+	}
+
+	$http     = new WP_Http();
+	$response = $http->request( $url );
+	if ( $response['response']['code'] != 200 ) {
+		return false;
+	}
+
+	$upload = wp_upload_bits( basename( $url ), null, $response['body'] );
+	if ( ! empty( $upload['error'] ) ) {
+		return false;
+	}
+
+	$file_path        = $upload['file'];
+	$file_name        = basename( $file_path );
+	$file_type        = wp_check_filetype( $file_name, null );
+	$attachment_title = sanitize_file_name( pathinfo( $file_name, PATHINFO_FILENAME ) );
+	$wp_upload_dir    = wp_upload_dir();
+
+	$post_info = array(
+		'guid'           => $wp_upload_dir['url'] . '/' . $file_name,
+		'post_mime_type' => $file_type['type'],
+		'post_title'     => $attachment_title,
+		'post_content'   => '',
+		'post_status'    => 'inherit',
+	);
+
+	// Create the attachment
+	$attach_id = wp_insert_attachment( $post_info, $file_path, $post_id );
+
+	// Include image.php
+	require_once( ABSPATH . 'wp-admin/includes/image.php' );
+
+	// Define attachment metadata
+	$attach_data = wp_generate_attachment_metadata( $attach_id, $file_path );
+
+	// Assign metadata to attachment
+	wp_update_attachment_metadata( $attach_id, $attach_data );
+
+	return $attach_id;
+
+}
+
+
+function videoType( $url ) {
+	if ( strpos( $url, 'youtube' ) > 0 ) {
+		return 'youtube';
+	} elseif ( strpos( $url, 'vimeo' ) > 0 ) {
+		return 'vimeo';
+	} else {
+		return 'unknown';
+	}
+}
 
 
 /**
