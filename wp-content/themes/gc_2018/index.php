@@ -28,6 +28,11 @@ if ( $post_type == "gc_event" ) {
 	get_template_part( 'template-parts/talk/index' );
 
 
+} else if ( $post_type == "gc_people" ) {
+
+	get_template_part( 'template-parts/people/index' );
+
+
 } else {
 
 	get_template_part( 'template-parts/blog/index' );

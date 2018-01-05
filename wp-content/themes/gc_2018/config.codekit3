@@ -527,6 +527,13 @@
 		"oAP": "\/includes\/acf\/tv_page.php",
 		"oF": 0
 		},
+	"\/includes\/acf\/tv_selection.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/tv_selection.php",
+		"oF": 0
+		},
 	"\/includes\/acf_fields.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -3100,6 +3107,13 @@
 		"oAP": "\/page-tv.php",
 		"oF": 0
 		},
+	"\/page-tv_selection.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/page-tv_selection.php",
+		"oF": 0
+		},
 	"\/page-weekend.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -3650,6 +3664,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/advanced\/speaker.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/speaker.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/advanced\/sub_nav.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -4048,18 +4075,46 @@
 		"oAP": "\/template-parts\/form\/simple.php",
 		"oF": 0
 		},
-	"\/template-parts\/people\/people_details.php": {
+	"\/template-parts\/people\/index.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/template-parts\/people\/people_details.php",
+		"oAP": "\/template-parts\/people\/index.php",
 		"oF": 0
 		},
-	"\/template-parts\/people\/people_simple.php": {
+	"\/template-parts\/people\/item.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
-		"oAP": "\/template-parts\/people\/people_simple.php",
+		"oAP": "\/template-parts\/people\/item.php",
+		"oF": 0
+		},
+	"\/template-parts\/people\/list.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/people\/list.php",
+		"oF": 0
+		},
+	"\/template-parts\/people\/none.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/people\/none.php",
+		"oF": 0
+		},
+	"\/template-parts\/people\/single.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/people\/single.php",
+		"oF": 0
+		},
+	"\/template-parts\/people\/speaker.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/people\/speaker.php",
 		"oF": 0
 		},
 	"\/template-parts\/talk\/index.php": {
@@ -4067,6 +4122,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/talk\/index.php",
+		"oF": 0
+		},
+	"\/template-parts\/talk\/item.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/talk\/item.php",
 		"oF": 0
 		},
 	"\/template-parts\/talk\/none.php": {
@@ -4088,6 +4150,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/talk\/talk.php",
+		"oF": 0
+		},
+	"\/template-parts\/talk\/talk_list.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/talk\/talk_list.php",
 		"oF": 0
 		},
 	"\/widgets\/complex-carousel.php": {

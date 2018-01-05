@@ -72,3 +72,37 @@ function update_people( $post_id ) {
 add_action( 'save_post', 'update_people' );
 
 
+/**
+ * Order People
+ *
+ * @param $query
+ *
+ * @return mixed
+ */
+function gc_order_people( $query ) {
+
+
+	if ( ! is_single() && isset( $query->query_vars['post_type'] ) && $query->query_vars['post_type'] == 'gc_people' ) {
+
+
+		$query->set( 'orderby', 'meta_value' );
+		$query->set( 'meta_key', 'lastname' );
+		$query->set( 'order', 'asc' );
+		$query->set( 'posts_per_page', 36 );
+
+
+		$query->set( 'meta_query', array() );
+
+		return $query;
+
+
+	}
+
+	return $query;
+
+
+}
+
+add_action( 'pre_get_posts', 'gc_order_people' );
+
+

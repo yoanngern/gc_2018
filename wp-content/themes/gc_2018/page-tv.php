@@ -73,54 +73,13 @@
 				$section_title = get_sub_field( 'title' );
 
 
+				set_query_var( 'talks', $talks );
+				set_query_var( 'section_title', $section_title );
+
+				get_template_part( 'template-parts/talk/talk_list' );
+
+
 				?>
-
-				<?php if ( sizeof( $talks ) ): ?>
-
-
-                    <section class="talk_list">
-
-                        <div class="header">
-                            <h1><?php echo $section_title; ?></h1>
-                        </div>
-
-                        <div class="list_container">
-                            <div class="talks">
-								<?php foreach ( $talks as $talk ):
-
-									$image = get_field( 'talk_picture', $talk );
-									$title = get_field( 'title', $talk );
-									$speaker = get_field( 'speaker', $talk );
-
-									$link = esc_url( get_permalink( $talk ) );
-
-									$date = complex_date( get_field( 'date', $talk ), get_field( 'date', $talk ) );
-
-									?>
-
-                                    <div class="talk">
-                                        <a class="talk_container" href="<?php echo $link; ?>">
-
-                                            <div class="image">
-                                                <div class="bg"
-                                                     style="background-image: url('<?php echo $image['sizes']['summary'] ?>')"></div>
-                                            </div>
-
-                                            <div class="text">
-                                                <h1><?php echo $title; ?></h1>
-                                                <time><?php echo $date; ?></time>
-                                            </div>
-                                        </a>
-
-
-                                    </div>
-
-								<?php endforeach; ?>
-                            </div>
-                        </div>
-
-                    </section>
-				<?php endif; ?>
 
 			<?php endwhile; ?>
 

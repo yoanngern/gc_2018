@@ -125,7 +125,7 @@ function update_service_picture( $post_id ) {
 
 	if ( $talk_picture == null ) {
 
-		$video = get_field('video', false, false);
+		$video = get_field( 'video', false, false );
 
 		$image_url = "";
 
@@ -235,13 +235,16 @@ function videoType( $url ) {
  *
  * @return array
  */
-function get_talks( $nb = 12, $city = null, $speaker = null, $category = null ) {
+function get_talks( $nb = 12, $city = null, $speaker = null, $category = null, $exclude = null ) {
 
 	$meta_query = array(
 		'relation' => 'AND',
 	);
 
 	$tax_query = array();
+
+	//var_dump($exclude);
+
 
 
 	if ( $city !== null ) {
@@ -255,6 +258,7 @@ function get_talks( $nb = 12, $city = null, $speaker = null, $category = null ) 
 	}
 
 	if ( $speaker !== null ) {
+
 
 		$meta_query[] = array(
 			'key'     => 'speaker',
@@ -276,9 +280,12 @@ function get_talks( $nb = 12, $city = null, $speaker = null, $category = null ) 
 	}
 
 
+
+
 	$args = array(
 		'posts_per_page' => $nb,
 		'orderby'        => 'meta_value',
+		'post__not_in'   => $exclude,
 		'meta_key'       => 'date',
 		'order'          => 'desc',
 		'post_type'      => 'gc_talk',
