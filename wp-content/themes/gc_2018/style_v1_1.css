@@ -2487,14 +2487,78 @@ body.page-template-page-home #content .platter {
       left: -20px;
       width: 100vw; }
   body.page-template-page-home #content .platter article#tv {
-    background-color: #545454;
+    background-color: #F8F8F8;
     margin: 20px; }
-    body.page-template-page-home #content .platter article#tv h1 {
-      color: #FFFFFF; }
-      body.page-template-page-home #content .platter article#tv h1.title span::after {
-        background-color: #FFFFFF; }
-    body.page-template-page-home #content .platter article#tv em {
-      color: #FFFFFF; }
+    body.page-template-page-home #content .platter article#tv .talks {
+      margin-bottom: 20px;
+      display: table;
+      width: 98%;
+      padding: 0 1%; }
+      @media only screen and (max-width: 680px) {
+        body.page-template-page-home #content .platter article#tv .talks {
+          text-align: left; } }
+    body.page-template-page-home #content .platter article#tv .talk_item {
+      display: inline-block;
+      width: 15.7%;
+      vertical-align: top; }
+      body.page-template-page-home #content .platter article#tv .talk_item .talk_container {
+        background-color: #FFFFFF;
+        margin: 0 0.4% 15px;
+        border: 1px solid #EEEEEE;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        -o-border-radius: 3px;
+        border-radius: 3px;
+        white-space: normal;
+        text-decoration: none;
+        display: block; }
+        body.page-template-page-home #content .platter article#tv .talk_item .talk_container .image {
+          width: 100%;
+          height: 0;
+          padding-bottom: 56.2%;
+          position: relative; }
+          body.page-template-page-home #content .platter article#tv .talk_item .talk_container .image .bg {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-color: #d7d7d7; }
+        body.page-template-page-home #content .platter article#tv .talk_item .talk_container .text {
+          display: block;
+          padding: 10px;
+          text-align: left; }
+          body.page-template-page-home #content .platter article#tv .talk_item .talk_container .text h1 {
+            padding-bottom: 5px;
+            line-height: 1.3em;
+            font-size: 1em;
+            letter-spacing: 0;
+            font-family: "Radikal", sans-serif;
+            color: #545454;
+            text-transform: inherit;
+            margin: 0; }
+          body.page-template-page-home #content .platter article#tv .talk_item .talk_container .text time {
+            margin: 0;
+            line-height: 1em;
+            font-size: 0.8em;
+            letter-spacing: 0;
+            font-family: "Radikal", sans-serif;
+            color: #545454;
+            text-transform: inherit; }
+      @media only screen and (max-width: 1600px) {
+        body.page-template-page-home #content .platter article#tv .talk_item {
+          width: 18.8%; } }
+      @media only screen and (max-width: 1300px) {
+        body.page-template-page-home #content .platter article#tv .talk_item {
+          width: 23%; } }
+      @media only screen and (max-width: 900px) {
+        body.page-template-page-home #content .platter article#tv .talk_item {
+          width: 40%; } }
+      @media only screen and (max-width: 680px) {
+        body.page-template-page-home #content .platter article#tv .talk_item {
+          width: 50%; } }
   body.page-template-page-home #content .platter article#church_life {
     max-width: 1200px;
     margin: 40px auto;
@@ -3152,7 +3216,8 @@ ul.category_filter {
     border-radius: 3px;
     white-space: normal;
     text-decoration: none;
-    display: block; }
+    display: block;
+    overflow: hidden; }
     #gc_tv .talk_item .talk_container .image {
       width: 100%;
       height: 0;

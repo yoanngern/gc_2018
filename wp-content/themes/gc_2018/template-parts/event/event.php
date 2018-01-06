@@ -175,7 +175,6 @@
 		}
 
 
-
 		$query = new WP_Query( array(
 			'post_type'    => 'gc_event',
 			'showposts'    => 12,

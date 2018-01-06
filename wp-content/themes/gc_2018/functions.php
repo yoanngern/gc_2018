@@ -390,3 +390,107 @@ function get_people( $people_id ) {
 
 	return $people_array;
 }
+
+
+/**
+ * @param int $people_id
+ *
+ * @return mixed
+ */
+function get_last_talks( $city = null ) {
+
+
+	// Get the current blog id
+	$original_blog_id = get_current_blog_id();
+
+
+	// GC TV
+	switch_to_blog( 4 );
+
+	$args = array(
+		'posts_per_page' => 4,
+		'orderby'        => 'meta_value',
+		'meta_key'       => 'date',
+		'order'          => 'desc',
+		'post_type'      => 'gc_talk',
+		'meta_query'     => array(
+			'key'     => 'city',
+			'compare' => '=',
+			'value'   => $city,
+		)
+
+	);
+
+
+	// The Query
+	$query = new WP_Query( $args );
+
+	$talks = $query->get_posts();
+
+	$items = array();
+
+
+	foreach ( $talks as $talk ) {
+		$item['image']   = get_field( 'talk_picture', $talk );
+		$item['title']   = get_field( 'title', $talk );
+		$item['speaker'] = get_field( 'speaker', $talk );
+
+		$item['link'] = esc_url( get_permalink( $talk ) );
+
+		$item['date'] = complex_date( get_field( 'date', $talk ), get_field( 'date', $talk ) );
+
+		$items[] = $item;
+	}
+
+
+	// Switch back to the current blog
+	switch_to_blog( $original_blog_id );
+
+	return $items;
+}
+
+
+/**
+ * @param $field
+ *
+ * @return mixed
+ */
+function talks_acf_load_value( $field ) {
+
+
+	// Get the current blog id
+	$original_blog_id = get_current_blog_id();
+
+
+	// GC TV
+	switch_to_blog( 4 );
+
+	$cities = get_posts(
+		array(
+			'post_type'   => 'gc_city',
+			'numberposts' => 100,
+		)
+	);
+
+
+	$choices = [];
+
+
+	foreach ( $cities as $city ) {
+
+		$choices[ $city->ID ] = $city->post_title;
+	}
+
+	// Switch back to the current blog
+	switch_to_blog( $original_blog_id );
+
+
+	$field['choices'] = $choices;
+
+
+	return $field;
+}
+
+// acf/load_value - filter for every field load
+add_filter( 'acf/load_field/name=home_talks', 'talks_acf_load_value', 10, 3 );
+
