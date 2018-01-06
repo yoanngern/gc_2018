@@ -18,19 +18,8 @@ body.page-template-page-home {
                 -webkit-animation-fill-mode: forwards;
                 -o-animation-fill-mode: forwards;
 
-                a.button {
+                a.dynamic {
                     margin-top: 50px;
-                    padding: 3px 13px 0;
-                    line-height: 1.8em;
-                    border-width: 2px;
-
-                    &::before {
-                        display: none;
-                    }
-
-                    &:hover {
-                        opacity: 0.8;
-                    }
                 }
             }
 
@@ -78,14 +67,19 @@ body.page-template-page-home {
                     margin: 0 20px;
                 }
 
+                & > h1.title {
+                    font-size: 2.4em;
+                }
+
                 & > h4 {
-                    font-size: 1.8em;
+                    font-size: 1.4em;
                     color: $gray3;
                     letter-spacing: 0.06em;
-                    max-width: 960px;
+                    max-width: 680px;
                     margin: 0 auto;
                     line-height: 1.4em;
-                    width: 90%;
+                    width: 80%;
+                    //font-family: $radikal-light;
                 }
 
                 &#events {
@@ -107,7 +101,7 @@ body.page-template-page-home {
                         li {
                             width: 29.333%;
                             text-align: center;
-                            margin: 30px 2%;
+                            margin: 20px 2%;
 
                             h1 {
                                 font-family: $radikal-black;
@@ -118,7 +112,7 @@ body.page-template-page-home {
 
                             h2 {
                                 color: $gray3;
-                                font-size: 1.2em;
+                                font-size: 1em;
                             }
                         }
                     }
@@ -146,8 +140,8 @@ body.page-template-page-home {
                     h1 {
                         color: $white;
 
-                        &.title span {
-                            border-color: $white;
+                        &.title span::after {
+                            background-color: $white;
                         }
                     }
 
@@ -270,12 +264,17 @@ body.page-template-page-home {
                     &#gcfamily {
                         ul.dynamic {
                             li {
-                                width: 80%;
-                                margin: 30px 10%;
+                                //width: 80%;
+                                margin: 20px 3%;
 
 
                                 a {
                                     margin-right: 0;
+                                    padding: 15px;
+
+                                    h1 {
+                                        font-size: 1.1em;
+                                    }
                                 }
                             }
                         }

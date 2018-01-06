@@ -134,6 +134,57 @@
                     }
                 }
             }
+
+            a.dynamic {
+                font-family: $radikal-bold;
+                font-size: 0.8em;
+                line-height: 2.3em;
+                text-transform: uppercase;
+                letter-spacing: 0.18em;
+                color: $white;
+                display: inline-block;
+                position: relative;
+                margin: 5px 0;
+                padding: 0 8px 2px 13px;
+                transition: all 100ms ease;
+                text-decoration: none;
+
+                &::before {
+                    content: '';
+                    height: 50%;
+                    width: 2px;
+                    bottom: 0;
+                    left: 0;
+                    background-color: $white;
+                    display: block;
+                    position: absolute;
+                    transition: all 100ms ease;
+                }
+
+                &::after {
+                    content: '';
+                    height: 2px;
+                    width: 50%;
+                    background-color: $white;
+                    display: block;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    transition: all 250ms ease;
+                }
+
+                &:hover {
+                    &::before {
+                        height: 100%;
+                        background-color: $white;
+                    }
+
+                    &::after {
+                        width: 100%;
+                        background-color: $white;
+                    }
+                }
+            }
         }
 
     }
@@ -203,8 +254,8 @@
 
             p {
                 font-family: $corbel;
-                line-height: 1.54em;
-                font-size: 1.36em;
+                line-height: 1.5em;
+                font-size: 1.2em;
                 letter-spacing: 0.062em;
                 margin: 20px 0 30px;
                 color: $gray2;
@@ -215,6 +266,7 @@
                 color: lighten($red, 17);
                 text-decoration: none;
                 transition: all 130ms ease;
+                font-size: 1em;
 
                 &:hover {
                     color: $red;
@@ -247,14 +299,14 @@
                     display: inline-block;
                     color: $white;
                     background-color: $red;
-                    padding: 8px 30px 10px;
-                    font-size: 1em;
-                    line-height: 2.5em;
+                    padding: 8px 25px 9px;
+                    font-size: 0.9em;
+                    line-height: 2.0em;
                     font-family: $radikal-bold;
                     text-transform: uppercase;
                     text-align: center;
                     letter-spacing: 0.17em;
-                    margin: 10px 0;
+                    margin: 5px 0;
                     transition: all 200ms ease;
                     position: relative;
 
@@ -325,14 +377,14 @@
 
                 &.dynamic {
                     font-family: $radikal-bold;
-                    font-size: 1em;
-                    line-height: 2.5em;
+                    font-size: 0.9em;
+                    line-height: 2.3em;
                     text-transform: uppercase;
                     letter-spacing: 0.18em;
                     color: $gray3;
                     display: inline-block;
                     position: relative;
-                    margin: 10px 0;
+                    margin: 5px 0;
                     padding-left: 13px;
                     transition: all 100ms ease;
                     padding-right: 8px;
@@ -378,11 +430,11 @@
             h1 {
                 font-family: $radikal-bold;
                 color: $black;
-                font-size: 2.29em;
+                font-size: 2em;
                 text-transform: uppercase;
                 line-height: 1.2em;
                 letter-spacing: 0.125em;
-                margin: 40px auto 60px;
+                margin: 40px auto 50px;
 
                 &.title {
                     font-family: $radikal-black;
@@ -390,20 +442,27 @@
                     line-height: 1.2em;
 
                     span {
-                        border: 4px solid $black;
                         display: inline-block;
-                        padding: 8px 12px 0;
+
+                        &::after {
+                            height: 5px;
+                            background-color: $black;
+                            width: 50%;
+                            margin: 3px auto 0;
+                            display: block;
+                            content: "";
+                        }
                     }
                 }
             }
 
             h2 {
                 font-family: $radikal-bold;
-                font-size: 2.07em;
+                font-size: 1.8em;
                 color: $gray-dark;
                 line-height: 1.2em;
                 letter-spacing: 0.08em;
-                margin: 45px 0 25px;
+                margin: 45px 0 20px;
             }
 
             h3 {
@@ -476,7 +535,7 @@
                     text-align: center;
                     font-family: $radikal-light;
                     color: $black;
-                    font-size: 1.72em;
+                    font-size: 1.6em;
                     margin: 0 auto 20px;
 
                     em {
@@ -520,6 +579,7 @@
                     width: 25%;
                     padding: 0;
                     text-indent: 0;
+                    margin-bottom: 20px;
 
                     &::before {
                         display: none;
@@ -544,15 +604,15 @@
 
                         h1 {
                             font-family: $radikal;
-                            font-size: 26px;
+                            font-size: 1.3em;
                             line-height: 1.3em;
                             letter-spacing: 0.06em;
                         }
 
                         h2 {
                             font-family: $radikal;
-                            font-size: 14px;
-                            line-height: 1.5em;
+                            font-size: 0.7em;
+                            line-height: 1.3em;
                             letter-spacing: 0.06em;
                             color: $black;
                         }

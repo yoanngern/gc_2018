@@ -18,7 +18,7 @@
 
                 <p>
                     <a href="<?php echo get_field( 'button_link' ); ?>"
-                       class="button"><span><?php echo get_field( 'button_label' ); ?></span></a>
+                       class="dynamic"><span><?php echo get_field( 'button_label' ); ?></span></a>
                 </p>
             </div>
 

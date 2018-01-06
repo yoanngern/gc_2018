@@ -76,6 +76,101 @@ add_action( 'init', 'create_talkcategory_taxonomy', 0 );
 
 
 /**
+ * Service column
+ *
+ * @param $columns
+ *
+ * @return array
+ */
+function gc_talk_column( $columns ) {
+
+	$columns = array(
+		'cb'            => '<input type="checkbox" />',
+		//'title'           => 'Date',
+		'talk_date_col' => 'Date',
+		'talk_city_col' => 'City',
+		'talk_speaker'  => 'Speaker',
+
+	);
+
+	return $columns;
+}
+
+add_filter( 'manage_edit-gc_talk_columns', 'gc_talk_column' );
+
+
+/**
+ * Service column content
+ *
+ * @param $column
+ */
+function gc_talk_custom_column( $column ) {
+	global $post;
+
+	$date = get_field( 'date', $post );
+
+	if ( $column == 'talk_city_col' ) {
+
+		$city_id = get_field( 'city', $post );
+
+		$city = get_post( $city_id );
+
+		if ( $city ) {
+			echo $city->post_title;
+		} else {
+			echo "-";
+		}
+
+	} elseif ( $column == 'talk_date_col' ) {
+
+		$id = $post->ID;
+
+		$txt = date_i18n( get_option( 'date_format' ), strtotime( $date ) );
+
+		echo "<a class='row-title' href='/wp-admin/post.php?post=$id&action=edit'>$txt</a>";
+
+
+	} elseif ( $column == 'talk_speaker' ) {
+
+		$speakers = get_field( 'speaker', $post );
+
+
+		if ( $speakers ) {
+			foreach ( $speakers as $speaker ) {
+
+
+				echo $speaker->post_title . "<br/>";
+
+			}
+		} else {
+			echo "-";
+		}
+
+
+	}
+}
+
+add_action( "manage_posts_custom_column", "gc_talk_custom_column" );
+
+/**
+ * @param $columns
+ *
+ * @return mixed
+ */
+function gc_talk_sort_column( $columns ) {
+	$columns['talk_date_col'] = 'date';
+
+	//To make a column 'un-sortable' remove it from the array
+	//unset($columns['date']);
+
+	return $columns;
+}
+
+add_filter( 'manage_edit-gc_talk_sortable_columns', 'gc_talk_sort_column' );
+
+
+
+/**
  * Update Service
  *
  * @param $post_id
@@ -246,7 +341,6 @@ function get_talks( $nb = 12, $city = null, $speaker = null, $category = null, $
 	//var_dump($exclude);
 
 
-
 	if ( $city !== null ) {
 
 		$meta_query[] = array(
@@ -278,8 +372,6 @@ function get_talks( $nb = 12, $city = null, $speaker = null, $category = null, $
 			'terms'    => $category->slug,
 		);
 	}
-
-
 
 
 	$args = array(

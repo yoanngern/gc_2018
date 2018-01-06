@@ -5572,7 +5572,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http:\/\/dev.gospel-center.tv",
+	"externalServerAddress": "http:\/\/dev.gc-lausanne.org",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",

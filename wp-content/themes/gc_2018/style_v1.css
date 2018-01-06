@@ -435,7 +435,7 @@ footer {
             margin-bottom: 7px; }
           footer section.bottom ul li a p {
             font-size: 1.1em;
-            line-height: 1.1em; }
+            line-height: 1.2em; }
         footer section.bottom ul li.email a::before {
           background-image: url("images/footer_email.png"); }
         footer section.bottom ul li.location a::before {
@@ -602,6 +602,45 @@ footer {
       #content article.title div.title a.button:hover::before {
         right: 30px;
         transition: all 300ms ease-in-out 0s; }
+    #content article.title div.title a.dynamic {
+      font-family: "Radikal-Bold", "Radikal", sans-serif;
+      font-size: 0.8em;
+      line-height: 2.3em;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #FFFFFF;
+      display: inline-block;
+      position: relative;
+      margin: 5px 0;
+      padding: 0 8px 2px 13px;
+      transition: all 100ms ease;
+      text-decoration: none; }
+      #content article.title div.title a.dynamic::before {
+        content: '';
+        height: 50%;
+        width: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #FFFFFF;
+        display: block;
+        position: absolute;
+        transition: all 100ms ease; }
+      #content article.title div.title a.dynamic::after {
+        content: '';
+        height: 2px;
+        width: 50%;
+        background-color: #FFFFFF;
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transition: all 250ms ease; }
+      #content article.title div.title a.dynamic:hover::before {
+        height: 100%;
+        background-color: #FFFFFF; }
+      #content article.title div.title a.dynamic:hover::after {
+        width: 100%;
+        background-color: #FFFFFF; }
 
 #content .platter {
   position: relative;
@@ -646,8 +685,8 @@ footer {
     #content .platter article.home-default p,
     #content .platter section.content-default p {
       font-family: "Corbel", sans-serif;
-      line-height: 1.54em;
-      font-size: 1.36em;
+      line-height: 1.5em;
+      font-size: 1.2em;
       letter-spacing: 0.062em;
       margin: 20px 0 30px;
       color: #6E6E6E;
@@ -657,7 +696,8 @@ footer {
     #content .platter section.content-default a {
       color: #ee7380;
       text-decoration: none;
-      transition: all 130ms ease; }
+      transition: all 130ms ease;
+      font-size: 1em; }
       #content .platter article.content-page a:hover,
       #content .platter article.home-default a:hover,
       #content .platter section.content-default a:hover {
@@ -688,14 +728,14 @@ footer {
         display: inline-block;
         color: #FFFFFF;
         background-color: #E52639;
-        padding: 8px 30px 10px;
-        font-size: 1em;
-        line-height: 2.5em;
+        padding: 8px 25px 9px;
+        font-size: 0.9em;
+        line-height: 2.0em;
         font-family: "Radikal-Bold", "Radikal", sans-serif;
         text-transform: uppercase;
         text-align: center;
         letter-spacing: 0.17em;
-        margin: 10px 0;
+        margin: 5px 0;
         transition: all 200ms ease;
         position: relative; }
         #content .platter article.content-page a.button::before,
@@ -762,14 +802,14 @@ footer {
       #content .platter article.home-default a.dynamic,
       #content .platter section.content-default a.dynamic {
         font-family: "Radikal-Bold", "Radikal", sans-serif;
-        font-size: 1em;
-        line-height: 2.5em;
+        font-size: 0.9em;
+        line-height: 2.3em;
         text-transform: uppercase;
         letter-spacing: 0.18em;
         color: #3E3E3E;
         display: inline-block;
         position: relative;
-        margin: 10px 0;
+        margin: 5px 0;
         padding-left: 13px;
         transition: all 100ms ease;
         padding-right: 8px; }
@@ -812,11 +852,11 @@ footer {
     #content .platter section.content-default h1 {
       font-family: "Radikal-Bold", "Radikal", sans-serif;
       color: #333333;
-      font-size: 2.29em;
+      font-size: 2em;
       text-transform: uppercase;
       line-height: 1.2em;
       letter-spacing: 0.125em;
-      margin: 40px auto 60px; }
+      margin: 40px auto 50px; }
       #content .platter article.content-page h1.title,
       #content .platter article.home-default h1.title,
       #content .platter section.content-default h1.title {
@@ -826,18 +866,25 @@ footer {
         #content .platter article.content-page h1.title span,
         #content .platter article.home-default h1.title span,
         #content .platter section.content-default h1.title span {
-          border: 4px solid #333333;
-          display: inline-block;
-          padding: 8px 12px 0; }
+          display: inline-block; }
+          #content .platter article.content-page h1.title span::after,
+          #content .platter article.home-default h1.title span::after,
+          #content .platter section.content-default h1.title span::after {
+            height: 5px;
+            background-color: #333333;
+            width: 50%;
+            margin: 3px auto 0;
+            display: block;
+            content: ""; }
     #content .platter article.content-page h2,
     #content .platter article.home-default h2,
     #content .platter section.content-default h2 {
       font-family: "Radikal-Bold", "Radikal", sans-serif;
-      font-size: 2.07em;
+      font-size: 1.8em;
       color: #545454;
       line-height: 1.2em;
       letter-spacing: 0.08em;
-      margin: 45px 0 25px; }
+      margin: 45px 0 20px; }
     #content .platter article.content-page h3,
     #content .platter article.home-default h3,
     #content .platter section.content-default h3 {
@@ -896,7 +943,7 @@ footer {
         text-align: center;
         font-family: "Radikal-Light", "Radikal", sans-serif;
         color: #333333;
-        font-size: 1.72em;
+        font-size: 1.6em;
         margin: 0 auto 20px; }
         #content .platter article.content-page blockquote p em,
         #content .platter article.home-default blockquote p em,
@@ -938,7 +985,8 @@ footer {
         display: inline-block;
         width: 25%;
         padding: 0;
-        text-indent: 0; }
+        text-indent: 0;
+        margin-bottom: 20px; }
         #content .platter article.content-page ul.dynamic li::before,
         #content .platter article.home-default ul.dynamic li::before,
         #content .platter section.content-default ul.dynamic li::before {
@@ -966,15 +1014,15 @@ footer {
           #content .platter article.home-default ul.dynamic li a h1,
           #content .platter section.content-default ul.dynamic li a h1 {
             font-family: "Radikal", sans-serif;
-            font-size: 26px;
+            font-size: 1.3em;
             line-height: 1.3em;
             letter-spacing: 0.06em; }
           #content .platter article.content-page ul.dynamic li a h2,
           #content .platter article.home-default ul.dynamic li a h2,
           #content .platter section.content-default ul.dynamic li a h2 {
             font-family: "Radikal", sans-serif;
-            font-size: 14px;
-            line-height: 1.5em;
+            font-size: 0.7em;
+            line-height: 1.3em;
             letter-spacing: 0.06em;
             color: #333333; }
           #content .platter article.content-page ul.dynamic li a:hover span.top, #content .platter article.content-page ul.dynamic li a:hover span.bottom,
@@ -2357,15 +2405,8 @@ body.page-template-page-home #content article.title {
     -moz-animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
     -o-animation-fill-mode: forwards; }
-    body.page-template-page-home #content article.title div.title a.button {
-      margin-top: 50px;
-      padding: 3px 13px 0;
-      line-height: 1.8em;
-      border-width: 2px; }
-      body.page-template-page-home #content article.title div.title a.button::before {
-        display: none; }
-      body.page-template-page-home #content article.title div.title a.button:hover {
-        opacity: 0.8; }
+    body.page-template-page-home #content article.title div.title a.dynamic {
+      margin-top: 50px; }
   body.page-template-page-home #content article.title .footer {
     bottom: 12px;
     position: absolute;
@@ -2399,14 +2440,16 @@ body.page-template-page-home #content .platter {
     text-align: center;
     padding: 90px 0;
     margin: 0 20px; }
+  body.page-template-page-home #content .platter article > h1.title {
+    font-size: 2.4em; }
   body.page-template-page-home #content .platter article > h4 {
-    font-size: 1.8em;
+    font-size: 1.4em;
     color: #3E3E3E;
     letter-spacing: 0.06em;
-    max-width: 960px;
+    max-width: 680px;
     margin: 0 auto;
     line-height: 1.4em;
-    width: 90%; }
+    width: 80%; }
   body.page-template-page-home #content .platter article#events {
     background-color: #F8F8F8; }
     body.page-template-page-home #content .platter article#events #listOfEvents .events_table {
@@ -2419,7 +2462,7 @@ body.page-template-page-home #content .platter {
     body.page-template-page-home #content .platter article#gcfamily ul.dynamic li {
       width: 29.333%;
       text-align: center;
-      margin: 30px 2%; }
+      margin: 20px 2%; }
       body.page-template-page-home #content .platter article#gcfamily ul.dynamic li h1 {
         font-family: "Radikal-Black", "Radikal-Bold", "Radikal", sans-serif;
         color: #3E3E3E;
@@ -2427,7 +2470,7 @@ body.page-template-page-home #content .platter {
         margin-bottom: 5px; }
       body.page-template-page-home #content .platter article#gcfamily ul.dynamic li h2 {
         color: #3E3E3E;
-        font-size: 1.2em; }
+        font-size: 1em; }
   body.page-template-page-home #content .platter article#next_step {
     background-color: #F8F8F8; }
     body.page-template-page-home #content .platter article#next_step > h4 {
@@ -2441,8 +2484,8 @@ body.page-template-page-home #content .platter {
     margin: 20px; }
     body.page-template-page-home #content .platter article#tv h1 {
       color: #FFFFFF; }
-      body.page-template-page-home #content .platter article#tv h1.title span {
-        border-color: #FFFFFF; }
+      body.page-template-page-home #content .platter article#tv h1.title span::after {
+        background-color: #FFFFFF; }
     body.page-template-page-home #content .platter article#tv em {
       color: #FFFFFF; }
   body.page-template-page-home #content .platter article#church_life {
@@ -2499,10 +2542,12 @@ body.page-template-page-home #content .platter {
       margin: 40px auto 60px;
       width: 85%; }
   body.page-template-page-home #content .platter article#gcfamily ul.dynamic li {
-    width: 80%;
-    margin: 30px 10%; }
+    margin: 20px 3%; }
     body.page-template-page-home #content .platter article#gcfamily ul.dynamic li a {
-      margin-right: 0; }
+      margin-right: 0;
+      padding: 15px; }
+      body.page-template-page-home #content .platter article#gcfamily ul.dynamic li a h1 {
+        font-size: 1.1em; }
   body.page-template-page-home #content .platter article#next_step ul.wall_image {
     left: -10px; }
   body.page-template-page-home #content .platter article#church_life {
