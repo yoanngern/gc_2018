@@ -86,10 +86,13 @@
 	<?php endif; ?>
 
 
+
     <script>
 
     </script>
 	<?php wp_head(); ?>
+
+    <?php echo get_field( 'script', 'option' ) ?>
 
 
     <script>
