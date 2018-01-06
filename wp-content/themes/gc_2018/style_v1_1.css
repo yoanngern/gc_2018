@@ -2596,6 +2596,64 @@ body.page-template-page-home #content .platter {
       font-family: "Radikal-Black", "Radikal-Bold", "Radikal", sans-serif; }
     body.page-template-page-home #content .platter article#news em {
       color: #FFFFFF; }
+    body.page-template-page-home #content .platter article#news div.form {
+      text-align: center; }
+      body.page-template-page-home #content .platter article#news div.form form {
+        text-align: center;
+        display: inline-block;
+        position: relative;
+        margin: 0 auto;
+        width: 90%; }
+        body.page-template-page-home #content .platter article#news div.form form div {
+          text-align: center; }
+          body.page-template-page-home #content .platter article#news div.form form div p {
+            color: #EEEEEE;
+            text-align: center;
+            font-size: 0.9em;
+            font-family: "Radikal", sans-serif; }
+        body.page-template-page-home #content .platter article#news div.form form > div:first-of-type {
+          display: table;
+          text-align: center;
+          width: 100%; }
+          body.page-template-page-home #content .platter article#news div.form form > div:first-of-type input {
+            background-color: #FFFFFF;
+            outline: none;
+            border: none;
+            line-height: 1.4em;
+            padding: 9px 25px 9px;
+            vertical-align: top;
+            font-size: 1.2em;
+            font-family: "Radikal", sans-serif;
+            box-sizing: border-box;
+            display: inline-block;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            border-radius: 0;
+            color: #545454;
+            text-align: left;
+            margin: 10px 0; }
+            body.page-template-page-home #content .platter article#news div.form form > div:first-of-type input[type="submit"] {
+              vertical-align: top;
+              background-color: #E52639;
+              border: none;
+              outline: none;
+              color: #FFFFFF;
+              padding: 9px 25px 9px;
+              font-family: "Radikal-Bold", "Radikal", sans-serif;
+              text-transform: uppercase;
+              letter-spacing: 0.04em;
+              line-height: 1.4em;
+              cursor: pointer;
+              appearance: none;
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              min-width: 110px;
+              transition: all 300ms ease;
+              text-align: center; }
+      @media only screen and (max-width: 400px) {
+        body.page-template-page-home #content .platter article#news div.form form div {
+          display: block; } }
 
 @media only screen and (max-width: 940px) {
   body.page-template-page-home #content .platter article#events #listOfEvents .events_table {

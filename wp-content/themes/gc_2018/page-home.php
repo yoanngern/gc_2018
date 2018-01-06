@@ -156,25 +156,25 @@
 
 				<?php
 
-                $city = get_field('home_talks');
-				$more = get_field('tv_link');
+				$city = get_field( 'home_talks' );
+				$more = get_field( 'tv_link' );
 
-				$items = get_last_talks( $city);
+				$items = get_last_talks( $city );
 
 
 				?>
 
                 <section class="talks">
 
-		            <?php foreach ( $items as $item ):
+					<?php foreach ( $items as $item ):
 
-			            set_query_var( 'item', $item );
+						set_query_var( 'item', $item );
 
-			            get_template_part( 'template-parts/talk/item' );
+						get_template_part( 'template-parts/talk/item' );
 
-			            ?>
+						?>
 
-		            <?php endforeach; ?>
+					<?php endforeach; ?>
 
                 </section>
 
@@ -184,7 +184,7 @@
 
 
 
-	    <?php if ( have_rows( 'life_church' ) && get_field( 'life_church_show' ) ): ?>
+		<?php if ( have_rows( 'life_church' ) && get_field( 'life_church_show' ) ): ?>
             <article id="church_life" class="home-default">
                 <div class="left">
                     <h1><?php echo get_field( 'life_church_title' ) ?></h1>
@@ -192,34 +192,40 @@
 
                 <div class="right">
 
-				    <?php while ( have_rows( 'life_church' ) ):
-					    the_row();
+					<?php while ( have_rows( 'life_church' ) ):
+						the_row();
 
-					    $link  = get_sub_field( 'link' );
-					    $title = get_sub_field( 'title' );
+						$link  = get_sub_field( 'link' );
+						$title = get_sub_field( 'title' );
 
-					    ?>
+						?>
 
                         <p>
                             <a href="<?php echo $link; ?>"><?php echo $title; ?></a>
                         </p>
 
-				    <?php endwhile; ?>
+					<?php endwhile; ?>
                 </div>
 
             </article>
-	    <?php endif; ?>
+		<?php endif; ?>
 
 
 		<?php if ( get_field( 'news_show' ) ): ?>
             <article class="home-default" id="news">
                 <h1><?php echo get_field( 'news_title' ) ?></h1>
 
-                <blockquote><p><em>Cette section est en cours de création</em></p></blockquote>
+				<?php
+
+				$form_id = get_field( 'form_id' );
+
+				?>
+
+                <div class="form">
+					<?php echo do_shortcode( '[mc4wp_form id="' . $form_id . '"]' ); ?>
+                </div>
             </article>
 		<?php endif; ?>
-
-
 
 
     </div>
