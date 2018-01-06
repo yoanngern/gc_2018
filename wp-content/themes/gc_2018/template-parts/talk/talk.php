@@ -13,6 +13,7 @@
 
 	$speakers = get_field( 'speaker', $_POST );
 
+	var_dump($speakers);
 
 	// use preg_match to find iframe src
 	preg_match( '/src="(.+?)"/', $video, $matches );

@@ -338,8 +338,6 @@ function get_talks( $nb = 12, $city = null, $speaker = null, $category = null, $
 
 	$tax_query = array();
 
-	//var_dump($exclude);
-
 
 	if ( $city !== null ) {
 
@@ -353,11 +351,10 @@ function get_talks( $nb = 12, $city = null, $speaker = null, $category = null, $
 
 	if ( $speaker !== null ) {
 
-
 		$meta_query[] = array(
 			'key'     => 'speaker',
 			'compare' => 'LIKE',
-			'value'   => $speaker->ID,
+			'value'   => strval($speaker->ID),
 		);
 
 
