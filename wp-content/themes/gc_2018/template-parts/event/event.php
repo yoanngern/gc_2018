@@ -174,9 +174,11 @@
 			$categories[] = $cat->slug;
 		}
 
+
+
 		$query = new WP_Query( array(
 			'post_type'    => 'gc_event',
-			'showposts'    => 5,
+			'showposts'    => 20,
 			'post__not_in' => array( get_the_ID() ),
 			'tax_query'    => array(
 				array(
@@ -187,6 +189,11 @@
 			)
 
 		) );
+
+		$query->set( 'orderby', 'meta_value' );
+		$query->set( 'meta_key', 'start' );
+		$query->set( 'meta_key', 'end' );
+		$query->set( 'order', 'desc' );
 
 
 		$events = $query->get_posts();

@@ -17,7 +17,6 @@ function create_talks() {
 			'public'              => true,
 			'can_export'          => true,
 			'show_ui'             => true,
-			'show_in_rest'        => true,
 			'_builtin'            => false,
 			'has_archive'         => true,
 			'publicly_queryable'  => true,
