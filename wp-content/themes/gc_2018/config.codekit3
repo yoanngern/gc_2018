@@ -597,24 +597,14 @@
 		"oAP": "\/index.php",
 		"oF": 0
 		},
-	"\/js\/main_v1.js": {
+	"\/js\/main_v1_1.js": {
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
 		"oA": 0,
-		"oAP": "\/js\/main_v1.min.js",
+		"oAP": "\/js\/main_v1_1.min.js",
 		"oF": 2,
 		"sC": 0,
-		"tS": 0
-		},
-	"\/js\/main_v1.min.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "\/js\/main_v1.min.min.js",
-		"oF": 0,
-		"sC": 1,
 		"tS": 0
 		},
 	"\/js\/vendor\/handlebars-intl\/handlebars-intl-with-locales.js": {
@@ -3846,7 +3836,7 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/style_v1.scss": {
+	"\/scss\/style_v1_1.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -3854,7 +3844,7 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/style_v1.css",
+		"oAP": "\/style_v1_1.css",
 		"oF": 2,
 		"oS": 0,
 		"uL": 1
