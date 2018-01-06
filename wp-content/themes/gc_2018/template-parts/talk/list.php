@@ -5,7 +5,7 @@ $city     = null;
 $category = null;
 
 $nb_filter = 0;
-$title     = "All talks";
+$title     = pll__('All talks');
 
 if ( isset( $_GET['speaker'] ) ) {
 
