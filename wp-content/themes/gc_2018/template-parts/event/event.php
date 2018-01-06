@@ -178,7 +178,7 @@
 
 		$query = new WP_Query( array(
 			'post_type'    => 'gc_event',
-			'showposts'    => 20,
+			'showposts'    => 12,
 			'post__not_in' => array( get_the_ID() ),
 			'tax_query'    => array(
 				array(
@@ -193,7 +193,7 @@
 		$query->set( 'orderby', 'meta_value' );
 		$query->set( 'meta_key', 'start' );
 		$query->set( 'meta_key', 'end' );
-		$query->set( 'order', 'desc' );
+		$query->set( 'order', 'asc' );
 
 
 		$events = $query->get_posts();
