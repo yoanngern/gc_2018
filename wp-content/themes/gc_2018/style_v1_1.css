@@ -922,6 +922,22 @@ footer {
           content: "•";
           color: #E52639;
           padding-right: 17px; }
+    #content .platter article.content-page p a.dynamic,
+    #content .platter article.home-default p a.dynamic,
+    #content .platter section.content-default p a.dynamic {
+      font-size: 0.6em; }
+    #content .platter article.content-page p a.small,
+    #content .platter article.home-default p a.small,
+    #content .platter section.content-default p a.small {
+      font-size: 0.55em; }
+    #content .platter article.content-page p a.button,
+    #content .platter article.home-default p a.button,
+    #content .platter section.content-default p a.button {
+      font-size: 0.7em; }
+    #content .platter article.content-page p em,
+    #content .platter article.home-default p em,
+    #content .platter section.content-default p em {
+      font-family: "Corbel-Italic", "Corbel", sans-serif; }
     #content .platter article.content-page blockquote,
     #content .platter article.home-default blockquote,
     #content .platter section.content-default blockquote {
@@ -2065,6 +2081,14 @@ body.post-type-archive-gc_event #content .platter {
       width: 100%; }
       #content .platter#summary section.sections article .content .txt {
         padding: 40px 0 20px; }
+        #content .platter#summary section.sections article .content .txt h2 {
+          font-size: 1.5em; }
+        #content .platter#summary section.sections article .content .txt p {
+          font-size: 1.1em;
+          line-height: 1.3em;
+          letter-spacing: 0.04em; }
+        #content .platter#summary section.sections article .content .txt a.dynamic {
+          font-size: 0.8em; }
     #content .platter#summary section.sections article .pic {
       width: 100%; } }
   @media only screen and (max-width: 380px) {
@@ -2089,13 +2113,13 @@ nav.sub-nav {
         overflow-scrolling: touch; }
         nav.sub-nav div > ul > li.current-menu-item ul li, nav.sub-nav div > ul > li.current-menu-parent ul li {
           display: inline-block;
-          padding: 0 15px;
+          padding: 2px 15px 0;
           overflow: scroll; }
           nav.sub-nav div > ul > li.current-menu-item ul li.current_page_item a, nav.sub-nav div > ul > li.current-menu-parent ul li.current_page_item a {
             color: #979797; }
           nav.sub-nav div > ul > li.current-menu-item ul li a, nav.sub-nav div > ul > li.current-menu-parent ul li a {
             font-size: 1.1em;
-            line-height: 44px;
+            line-height: 42px;
             text-decoration: none;
             color: #777777;
             text-transform: uppercase;

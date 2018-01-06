@@ -504,7 +504,19 @@
 
             p {
 
+
                 a {
+                    &.dynamic {
+                        font-size: 0.6em;
+                    }
+
+                    &.small {
+                        font-size: 0.55em;
+                    }
+
+                    &.button {
+                        font-size: 0.7em;
+                    }
 
                     &:hover {
 
@@ -512,7 +524,7 @@
                 }
 
                 em {
-
+                    font-family: $corbel-i;
                 }
 
             }
@@ -946,7 +958,6 @@
                         margin: 0 0 6px 0;
                     }
                 }
-
 
             }
         }

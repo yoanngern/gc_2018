@@ -22,7 +22,7 @@ nav.sub-nav {
 
                 li {
                     display: inline-block;
-                    padding: 0 15px;
+                    padding: 2px 15px 0;
                     overflow: scroll;
 
                     &.current_page_item {
@@ -33,7 +33,7 @@ nav.sub-nav {
 
                     a {
                         font-size: 1.1em;
-                        line-height: 44px;
+                        line-height: 42px;
                         text-decoration: none;
                         color: $gray;
                         text-transform: uppercase;
