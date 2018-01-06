@@ -437,8 +437,8 @@ footer {
             text-transform: uppercase;
             margin-bottom: 7px; }
           footer section.bottom ul li a p {
-            font-size: 1.1em;
-            line-height: 1.2em; }
+            font-size: 0.9em;
+            line-height: 1.1em; }
         footer section.bottom ul li.email a::before {
           background-image: url("images/footer_email.png"); }
         footer section.bottom ul li.location a::before {

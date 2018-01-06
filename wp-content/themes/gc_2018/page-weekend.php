@@ -305,8 +305,8 @@
 
 						<?php
 
-						$name    = $cat->name;
-						$id      = $cat->term_id;
+						$name = $cat->name;
+						$id   = $cat->term_id;
 
 						$link = add_query_arg( array(
 							'category' => $cat->slug,
@@ -377,9 +377,16 @@
             <div class="content ">
 				<?php foreach ( $services as $service ):
 
-					$title = $service->post_title;
-					$date = date_i18n( 'j M. Y', strtotime( get_field( 'start', $service ) ) );
-					$time = complex_time( get_field( 'start', $service ), get_field( 'end', $service ) );
+
+					$title = get_field( 'title', $service );
+
+					if ( ! $title ) {
+						$title = $service->post_title;
+					}
+
+
+					$date     = date_i18n( 'j M. Y', strtotime( get_field( 'start', $service ) ) );
+					$time     = complex_time( get_field( 'start', $service ), get_field( 'end', $service ) );
 					$speakers = get_field( 'service_speaker', $service );
 
 					$txt = get_field_or_parent( 'description', $service, 'gc_servicecategory' );
