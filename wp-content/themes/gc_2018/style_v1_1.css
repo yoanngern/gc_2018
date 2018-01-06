@@ -2908,7 +2908,7 @@ ul.category_filter {
   max-width: 1700px;
   min-height: 60vh; }
   #gc_tv #content .platter article.content-page {
-    padding: 40px; }
+    padding: 40px 40px 10px; }
     #gc_tv #content .platter article.content-page .header {
       margin: 0 1.333%; }
     #gc_tv #content .platter article.content-page .speakers .speaker,
@@ -2991,7 +2991,7 @@ ul.category_filter {
               z-index: 0;
               background-color: #979797; }
   #gc_tv #content .platter .nav {
-    padding: 60px 40px 20px; }
+    padding: 10px 40px 20px; }
 
 @media only screen and (max-width: 1500px) {
   #gc_tv #content .platter article.content-page .speakers .speaker,
