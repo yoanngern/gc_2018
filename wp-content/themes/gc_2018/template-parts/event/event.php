@@ -140,7 +140,9 @@
                                 <h3><?php pll_e( 'Lieu' ) ?></h3>
                                 <p class="address"><?php echo $location; ?></p>
 
-                                <a target="_blank" class="direction" href=""><?php pll_e( 'Itinéraire' ) ?></a>
+								<?php if ( false ): ?>
+                                    <a target="_blank" class="direction" href=""><?php pll_e( 'Itinéraire' ) ?></a>
+								<?php endif; ?>
                             </div>
 						<?php endif; ?>
 
@@ -151,7 +153,8 @@
                                href="<?php echo $button_url ?>"><?php echo $button_label ?></a>
 						<?php endif; ?>
 
-						<?php if ( $location_obj != null ): ?>
+						<?php //if ( $location_obj != null ): ?>
+						<?php if ( false ): ?>
                             <a target="_blank" class="small" href=""><?php pll_e( 'ajouter au calendrier' ) ?></a>
 						<?php endif; ?>
 
