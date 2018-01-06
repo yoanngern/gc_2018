@@ -71,21 +71,23 @@ if ( isset( $_GET['category'] ) ) {
 
 					<?php if ( $nb_filter > 1 ): ?>
 
-                        <h1>Talks selection</h1>
+                        <h1><?php pll_e( 'Talks selection' ) ?></h1>
 
                         <ul>
 							<?php
 
 							if ( $city ) {
-								echo "<li>City: $city->post_title</li>";
+
+
+								echo "<li>" . pll__( 'City' ) . ": " . $city->post_title . "</li>";
 							}
 
 							if ( $speaker ) {
-								echo "<li>Speaker: $speaker->post_title</li>";
+								echo "<li>" . pll__( 'Speaker' ) . ": " . $speaker->post_title . "</li>";
 							}
 
 							if ( $category ) {
-								echo "<li>Category: $category->name</li>";
+								echo "<li>" . pll__( 'Category' ) . ": " . $category->name . "</li>";
 							}
 
 							?>
@@ -124,8 +126,8 @@ if ( isset( $_GET['category'] ) ) {
             </article>
 
             <nav class="nav">
-                <div class="previous"><?php previous_posts_link( pll__('Previous') ); ?></div>
-                <div class="next"><?php next_posts_link( pll__('Next') ); ?></div>
+                <div class="previous"><?php previous_posts_link( pll__( 'Previous' ) ); ?></div>
+                <div class="next"><?php next_posts_link( pll__( 'Next' ) ); ?></div>
             </nav>
         </div>
 

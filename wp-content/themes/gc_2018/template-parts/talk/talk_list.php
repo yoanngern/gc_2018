@@ -8,7 +8,7 @@
                 <h1><?php echo $section_title; ?></h1>
 
 				<?php if ( sizeof( $talks ) > 12 ): ?>
-                    <a href="<?php echo $section_more; ?>" class="more">More talks</a>
+                    <a href="<?php echo $section_more; ?>" class="more"><?php pll__('More talks') ?></a>
 				<?php endif; ?>
             </div>
         </div>

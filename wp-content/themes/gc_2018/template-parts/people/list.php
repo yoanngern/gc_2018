@@ -13,7 +13,7 @@
             <article class="content-page">
 
                 <section class="header">
-                    <h1>Speakers</h1>
+                    <h1><?php pll__('Speakers') ?></h1>
 
                 </section>
 
