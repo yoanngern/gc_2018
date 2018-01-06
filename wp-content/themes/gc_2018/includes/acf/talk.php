@@ -101,7 +101,7 @@ if( function_exists('acf_add_local_field_group') ):
 				),
 				'allow_null' => 0,
 				'multiple' => 1,
-				'return_format' => 'object',
+				'return_format' => 'id',
 				'ui' => 1,
 			),
 			array(

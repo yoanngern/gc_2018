@@ -66,7 +66,6 @@
 					$category = get_sub_field( 'category' );
 				}
 
-				//var_dump($speaker);
 
 				$talks = get_talks( 12, $city, $speaker, $category );
 

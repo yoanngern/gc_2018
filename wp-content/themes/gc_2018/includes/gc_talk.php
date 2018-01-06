@@ -169,7 +169,6 @@ function gc_talk_sort_column( $columns ) {
 add_filter( 'manage_edit-gc_talk_sortable_columns', 'gc_talk_sort_column' );
 
 
-
 /**
  * Update Service
  *
@@ -330,13 +329,36 @@ function videoType( $url ) {
  *
  * @return array
  */
-function get_talks( $nb = 12, $city = null, $speaker = null, $category = null, $exclude = null ) {
+function get_talks( $nb = 12, $city = null, $speakers = null, $category = null, $exclude = null ) {
 
 	$meta_query = array(
 		'relation' => 'AND',
 	);
 
 	$tax_query = array();
+
+	if ( $speakers !== null ) {
+
+		if ( ! is_array( $speakers ) ) {
+			$speakers = array( $speakers );
+		}
+
+		foreach ( $speakers as $speaker ) {
+
+			if ( $speaker instanceof WP_Post ) {
+				$speaker_id = strval( $speaker->ID );
+			} else {
+				$speaker_id = strval( $speaker );
+			}
+
+			$meta_query[] = array(
+				'key'     => 'speaker',
+				'compare' => 'LIKE',
+				'value'   => $speaker_id,
+			);
+		}
+
+	}
 
 
 	if ( $city !== null ) {
@@ -346,17 +368,6 @@ function get_talks( $nb = 12, $city = null, $speaker = null, $category = null, $
 			'compare' => '=',
 			'value'   => $city->ID,
 		);
-
-	}
-
-	if ( $speaker !== null ) {
-
-		$meta_query[] = array(
-			'key'     => 'speaker',
-			'compare' => 'LIKE',
-			'value'   => strval($speaker->ID),
-		);
-
 
 	}
 

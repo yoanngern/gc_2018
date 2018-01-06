@@ -13,8 +13,6 @@
 
 	$speakers = get_field( 'speaker', $_POST );
 
-	var_dump($speakers);
-
 	// use preg_match to find iframe src
 	preg_match( '/src="(.+?)"/', $video, $matches );
 	$src = $matches[1];
@@ -74,7 +72,9 @@
 
                 <div class="speakers">
 
-					<?php foreach ( $speakers as $speaker ):
+					<?php foreach ( $speakers as $speaker_id ):
+
+                        $speaker = get_post($speaker_id);
 
 						$name = get_field( 'firstname', $speaker ) . " " . get_field( 'lastname', $speaker );
 						$image = get_field( 'picture', $speaker );
