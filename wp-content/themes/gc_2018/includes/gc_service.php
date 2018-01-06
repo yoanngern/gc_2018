@@ -99,10 +99,17 @@ function update_service( $post_id ) {
 	}
 
 
+	$title = get_field('title', $post_id);
+
+	if(!$title) {
+		$title = get_the_terms( $post_id, array( 'taxonomy' => 'gc_servicecategory' ) )[0]->name;
+	}
+
+
 	$my_post = array(
 		'ID'         => $post_id,
 		//'post_title' => date_i18n( get_option( 'date_format' ), strtotime( get_field( 'start', $post_id ) ) ),
-		'post_title' => get_the_terms( $post_id, array( 'taxonomy' => 'gc_servicecategory' ) )[0]->name,
+		'post_title' => $title,
 	);
 
 
