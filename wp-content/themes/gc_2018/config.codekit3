@@ -3935,55 +3935,6 @@
 		"oF": 0,
 		"oS": 3
 		},
-	"\/template-parts\/blog\/blogroll.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/blog\/blogroll.php",
-		"oF": 0
-		},
-	"\/template-parts\/blog\/index.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/blog\/index.php",
-		"oF": 0
-		},
-	"\/template-parts\/blog\/list.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/blog\/list.php",
-		"oF": 0
-		},
-	"\/template-parts\/blog\/none.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/blog\/none.php",
-		"oF": 0
-		},
-	"\/template-parts\/blog\/related_posts.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/blog\/related_posts.php",
-		"oF": 0
-		},
-	"\/template-parts\/blog\/single.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/blog\/single.php",
-		"oF": 0
-		},
-	"\/template-parts\/blog\/slider.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/blog\/slider.php",
-		"oF": 0
-		},
 	"\/template-parts\/city\/city.php": {
 		"cB": 0,
 		"ft": 8192,

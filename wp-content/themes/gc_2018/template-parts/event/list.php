@@ -66,8 +66,7 @@
 	$events = $query->get_posts();
 
 
-
-	if ( $events[0] instanceof WP_Post && get_queried_object()->name == "gc_event") :
+	if ( $events[0] instanceof WP_Post && get_queried_object()->name == "gc_event" ) :
 
 		$event = $events[0];
 
@@ -316,8 +315,8 @@
 
 
             <nav class="nav">
-                <div class="previous"><?php previous_posts_link( 'Previous' ); ?></div>
-                <div class="next"><?php next_posts_link( 'Next' ); ?></div>
+                <div class="previous"><?php previous_posts_link( pll__('Previous') ); ?></div>
+                <div class="next"><?php next_posts_link( pll__('Next') ); ?></div>
             </nav>
 
 			<?php

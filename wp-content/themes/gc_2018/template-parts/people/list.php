@@ -36,8 +36,8 @@
             </article>
 
             <nav class="nav">
-                <div class="previous"><?php previous_posts_link( 'Previous' ); ?></div>
-                <div class="next"><?php next_posts_link( 'Next' ); ?></div>
+                <div class="previous"><?php previous_posts_link( pll__('Previous') ); ?></div>
+                <div class="next"><?php next_posts_link( pll__('Next') ); ?></div>
             </nav>
         </div>
 
