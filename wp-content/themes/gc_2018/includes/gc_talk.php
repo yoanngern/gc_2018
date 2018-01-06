@@ -132,16 +132,12 @@ function gc_talk_custom_column( $column ) {
 
 	} elseif ( $column == 'talk_speaker' ) {
 
-		$speakers = get_field( 'speaker', $post );
+		$speaker = get_field( 'speaker', $post );
 
 
-		if ( $speakers ) {
-			foreach ( $speakers as $speaker ) {
+		if ( $speaker ) {
 
-
-				echo $speaker->post_title . "<br/>";
-
-			}
+			echo $speaker->post_title . "<br/>";
 		} else {
 			echo "-";
 		}
@@ -167,6 +163,85 @@ function gc_talk_sort_column( $columns ) {
 }
 
 add_filter( 'manage_edit-gc_talk_sortable_columns', 'gc_talk_sort_column' );
+
+
+/**
+ * Order Talk
+ *
+ * @param $query
+ *
+ * @return mixed
+ */
+function gc_order_talk( $query ) {
+
+
+	if ( ! is_single() && isset( $query->query_vars['post_type'] ) && $query->query_vars['post_type'] == 'gc_talk' ) {
+
+
+		$query->set( 'orderby', 'meta_value' );
+		$query->set( 'meta_key', 'date' );
+		$query->set( 'order', 'desc' );
+		$query->set( 'posts_per_page', 36 );
+
+
+		if ( is_archive() ) {
+
+			$meta_query = array(
+				'relation' => 'AND',
+			);
+
+			$tax_query = array();
+
+			if ( isset( $_GET['speaker'] ) ) {
+
+				$meta_query[] = array(
+					'key'     => 'speaker',
+					'compare' => '=',
+					'value'   => $_GET['speaker'],
+				);
+
+			}
+
+
+			if ( isset( $_GET['city'] ) ) {
+
+				$meta_query[] = array(
+					'key'     => 'city',
+					'compare' => '=',
+					'value'   => $_GET['city'],
+				);
+
+			}
+
+
+			if ( isset( $_GET['category'] ) ) {
+
+				$tax_query[] = array(
+					'taxonomy' => 'gc_talkcategory',
+					'field'    => 'slug',
+					'terms'    => $_GET['category'],
+				);
+			}
+
+			$query->set( 'meta_query', $meta_query );
+
+			$query->set( 'tax_query', $tax_query );
+
+
+		}
+
+
+		return $query;
+
+
+	}
+
+	return $query;
+
+
+}
+
+add_action( 'pre_get_posts', 'gc_order_talk' );
 
 
 /**
@@ -329,7 +404,7 @@ function videoType( $url ) {
  *
  * @return array
  */
-function get_talks( $nb = 12, $city = null, $speakers = null, $category = null, $exclude = null ) {
+function get_talks( $nb = 12, $city = null, $speaker = null, $category = null, $exclude = null ) {
 
 	$meta_query = array(
 		'relation' => 'AND',
@@ -337,26 +412,14 @@ function get_talks( $nb = 12, $city = null, $speakers = null, $category = null, 
 
 	$tax_query = array();
 
-	if ( $speakers !== null ) {
 
-		if ( ! is_array( $speakers ) ) {
-			$speakers = array( $speakers );
-		}
+	if ( $speaker !== null ) {
 
-		foreach ( $speakers as $speaker ) {
-
-			if ( $speaker instanceof WP_Post ) {
-				$speaker_id = strval( $speaker->ID );
-			} else {
-				$speaker_id = strval( $speaker );
-			}
-
-			$meta_query[] = array(
-				'key'     => 'speaker',
-				'compare' => 'LIKE',
-				'value'   => $speaker_id,
-			);
-		}
+		$meta_query[] = array(
+			'key'     => 'speaker',
+			'compare' => '=',
+			'value'   => $speaker->ID,
+		);
 
 	}
 

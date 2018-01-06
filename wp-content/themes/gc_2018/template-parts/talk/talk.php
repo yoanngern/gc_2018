@@ -11,7 +11,7 @@
 	$city = get_field( 'city', $_POST );
 
 
-	$speakers = get_field( 'speaker', $_POST );
+	$speaker = get_field( 'speaker', $_POST );
 
 	// use preg_match to find iframe src
 	preg_match( '/src="(.+?)"/', $video, $matches );
@@ -70,37 +70,35 @@
                     </div>
                 </div>
 
-                <div class="speakers">
 
-					<?php foreach ( $speakers as $speaker_id ):
+				<?php
 
-                        $speaker = get_post($speaker_id);
+				if ( $speaker ):
 
-						$name = get_field( 'firstname', $speaker ) . " " . get_field( 'lastname', $speaker );
-						$image = get_field( 'picture', $speaker );
-						$bio = get_field( 'bio', $speaker );
-						$title = get_field( 'title', $speaker );
-						$link = esc_url( get_permalink( $speaker ) );
+					$name = get_field( 'firstname', $speaker ) . " " . get_field( 'lastname', $speaker );
+					$image = get_field( 'picture', $speaker );
+					$bio = get_field( 'bio', $speaker );
+					$title = get_field( 'title', $speaker );
+					$link = esc_url( get_permalink( $speaker ) );
 
-						?>
+					?>
 
-                        <div class="speaker">
-                            <a class="photo" href="<?php echo $link ?>">
-                                <div class="image">
-                                    <div class="bg"
-                                         style="background-image: url('<?php echo $image['sizes']['speaker'] ?>')"></div>
-                                </div>
-                            </a>
-                            <div class="pres">
-                                <h1><a href="<?php echo $link ?>"><?php echo $name ?></a></h1>
-                                <h2><?php echo $title ?></h2>
-                                <p><?php echo $bio; ?></p>
+                    <div class="talk_speaker">
+                        <a class="photo" href="<?php echo $link ?>">
+                            <div class="image">
+                                <div class="bg"
+                                     style="background-image: url('<?php echo $image['sizes']['speaker'] ?>')"></div>
                             </div>
-
+                        </a>
+                        <div class="pres">
+                            <h1><a href="<?php echo $link ?>"><?php echo $name ?></a></h1>
+                            <h2><?php echo $title ?></h2>
+                            <p><?php echo $bio; ?></p>
                         </div>
 
-					<?php endforeach; ?>
-                </div>
+                    </div>
+
+				<?php endif; ?>
 
 
             </article>
@@ -113,7 +111,7 @@
 
 			$exclude[] = get_the_ID();
 
-			$talks = get_talks( 12, null, $speakers[0], null, $exclude );
+			$talks = get_talks( 12, null, $speaker, null, $exclude );
 
 			$section_title = "d'autres vidéos";
 

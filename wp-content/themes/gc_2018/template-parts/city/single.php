@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php get_header('tv'); ?>
 
 <?php
 
@@ -8,7 +8,7 @@ if ( have_posts() ) :
 	while ( have_posts() ) :
 		the_post();
 
-		get_template_part( 'template-parts/city/city', 'single-gc_city' );
+		get_template_part( 'template-parts/city/city' );
 
 	endwhile; ?>
 
@@ -16,7 +16,7 @@ if ( have_posts() ) :
 
 else :
 
-	get_template_part( 'template-parts/event/none' );
+	get_template_part( 'template-parts/city/none' );
 
 endif;
 ?>

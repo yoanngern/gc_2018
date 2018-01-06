@@ -101,7 +101,6 @@ if( function_exists('acf_add_local_field_group') ):
 							'id' => '',
 						),
 						'choices' => array(
-							'last' => 'Last',
 							'city' => 'City',
 							'speaker' => 'Speaker',
 							'category' => 'Category',

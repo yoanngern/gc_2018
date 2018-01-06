@@ -12,8 +12,6 @@ if ( get_queried_object() instanceof WP_Post_Type ) {
 
 }
 
-
-
 if ( $post_type == "gc_event" ) {
 
 	get_template_part( 'template-parts/event/index' );

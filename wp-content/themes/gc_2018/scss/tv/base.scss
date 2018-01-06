@@ -1,9 +1,12 @@
-body.post-type-archive-gc_people,
-body.single-gc_people,
-body.page-template-page-tv_selection {
+#gc_tv {
 
     #content {
         .platter {
+            top: inherit;
+            margin: 50px auto;
+            max-width: 1700px;
+            min-height: 60vh;
+
             article.content-page {
                 padding: 40px;
 
@@ -171,6 +174,7 @@ body.page-template-page-tv_selection {
     @media only screen and (max-width: 900px) {
         #content {
             .platter {
+
                 article.content-page {
                     padding: 10px;
 

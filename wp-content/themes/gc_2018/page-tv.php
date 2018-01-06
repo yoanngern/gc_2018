@@ -1,6 +1,6 @@
 <?php /* Template Name: TV */ ?>
 
-<?php get_header(); ?>
+<?php get_header( 'tv' ); ?>
 
 <section id="content" class="tv">
 
@@ -46,24 +46,38 @@
 				$speaker  = null;
 				$category = null;
 
-				if ( in_array( 'last', $type ) ) {
+
+				$link = get_post_type_archive_link( 'gc_talk' );
+
+
+
+				if ( get_sub_field( 'speaker' ) ) {
+
+					$speaker = get_sub_field( 'speaker' );
+
+					$link = add_query_arg( array(
+						'speaker' => $speaker->ID,
+					), $link );
 
 				}
 
-				if ( in_array( 'city', $type ) ) {
+				if ( get_sub_field( 'city' ) ) {
 
 					$city = get_sub_field( 'city' );
 
+					$link = add_query_arg( array(
+						'city' => $city->ID,
+					), $link );
+
 				}
 
-				if ( in_array( 'speaker', $type ) ) {
-
-					$speaker = get_sub_field( 'speaker' );
-				}
-
-				if ( in_array( 'category', $type ) ) {
+				if ( get_sub_field( 'category' ) ) {
 
 					$category = get_sub_field( 'category' );
+
+					$link = add_query_arg( array(
+						'category' => $category->slug,
+					), $link );
 				}
 
 
@@ -72,9 +86,9 @@
 
 				$section_title = get_sub_field( 'title' );
 
-
 				set_query_var( 'talks', $talks );
 				set_query_var( 'section_title', $section_title );
+				set_query_var( 'section_more', $link );
 
 				get_template_part( 'template-parts/talk/talk_list' );
 

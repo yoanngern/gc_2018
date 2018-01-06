@@ -2902,19 +2902,225 @@ ul.category_filter {
         text-align: center;
         padding-top: 4px; }
 
-#content.tv section.talk_list {
+#gc_tv #content .platter {
+  top: inherit;
+  margin: 50px auto;
+  max-width: 1700px;
+  min-height: 60vh; }
+  #gc_tv #content .platter article.content-page {
+    padding: 40px; }
+    #gc_tv #content .platter article.content-page .header {
+      margin: 0 1.333%; }
+    #gc_tv #content .platter article.content-page .speakers .speaker,
+    #gc_tv #content .platter article.content-page .talks .talk_item {
+      width: 16.666%;
+      display: inline-block;
+      margin-bottom: 40px;
+      vertical-align: top; }
+    #gc_tv #content .platter article.content-page .speakers {
+      display: table;
+      width: 100%; }
+      #gc_tv #content .platter article.content-page .speakers .speaker a {
+        margin: 0 8%;
+        display: block; }
+        #gc_tv #content .platter article.content-page .speakers .speaker a .image {
+          padding-bottom: 70%;
+          width: 100%;
+          height: 0;
+          position: relative; }
+          #gc_tv #content .platter article.content-page .speakers .speaker a .image .bg {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 0;
+            background-color: #979797; }
+        #gc_tv #content .platter article.content-page .speakers .speaker a .txt {
+          margin: 10px 0; }
+          #gc_tv #content .platter article.content-page .speakers .speaker a .txt h2 {
+            margin: 0;
+            font-size: 1.1em;
+            line-height: 1.2em;
+            letter-spacing: 0.03em;
+            font-family: "Radikal-Bold", "Radikal", sans-serif;
+            color: #333333;
+            text-transform: uppercase;
+            padding-bottom: 5px; }
+          #gc_tv #content .platter article.content-page .speakers .speaker a .txt h3 {
+            margin: 0;
+            font-size: 0.85em;
+            line-height: 1.1em;
+            letter-spacing: 0.01em;
+            font-family: "Radikal", sans-serif;
+            color: #545454;
+            text-transform: inherit; }
+    #gc_tv #content .platter article.content-page .talks {
+      display: table;
+      width: 100%; }
+      #gc_tv #content .platter article.content-page .talks .talk_item {
+        display: inline-block; }
+        #gc_tv #content .platter article.content-page .talks .talk_item a {
+          margin: 0 8%; }
+    #gc_tv #content .platter article.content-page .selection {
+      display: table;
+      width: 100%; }
+      #gc_tv #content .platter article.content-page .selection .item {
+        width: 33.333%;
+        display: inline-block;
+        margin-bottom: 40px;
+        vertical-align: top; }
+        #gc_tv #content .platter article.content-page .selection .item a {
+          margin: 0 5%;
+          display: block; }
+          #gc_tv #content .platter article.content-page .selection .item a .image {
+            padding-bottom: 70%;
+            width: 100%;
+            height: 0;
+            position: relative; }
+            #gc_tv #content .platter article.content-page .selection .item a .image .bg {
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: cover;
+              display: block;
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 0;
+              background-color: #979797; }
+  #gc_tv #content .platter .nav {
+    padding: 60px 40px 20px; }
+
+@media only screen and (max-width: 1500px) {
+  #gc_tv #content .platter article.content-page .speakers .speaker,
+  #gc_tv #content .platter article.content-page .talks .talk_item {
+    width: 20%; } }
+
+@media only screen and (max-width: 1200px) {
+  #gc_tv #content .platter article.content-page .speakers .speaker,
+  #gc_tv #content .platter article.content-page .talks .talk_item {
+    width: 25%; }
+  #gc_tv #content .platter article.content-page .selection .item {
+    width: 50%; } }
+
+@media only screen and (max-width: 900px) {
+  #gc_tv #content .platter article.content-page {
+    padding: 10px; }
+    #gc_tv #content .platter article.content-page .header {
+      margin: 0 1.9%; }
+    #gc_tv #content .platter article.content-page .speakers .speaker,
+    #gc_tv #content .platter article.content-page .talks .talk_item {
+      width: 33%; }
+      #gc_tv #content .platter article.content-page .speakers .speaker a,
+      #gc_tv #content .platter article.content-page .talks .talk_item a {
+        margin: 0 6%; } }
+
+@media only screen and (max-width: 680px) {
+  #gc_tv #content .platter article.content-page {
+    padding: 5px; }
+    #gc_tv #content .platter article.content-page .header {
+      margin: 0 2.9%; }
+    #gc_tv #content .platter article.content-page .speakers .speaker,
+    #gc_tv #content .platter article.content-page .talks .talk_item {
+      width: 50%; }
+      #gc_tv #content .platter article.content-page .speakers .speaker a,
+      #gc_tv #content .platter article.content-page .talks .talk_item a {
+        margin: 0 6%; }
+    #gc_tv #content .platter article.content-page .selection .item {
+      width: 100%; } }
+
+#gc_tv > header {
+  background-color: #EEEEEE;
+  top: inherit;
+  left: inherit;
+  right: inherit;
+  bottom: inherit;
+  width: inherit;
+  padding: 0 20px; }
+  #gc_tv > header > div {
+    margin: 0 auto; }
+  #gc_tv > header #simple_logo {
+    display: none;
+    margin: 0 auto; }
+  #gc_tv > header #logo_mini,
+  #gc_tv > header div.top-nav,
+  #gc_tv > header #burger {
+    display: inline-block;
+    position: relative;
+    top: inherit;
+    margin: 0; }
+  #gc_tv > header #logo_mini {
+    margin: 10px 5px; }
+    #gc_tv > header #logo_mini span {
+      color: #333333; }
+    #gc_tv > header #logo_mini svg {
+      fill: #333333; }
+  #gc_tv > header #burger {
+    float: right;
+    margin: 13px 5px; }
+    #gc_tv > header #burger span {
+      background-color: #333333; }
+  #gc_tv > header div.top-nav {
+    float: right;
+    margin: 5px 30px 0 0; }
+    #gc_tv > header div.top-nav ul li a {
+      color: #333333; }
+      #gc_tv > header div.top-nav ul li a::before, #gc_tv > header div.top-nav ul li a::after {
+        background-color: #333333; }
+
+@media only screen and (max-width: 900px) {
+  #gc_tv > header div.top-nav {
+    display: none; } }
+
+@media only screen and (max-width: 800px) {
+  #gc_tv > header {
+    padding: 0 10px; } }
+
+#gc_tv.page-template-page-tv #content .platter {
+  top: -15vh;
+  margin: 0 20px -10vh;
+  max-width: inherit;
+  min-height: inherit; }
+  @media only screen and (max-width: 800px) {
+    #gc_tv.page-template-page-tv #content .platter {
+      margin: 0;
+      top: inherit; } }
+
+#gc_tv section.talk_list {
   padding: 20px 15px 20px; }
-  #content.tv section.talk_list .header {
+  #gc_tv section.talk_list .header {
     padding: 3px; }
-    #content.tv section.talk_list .header h1 {
-      font-family: "Radikal-Black", "Radikal-Bold", "Radikal", sans-serif;
-      text-transform: uppercase;
-      font-size: 1.4em;
-      line-height: 1.4em;
-      letter-spacing: 0.07em; }
-  #content.tv section.talk_list .list_container {
+    #gc_tv section.talk_list .header > div {
+      position: relative; }
+      #gc_tv section.talk_list .header > div h1 {
+        font-family: "Radikal-Black", "Radikal-Bold", "Radikal", sans-serif;
+        text-transform: uppercase;
+        font-size: 1.4em;
+        line-height: 1.4em;
+        letter-spacing: 0.07em;
+        display: inline-block;
+        margin-right: 10px; }
+      #gc_tv section.talk_list .header > div a.more {
+        color: #777777;
+        text-decoration: none;
+        display: inline-block;
+        padding-right: 10px;
+        line-height: 1.4em;
+        white-space: nowrap;
+        transition: all 200ms ease; }
+        #gc_tv section.talk_list .header > div a.more::after {
+          content: ">";
+          color: #777777;
+          padding-left: 5px; }
+        #gc_tv section.talk_list .header > div a.more:hover {
+          color: #333333; }
+          #gc_tv section.talk_list .header > div a.more:hover::after {
+            color: #333333; }
+  #gc_tv section.talk_list .list_container {
     overflow-y: hidden; }
-    #content.tv section.talk_list .list_container .talks {
+    #gc_tv section.talk_list .list_container .talks {
       vertical-align: top;
       scroll-behavior: smooth;
       overflow-x: scroll;
@@ -2923,136 +3129,19 @@ ul.category_filter {
       overflow-scrolling: touch;
       text-align: left;
       white-space: nowrap; }
+  @media only screen and (max-width: 680px) {
+    #gc_tv section.talk_list {
+      padding: 20px 0 0 10px; }
+      #gc_tv section.talk_list .header {
+        padding: 3px 3px 3px 0; }
+      #gc_tv section.talk_list .list_container .talks {
+        padding-right: 10px; } }
 
-body.single-gc_talk > header,
-body.post-type-archive-gc_people > header,
-body.single-gc_people > header,
-body.page-template-page-tv_selection > header {
-  background-color: #EEEEEE;
-  top: inherit;
-  left: inherit;
-  right: inherit;
-  bottom: inherit;
-  width: inherit;
-  padding: 0 10px; }
-  body.single-gc_talk > header > div,
-  body.post-type-archive-gc_people > header > div,
-  body.single-gc_people > header > div,
-  body.page-template-page-tv_selection > header > div {
-    max-width: 1700px;
-    margin: 0 auto; }
-  body.single-gc_talk > header #simple_logo,
-  body.post-type-archive-gc_people > header #simple_logo,
-  body.single-gc_people > header #simple_logo,
-  body.page-template-page-tv_selection > header #simple_logo {
-    display: none;
-    margin: 0 auto; }
-  body.single-gc_talk > header #logo_mini,
-  body.single-gc_talk > header div.top-nav,
-  body.single-gc_talk > header #burger,
-  body.post-type-archive-gc_people > header #logo_mini,
-  body.post-type-archive-gc_people > header div.top-nav,
-  body.post-type-archive-gc_people > header #burger,
-  body.single-gc_people > header #logo_mini,
-  body.single-gc_people > header div.top-nav,
-  body.single-gc_people > header #burger,
-  body.page-template-page-tv_selection > header #logo_mini,
-  body.page-template-page-tv_selection > header div.top-nav,
-  body.page-template-page-tv_selection > header #burger {
-    display: inline-block;
-    position: relative;
-    top: inherit;
-    margin: 0; }
-  body.single-gc_talk > header #logo_mini,
-  body.post-type-archive-gc_people > header #logo_mini,
-  body.single-gc_people > header #logo_mini,
-  body.page-template-page-tv_selection > header #logo_mini {
-    margin: 10px 5px; }
-    body.single-gc_talk > header #logo_mini span,
-    body.post-type-archive-gc_people > header #logo_mini span,
-    body.single-gc_people > header #logo_mini span,
-    body.page-template-page-tv_selection > header #logo_mini span {
-      color: #333333; }
-    body.single-gc_talk > header #logo_mini svg,
-    body.post-type-archive-gc_people > header #logo_mini svg,
-    body.single-gc_people > header #logo_mini svg,
-    body.page-template-page-tv_selection > header #logo_mini svg {
-      fill: #333333; }
-  body.single-gc_talk > header #burger,
-  body.post-type-archive-gc_people > header #burger,
-  body.single-gc_people > header #burger,
-  body.page-template-page-tv_selection > header #burger {
-    float: right;
-    margin: 13px 5px; }
-    body.single-gc_talk > header #burger span,
-    body.post-type-archive-gc_people > header #burger span,
-    body.single-gc_people > header #burger span,
-    body.page-template-page-tv_selection > header #burger span {
-      background-color: #333333; }
-  body.single-gc_talk > header div.top-nav,
-  body.post-type-archive-gc_people > header div.top-nav,
-  body.single-gc_people > header div.top-nav,
-  body.page-template-page-tv_selection > header div.top-nav {
-    float: right;
-    margin: 5px 30px 0 0; }
-    body.single-gc_talk > header div.top-nav ul li a,
-    body.post-type-archive-gc_people > header div.top-nav ul li a,
-    body.single-gc_people > header div.top-nav ul li a,
-    body.page-template-page-tv_selection > header div.top-nav ul li a {
-      color: #333333; }
-      body.single-gc_talk > header div.top-nav ul li a::before, body.single-gc_talk > header div.top-nav ul li a::after,
-      body.post-type-archive-gc_people > header div.top-nav ul li a::before,
-      body.post-type-archive-gc_people > header div.top-nav ul li a::after,
-      body.single-gc_people > header div.top-nav ul li a::before,
-      body.single-gc_people > header div.top-nav ul li a::after,
-      body.page-template-page-tv_selection > header div.top-nav ul li a::before,
-      body.page-template-page-tv_selection > header div.top-nav ul li a::after {
-        background-color: #333333; }
-
-body.single-gc_talk #content .platter,
-body.post-type-archive-gc_people #content .platter,
-body.single-gc_people #content .platter,
-body.page-template-page-tv_selection #content .platter {
-  top: inherit;
-  margin: 50px auto;
-  max-width: 1700px;
-  min-height: 60vh; }
-
-@media only screen and (max-width: 900px) {
-  body.single-gc_talk > header div.top-nav,
-  body.post-type-archive-gc_people > header div.top-nav,
-  body.single-gc_people > header div.top-nav,
-  body.page-template-page-tv_selection > header div.top-nav {
-    display: none; }
-  body.single-gc_talk #content.tv .platter,
-  body.post-type-archive-gc_people #content.tv .platter,
-  body.single-gc_people #content.tv .platter,
-  body.page-template-page-tv_selection #content.tv .platter {
-    display: block;
-    margin: 0; }
-    body.single-gc_talk #content.tv .platter main,
-    body.single-gc_talk #content.tv .platter aside,
-    body.post-type-archive-gc_people #content.tv .platter main,
-    body.post-type-archive-gc_people #content.tv .platter aside,
-    body.single-gc_people #content.tv .platter main,
-    body.single-gc_people #content.tv .platter aside,
-    body.page-template-page-tv_selection #content.tv .platter main,
-    body.page-template-page-tv_selection #content.tv .platter aside {
-      width: 100%; } }
-
-body.single-gc_talk #content .platter .talk_item,
-body.post-type-archive-gc_people #content .platter .talk_item,
-body.single-gc_people #content .platter .talk_item,
-body.page-template-page-tv_selection #content .platter .talk_item,
-body.page-template-page-tv #content .platter .talk_item {
+#gc_tv .talk_item {
   display: inline-block;
   width: 15.7%;
   vertical-align: top; }
-  body.single-gc_talk #content .platter .talk_item .talk_container,
-  body.post-type-archive-gc_people #content .platter .talk_item .talk_container,
-  body.single-gc_people #content .platter .talk_item .talk_container,
-  body.page-template-page-tv_selection #content .platter .talk_item .talk_container,
-  body.page-template-page-tv #content .platter .talk_item .talk_container {
+  #gc_tv .talk_item .talk_container {
     background-color: #FFFFFF;
     margin: 0 0.4% 15px;
     border: 1px solid #EEEEEE;
@@ -3064,20 +3153,12 @@ body.page-template-page-tv #content .platter .talk_item {
     white-space: normal;
     text-decoration: none;
     display: block; }
-    body.single-gc_talk #content .platter .talk_item .talk_container .image,
-    body.post-type-archive-gc_people #content .platter .talk_item .talk_container .image,
-    body.single-gc_people #content .platter .talk_item .talk_container .image,
-    body.page-template-page-tv_selection #content .platter .talk_item .talk_container .image,
-    body.page-template-page-tv #content .platter .talk_item .talk_container .image {
+    #gc_tv .talk_item .talk_container .image {
       width: 100%;
       height: 0;
       padding-bottom: 56.2%;
       position: relative; }
-      body.single-gc_talk #content .platter .talk_item .talk_container .image .bg,
-      body.post-type-archive-gc_people #content .platter .talk_item .talk_container .image .bg,
-      body.single-gc_people #content .platter .talk_item .talk_container .image .bg,
-      body.page-template-page-tv_selection #content .platter .talk_item .talk_container .image .bg,
-      body.page-template-page-tv #content .platter .talk_item .talk_container .image .bg {
+      #gc_tv .talk_item .talk_container .image .bg {
         width: 100%;
         height: 100%;
         position: absolute;
@@ -3085,18 +3166,10 @@ body.page-template-page-tv #content .platter .talk_item {
         background-size: cover;
         background-position: center;
         background-color: #d7d7d7; }
-    body.single-gc_talk #content .platter .talk_item .talk_container .text,
-    body.post-type-archive-gc_people #content .platter .talk_item .talk_container .text,
-    body.single-gc_people #content .platter .talk_item .talk_container .text,
-    body.page-template-page-tv_selection #content .platter .talk_item .talk_container .text,
-    body.page-template-page-tv #content .platter .talk_item .talk_container .text {
+    #gc_tv .talk_item .talk_container .text {
       display: block;
       padding: 10px; }
-      body.single-gc_talk #content .platter .talk_item .talk_container .text h1,
-      body.post-type-archive-gc_people #content .platter .talk_item .talk_container .text h1,
-      body.single-gc_people #content .platter .talk_item .talk_container .text h1,
-      body.page-template-page-tv_selection #content .platter .talk_item .talk_container .text h1,
-      body.page-template-page-tv #content .platter .talk_item .talk_container .text h1 {
+      #gc_tv .talk_item .talk_container .text h1 {
         padding-bottom: 5px;
         line-height: 1.3em;
         font-size: 1em;
@@ -3105,11 +3178,7 @@ body.page-template-page-tv #content .platter .talk_item {
         color: #545454;
         text-transform: inherit;
         margin: 0; }
-      body.single-gc_talk #content .platter .talk_item .talk_container .text time,
-      body.post-type-archive-gc_people #content .platter .talk_item .talk_container .text time,
-      body.single-gc_people #content .platter .talk_item .talk_container .text time,
-      body.page-template-page-tv_selection #content .platter .talk_item .talk_container .text time,
-      body.page-template-page-tv #content .platter .talk_item .talk_container .text time {
+      #gc_tv .talk_item .talk_container .text time {
         margin: 0;
         line-height: 1em;
         font-size: 0.8em;
@@ -3117,323 +3186,66 @@ body.page-template-page-tv #content .platter .talk_item {
         font-family: "Radikal", sans-serif;
         color: #545454;
         text-transform: inherit; }
-
-@media only screen and (max-width: 1600px) {
-  body.single-gc_talk #content .platter .talk_item,
-  body.post-type-archive-gc_people #content .platter .talk_item,
-  body.single-gc_people #content .platter .talk_item,
-  body.page-template-page-tv_selection #content .platter .talk_item,
-  body.page-template-page-tv #content .platter .talk_item {
-    width: 18.8%; } }
-
-@media only screen and (max-width: 1300px) {
-  body.single-gc_talk #content .platter .talk_item,
-  body.post-type-archive-gc_people #content .platter .talk_item,
-  body.single-gc_people #content .platter .talk_item,
-  body.page-template-page-tv_selection #content .platter .talk_item,
-  body.page-template-page-tv #content .platter .talk_item {
-    width: 23%; } }
-
-@media only screen and (max-width: 900px) {
-  body.single-gc_talk #content.tv .platter,
-  body.post-type-archive-gc_people #content.tv .platter,
-  body.single-gc_people #content.tv .platter,
-  body.page-template-page-tv_selection #content.tv .platter,
-  body.page-template-page-tv #content.tv .platter {
-    display: block;
-    margin: 0; }
-    body.single-gc_talk #content.tv .platter .talk_item,
-    body.post-type-archive-gc_people #content.tv .platter .talk_item,
-    body.single-gc_people #content.tv .platter .talk_item,
-    body.page-template-page-tv_selection #content.tv .platter .talk_item,
-    body.page-template-page-tv #content.tv .platter .talk_item {
+  @media only screen and (max-width: 1600px) {
+    #gc_tv .talk_item {
+      width: 18.8%; } }
+  @media only screen and (max-width: 1300px) {
+    #gc_tv .talk_item {
+      width: 23%; } }
+  @media only screen and (max-width: 900px) {
+    #gc_tv .talk_item {
       width: 30%; } }
+  @media only screen and (max-width: 680px) {
+    #gc_tv .talk_item {
+      width: 43%; } }
 
-@media only screen and (max-width: 680px) {
-  body.single-gc_talk #content.tv section.talk_list,
-  body.post-type-archive-gc_people #content.tv section.talk_list,
-  body.single-gc_people #content.tv section.talk_list,
-  body.page-template-page-tv_selection #content.tv section.talk_list,
-  body.page-template-page-tv #content.tv section.talk_list {
-    padding: 20px 0 0 10px; }
-    body.single-gc_talk #content.tv section.talk_list .header,
-    body.post-type-archive-gc_people #content.tv section.talk_list .header,
-    body.single-gc_people #content.tv section.talk_list .header,
-    body.page-template-page-tv_selection #content.tv section.talk_list .header,
-    body.page-template-page-tv #content.tv section.talk_list .header {
-      padding: 3px 3px 3px 0; }
-    body.single-gc_talk #content.tv section.talk_list .list_container .talks,
-    body.post-type-archive-gc_people #content.tv section.talk_list .list_container .talks,
-    body.single-gc_people #content.tv section.talk_list .list_container .talks,
-    body.page-template-page-tv_selection #content.tv section.talk_list .list_container .talks,
-    body.page-template-page-tv #content.tv section.talk_list .list_container .talks {
-      padding-right: 10px; }
-  body.single-gc_talk #content.tv .platter .talk_item,
-  body.post-type-archive-gc_people #content.tv .platter .talk_item,
-  body.single-gc_people #content.tv .platter .talk_item,
-  body.page-template-page-tv_selection #content.tv .platter .talk_item,
-  body.page-template-page-tv #content.tv .platter .talk_item {
-    width: 43%; } }
-
-body.single-gc_talk #content .platter {
+#gc_tv.single-gc_talk #content .platter {
   display: flex; }
-  body.single-gc_talk #content .platter main,
-  body.single-gc_talk #content .platter aside {
+  #gc_tv.single-gc_talk #content .platter main,
+  #gc_tv.single-gc_talk #content .platter aside {
     width: 66.666%;
     display: inline-block;
     vertical-align: top; }
-  body.single-gc_talk #content .platter aside {
+  #gc_tv.single-gc_talk #content .platter aside {
     width: 33.333%; }
-  body.single-gc_talk #content .platter article.content-page {
+  #gc_tv.single-gc_talk #content .platter article.content-page {
     padding: 0 0 20px 0; }
-    body.single-gc_talk #content .platter article.content-page div.video {
+    #gc_tv.single-gc_talk #content .platter article.content-page div.video {
       width: 100%;
       overflow: auto;
       display: block; }
-      body.single-gc_talk #content .platter article.content-page div.video section.player {
+      #gc_tv.single-gc_talk #content .platter article.content-page div.video section.player {
         max-width: 100% !important; }
-        body.single-gc_talk #content .platter article.content-page div.video section.player div {
+        #gc_tv.single-gc_talk #content .platter article.content-page div.video section.player div {
           width: 100% !important; }
-          body.single-gc_talk #content .platter article.content-page div.video section.player div span {
+          #gc_tv.single-gc_talk #content .platter article.content-page div.video section.player div span {
             width: 100% !important; }
-            body.single-gc_talk #content .platter article.content-page div.video section.player div span iframe {
+            #gc_tv.single-gc_talk #content .platter article.content-page div.video section.player div span iframe {
               width: 100% !important; }
-    body.single-gc_talk #content .platter article.content-page div.talk_desc {
+    #gc_tv.single-gc_talk #content .platter article.content-page div.talk_desc {
       padding: 10px 20px; }
-      body.single-gc_talk #content .platter article.content-page div.talk_desc h1 {
+      #gc_tv.single-gc_talk #content .platter article.content-page div.talk_desc h1 {
         font-size: 1.4em;
         letter-spacing: 0.08em;
         margin: 10px 0; }
-      body.single-gc_talk #content .platter article.content-page div.talk_desc div.more {
+      #gc_tv.single-gc_talk #content .platter article.content-page div.talk_desc div.more {
         margin: 20px 0; }
-    body.single-gc_talk #content .platter article.content-page div.speakers {
-      padding: 10px 20px; }
-      body.single-gc_talk #content .platter article.content-page div.speakers .speaker {
-        margin-bottom: 30px;
-        display: flex;
-        width: 100%; }
-        body.single-gc_talk #content .platter article.content-page div.speakers .speaker .photo {
-          width: 20%;
-          display: inline-block;
-          vertical-align: top;
-          margin: 0 20px 0 0;
-          min-width: 160px; }
-          body.single-gc_talk #content .platter article.content-page div.speakers .speaker .photo .image {
-            padding-bottom: 70%;
-            width: 100%;
-            height: 0;
-            position: relative; }
-            body.single-gc_talk #content .platter article.content-page div.speakers .speaker .photo .image .bg {
-              background-position: center;
-              background-repeat: no-repeat;
-              background-size: cover;
-              display: block;
-              width: 100%;
-              height: 100%;
-              position: absolute;
-              z-index: 0;
-              background-color: #979797; }
-        body.single-gc_talk #content .platter article.content-page div.speakers .speaker .pres {
-          display: inline-block;
-          vertical-align: top;
-          width: 80%;
-          max-width: 700px; }
-          body.single-gc_talk #content .platter article.content-page div.speakers .speaker .pres h1 {
-            font-size: 1.4em;
-            letter-spacing: 0.06em;
-            margin: 0 0 10px; }
-            body.single-gc_talk #content .platter article.content-page div.speakers .speaker .pres h1 a {
-              color: #333333;
-              display: inline-block;
-              position: relative; }
-              body.single-gc_talk #content .platter article.content-page div.speakers .speaker .pres h1 a:hover::before {
-                width: 100%;
-                transition: all 0ms ease-in-out 150ms; }
-              body.single-gc_talk #content .platter article.content-page div.speakers .speaker .pres h1 a:hover::after {
-                width: 100%;
-                transition: all 150ms ease-in-out 0s; }
-              body.single-gc_talk #content .platter article.content-page div.speakers .speaker .pres h1 a::after, body.single-gc_talk #content .platter article.content-page div.speakers .speaker .pres h1 a::before {
-                position: absolute;
-                content: "";
-                height: 2px;
-                background-color: #333333;
-                display: block;
-                bottom: 0;
-                width: 0; }
-              body.single-gc_talk #content .platter article.content-page div.speakers .speaker .pres h1 a::before {
-                right: 0;
-                transition: all 150ms ease-in-out 150ms; }
-              body.single-gc_talk #content .platter article.content-page div.speakers .speaker .pres h1 a::after {
-                left: 0;
-                transition: all 0ms ease-in-out 0s; }
-          body.single-gc_talk #content .platter article.content-page div.speakers .speaker .pres h2 {
-            font-size: 1.1em;
-            letter-spacing: 0.03em;
-            margin: 10px 0; }
-          body.single-gc_talk #content .platter article.content-page div.speakers .speaker .pres p {
-            font-size: 0.9em;
-            font-family: "Radikal", sans-serif;
-            letter-spacing: 0.02em;
-            margin: 0; }
-
-@media only screen and (max-width: 1800px) {
-  body.single-gc_talk #content .platter {
-    margin-top: 20px; } }
-
-@media only screen and (max-width: 1700px) {
-  body.single-gc_talk #content .platter {
-    margin-top: 0; } }
-
-@media only screen and (max-width: 680px) {
-  body.single-gc_talk #content .platter article.content-page div.speakers .speaker {
-    display: block; }
-    body.single-gc_talk #content .platter article.content-page div.speakers .speaker .photo {
-      display: block; }
-    body.single-gc_talk #content .platter article.content-page div.speakers .speaker .pres {
-      width: 100%;
-      margin-top: 20px; } }
-
-@media only screen and (max-width: 480px) {
-  body.single-gc_talk #content .platter {
-    display: block;
-    margin: 0; }
-    body.single-gc_talk #content .platter main,
-    body.single-gc_talk #content .platter aside {
-      width: 100%; }
-    body.single-gc_talk #content .platter article.content-page div.talk_desc {
-      padding: 10px; } }
-
-@media only screen and (min-width: 901px) {
-  body.single-gc_talk #content.tv section.talk_list .list_container {
-    overflow-x: hidden;
-    overflow-y: inherit; }
-    body.single-gc_talk #content.tv section.talk_list .list_container .talks {
-      overflow-x: hidden;
-      overflow-y: scroll;
-      white-space: normal;
-      display: table;
-      width: 100%; }
-      body.single-gc_talk #content.tv section.talk_list .list_container .talks .talk_item {
-        width: 100%; }
-        body.single-gc_talk #content.tv section.talk_list .list_container .talks .talk_item .talk_container {
-          margin: 0 1.5% 15px; } }
-
-@media only screen and (min-width: 1100px) {
-  body.single-gc_talk #content.tv section.talk_list .list_container .talks .talk_item {
-    width: 50%; } }
-
-body.post-type-archive-gc_people #content .platter article.content-page,
-body.single-gc_people #content .platter article.content-page,
-body.page-template-page-tv_selection #content .platter article.content-page {
-  padding: 40px; }
-  body.post-type-archive-gc_people #content .platter article.content-page .header,
-  body.single-gc_people #content .platter article.content-page .header,
-  body.page-template-page-tv_selection #content .platter article.content-page .header {
-    margin: 0 1.333%; }
-  body.post-type-archive-gc_people #content .platter article.content-page .speakers .speaker,
-  body.post-type-archive-gc_people #content .platter article.content-page .talks .talk_item,
-  body.single-gc_people #content .platter article.content-page .speakers .speaker,
-  body.single-gc_people #content .platter article.content-page .talks .talk_item,
-  body.page-template-page-tv_selection #content .platter article.content-page .speakers .speaker,
-  body.page-template-page-tv_selection #content .platter article.content-page .talks .talk_item {
-    width: 16.666%;
-    display: inline-block;
-    margin-bottom: 40px;
-    vertical-align: top; }
-  body.post-type-archive-gc_people #content .platter article.content-page .speakers,
-  body.single-gc_people #content .platter article.content-page .speakers,
-  body.page-template-page-tv_selection #content .platter article.content-page .speakers {
-    display: table;
-    width: 100%; }
-    body.post-type-archive-gc_people #content .platter article.content-page .speakers .speaker a,
-    body.single-gc_people #content .platter article.content-page .speakers .speaker a,
-    body.page-template-page-tv_selection #content .platter article.content-page .speakers .speaker a {
-      margin: 0 8%;
-      display: block; }
-      body.post-type-archive-gc_people #content .platter article.content-page .speakers .speaker a .image,
-      body.single-gc_people #content .platter article.content-page .speakers .speaker a .image,
-      body.page-template-page-tv_selection #content .platter article.content-page .speakers .speaker a .image {
-        padding-bottom: 70%;
-        width: 100%;
-        height: 0;
-        position: relative; }
-        body.post-type-archive-gc_people #content .platter article.content-page .speakers .speaker a .image .bg,
-        body.single-gc_people #content .platter article.content-page .speakers .speaker a .image .bg,
-        body.page-template-page-tv_selection #content .platter article.content-page .speakers .speaker a .image .bg {
-          background-position: center;
-          background-repeat: no-repeat;
-          background-size: cover;
-          display: block;
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          z-index: 0;
-          background-color: #979797; }
-      body.post-type-archive-gc_people #content .platter article.content-page .speakers .speaker a .txt,
-      body.single-gc_people #content .platter article.content-page .speakers .speaker a .txt,
-      body.page-template-page-tv_selection #content .platter article.content-page .speakers .speaker a .txt {
-        margin: 10px 0; }
-        body.post-type-archive-gc_people #content .platter article.content-page .speakers .speaker a .txt h2,
-        body.single-gc_people #content .platter article.content-page .speakers .speaker a .txt h2,
-        body.page-template-page-tv_selection #content .platter article.content-page .speakers .speaker a .txt h2 {
-          margin: 0;
-          font-size: 1.1em;
-          line-height: 1.2em;
-          letter-spacing: 0.03em;
-          font-family: "Radikal-Bold", "Radikal", sans-serif;
-          color: #333333;
-          text-transform: uppercase;
-          padding-bottom: 5px; }
-        body.post-type-archive-gc_people #content .platter article.content-page .speakers .speaker a .txt h3,
-        body.single-gc_people #content .platter article.content-page .speakers .speaker a .txt h3,
-        body.page-template-page-tv_selection #content .platter article.content-page .speakers .speaker a .txt h3 {
-          margin: 0;
-          font-size: 0.85em;
-          line-height: 1.1em;
-          letter-spacing: 0.01em;
-          font-family: "Radikal", sans-serif;
-          color: #545454;
-          text-transform: inherit; }
-  body.post-type-archive-gc_people #content .platter article.content-page .talks,
-  body.single-gc_people #content .platter article.content-page .talks,
-  body.page-template-page-tv_selection #content .platter article.content-page .talks {
-    display: table;
-    width: 100%; }
-    body.post-type-archive-gc_people #content .platter article.content-page .talks .talk_item,
-    body.single-gc_people #content .platter article.content-page .talks .talk_item,
-    body.page-template-page-tv_selection #content .platter article.content-page .talks .talk_item {
-      display: inline-block; }
-      body.post-type-archive-gc_people #content .platter article.content-page .talks .talk_item a,
-      body.single-gc_people #content .platter article.content-page .talks .talk_item a,
-      body.page-template-page-tv_selection #content .platter article.content-page .talks .talk_item a {
-        margin: 0 8%; }
-  body.post-type-archive-gc_people #content .platter article.content-page .selection,
-  body.single-gc_people #content .platter article.content-page .selection,
-  body.page-template-page-tv_selection #content .platter article.content-page .selection {
-    display: table;
-    width: 100%; }
-    body.post-type-archive-gc_people #content .platter article.content-page .selection .item,
-    body.single-gc_people #content .platter article.content-page .selection .item,
-    body.page-template-page-tv_selection #content .platter article.content-page .selection .item {
-      width: 33.333%;
-      display: inline-block;
-      margin-bottom: 40px;
-      vertical-align: top; }
-      body.post-type-archive-gc_people #content .platter article.content-page .selection .item a,
-      body.single-gc_people #content .platter article.content-page .selection .item a,
-      body.page-template-page-tv_selection #content .platter article.content-page .selection .item a {
-        margin: 0 5%;
-        display: block; }
-        body.post-type-archive-gc_people #content .platter article.content-page .selection .item a .image,
-        body.single-gc_people #content .platter article.content-page .selection .item a .image,
-        body.page-template-page-tv_selection #content .platter article.content-page .selection .item a .image {
+    #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker {
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      display: flex; }
+      #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .photo {
+        width: 20%;
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 20px 0 0;
+        min-width: 160px; }
+        #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .photo .image {
           padding-bottom: 70%;
           width: 100%;
           height: 0;
           position: relative; }
-          body.post-type-archive-gc_people #content .platter article.content-page .selection .item a .image .bg,
-          body.single-gc_people #content .platter article.content-page .selection .item a .image .bg,
-          body.page-template-page-tv_selection #content .platter article.content-page .selection .item a .image .bg {
+          #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .photo .image .bg {
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -3443,85 +3255,102 @@ body.page-template-page-tv_selection #content .platter article.content-page {
             position: absolute;
             z-index: 0;
             background-color: #979797; }
+      #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .pres {
+        display: inline-block;
+        vertical-align: top;
+        width: 80%;
+        max-width: 700px; }
+        #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .pres h1 {
+          font-size: 1.4em;
+          letter-spacing: 0.06em;
+          margin: 0 0 10px; }
+          #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .pres h1 a {
+            color: #333333;
+            display: inline-block;
+            position: relative; }
+            #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .pres h1 a:hover::before {
+              width: 100%;
+              transition: all 0ms ease-in-out 150ms; }
+            #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .pres h1 a:hover::after {
+              width: 100%;
+              transition: all 150ms ease-in-out 0s; }
+            #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .pres h1 a::after, #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .pres h1 a::before {
+              position: absolute;
+              content: "";
+              height: 2px;
+              background-color: #333333;
+              display: block;
+              bottom: 0;
+              width: 0; }
+            #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .pres h1 a::before {
+              right: 0;
+              transition: all 150ms ease-in-out 150ms; }
+            #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .pres h1 a::after {
+              left: 0;
+              transition: all 0ms ease-in-out 0s; }
+        #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .pres h2 {
+          font-size: 1.1em;
+          letter-spacing: 0.03em;
+          margin: 10px 0; }
+        #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .pres p {
+          font-size: 0.9em;
+          font-family: "Radikal", sans-serif;
+          letter-spacing: 0.02em;
+          margin: 0; }
 
-body.post-type-archive-gc_people #content .platter .nav,
-body.single-gc_people #content .platter .nav,
-body.page-template-page-tv_selection #content .platter .nav {
-  padding: 60px 40px 20px; }
+@media only screen and (max-width: 1800px) {
+  #gc_tv.single-gc_talk #content .platter {
+    margin-top: 20px; } }
 
-@media only screen and (max-width: 1500px) {
-  body.post-type-archive-gc_people #content .platter article.content-page .speakers .speaker,
-  body.post-type-archive-gc_people #content .platter article.content-page .talks .talk_item,
-  body.single-gc_people #content .platter article.content-page .speakers .speaker,
-  body.single-gc_people #content .platter article.content-page .talks .talk_item,
-  body.page-template-page-tv_selection #content .platter article.content-page .speakers .speaker,
-  body.page-template-page-tv_selection #content .platter article.content-page .talks .talk_item {
-    width: 20%; } }
-
-@media only screen and (max-width: 1200px) {
-  body.post-type-archive-gc_people #content .platter article.content-page .speakers .speaker,
-  body.post-type-archive-gc_people #content .platter article.content-page .talks .talk_item,
-  body.single-gc_people #content .platter article.content-page .speakers .speaker,
-  body.single-gc_people #content .platter article.content-page .talks .talk_item,
-  body.page-template-page-tv_selection #content .platter article.content-page .speakers .speaker,
-  body.page-template-page-tv_selection #content .platter article.content-page .talks .talk_item {
-    width: 25%; }
-  body.post-type-archive-gc_people #content .platter article.content-page .selection .item,
-  body.single-gc_people #content .platter article.content-page .selection .item,
-  body.page-template-page-tv_selection #content .platter article.content-page .selection .item {
-    width: 50%; } }
-
-@media only screen and (max-width: 900px) {
-  body.post-type-archive-gc_people #content .platter article.content-page,
-  body.single-gc_people #content .platter article.content-page,
-  body.page-template-page-tv_selection #content .platter article.content-page {
-    padding: 10px; }
-    body.post-type-archive-gc_people #content .platter article.content-page .header,
-    body.single-gc_people #content .platter article.content-page .header,
-    body.page-template-page-tv_selection #content .platter article.content-page .header {
-      margin: 0 1.9%; }
-    body.post-type-archive-gc_people #content .platter article.content-page .speakers .speaker,
-    body.post-type-archive-gc_people #content .platter article.content-page .talks .talk_item,
-    body.single-gc_people #content .platter article.content-page .speakers .speaker,
-    body.single-gc_people #content .platter article.content-page .talks .talk_item,
-    body.page-template-page-tv_selection #content .platter article.content-page .speakers .speaker,
-    body.page-template-page-tv_selection #content .platter article.content-page .talks .talk_item {
-      width: 33%; }
-      body.post-type-archive-gc_people #content .platter article.content-page .speakers .speaker a,
-      body.post-type-archive-gc_people #content .platter article.content-page .talks .talk_item a,
-      body.single-gc_people #content .platter article.content-page .speakers .speaker a,
-      body.single-gc_people #content .platter article.content-page .talks .talk_item a,
-      body.page-template-page-tv_selection #content .platter article.content-page .speakers .speaker a,
-      body.page-template-page-tv_selection #content .platter article.content-page .talks .talk_item a {
-        margin: 0 6%; } }
+@media only screen and (max-width: 1700px) {
+  #gc_tv.single-gc_talk #content .platter {
+    margin-top: 0; } }
 
 @media only screen and (max-width: 680px) {
-  body.post-type-archive-gc_people #content .platter article.content-page,
-  body.single-gc_people #content .platter article.content-page,
-  body.page-template-page-tv_selection #content .platter article.content-page {
-    padding: 5px; }
-    body.post-type-archive-gc_people #content .platter article.content-page .header,
-    body.single-gc_people #content .platter article.content-page .header,
-    body.page-template-page-tv_selection #content .platter article.content-page .header {
-      margin: 0 2.9%; }
-    body.post-type-archive-gc_people #content .platter article.content-page .speakers .speaker,
-    body.post-type-archive-gc_people #content .platter article.content-page .talks .talk_item,
-    body.single-gc_people #content .platter article.content-page .speakers .speaker,
-    body.single-gc_people #content .platter article.content-page .talks .talk_item,
-    body.page-template-page-tv_selection #content .platter article.content-page .speakers .speaker,
-    body.page-template-page-tv_selection #content .platter article.content-page .talks .talk_item {
-      width: 50%; }
-      body.post-type-archive-gc_people #content .platter article.content-page .speakers .speaker a,
-      body.post-type-archive-gc_people #content .platter article.content-page .talks .talk_item a,
-      body.single-gc_people #content .platter article.content-page .speakers .speaker a,
-      body.single-gc_people #content .platter article.content-page .talks .talk_item a,
-      body.page-template-page-tv_selection #content .platter article.content-page .speakers .speaker a,
-      body.page-template-page-tv_selection #content .platter article.content-page .talks .talk_item a {
-        margin: 0 6%; }
-    body.post-type-archive-gc_people #content .platter article.content-page .selection .item,
-    body.single-gc_people #content .platter article.content-page .selection .item,
-    body.page-template-page-tv_selection #content .platter article.content-page .selection .item {
+  #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker {
+    display: block; }
+    #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .photo {
+      display: block; }
+    #gc_tv.single-gc_talk #content .platter article.content-page div.talk_speaker .pres {
+      width: 100%;
+      margin-top: 20px; } }
+
+@media only screen and (max-width: 900px) {
+  #gc_tv.single-gc_talk #content .platter {
+    display: block;
+    margin: 0; }
+    #gc_tv.single-gc_talk #content .platter main,
+    #gc_tv.single-gc_talk #content .platter aside {
       width: 100%; } }
+
+@media only screen and (max-width: 480px) {
+  #gc_tv.single-gc_talk #content .platter {
+    display: block;
+    margin: 0; }
+    #gc_tv.single-gc_talk #content .platter main,
+    #gc_tv.single-gc_talk #content .platter aside {
+      width: 100%; }
+    #gc_tv.single-gc_talk #content .platter article.content-page div.talk_desc {
+      padding: 10px; } }
+
+@media only screen and (min-width: 901px) {
+  #gc_tv.single-gc_talk #content.tv section.talk_list .list_container {
+    overflow-x: hidden;
+    overflow-y: inherit; }
+    #gc_tv.single-gc_talk #content.tv section.talk_list .list_container .talks {
+      overflow-x: hidden;
+      overflow-y: scroll;
+      white-space: normal;
+      display: table;
+      width: 100%; }
+      #gc_tv.single-gc_talk #content.tv section.talk_list .list_container .talks .talk_item {
+        width: 100%; }
+        #gc_tv.single-gc_talk #content.tv section.talk_list .list_container .talks .talk_item .talk_container {
+          margin: 0 1.5% 15px; } }
+
+@media only screen and (min-width: 1100px) {
+  #gc_tv.single-gc_talk #content.tv section.talk_list .list_container .talks .talk_item {
+    width: 50%; } }
 
 body {
   font-family: "Radikal", sans-serif;

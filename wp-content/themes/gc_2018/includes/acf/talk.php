@@ -100,8 +100,8 @@ if( function_exists('acf_add_local_field_group') ):
 				'taxonomy' => array(
 				),
 				'allow_null' => 0,
-				'multiple' => 1,
-				'return_format' => 'id',
+				'multiple' => 0,
+				'return_format' => 'object',
 				'ui' => 1,
 			),
 			array(

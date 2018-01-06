@@ -4,13 +4,18 @@
     <section class="talk_list">
 
         <div class="header">
-            <h1><?php echo $section_title; ?></h1>
+            <div>
+                <h1><?php echo $section_title; ?></h1>
+
+				<?php if ( sizeof( $talks ) > 12 ): ?>
+                    <a href="<?php echo $section_more; ?>" class="more">More talks</a>
+				<?php endif; ?>
+            </div>
         </div>
 
         <div class="list_container">
             <div class="talks">
 				<?php foreach ( $talks as $talk ):
-
 
 					$item['image']   = get_field( 'talk_picture', $talk );
 					$item['title']   = get_field( 'title', $talk );

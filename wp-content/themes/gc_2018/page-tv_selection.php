@@ -1,6 +1,6 @@
 <?php /* Template Name: TV selection */ ?>
 
-<?php get_header(); ?>
+<?php get_header('tv'); ?>
 
 <section id="content" class="tv">
 

@@ -261,6 +261,13 @@
 		"oAP": "\/header-campaign.php",
 		"oF": 0
 		},
+	"\/header-tv.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/header-tv.php",
+		"oF": 0
+		},
 	"\/header.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -3664,19 +3671,6 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/advanced\/speaker.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/speaker.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
 	"\/scss\/advanced\/sub_nav.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -3703,19 +3697,6 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/advanced\/talk.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/talk.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
 	"\/scss\/advanced\/tmp_default.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -3725,19 +3706,6 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/scss\/tmp_default.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/scss\/advanced\/tv.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/tv.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
@@ -3859,6 +3827,84 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/tv\/base.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/base.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/tv\/header.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/header.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/tv\/page.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/page.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/tv\/talk.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/talk.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/tv\/talk_list.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/talk_list.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/tv\/tv.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/tv.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/style.css": {
 		"aP": 1,
 		"bl": 0,
@@ -3964,6 +4010,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/city\/list.php",
+		"oF": 0
+		},
+	"\/template-parts\/city\/none.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/city\/none.php",
 		"oF": 0
 		},
 	"\/template-parts\/city\/single.php": {
@@ -4139,6 +4192,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/talk\/item.php",
+		"oF": 0
+		},
+	"\/template-parts\/talk\/list.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/template-parts\/talk\/list.php",
 		"oF": 0
 		},
 	"\/template-parts\/talk\/none.php": {

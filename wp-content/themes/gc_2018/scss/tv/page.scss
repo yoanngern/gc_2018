@@ -1,0 +1,15 @@
+#gc_tv.page-template-page-tv {
+
+    #content .platter {
+        top: -15vh;
+        margin: 0 20px -10vh;
+        max-width: inherit;
+        min-height: inherit;
+
+        @media only screen and (max-width: 800px) {
+            margin: 0;
+            top: inherit;
+        }
+    }
+
+}
