@@ -240,8 +240,7 @@ body > header {
                     li {
                         padding: 5px 0 3px 6px;
 
-                        &.current-menu-item,
-                        &.current_page_item {
+                        &.current-menu-item {
                             & > a {
                                 padding: 2px 0 0 3px;
                                 border-left: 3px solid $red;
