@@ -247,6 +247,13 @@ body > header {
                             }
                         }
 
+                        &.current-menu-item.current-menu-ancestor {
+                            & > a {
+                                padding: 2px 0 0 6px;
+                                border-left: inherit;
+                            }
+                        }
+
                         a {
                             font-family: $radikal;
                             text-transform: uppercase;

@@ -266,6 +266,9 @@ body > header {
             body > header div.principal-nav div > ul li ul li.current-menu-item > a {
               padding: 2px 0 0 3px;
               border-left: 3px solid #E52639; }
+            body > header div.principal-nav div > ul li ul li.current-menu-item.current-menu-ancestor > a {
+              padding: 2px 0 0 6px;
+              border-left: inherit; }
             body > header div.principal-nav div > ul li ul li a {
               font-family: "Radikal", sans-serif;
               text-transform: uppercase;
