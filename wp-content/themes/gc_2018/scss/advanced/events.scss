@@ -198,19 +198,9 @@ body.post-type-archive-gc_event {
                 &:hover {
                     color: $black;
 
-                    h2 {
-                        //opacity: 0;
-                    }
-
-                    div.txt {
-                        //opacity: 0;
-                    }
-
                     .image {
-                        //background-color: $red;
-                        //background-image: none !important;
-                        //filter: brightness(100%) saturate(1) contrast(100%);
 
+                        filter: brightness(80%) saturate(1.1) contrast(105%) blur(3px);
                         -webkit-filter: brightness(80%) saturate(1.1) contrast(105%) blur(3px);
                     }
 
@@ -219,8 +209,6 @@ body.post-type-archive-gc_event {
                         height: 100%;
 
                         &::after {
-
-                            //width: 100%;
                             transition: all 300ms ease-in-out 0s;
                         }
                     }
@@ -236,41 +224,11 @@ body.post-type-archive-gc_event {
                             transition: all 300ms ease-in-out 0s;
 
                             &::before {
-                                //right: 12px;
                                 transition: all 300ms ease-in-out 200ms;
                             }
                         }
                     }
                 }
-
-                /*
-                .hover {
-                    opacity: 0;
-                    position: absolute;
-                    z-index: 200;
-                    color: $black;
-                    background-color: $black;
-                    width: 100%;
-                    height: 100%;
-                    bottom: 0;
-                    left: 0;
-                    -webkit-transition: all 300ms ease;
-                    -moz-transition: all 300ms ease;
-                    -o-transition: all 300ms ease;
-
-                    span {
-                        text-align: center;
-                        width: 100%;
-                        display: none;
-                        //display: block;
-                        top: 50%;
-                        -webkit-transform: translateY(-50%);
-                        -ms-transform: translateY(-50%);
-                        transform: translateY(-50%);
-                        position: relative;
-                    }
-                }
-                */
 
                 .hover {
                     opacity: 0;
@@ -325,6 +283,7 @@ body.post-type-archive-gc_event {
                     -ms-transition: all 0.4s ease;
                     transition: all 0.4s ease;
 
+                    filter: brightness(60%) saturate(1.1) contrast(105%) blur(0);
                     -webkit-filter: brightness(60%) saturate(1.1) contrast(105%) blur(0);
 
                     -webkit-animation: 1s linear infinite;
