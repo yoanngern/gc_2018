@@ -535,11 +535,12 @@
                     text-align: center;
                     font-family: $radikal-light;
                     color: $black;
-                    font-size: 1.6em;
+                    font-size: 1.5em;
                     margin: 0 auto 20px;
 
                     em {
                         line-height: 1.5em;
+                        font-size: 1.2em;
                         font-family: $radikal-bold;
                         color: $gray3;
                         display: block;
@@ -914,6 +915,15 @@
             article.content-page {
                 blockquote {
                     width: 94%;
+
+                    p {
+                        font-size: 1.2em;
+                        line-height: 1.3em;
+
+                        em {
+                            line-height: 1.4em;
+                        }
+                    }
                 }
             }
 
@@ -936,6 +946,8 @@
                         margin: 0 0 6px 0;
                     }
                 }
+
+
             }
         }
 

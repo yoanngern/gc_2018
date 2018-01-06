@@ -943,12 +943,13 @@ footer {
         text-align: center;
         font-family: "Radikal-Light", "Radikal", sans-serif;
         color: #333333;
-        font-size: 1.6em;
+        font-size: 1.5em;
         margin: 0 auto 20px; }
         #content .platter article.content-page blockquote p em,
         #content .platter article.home-default blockquote p em,
         #content .platter section.content-default blockquote p em {
           line-height: 1.5em;
+          font-size: 1.2em;
           font-family: "Radikal-Bold", "Radikal", sans-serif;
           color: #3E3E3E;
           display: block; }
@@ -1255,6 +1256,11 @@ footer {
       padding: 2px 10px 2px; }
   #content .platter article.content-page blockquote {
     width: 94%; }
+    #content .platter article.content-page blockquote p {
+      font-size: 1.2em;
+      line-height: 1.3em; }
+      #content .platter article.content-page blockquote p em {
+        line-height: 1.4em; }
   #content .platter article.content-page ul.wall_image li,
   #content .platter article.home-default ul.wall_image li,
   #content .platter section.content-default ul.wall_image li {
@@ -1985,9 +1991,9 @@ body.post-type-archive-gc_event #content .platter {
           text-transform: uppercase; }
         #content .platter#summary section.sections article .content p {
           font-family: "Corbel", sans-serif;
-          line-height: 1.54em;
-          font-size: 1.36em;
-          letter-spacing: 0.062em;
+          line-height: 1.4em;
+          font-size: 1.4em;
+          letter-spacing: 0.05em;
           margin: 10px 0 20px;
           color: #6E6E6E;
           text-align: justify; }
@@ -2539,7 +2545,7 @@ body.page-template-page-home #content .platter {
     padding: 50px 0;
     margin: 0 10px; }
     body.page-template-page-home #content .platter article.home-default h1 {
-      margin: 40px auto 60px;
+      margin: 40px auto;
       width: 85%; }
   body.page-template-page-home #content .platter article#gcfamily ul.dynamic li {
     margin: 20px 3%; }
