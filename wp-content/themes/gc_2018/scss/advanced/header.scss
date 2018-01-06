@@ -247,13 +247,6 @@ body > header {
                             }
                         }
 
-                        &.current-menu-item.current-menu-ancestor {
-                            & > a {
-                                padding: 2px 0 0 6px;
-                                border-left: inherit;
-                            }
-                        }
-
                         a {
                             font-family: $radikal;
                             text-transform: uppercase;
@@ -275,13 +268,21 @@ body > header {
             & > li {
                 padding: 3px;
 
-                &.current-menu-item,
-                &.current_page_item {
+                &.current-menu-item {
                     & > a {
                         padding: 0 0 0 3px;
                         border-left: 3px solid $red;
                     }
                 }
+
+                &.current-menu-item.current-menu-ancestor {
+                    & > a {
+                        padding: 2px 0 0 6px;
+                        border-left: inherit;
+
+                    }
+                }
+
 
                 & > a {
 
@@ -297,7 +298,6 @@ body > header {
                     -o-transition: all 100ms ease;
 
                     &:hover {
-                        //border-bottom: 2px solid $red;
                         color: $red;
                     }
                 }
