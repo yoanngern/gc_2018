@@ -23,7 +23,7 @@ nav.sub-nav {
                 li {
                     display: inline-block;
                     padding: 2px 15px 0;
-                    overflow: scroll;
+                    overflow: inherit;
 
                     &.current_page_item {
                         a {

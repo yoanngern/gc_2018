@@ -4085,7 +4085,7 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/style_v1_2.scss": {
+	"\/scss\/style_v1_3.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -4093,7 +4093,7 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/style_v1_2.css",
+		"oAP": "\/style_v1_3.css",
 		"oF": 2,
 		"oS": 3,
 		"uL": 1
@@ -4203,6 +4203,16 @@
 		"ma": 0,
 		"oA": 0,
 		"oAP": "\/style_v1_1-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"\/style_v1_2.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/style_v1_2-min.css",
 		"oF": 0,
 		"oS": 3
 		},

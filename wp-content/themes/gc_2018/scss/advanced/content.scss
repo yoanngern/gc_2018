@@ -726,6 +726,7 @@
             ul.wall_image {
                 position: relative;
                 display: table;
+                overflow: hidden;
 
                 li {
                     display: inline-block;
