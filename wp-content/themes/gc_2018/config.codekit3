@@ -763,7 +763,7 @@
 		"oAP": "\/includes\/acf\/recurrence.php",
 		"oF": 0
 		},
-	"\/includes\/acf\/Related_events.php": {
+	"\/includes\/acf\/related_events.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
@@ -4216,6 +4216,16 @@
 		"oF": 0,
 		"oS": 3
 		},
+	"\/style_v1_3.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/style_v1_3-min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"\/template-parts\/city\/city.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -5874,7 +5884,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http:\/\/dev.gc-lausanne.org",
+	"externalServerAddress": "http:\/\/dev.gospel-center.tv",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",

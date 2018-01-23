@@ -46,6 +46,13 @@ $(document).ready(function () {
 
     });
 
+    $("a[href^='#switch_player']").click(function (e) {
+        e.preventDefault();
+
+        $('div.video, div.audio').toggleClass('hide');
+        $(this).toggleClass('audio');
+    });
+
     $('a[href^="#"]').on('click', function (e) {
         e.preventDefault();
 
@@ -61,11 +68,16 @@ $(document).ready(function () {
 
 
     $('#burger').click(function () {
+
         $('body > header').toggleClass('open_nav');
     });
 
 
-    $("iframe.video").each(function () {
+
+
+
+    $("iframe.video, iframe.audio").each(function () {
+
 
         var iframe = $(this);
 

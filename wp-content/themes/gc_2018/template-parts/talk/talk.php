@@ -6,38 +6,14 @@
 	$title = get_field( 'title' );
 	$date  = complex_date( get_field( 'date' ), get_field( 'date' ) );
 
-	$video = get_field( 'video', $_POST );
+	$video = get_iframe_video( get_field( 'video', $_POST ) );
+
+	$audio = get_iframe_audio( get_field( 'audio', $_POST ) );
 
 	$city = get_field( 'city', $_POST );
 
 
 	$speaker = get_field( 'speaker', $_POST );
-
-	// use preg_match to find iframe src
-	preg_match( '/src="(.+?)"/', $video, $matches );
-	$src = $matches[1];
-
-	$params = array(
-		'controls'       => 1,
-		'hd'             => 1,
-		'autohide'       => 1,
-		'rel'            => 0,
-		'showinfo'       => 0,
-		'color'          => 'e52639',
-		'title'          => 0,
-		'byline'         => 0,
-		'portrait'       => 0,
-		'data-show-text' => 0
-	);
-
-
-	$new_src = add_query_arg( $params, $src );
-
-	$video = str_replace( $src, $new_src, $video );
-
-	$attributes = 'frameborder="0"';
-
-	$video = str_replace( '></iframe>', ' ' . $attributes . 'class="video"></iframe>', $video );
 
 
 	?>
@@ -49,12 +25,25 @@
 
             <article class="content-page">
 
-                <div class="video">
+				<?php if ( $video ): ?>
+                    <div class="video">
+						<?php echo $video; ?>
+                    </div>
+				<?php endif; ?>
 
-					<?php echo $video; ?>
-                </div>
+				<?php if ( $audio ): ?>
+                    <div class="audio <?php if ( $video ) {
+						echo 'hide';
+					} ?>">
+						<?php echo $audio; ?>
+                    </div>
+				<?php endif; ?>
 
                 <div class="talk_desc">
+					<?php if ( $audio & $video ): ?>
+                        <a href="#switch_player" class="dynamic audio"><span class="audio">Message en audio</span><span
+                                    class="video">Message en vidéo</span></a>
+					<?php endif; ?>
                     <h1><?php echo $title; ?></h1>
 
                     <time><?php echo $date; ?></time>

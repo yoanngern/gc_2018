@@ -17,7 +17,8 @@
             article.content-page {
                 padding: 0 0 20px 0;
 
-                div.video {
+                div.video,
+                div.audio {
                     width: 100%;
                     overflow: auto;
                     display: block;
@@ -38,10 +39,37 @@
                         }
                     }
 
+                    &.hide {
+                        display: none;
+                    }
+
                 }
 
                 div.talk_desc {
                     padding: 10px 20px;
+
+                    a.dynamic {
+                        float: right;
+
+                        .audio {
+                            display: none;
+                        }
+
+                        .video {
+                            display: inline-block;
+                        }
+
+                        &.audio {
+                            .audio {
+                                display: inline-block;
+                            }
+
+                            .video {
+                                display: none;
+                            }
+                        }
+                    }
+
                     h1 {
                         font-size: 1.4em;
                         letter-spacing: 0.08em;

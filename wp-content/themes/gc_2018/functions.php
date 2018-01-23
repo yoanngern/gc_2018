@@ -494,3 +494,80 @@ function talks_acf_load_value( $field ) {
 // acf/load_value - filter for every field load
 add_filter( 'acf/load_field/name=home_talks', 'talks_acf_load_value', 10, 3 );
 
+function get_iframe_video( $iframe ) {
+
+	if($iframe == null) {
+		return false;
+	}
+
+	// use preg_match to find iframe src
+	preg_match( '/src="(.+?)"/', $iframe, $matches );
+	$src = $matches[1];
+
+	$params = array(
+		'controls'       => 1,
+		'hd'             => 1,
+		'autohide'       => 1,
+		'rel'            => 0,
+		'showinfo'       => 0,
+		'color'          => 'e52639',
+		'title'          => 0,
+		'byline'         => 0,
+		'portrait'       => 0,
+		'data-show-text' => 0
+	);
+
+
+	$new_src = add_query_arg( $params, $src );
+
+	$video = str_replace( $src, $new_src, $iframe );
+
+	$attributes = 'frameborder="0"';
+
+	$iframe = str_replace( '></iframe>', ' ' . $attributes . 'class="video"></iframe>', $video );
+
+	return $iframe;
+
+
+}
+
+function get_iframe_audio( $iframe ) {
+
+	if($iframe == null) {
+		return false;
+	}
+
+	// use preg_match to find iframe src
+	preg_match( '/src="(.+?)"/', $iframe, $matches );
+	$src = $matches[1];
+
+	$params = array(
+		'color'         => 'e52639',
+		'auto_play'     => false,
+		'hide_related'  => true,
+		'show_comments' => false,
+		'show_user'     => false,
+		'show_reposts'  => false,
+		'show_teaser'   => false,
+		'visual'        => true,
+	);
+
+	$height = '360px';
+	$width = '640px';
+
+
+	$new_src = add_query_arg( $params, $src );
+
+	$audio = str_replace( $src, $new_src, $iframe );
+
+	$attributes = 'frameborder="no" scrolling="no"';
+
+	$iframe = str_replace( '></iframe>', ' ' . $attributes . 'class="audio" width="640px" height="360px"></iframe>', $audio );
+
+	$iframe = preg_replace('/height="(.*?)"/i', 'height="' . $height .'"', $iframe);
+	$iframe = preg_replace('/width="(.*?)"/i', 'width="' . $width .'"', $iframe);
+
+	return $iframe;
+
+
+}
