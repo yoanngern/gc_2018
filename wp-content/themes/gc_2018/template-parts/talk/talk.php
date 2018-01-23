@@ -102,7 +102,7 @@
 
 			$talks = get_talks( 12, null, $speaker, null, $exclude );
 
-			$section_title = "d'autres vidéos";
+			$section_title = "d'autres messages";
 
 			set_query_var( 'talks', $talks );
 			set_query_var( 'section_title', $section_title );
