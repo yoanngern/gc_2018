@@ -107,7 +107,13 @@ if ( isset( $_GET['category'] ) ) {
 					while ( have_posts() ) :
 						the_post();
 
-						$item['image']   = get_field( 'talk_picture' );
+						if ( get_field( 'talk_picture' ) != null ) {
+							$item['image']   = get_field( 'talk_picture' );
+						} else {
+
+							$item['image']   = get_field( 'picture', get_field( 'speaker' ) );
+						}
+
 
 						$item['title']   = get_field( 'title' );
 						$item['speaker'] = get_field( 'speaker' );
