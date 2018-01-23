@@ -17,7 +17,14 @@
             <div class="talks">
 				<?php foreach ( $talks as $talk ):
 
-					$item['image']   = get_field( 'talk_picture', $talk );
+					if ( get_field( 'talk_picture', $talk ) != null ) {
+						$item['image']   = get_field( 'talk_picture', $talk );
+					} else {
+
+						$item['image']   = get_field( 'picture', get_field( 'speaker', $talk ) );
+					}
+
+
 					$item['title']   = get_field( 'title', $talk );
 					$item['speaker'] = get_field( 'speaker', $talk );
 

@@ -5,7 +5,7 @@ $city     = null;
 $category = null;
 
 $nb_filter = 0;
-$title     = pll__('All talks');
+$title     = pll__( 'All talks' );
 
 if ( isset( $_GET['speaker'] ) ) {
 
@@ -108,6 +108,7 @@ if ( isset( $_GET['category'] ) ) {
 						the_post();
 
 						$item['image']   = get_field( 'talk_picture' );
+
 						$item['title']   = get_field( 'title' );
 						$item['speaker'] = get_field( 'speaker' );
 
