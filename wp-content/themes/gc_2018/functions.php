@@ -431,7 +431,15 @@ function get_last_talks( $city = null ) {
 
 
 	foreach ( $talks as $talk ) {
-		$item['image']   = get_field( 'talk_picture', $talk );
+
+
+		if ( get_field( 'talk_picture', $talk ) != null ) {
+			$item['image'] = get_field( 'talk_picture', $talk );
+		} else {
+
+			$item['image'] = get_field( 'picture', get_field( 'speaker', $talk ) );
+		}
+
 		$item['title']   = get_field( 'title', $talk );
 		$item['speaker'] = get_field( 'speaker', $talk );
 
@@ -496,7 +504,7 @@ add_filter( 'acf/load_field/name=home_talks', 'talks_acf_load_value', 10, 3 );
 
 function get_iframe_video( $iframe ) {
 
-	if($iframe == null) {
+	if ( $iframe == null ) {
 		return false;
 	}
 
@@ -533,7 +541,7 @@ function get_iframe_video( $iframe ) {
 
 function get_iframe_audio( $iframe ) {
 
-	if($iframe == null) {
+	if ( $iframe == null ) {
 		return false;
 	}
 
@@ -553,7 +561,7 @@ function get_iframe_audio( $iframe ) {
 	);
 
 	$height = '360px';
-	$width = '640px';
+	$width  = '640px';
 
 
 	$new_src = add_query_arg( $params, $src );
@@ -564,8 +572,8 @@ function get_iframe_audio( $iframe ) {
 
 	$iframe = str_replace( '></iframe>', ' ' . $attributes . 'class="audio" width="640px" height="360px"></iframe>', $audio );
 
-	$iframe = preg_replace('/height="(.*?)"/i', 'height="' . $height .'"', $iframe);
-	$iframe = preg_replace('/width="(.*?)"/i', 'width="' . $width .'"', $iframe);
+	$iframe = preg_replace( '/height="(.*?)"/i', 'height="' . $height . '"', $iframe );
+	$iframe = preg_replace( '/width="(.*?)"/i', 'width="' . $width . '"', $iframe );
 
 	return $iframe;
 
