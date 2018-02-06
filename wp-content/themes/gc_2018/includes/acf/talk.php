@@ -38,13 +38,36 @@ if( function_exists('acf_add_local_field_group') ):
 				'required' => 0,
 				'conditional_logic' => 0,
 				'wrapper' => array(
-					'width' => '51',
+					'width' => '49',
 					'class' => '',
 					'id' => '',
 				),
 				'display_format' => 'd/m/Y',
 				'return_format' => 'Y-m-d',
 				'first_day' => 1,
+			),
+			array(
+				'key' => 'field_5a03120e267d2',
+				'label' => 'Speaker',
+				'name' => 'speaker',
+				'type' => 'post_object',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '51',
+					'class' => '',
+					'id' => '',
+				),
+				'post_type' => array(
+					0 => 'gc_people',
+				),
+				'taxonomy' => array(
+				),
+				'allow_null' => 0,
+				'multiple' => 0,
+				'return_format' => 'object',
+				'ui' => 1,
 			),
 			array(
 				'key' => 'field_5a4e497bf9c51',
@@ -55,7 +78,7 @@ if( function_exists('acf_add_local_field_group') ):
 				'required' => 0,
 				'conditional_logic' => 0,
 				'wrapper' => array(
-					'width' => '51',
+					'width' => '49',
 					'class' => '',
 					'id' => '',
 				),
@@ -90,35 +113,12 @@ if( function_exists('acf_add_local_field_group') ):
 				'required' => 0,
 				'conditional_logic' => 0,
 				'wrapper' => array(
-					'width' => '51',
+					'width' => '49',
 					'class' => '',
 					'id' => '',
 				),
 				'width' => 640,
 				'height' => 360,
-			),
-			array(
-				'key' => 'field_5a03120e267d2',
-				'label' => 'Speaker',
-				'name' => 'speaker',
-				'type' => 'post_object',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '51',
-					'class' => '',
-					'id' => '',
-				),
-				'post_type' => array(
-					0 => 'gc_people',
-				),
-				'taxonomy' => array(
-				),
-				'allow_null' => 0,
-				'multiple' => 0,
-				'return_format' => 'object',
-				'ui' => 1,
 			),
 			array(
 				'key' => 'field_5a4e34317699a',

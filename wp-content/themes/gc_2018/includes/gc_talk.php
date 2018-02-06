@@ -306,13 +306,37 @@ function update_service_picture( $post_id ) {
 			$image_url = getVimeoThumb( $id );
 		}
 
-		$upload_file = crb_insert_attachment_from_url( $image_url, $post_id );
 
-		update_field( 'talk_picture', $upload_file, $post_id );
+		if ( videoType( $video ) == 'youtube' ) {
+
+
+			if ( preg_match( "#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $video, $regs ) ) {
+				$id = $regs[0];
+			}
+
+			$image_url = getYoutubeThumb( $id );
+		}
+
+		if ( $image_url != "" ) {
+			$upload_file = crb_insert_attachment_from_url( $image_url, $post_id );
+
+			update_field( 'talk_picture', $upload_file, $post_id );
+		}
+
 
 	}
 
 }
+
+
+function getYoutubeThumb( $id ) {
+
+	$image_url = "https://img.youtube.com/vi/$id/maxresdefault.jpg";
+
+	return $image_url;
+
+}
+
 
 function getVimeoThumb( $id ) {
 

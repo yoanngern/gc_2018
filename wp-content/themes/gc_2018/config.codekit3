@@ -7,7 +7,7 @@
 		"uuidString": "35FCC746-D50B-47EC-8292-55E51DFD872E"
 		}
 	],
-"creatorBuild": "26148",
+"creatorBuild": "26261",
 "files": {
 	"\/404.php": {
 		"cB": 0,
@@ -4176,46 +4176,6 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/style.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/style-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"\/style_v1.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/style_v1-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"\/style_v1_1.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/style_v1_1-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"\/style_v1_2.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/style_v1_2-min.css",
-		"oF": 0,
-		"oS": 3
-		},
 	"\/style_v1_3.css": {
 		"aP": 1,
 		"bl": 0,
@@ -5065,6 +5025,10 @@
 		"id-match": {
 			"active": 0,
 			"optionString": "'^[a-z]+([A-Z][a-z]+)*$', {'properties': false, 'onlyDeclarations': true}"
+			},
+		"implicit-arrow-linebreak": {
+			"active": 0,
+			"optionString": "'beside'"
 			},
 		"indent": {
 			"active": 0,
