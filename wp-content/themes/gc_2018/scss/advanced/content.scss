@@ -427,6 +427,14 @@
                 }
             }
 
+            div.buttons {
+                display: inline-block;
+
+                a {
+                    margin: 5px 20px;
+                }
+            }
+
             h1 {
                 font-family: $radikal-bold;
                 color: $black;

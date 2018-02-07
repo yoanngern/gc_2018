@@ -4,7 +4,7 @@
  *
  */
 function themeslug_enqueue_style() {
-	wp_enqueue_style( 'core', get_template_directory_uri() . '/style_v1_3.css', false );
+	wp_enqueue_style( 'core', get_template_directory_uri() . '/style_v1_4.css', false );
 }
 
 function themeslug_enqueue_script() {
@@ -578,4 +578,39 @@ function get_iframe_audio( $iframe ) {
 	return $iframe;
 
 
+}
+
+
+/**
+ * @param $acf_selector
+ * @param $post
+ */
+function print_buttons( $acf_selector, $post, $style = 'dynamic' ) {
+	if ( have_rows( $acf_selector . '_buttons', $post ) ): ?>
+        <div class="buttons">
+
+			<?php while ( have_rows( $acf_selector . '_buttons', $post ) ):
+				the_row();
+
+
+				$link    = get_sub_field( 'link' );
+				$display = get_sub_field( 'display' );
+
+				$url    = $link['url'];
+				$label  = $link['title'];
+				$target = $link['target'];
+
+				?>
+
+
+				<?php if ( $display ): ?>
+                <a class="<?php echo $style ?>" target="<?php echo $target ?>"
+                   href="<?php echo $url; ?>"><?php echo $label; ?></a>
+			<?php endif; ?>
+
+			<?php endwhile; ?>
+
+        </div>
+
+	<?php endif;
 }

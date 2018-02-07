@@ -18,9 +18,15 @@ body.page-template-page-home {
                 -webkit-animation-fill-mode: forwards;
                 -o-animation-fill-mode: forwards;
 
-                a.dynamic {
+                div.buttons {
                     margin-top: 50px;
+
+                    a {
+                        margin: 0 20px;
+                    }
                 }
+
+
             }
 
             .footer {
@@ -89,6 +95,14 @@ body.page-template-page-home {
                         width: 90%;
                         padding: 20px 0 50px;
                     }
+
+                    & > a {
+                        margin: 5px 20px;
+                    }
+
+
+
+
                 }
 
                 &#gcfamily {

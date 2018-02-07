@@ -693,6 +693,13 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/includes\/acf\/buttons.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/buttons.php",
+		"oF": 0
+		},
 	"\/includes\/acf\/city.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -4085,7 +4092,7 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/style_v1_3.scss": {
+	"\/scss\/style_v1_4.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -4093,7 +4100,7 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/style_v1_3.css",
+		"oAP": "\/style_v1_4.css",
 		"oF": 2,
 		"oS": 3,
 		"uL": 1
@@ -4176,13 +4183,13 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/style_v1_3.css": {
+	"\/style.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/style_v1_3-min.css",
+		"oAP": "\/style-min.css",
 		"oF": 0,
 		"oS": 3
 		},
@@ -5848,7 +5855,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http:\/\/dev.gospel-center.tv",
+	"externalServerAddress": "gc-lausanne.org",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",

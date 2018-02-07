@@ -16,10 +16,8 @@
                     <span class="underline"></span>
                 </h1>
 
-                <p>
-                    <a href="<?php echo get_field( 'button_link' ); ?>"
-                       class="dynamic"><span><?php echo get_field( 'button_label' ); ?></span></a>
-                </p>
+	            <?php print_buttons('weekend_buttons', $_POST) ?>
+
             </div>
 
             <div class="footer">
@@ -83,9 +81,16 @@
 						endforeach; ?>
 
                     </article>
+
+
+                </section>
+
+
                     <a class="dynamic" href="<?php echo get_post_type_archive_link( 'gc_event' ); ?>"><?php pll_e( 'Plus
                         d\'événements' ) ?></a>
-                </section>
+
+	                <?php print_buttons('event_buttons', $_POST) ?>
+
             </article>
 
 		<?php endif; ?>
@@ -178,7 +183,8 @@
 
                 </section>
 
-                <a class="dynamic" href="<?php echo $more; ?>"><?php pll_e( 'Plus de talks' ) ?></a>
+				<?php print_buttons('tv_buttons', $_POST) ?>
+
             </article>
 		<?php endif; ?>
 
