@@ -83,18 +83,23 @@
 						$days['sunday']['show'] = true;
 					}
 
-					$location_obj = get_field_or_parent( 'location', $date, 'gc_servicecategory' );
+
+
+
+					if ( $date->post_type == 'gc_event' ) {
+						$url = esc_url( get_permalink( $date ) );
+						$location_obj = get_field( 'location', $date );
+					} else {
+						$url = '#service-' . $date->ID;
+						$location_obj = get_field_or_parent( 'location', $date, 'gc_servicecategory' );
+					}
+
+
 
 					if ( $location_obj != null ) {
 						$location = get_the_title( $location_obj );
 					} else {
 						$location = "";
-					}
-
-					if ( $date->post_type == 'gc_event' ) {
-						$url = esc_url( get_permalink( $date ) );
-					} else {
-						$url = '#service-' . $date->ID;
 					}
 
 					$item = array(
