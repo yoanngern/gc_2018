@@ -2,21 +2,77 @@
 <html <?php language_attributes(); ?> class="no-js">
 <head>
 
+
 	<?php
 
-	if ( is_single() ):
-		echo "<title>" . get_field( 'short_name', 'option' ) . " - " . get_the_title() . "</title>";
+	global $wp;
+	$og_url         = home_url( $wp->request );
+	$og_locale      = get_locale();
+	$og_name        = get_the_title();
+	$og_title       = get_the_title();
+	$og_image       = "http://gospel-center.org/wp-content/themes/gc_2018/images/facebook_default_home.png";
+	$og_description = get_bloginfo( 'description' );
 
-		if ( get_the_excerpt() ): ?>
-            <meta name="Description" content="<?php echo strip_tags( get_the_excerpt() ); ?>"/>
-		<?php endif;
-	else:
-		echo "<title>" . get_field( 'short_name', 'option' ) . " - " . get_the_title() . "</title>";
-		echo '<meta name="description" content="' . get_bloginfo( 'description' ) . '">';
-	endif; ?>
+
+	if ( get_field( 'fb_title' ) ) {
+
+		$og_title = get_field( 'fb_title' );
+		$og_name  = get_field( 'fb_title' );
+
+	}
+
+	if ( get_field( 'fb_desc' ) ) {
+
+		$og_description = get_field( 'fb_desc' );
+
+	}
+
+	if ( get_field( 'fb_image' ) ) {
+
+		$og_image = get_field( 'fb_image' )['sizes']['full_hd'];
+
+	}
+
+	?>
+
+
+	<?php
+
+	if ( is_single() ) {
+		$og_title = get_the_title() . " - " . get_field( 'short_name', 'option' );
+
+		if ( get_the_excerpt() ) {
+
+			$og_description = strip_tags( get_the_excerpt() );
+		}
+
+	} else {
+
+		$og_title = get_the_title() . " - " . get_field( 'short_name', 'option' );
+	}
+
+	if ( is_page_template( 'home' ) ) {
+		$og_title = get_field( 'long_name', 'option' );
+	}
+
+	?>
 
 
     <meta charset="<?php bloginfo( 'charset' ); ?>">
+
+    <link rel="canonical" href="<?php echo $og_url ?>"/>
+
+    <title><?php echo $og_title; ?></title>
+
+    <meta name="Description" content="<?php echo $og_description ?>"/>
+
+    <meta property="og:title" content="<?php echo $og_title; ?>"/>
+    <meta property="og:description" content="<?php echo $og_description; ?>"/>
+    <meta property="og:image" content="<?php echo $og_image; ?>"/>
+    <meta property="og:url" content="<?php echo $og_url; ?>"/>
+    <meta property="og:locale" content="<?php echo $og_locale; ?>"/>
+    <meta property="og:site_name" content="<?php echo $og_name; ?>"/>
+    <meta property="og:type" content="website"/>
 
     <meta name="viewport"
           content="initial-scale=1, width=device-width, minimum-scale=1, user-scalable=no, maximum-scale=1, width=device-width, minimal-ui">
@@ -56,35 +112,10 @@
           content="<?php echo get_stylesheet_directory_uri(); ?>/images/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
-	<?php if ( get_field( 'fb_title' ) ):
-		$meta_fb_title = get_field( 'fb_title' );
-	else:
-		$meta_fb_title = get_the_title();
-	endif; ?>
-
-	<?php if ( get_field( 'fb_desc' ) ):
-		$meta_fb_desc = get_field( 'fb_desc' );
-	else:
-		$meta_fb_desc = "A place where miracles happen!";
-	endif; ?>
-
-	<?php if ( get_field( 'fb_image' ) ):
-		$meta_fb_image = get_field( 'fb_image' )['sizes']['full_hd'];;
-	else:
-		$meta_fb_image = "http://gospel-center.org/wp-content/themes/gc_2018/images/facebook_default_home.png";
-	endif; ?>
-
-    <meta property="og:title" content="<?php echo $meta_fb_title; ?>"/>
-    <meta property="og:description"
-          content="<?php echo $meta_fb_desc; ?>"/>
-    <meta property="og:image"
-          content="<?php echo $meta_fb_image; ?>"/>
-
 
 	<?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
         <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<?php endif; ?>
-
 
 
     <script>
@@ -92,7 +123,7 @@
     </script>
 	<?php wp_head(); ?>
 
-    <?php echo get_field( 'script', 'option' ) ?>
+	<?php echo get_field( 'script', 'option' ) ?>
 
 
     <script>
