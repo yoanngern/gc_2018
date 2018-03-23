@@ -51,7 +51,7 @@
 		$og_title = get_the_title() . " - " . get_field( 'short_name', 'option' );
 	}
 
-	if ( is_page_template( 'home' ) ) {
+	if ( is_page_template( 'page-home.php' ) ) {
 		$og_title = get_field( 'long_name', 'option' );
 	}
 
