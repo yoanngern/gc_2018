@@ -254,13 +254,6 @@
 		"oAP": "\/functions.php",
 		"oF": 0
 		},
-	"\/header-campaign.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/header-campaign.php",
-		"oF": 0
-		},
 	"\/header-tv.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -754,6 +747,13 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/includes\/acf\/location.php",
+		"oF": 0
+		},
+	"\/includes\/acf\/meta_facebook.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/meta_facebook.php",
 		"oF": 0
 		},
 	"\/includes\/acf\/people.php": {
@@ -4257,13 +4257,6 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/template-parts\/custom\/share.php",
-		"oF": 0
-		},
-	"\/template-parts\/divers\/action_banner.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/divers\/action_banner.php",
 		"oF": 0
 		},
 	"\/template-parts\/divers\/facebook_pixel.php": {

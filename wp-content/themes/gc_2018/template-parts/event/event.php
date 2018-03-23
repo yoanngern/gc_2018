@@ -173,6 +173,8 @@
 
 		$categories = [];
 
+		$today = date( 'Y-m-d H:i:s' );
+
 		foreach ( get_the_terms( $_POST, 'gc_eventcategory' ) as $cat ) {
 			$categories[] = $cat->slug;
 		}
@@ -195,6 +197,13 @@
 		$query->set( 'orderby', 'meta_value' );
 		$query->set( 'meta_key', 'start' );
 		$query->set( 'meta_key', 'end' );
+		$query->set('meta_query', array(
+			array(
+				'key'     => 'end',
+				'compare' => '>=',
+				'value'   => $today,
+			)
+		));
 		$query->set( 'order', 'asc' );
 
 
