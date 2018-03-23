@@ -118,7 +118,7 @@
 
 						<?php if ( $pres_page != null ): ?>
                             <a class="dynamic"
-                               href="<?php echo $pres_page->guid; ?>"><?php pll_e( 'découvrir' ) ?><?php echo " " . $pres_page->post_title; ?></a>
+                               href="<?php echo get_permalink($pres_page->ID); ?>"><?php pll_e( 'découvrir' ) ?><?php echo " " . $pres_page->post_title; ?></a>
 						<?php endif; ?>
 
                         <div class="social">
