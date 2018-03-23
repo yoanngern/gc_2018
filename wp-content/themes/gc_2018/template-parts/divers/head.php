@@ -14,6 +14,24 @@
 	$og_description = get_bloginfo( 'description' );
 
 
+	if ( is_single() ) {
+		$og_title = get_the_title() . " - " . get_field( 'short_name', 'option' );
+
+		if ( get_the_excerpt() ) {
+
+			$og_description = strip_tags( get_the_excerpt() );
+		}
+
+	} else {
+
+		$og_title = get_the_title() . " - " . get_field( 'short_name', 'option' );
+	}
+
+	if ( is_page_template( 'page-home.php' ) ) {
+		$og_title = get_field( 'long_name', 'option' );
+	}
+
+
 	if ( get_field( 'fb_title' ) ) {
 
 		$og_title = get_field( 'fb_title' );
@@ -31,28 +49,6 @@
 
 		$og_image = get_field( 'fb_image' )['sizes']['full_hd'];
 
-	}
-
-	?>
-
-
-	<?php
-
-	if ( is_single() ) {
-		$og_title = get_the_title() . " - " . get_field( 'short_name', 'option' );
-
-		if ( get_the_excerpt() ) {
-
-			$og_description = strip_tags( get_the_excerpt() );
-		}
-
-	} else {
-
-		$og_title = get_the_title() . " - " . get_field( 'short_name', 'option' );
-	}
-
-	if ( is_page_template( 'page-home.php' ) ) {
-		$og_title = get_field( 'long_name', 'option' );
 	}
 
 	?>
