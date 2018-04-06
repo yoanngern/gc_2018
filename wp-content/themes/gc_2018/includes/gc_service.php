@@ -110,6 +110,7 @@ function update_service( $post_id ) {
 		'ID'         => $post_id,
 		//'post_title' => date_i18n( get_option( 'date_format' ), strtotime( get_field( 'start', $post_id ) ) ),
 		'post_title' => $title,
+		'post_name' => $post_id
 	);
 
 

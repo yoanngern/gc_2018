@@ -54,6 +54,7 @@ function update_people( $post_id ) {
 	$my_post = array(
 		'ID'         => $post_id,
 		'post_title' => get_field( 'firstname', $post_id ) . " " . get_field( 'lastname', $post_id ),
+		'post_name' => $post_id
 	);
 
 

@@ -155,6 +155,7 @@ function update_event( $post_id ) {
 	$my_post = array(
 		'ID'         => $post_id,
 		'post_title' => $title,
+		'post_name' => $post_id
 	);
 
 

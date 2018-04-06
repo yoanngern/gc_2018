@@ -47,7 +47,8 @@ function update_location( $post_id ) {
 
 	$my_post = array(
 		'ID'         => $post_id,
-		'post_title' => get_field( 'name', $post_id )
+		'post_title' => get_field( 'name', $post_id ),
+		'post_name' => $post_id
 	);
 
 

@@ -261,6 +261,7 @@ function update_talk( $post_id ) {
 	$my_post = array(
 		'ID'         => $post_id,
 		'post_title' => date_i18n( get_option( 'date_format' ), strtotime( get_field( 'date', $post_id ) ) ),
+		'post_name' => $post_id
 	);
 
 
