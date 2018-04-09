@@ -118,7 +118,7 @@
 
 						<?php if ( $pres_page != null ): ?>
                             <a class="dynamic"
-                               href="<?php echo get_permalink($pres_page->ID); ?>"><?php pll_e( 'découvrir' ) ?><?php echo " " . $pres_page->post_title; ?></a>
+                               href="<?php echo get_permalink( $pres_page->ID ); ?>"><?php pll_e( 'découvrir' ) ?><?php echo " " . $pres_page->post_title; ?></a>
 						<?php endif; ?>
 
                         <div class="social">
@@ -140,9 +140,9 @@
                                 <h3><?php pll_e( 'Lieu' ) ?></h3>
                                 <p class="address"><?php echo $location; ?></p>
 
-								<?php if ( false ): ?>
-                                    <a target="_blank" class="direction" href=""><?php pll_e( 'Itinéraire' ) ?></a>
-								<?php endif; ?>
+                                <a target="_blank" class="direction"
+                                   href="https://www.google.com/maps/search/?api=1&query=<?php echo urlencode( $location ) ?>"><?php pll_e( 'Itinéraire' ) ?></a>
+
                             </div>
 						<?php endif; ?>
 
@@ -197,13 +197,13 @@
 		$query->set( 'orderby', 'meta_value' );
 		$query->set( 'meta_key', 'start' );
 		$query->set( 'meta_key', 'end' );
-		$query->set('meta_query', array(
+		$query->set( 'meta_query', array(
 			array(
 				'key'     => 'end',
 				'compare' => '>=',
 				'value'   => $today,
 			)
-		));
+		) );
 		$query->set( 'order', 'asc' );
 
 
