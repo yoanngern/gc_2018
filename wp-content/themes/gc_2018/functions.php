@@ -4,7 +4,7 @@
  *
  */
 function themeslug_enqueue_style() {
-	wp_enqueue_style( 'core', get_template_directory_uri() . '/style_v1_4.css', false );
+	wp_enqueue_style( 'core', get_template_directory_uri() . '/style_v1_5.css', false );
 }
 
 function themeslug_enqueue_script() {
@@ -614,3 +614,48 @@ function print_buttons( $acf_selector, $post, $style = 'dynamic' ) {
 
 	<?php endif;
 }
+
+
+/**
+ * @param $field
+ *
+ * @return mixed
+ */
+function gc_team_load_value( $field ) {
+
+
+	// Get the current blog id
+	$original_blog_id = get_current_blog_id();
+
+
+	// GC TV
+	switch_to_blog( 4 );
+
+	$speakers = get_posts(
+		array(
+			'post_type' => 'gc_people',
+			'numberposts' => 300,
+		)
+	);
+
+
+	$choices = [];
+
+
+	foreach ( $speakers as $speaker ) {
+
+		$choices[ $speaker->ID ] = $speaker->post_title;
+	}
+
+	// Switch back to the current blog
+	switch_to_blog( $original_blog_id );
+
+
+	$field['choices'] = $choices;
+
+
+	return $field;
+}
+
+// acf/load_value - filter for every field load
+add_filter( 'acf/load_field/name=team_members', 'gc_team_load_value', 10, 3 );

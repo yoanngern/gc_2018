@@ -21,5 +21,6 @@ if(function_exists('pll__')) {
 	require_once( __DIR__ . '/acf/tv_selection.php' );
 	require_once( __DIR__ . '/acf/buttons.php' );
 	require_once( __DIR__ . '/acf/meta_facebook.php' );
+	require_once( __DIR__ . '/acf/team_page.php' );
 
 }

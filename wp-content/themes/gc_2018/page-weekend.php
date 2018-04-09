@@ -443,7 +443,7 @@
 								<?php if ( $speakers != null ): ?>
                                     <div class="speaker">
 										<?php foreach ( $speakers as $speaker ): ?>
-                                            <h1><?php echo get_people( $speaker['value'] )['name'];; ?></h1>
+                                            <h1><?php echo get_people( $speaker['value'] )['name']; ?></h1>
 										<?php endforeach; ?>
                                     </div>
 								<?php endif; ?>

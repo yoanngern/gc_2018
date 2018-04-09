@@ -309,7 +309,7 @@ add_action( 'pre_get_posts', 'gc_service_orderby' );
  *
  * @return mixed
  */
-function my_acf_load_value( $field ) {
+function gc_service_load_value( $field ) {
 
 
 	// Get the current blog id
@@ -346,5 +346,5 @@ function my_acf_load_value( $field ) {
 }
 
 // acf/load_value - filter for every field load
-add_filter( 'acf/load_field/name=service_speaker', 'my_acf_load_value', 10, 3 );
+add_filter( 'acf/load_field/name=service_speaker', 'gc_service_load_value', 10, 3 );
 

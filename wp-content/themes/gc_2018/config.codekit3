@@ -805,6 +805,13 @@
 		"oAP": "\/includes\/acf\/talk.php",
 		"oF": 0
 		},
+	"\/includes\/acf\/team_page.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/team_page.php",
+		"oF": 0
+		},
 	"\/includes\/acf\/tv_page.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -3385,6 +3392,13 @@
 		"oAP": "\/page-summary.php",
 		"oF": 0
 		},
+	"\/page-team.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/page-team.php",
+		"oF": 0
+		},
 	"\/page-tv.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -3975,6 +3989,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/scss\/advanced\/team.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/team.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/scss\/advanced\/tmp_default.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -4092,7 +4119,7 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/style_v1_4.scss": {
+	"\/scss\/style_v1_5.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -4100,7 +4127,7 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/style_v1_4.css",
+		"oAP": "\/style_v1_5.css",
 		"oF": 2,
 		"oS": 3,
 		"uL": 1
