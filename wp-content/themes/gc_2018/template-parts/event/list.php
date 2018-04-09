@@ -20,7 +20,7 @@
 		$title = get_queried_object()->name;
 
 
-	elseif ( get_queried_object()->name == "gc_event" ):
+    elseif ( get_queried_object()->name == "gc_event" ):
 
 		$default_cat = get_term_by( 'slug', 'other', 'gc_eventcategory' );
 
@@ -211,11 +211,12 @@
 						*/
 
 
-						$cat_list = get_categories( array(
+						$cat_list = get_terms( array(
 							'taxonomy' => 'gc_eventcategory',
 							'orderby'  => 'name',
 							'order'    => 'ASC',
 							'exclude'  => $exclude,
+							'parent'   => 0
 						) );
 
 
@@ -315,11 +316,11 @@
 
 
             <nav class="nav">
-                <div class="previous"><?php previous_posts_link( pll__('Previous') ); ?></div>
-                <div class="next"><?php next_posts_link( pll__('Next') ); ?></div>
+                <div class="previous"><?php previous_posts_link( pll__( 'Previous' ) ); ?></div>
+                <div class="next"><?php next_posts_link( pll__( 'Next' ) ); ?></div>
             </nav>
 
-			<?php
+		<?php
 
 		else :
 
