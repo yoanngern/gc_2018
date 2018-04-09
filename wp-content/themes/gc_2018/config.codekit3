@@ -5859,7 +5859,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "gc-lausanne.org",
+	"externalServerAddress": "gc-oron.org",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",

@@ -37,6 +37,12 @@
 
 	$dates = get_dates( $first, $last, false, false, true );
 
+	if ( isset( $_GET['category'] ) ) {
+		$curr_cat = $_GET['category'];
+	} else {
+		$curr_cat = 'celebration';
+	}
+
 	?>
 
 
@@ -84,16 +90,29 @@
 					}
 
 
-
-
 					if ( $date->post_type == 'gc_event' ) {
-						$url = esc_url( get_permalink( $date ) );
+						$url          = esc_url( get_permalink( $date ) );
 						$location_obj = get_field( 'location', $date );
 					} else {
-						$url = '#service-' . $date->ID;
+						$url          = '#service-' . $date->ID;
 						$location_obj = get_field_or_parent( 'location', $date, 'gc_servicecategory' );
-					}
 
+						$cat = get_the_terms( $date, 'gc_servicecategory' )[0];
+
+						if ( $curr_cat == $cat->slug ) {
+
+							$url = '#service-' . $date->ID;
+
+						} else {
+
+							$url = add_query_arg( array(
+								'category' => $cat->slug,
+								'service'  => $date->ID,
+							), $curr_url );
+
+						}
+
+					}
 
 
 					if ( $location_obj != null ) {
@@ -101,6 +120,7 @@
 					} else {
 						$location = "";
 					}
+
 
 					$item = array(
 						'title'    => $date->post_title,
@@ -139,7 +159,6 @@
 								foreach ( $items as $item ):
 
 									if ( date( 'Y-m-d', strtotime( $item['start'] ) ) == date( 'Y-m-d', $days['friday']['date'] ) ):
-
 
 										?>
 
@@ -266,19 +285,13 @@
             </article><!-- .entry-content-page -->
 
 
-			<?php
+		<?php
 		endwhile; //resetting the page loop
 		wp_reset_query(); //resetting the page query
 		?>
 
 
 		<?php
-
-		if ( isset( $_GET['category'] ) ) {
-			$curr_cat = $_GET['category'];
-		} else {
-			$curr_cat = 'celebration';
-		}
 
 
 		$start = date( "Y-m-d", strtotime( 'monday this week' ) ) . ' 00:00:00';
