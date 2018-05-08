@@ -37,7 +37,14 @@ class MC4WP_Graph {
 	 */
 	public $step_size = 'day';
 
+	/**
+	 * @var array
+	 */
 	public $datasets = array();
+
+	/**
+	 * @var array
+	 */
 	public $lines = array();
 
 	/**
@@ -65,7 +72,6 @@ class MC4WP_Graph {
 	* Initialize various settings to use
 	*/
 	public function init() {
-
 		$this->day = date( 'd' );
 
 		switch ( $this->range ) {
@@ -82,7 +88,7 @@ class MC4WP_Graph {
 			break;
 
 			case 'last_week':
-				$this->start_date = strtotime( '-6 days midnight' );
+				$this->start_date = strtotime( '-1 week midnight' );
 				$this->end_date = strtotime( 'tomorrow midnight' );
 				$this->step_size = 'day';
 			break;
@@ -94,13 +100,13 @@ class MC4WP_Graph {
 			break;
 
 			case 'last_quarter':
-				$this->start_date = strtotime( '-3 months midnight' );
+				$this->start_date = strtotime( '-3 months midnight', strtotime(date('01-m-Y')) );
 				$this->end_date = strtotime( 'tomorrow midnight' );
 				$this->step_size = 'month';
 			break;
 
 			case 'last_year':
-				$this->start_date = strtotime( '-1 year midnight' );
+				$this->start_date = strtotime( '-1 year midnight', strtotime(date('01-m-Y')) );
 				$this->end_date = strtotime( 'tomorrow midnight' );
 				$this->step_size = 'month';
 			break;
@@ -110,6 +116,9 @@ class MC4WP_Graph {
 				$this->end_date = strtotime( implode( '-', array( $this->config['end_year'], $this->config['end_month'], $this->config['end_day'] ) ) );
 				$this->step_size = $this->calculate_step_size( $this->start_date, $this->end_date );
 				$this->day = $this->config['start_day'];
+
+				// add 1 step to end date so we include today
+				$this->end_date = strtotime( "+1 {$this->step_size}", $this->end_date );
 				break;
 
 			default:
@@ -129,7 +138,7 @@ class MC4WP_Graph {
 		// setup array of dates with 0's
 		$current = $this->start_date;
 		$this->initial_data = array();
-		while ( $current < $this->end_date ) {
+		while ( $current <= $this->end_date ) {
 			$this->initial_data["{$current}"] = 0;
 			$current = strtotime( "+1 {$this->step_size}", $current );
 		}
@@ -169,7 +178,7 @@ class MC4WP_Graph {
 			'hour' => '%Y-%m-%d %H:00:00',
 			'day' => '%Y-%m-%d 00:00:00',
 			'week' => '%YW%v 00:00:00',
-			'month' => "%Y-%m-{$this->day} 00:00:00"
+			'month' =>  "%Y-%m-{$this->day} 00:00:00",
 		);
 
 		return $date_formats[ $this->step_size ];
@@ -179,12 +188,9 @@ class MC4WP_Graph {
 	 * @return array
 	 */
 	public function query() {
-
 		$datasets = array();
 		$lines = array();
-
 		$day_counts = $this->get_total_day_counts();
-
 
 		// everything
 		$datasets['all'] = array(
@@ -247,12 +253,25 @@ class MC4WP_Graph {
 	 */
 	public function get_day_counts( $totals ) {
 		$counts = $this->initial_data;
-		foreach ( $totals as $day ) {
-			$timestamp = strtotime( $day->date_group );
-            if( isset( $counts["$timestamp"] ) ) {
-                $counts["{$timestamp}"] = $day->count;
-           }
-        }
+		$timestamps = array_keys( $counts );
+
+		for($i = 0; $i < count($timestamps); $i++) {
+			$start = $timestamps[$i];
+			$end = isset( $timestamps[$i+1] ) ? $timestamps[$i+1] : strtotime('+1 year');
+
+			foreach( $totals as $group ) {
+				$timestamp = strtotime( $group->date_group );
+				
+				if( $timestamp >= $end ) {
+					break;
+				}
+
+				if( $timestamp >= $start ) {
+					$counts[$start] = $counts[$start] + $group->count;
+				}				
+			}
+		}
+
 
 		return $counts;
 	}
@@ -262,7 +281,8 @@ class MC4WP_Graph {
 	 */
 	public function get_total_day_counts() {
 		global $wpdb;
-		$sql = "SELECT COUNT(*) AS count, DATE_FORMAT(datetime, '%s') AS date_group FROM `{$this->table_name}` WHERE UNIX_TIMESTAMP(datetime) >= %d AND UNIX_TIMESTAMP(datetime) <= %d GROUP BY date_group";
+		$sql = "SELECT COUNT(*) AS count, DATE_FORMAT(datetime, %s) AS date_group FROM `{$this->table_name}` WHERE UNIX_TIMESTAMP(datetime) >= %d AND UNIX_TIMESTAMP(datetime) <= %d GROUP BY date_group ORDER BY date_group ASC";
+		
 		$query = $wpdb->prepare( $sql, $this->get_date_format(), $this->start_date, $this->end_date );
 		$totals = $wpdb->get_results( $query );
 		return $this->get_day_counts( $totals );
@@ -270,7 +290,7 @@ class MC4WP_Graph {
 
 	public function get_day_counts_for_type( $type ) {
 		global $wpdb;
-		$sql = "SELECT COUNT(*) AS count, DATE_FORMAT(datetime, '%s') AS date_group FROM `{$this->table_name}` WHERE `type` = '%s' AND UNIX_TIMESTAMP(datetime) >= %d AND UNIX_TIMESTAMP(datetime) <= %d GROUP BY date_group";
+		$sql = "SELECT COUNT(*) AS count, DATE_FORMAT(datetime, '%s') AS date_group FROM `{$this->table_name}` WHERE `type` = '%s' AND UNIX_TIMESTAMP(datetime) >= %d AND UNIX_TIMESTAMP(datetime) <= %d GROUP BY date_group ORDER BY date_group ASC";
 		$query = $wpdb->prepare( $sql, $this->get_date_format(), $type, $this->start_date, $this->end_date );
 		$totals = $wpdb->get_results( $query );
 		return $this->get_day_counts( $totals );
@@ -278,7 +298,7 @@ class MC4WP_Graph {
 
 	public function get_day_counts_for_form( $form_id ) {
 		global $wpdb;
-		$sql = "SELECT COUNT(*) AS count, DATE_FORMAT(datetime, '%s') AS date_group FROM `{$this->table_name}` WHERE `related_object_ID` = %d AND `type` = '%s' AND UNIX_TIMESTAMP(datetime) >= %d AND UNIX_TIMESTAMP(datetime) <= %d GROUP BY date_group";
+		$sql = "SELECT COUNT(*) AS count, DATE_FORMAT(datetime, '%s') AS date_group FROM `{$this->table_name}` WHERE `related_object_ID` = %d AND `type` = '%s' AND UNIX_TIMESTAMP(datetime) >= %d AND UNIX_TIMESTAMP(datetime) <= %d GROUP BY date_group ORDER BY date_group ASC";
 		$query = $wpdb->prepare( $sql, $this->get_date_format(), $form_id, 'mc4wp-form', $this->start_date, $this->end_date );
 		$totals = $wpdb->get_results( $query );
 		return $this->get_day_counts( $totals );

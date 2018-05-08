@@ -25,15 +25,15 @@ class Go_Live_Update_URLS_Pro_Tests_Domain extends Go_Live_Update_URLS_Pro_Tests
 		$this->result = true;
 
 		$site_url = site_url();
-		$parts = parse_url( $site_url );
+		$parts = wp_parse_url( $site_url );
 		//site_url() will not have a slash
 		$new_url = untrailingslashit( $this->new_url );
 		$old_url = untrailingslashit( $this->old_url );
 
-		if( $new_url === $site_url || $new_url === $parts[ 'host' ] ){
+		if ( $new_url === $site_url || $new_url === $parts['host'] ) {
 			return;
 		}
-		if( $old_url !== $site_url && $old_url !== $parts[ 'host' ] ){
+		if ( $old_url !== $site_url && $old_url !== $parts['host'] ) {
 			$this->result = 'unknown';
 			return;
 		}
@@ -46,18 +46,18 @@ class Go_Live_Update_URLS_Pro_Tests_Domain extends Go_Live_Update_URLS_Pro_Tests
 				Go_Live_Update_URLS_Pro_Tests_Ajax::DOMAIN_KEY => site_url(),
 
 				'action' => Go_Live_Update_URLS_Pro_Tests_Ajax::VERIFY_DOMAIN,
-				'hash' => md5( dirname( dirname( dirname( __FILE__ ) ) ). DIRECTORY_SEPARATOR . 'endpoint' . DIRECTORY_SEPARATOR . 'domain-test-endpoint.php' ),
+				'hash'   => md5( dirname( dirname( dirname( __FILE__ ) ) ). DIRECTORY_SEPARATOR . 'endpoint' . DIRECTORY_SEPARATOR . 'domain-test-endpoint.php' ),
 			),
 			'sslverify' => false,
 			'headers'   => array( 'Accept' => 'application/json' ),
 		);
 
-		if( !is_multisite() ){
+		if ( ! is_multisite() ) {
 			$post_url = admin_url( 'admin-post.php' );
 		} else {
 			//multisite redirects the requests which make ajax always fail.
 			//We use our own endpoint when testing multisite.
-			$post_url = Go_Live_Update_URLS_Pro_Factory::plugin_url( 'endpoint/domain-test-endpoint.php' );
+			$post_url = Go_Live_Update_URLS_Pro_Core::plugin_url( 'endpoint/domain-test-endpoint.php' );
 		}
 
 		$request_url = str_replace( $this->old_url, $this->new_url, $post_url );
@@ -70,12 +70,12 @@ class Go_Live_Update_URLS_Pro_Tests_Domain extends Go_Live_Update_URLS_Pro_Tests
 		 * @todo make additional warning message for different circumstances
 		 *
 		 */
-		if( $request_url === $post_url ){
+		if ( $request_url === $post_url ) {
 			$this->result = 'unknown';
 		} else {
 			$request = wp_remote_post( $request_url, $_args );
 			$result = json_decode( wp_remote_retrieve_body( $request ) );
-			if( empty( $result->success ) ){
+			if ( empty( $result->success ) ) {
 				$this->result = false;
 			}
 		}
@@ -83,14 +83,14 @@ class Go_Live_Update_URLS_Pro_Tests_Domain extends Go_Live_Update_URLS_Pro_Tests
 
 
 	protected function get_message() {
-		if( true === $this->result ){
-			return $this->messages[ 'pass' ];
+		if ( true === $this->result ) {
+			return $this->messages['pass'];
 		}
-		if( false === $this->result ){
-			return $this->messages[ 'fail' ];
+		if ( false === $this->result ) {
+			return $this->messages['fail'];
 		}
 
-		return $this->messages[ 'warning' ];
+		return $this->messages['warning'];
 	}
 
 
@@ -112,7 +112,7 @@ class Go_Live_Update_URLS_Pro_Tests_Domain extends Go_Live_Update_URLS_Pro_Tests
 	}
 
 
-	public static function factory( $old_url, $new_url){
+	public static function factory( $old_url, $new_url ) {
 		$class = new self();
 		$class->old_url = $old_url;
 		$class->new_url = $new_url;

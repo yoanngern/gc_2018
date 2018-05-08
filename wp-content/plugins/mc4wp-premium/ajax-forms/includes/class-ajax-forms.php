@@ -8,9 +8,9 @@
 class MC4WP_AJAX_Forms {
 
 	/**
-	 * @var MC4WP_Plugin
+	 * @var string
 	 */
-	protected $plugin;
+	protected $plugin_file;
 
 	/**
 	 * @var bool Is the script enqueued already?
@@ -18,10 +18,10 @@ class MC4WP_AJAX_Forms {
 	protected $is_script_enqueued = false;
 
 	/**
-	 * @param MC4WP_Plugin $plugin
+	 * @param string $plugin_file
 	 */
-	public function __construct( MC4WP_Plugin $plugin ) {
-		$this->plugin = $plugin;
+	public function __construct( $plugin_file ) {
+		$this->plugin_file = $plugin_file;
 	}
 
 	public function add_hooks() {
@@ -74,7 +74,7 @@ class MC4WP_AJAX_Forms {
 
 		// enqueue ajax script
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.js' : '.min.js';
-		wp_enqueue_script( 'mc4wp-ajax-forms', $this->plugin->url( '/assets/js/ajax-forms' . $suffix ), array( 'mc4wp-forms-api' ), $this->plugin->version(), true );
+		wp_enqueue_script( 'mc4wp-ajax-forms', plugins_url( '/assets/js/ajax-forms' . $suffix, $this->plugin_file ), array( 'mc4wp-forms-api' ), MC4WP_PREMIUM_VERSION, true );
 
 		// default loading character
 		$character = "&bull;";
@@ -151,12 +151,13 @@ class MC4WP_AJAX_Forms {
 			$data['event'] = $form->last_event;
 		}
 
-		$response['data'] = $data;
-
-		if( $form->get_redirect_url() ) {
-			$response['data']['redirect_to'] = $form->get_redirect_url();
+		// set redirect url (if not empty or 0)
+		$redirect_url = $form->get_redirect_url();
+		if( ! empty( $redirect_url ) ) {
+			$data['redirect_to'] = $redirect_url;
 		}
 
+		$response['data'] = $data;
 		wp_send_json( $response );
 		exit;
 	}

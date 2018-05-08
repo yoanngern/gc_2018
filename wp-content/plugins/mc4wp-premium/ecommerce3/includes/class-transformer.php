@@ -75,8 +75,15 @@ class MC4WP_Ecommerce_Object_Transformer {
 	 * @throws Exception
 	 */
 	public function customer($object) {
+		// first, attempt to get billing_email from order or customer object.
 		$billing_email = method_exists( $object, 'get_billing_email' ) ? $object->get_billing_email() : $this->get_object_property($object, 'billing_email');
-		if (empty($billing_email)) {
+		
+		// if the above failed, try "user_email" property
+		if ( empty($billing_email) && ! empty($object->user_email) ) {
+			$billing_email = $object->user_email;	
+		}
+
+		if( empty($billing_email) ) {
 			throw new Exception("Customer data requires a billing_email property", 100);
 		}
 
@@ -157,25 +164,32 @@ class MC4WP_Ecommerce_Object_Transformer {
 		$billing_email = $order->get_billing_email(); 
 
 		// generate item lines data
-		$items = $order->get_items();
+		$items = $order->get_items( array( 'line_item' ) );
 		$order_lines_data = array();
 		foreach ($items as $item_id => $item) {
+			// product may not exist anymore by now, we validate this outside of this class
+			$product_id = $item->get_product_id();
+
 			// calculate cost of a single item
 			$qty = (int) $item->get_quantity();
 			$item_price = $item->get_total() / $qty;
 
 			$line_data = array(
 				'id' => (string) $item_id,
-				'product_id' => (string) $item->get_product_id(),
-				'product_variant_id' => (string) $item->get_product_id(),
+				'product_id' => (string) $product_id,
+				'product_variant_id' => (string) $product_id,
 				'quantity' => $qty,
 				'price' => floatval($item_price),
 			);
 
-			// use variation ID if set.
+			// use variation ID if set & product variation exists
 			$variation_id = $item->get_variation_id();
-			if (!empty($variation_id)) {
-				$line_data['product_variant_id'] = (string) $variation_id;
+			if (!empty($variation_id) ) {
+				$variation_product = wc_get_product( $variation_id );
+
+				if( $variation_product && $variation_product->get_parent_id() === $product_id ) {
+					$line_data['product_variant_id'] = (string) $variation_id;
+				}
 			}
 
 			$order_lines_data[] = $line_data;
@@ -183,7 +197,7 @@ class MC4WP_Ecommerce_Object_Transformer {
 
 		// add order
 		$order_data = array(
-			'id' => (string) $order_number,
+			'id' => (string) $order_number, // use order number instead of ID, because emails.
 			'customer' => array( 'id' => $this->get_customer_id( $billing_email )) ,
 			'order_total' => floatval($order->get_total()),
 			'tax_total' => floatval($order->get_total_tax()),
@@ -224,7 +238,7 @@ class MC4WP_Ecommerce_Object_Transformer {
 
 		// only send `order_url` if it looks like an actual domain, because mailchimp will reject values like "localhost/order/5"
 		$order_url = $order->get_view_order_url();
-		if( strpos( $order_url, '.' ) && strpos( $order_url, 'wordpress.' ) === false ) {
+		if( strpos( $order_url, '.' ) && strpos( $order_url, 'wordpress.' ) === false && strpos( $order_url, '.localhost' ) === false ) {
 			$order_data['order_url'] = $order_url;
 		}
 
@@ -245,18 +259,23 @@ class MC4WP_Ecommerce_Object_Transformer {
 	 * @return array
 	 */
 	public function product(WC_Product $product) {
-		// init product variants
+		// add product variants if this is a variable product
 		$variants = array();
-		if ($product instanceof WC_Product_Variable) {
-			$children = $product->get_children();
+		$children = $product->get_children();
+		if(! empty($children) ) {
 			foreach ($children as $product_variation_id) {
 				$product_variation = wc_get_product($product_variation_id);
-				$variants[] = $this->get_product_variant_data($product_variation);
+
+				// only add variation if it exists
+				if( $product ) {
+					$variants[] = $this->get_product_variant_data($product_variation);
+				}
 			}
-		} else {
-			// default variant
-			$variants[] = $this->get_product_variant_data($product);
 		}
+
+		// always add main product to the available variants
+		// TODO: Check if this can cause issues with product recommendations?
+		$variants[] = $this->get_product_variant_data($product);
 
 		// data to send to MailChimp
 		$product_data = array(
@@ -268,8 +287,21 @@ class MC4WP_Ecommerce_Object_Transformer {
 
 			// optional
 			'type' => (string) $product->get_type(),
-			'image_url' => function_exists( 'get_the_post_thumbnail_url' ) ? (string) get_the_post_thumbnail_url( $product->get_id(), 'shop_single' ) : '',
+			'image_url' => function_exists( 'get_the_post_thumbnail_url' ) ? (string) get_the_post_thumbnail_url($product->get_id(), 'shop_single') : '',
 		);
+
+		// add variant images
+		$product_data['images'] = array();
+		foreach( $product_data['variants'] as $variant ) {
+			if( empty( $variant['image_url'] ) ) {
+				continue;
+			}
+			$product_data['images'][] = array(
+				'id' => $variant['id'],
+				'url' => $variant['image_url'],
+				'variant_ids' => array( $variant['id'] )
+			);
+		}
 
 		// add product categories, joined together by "|"
 		$category_names = array();
@@ -366,6 +398,11 @@ class MC4WP_Ecommerce_Object_Transformer {
 		foreach ($cart_items as $line_id => $cart_item) {
 			$product_variant_id = !empty($cart_item['variation_id']) ? $cart_item['variation_id'] : $cart_item['product_id'];
 			$product = wc_get_product($product_variant_id);
+			
+			// check if product exists before adding to line data
+			if( ! $product ) {
+				continue;
+			}
 
 			$lines_data[] = array(
 				'id' => (string) $line_id,

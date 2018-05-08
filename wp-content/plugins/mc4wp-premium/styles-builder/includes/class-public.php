@@ -8,15 +8,15 @@
 class MC4WP_Styles_Builder_Public {
 
 	/**
-	 * @var MC4WP_Plugin
+	 * @var string
 	 */
-	protected $plugin;
+	protected $plugin_file;
 
 	/**
-	 * @param MC4WP_Plugin $plugin
+	 * @param string $plugin_file
 	 */
-	public function __construct( MC4WP_Plugin $plugin ) {
-		$this->plugin = $plugin;
+	public function __construct( $plugin_file ) {
+		$this->plugin_file = $plugin_file;
 	}
 
 	/**
@@ -79,7 +79,8 @@ class MC4WP_Styles_Builder_Public {
 		// disable all other stylesheets
 		add_filter( 'mc4wp_form_stylesheets', '__return_empty_array' );
 
-		require $this->plugin->dir( '/views/form-preview.php' );
+
+		require dirname( $this->plugin_file ) . '/views/form-preview.php';
 		exit;
 	}
 

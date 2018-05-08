@@ -25,6 +25,7 @@
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
 		<exclude name="Generic" />
 		<exclude name="Squiz" />
+		<exclude name="PEAR.NamingConventions.ValidClassName.Invalid" />
 	</rule>
     <rule ref="WordPress.WP.I18n">
         <properties>

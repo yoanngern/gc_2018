@@ -6,9 +6,9 @@ function AccordionElement(element) {
     this.heading = element.querySelector('h2, h3, h4');
     this.content = element.querySelector('div');
 
-    element.setAttribute('class','accordion');
-    this.heading.setAttribute('class','accordion-heading');
-    this.content.setAttribute('class','accordion-content');
+    element.setAttribute('class', 'accordion');
+    this.heading.setAttribute('class', 'accordion-heading');
+    this.content.setAttribute('class', 'accordion-content');
     this.content.style.display = 'none';
     this.heading.addEventListener('click', this.toggle.bind(this));
 }
@@ -16,14 +16,14 @@ function AccordionElement(element) {
 /**
  * Open this accordion
  */
-AccordionElement.prototype.open = function() {
+AccordionElement.prototype.open = function () {
     this.toggle(true);
 };
 
 /**
  * Close this accordion
  */
-AccordionElement.prototype.close = function() {
+AccordionElement.prototype.close = function () {
     this.toggle(false);
 };
 
@@ -32,16 +32,17 @@ AccordionElement.prototype.close = function() {
  *
  * @param show
  */
-AccordionElement.prototype.toggle = function(show) {
-    if( typeof(show) !== "boolean" ) {
-        show = ( this.content.offsetParent === null );
+AccordionElement.prototype.toggle = function (show) {
+    if (typeof show !== "boolean") {
+        show = this.content.offsetParent === null;
     }
 
     this.content.style.display = show ? 'block' : 'none';
-    this.element.className = 'accordion ' + ( ( show ) ? 'expanded' : 'collapsed' );
+    this.element.className = 'accordion ' + (show ? 'expanded' : 'collapsed');
 };
 
 module.exports = AccordionElement;
+
 },{}],2:[function(require,module,exports){
 'use strict';
 
@@ -50,19 +51,19 @@ var AccordionElement = require('./_accordion-element.js');
 function Accordion(element) {
 
 	var accordions = [],
-		accordionElements;
+	    accordionElements;
 
 	// add class to container
-	element.className+= " accordion-container";
+	element.className += " accordion-container";
 
 	// find accordion blocks
 	accordionElements = element.children;
 
 	// hide all content blocks
-	for( var i=0; i < accordionElements.length; i++) {
+	for (var i = 0; i < accordionElements.length; i++) {
 
 		// only act on direct <div> children
-		if( accordionElements[i].tagName.toUpperCase() !== 'DIV' ) {
+		if (accordionElements[i].tagName.toUpperCase() !== 'DIV') {
 			continue;
 		}
 
@@ -78,11 +79,12 @@ function Accordion(element) {
 }
 
 module.exports = Accordion;
+
 },{"./_accordion-element.js":1}],3:[function(require,module,exports){
 'use strict';
 
 var Option = require('./_option.js'),
-	$ = window.jQuery;
+    $ = window.jQuery;
 
 function lightenColor(col, amt) {
 
@@ -93,30 +95,26 @@ function lightenColor(col, amt) {
 		usePound = true;
 	}
 
-	var num = parseInt(col,16);
+	var num = parseInt(col, 16);
 
 	var r = (num >> 16) + amt;
 
-	if (r > 255) r = 255;
-	else if  (r < 0) r = 0;
+	if (r > 255) r = 255;else if (r < 0) r = 0;
 
-	var b = ((num >> 8) & 0x00FF) + amt;
+	var b = (num >> 8 & 0x00FF) + amt;
 
-	if (b > 255) b = 255;
-	else if  (b < 0) b = 0;
+	if (b > 255) b = 255;else if (b < 0) b = 0;
 
 	var g = (num & 0x0000FF) + amt;
 
-	if (g > 255) g = 255;
-	else if (g < 0) g = 0;
+	if (g > 255) g = 255;else if (g < 0) g = 0;
 
-	return (usePound?"#":"") + String("000000" + (g | (b << 8) | (r << 16)).toString(16)).slice(-6);
+	return (usePound ? "#" : "") + String("000000" + (g | b << 8 | r << 16).toString(16)).slice(-6);
 }
 
-
-var FormPreview = function(context) {
+var FormPreview = function FormPreview(context) {
 	var $context = $(context),
-		$elements;
+	    $elements;
 
 	// create option elements
 	var options = createOptions();
@@ -124,7 +122,7 @@ var FormPreview = function(context) {
 	// attach events
 	$(".mc4wp-option").on('input change', applyStyles);
 	$('.color-field').wpColorPicker({
-		change: function() {
+		change: function change() {
 			window.setTimeout(applyStyles, 10);
 		},
 		clear: applyStyles
@@ -133,13 +131,14 @@ var FormPreview = function(context) {
 	// initialize form preview
 	function init() {
 		var $form = $context.contents().find('.mc4wp-form');
+		var $fields = $form.find('.mc4wp-form-fields');
 
 		$elements = {
 			form: $form,
-			labels: $form.find('label'),
-			fields: $form.find('input[type="text"], input[type="email"], input[type="url"], input[type="number"], input[type="date"], select, textarea'),
-			choices: $form.find('input[type="radio"], input[type="checkbox"]'),
-			buttons: $form.find('input[type="submit"], input[type="button"], button'),
+			labels: $fields.find('label'),
+			fields: $fields.find('input[type="text"], input[type="email"], input[type="url"], input[type="number"], input[type="date"], select, textarea'),
+			choices: $fields.find('input[type="radio"], input[type="checkbox"]'),
+			buttons: $fields.find('input[type="submit"], input[type="button"], button'),
 			messages: $form.find('.mc4wp-alert'),
 			css: $context.contents().find('#custom-css')
 		};
@@ -157,8 +156,8 @@ var FormPreview = function(context) {
 		var optionElements = document.querySelectorAll('.mc4wp-option');
 		var options = {};
 
-		for( var i=0; i<optionElements.length; i++ ) {
-			options[ optionElements[i].id ] = new Option( optionElements[i] );
+		for (var i = 0; i < optionElements.length; i++) {
+			options[optionElements[i].id] = new Option(optionElements[i]);
 		}
 
 		return options;
@@ -203,26 +202,25 @@ var FormPreview = function(context) {
 		});
 
 		// responsive form width
-		if( options["form-width"].getValue().length > 0 ) {
+		if (options["form-width"].getValue().length > 0) {
 			$elements.form.css('width', '100%');
 		}
 
 		// set background image (if set, otherwise reset)
-		if( options["form-background-image"].getValue().length > 0 ) {
+		if (options["form-background-image"].getValue().length > 0) {
 			$elements.form.css('background-image', 'url("' + options["form-background-image"].getValue() + '")');
 
-			
 			var bgRepeat = options["form-background-repeat"].getValue();
-			var property = (['cover'].indexOf(bgRepeat) > -1) ? 'background-size' : 'background-repeat';
+			var property = ['cover'].indexOf(bgRepeat) > -1 ? 'background-size' : 'background-repeat';
 			$elements.form.css(property, bgRepeat);
 		} else {
 			$elements.form.css('background-image', 'initial');
-			$elements.form.css('background-repeat','');
-			$elements.form.css('background-size','');
+			$elements.form.css('background-repeat', '');
+			$elements.form.css('background-size', '');
 		}
 
-		if( options["form-border-width"].getValue() > 0 ) {
-			$elements.form.css( 'border-style', 'solid' );
+		if (options["form-border-width"].getValue() > 0) {
+			$elements.form.css('border-style', 'solid');
 		}
 
 		// apply custom styles to labels
@@ -237,19 +235,19 @@ var FormPreview = function(context) {
 		});
 
 		// responsive label width
-		if( options["labels-width"].getValue().length > 0 ) {
+		if (options["labels-width"].getValue().length > 0) {
 			$elements.labels.css('width', '100%');
 		}
 
 		// reset font style of <span> elements inside <label> elements
-		$elements.labels.find('span').css('font-weight', 'normal' );
+		$elements.labels.find('span').css('font-weight', 'normal');
 
 		// only set label text style if it's set
 		var labelsFontStyle = options["labels-font-style"].getValue();
-		if( labelsFontStyle.length > 0 ) {
+		if (labelsFontStyle.length > 0) {
 			$elements.labels.css({
-				"font-weight": (labelsFontStyle == 'bold' || labelsFontStyle == 'bolditalic') ? 'bold' : 'normal',
-				"font-style": (labelsFontStyle == 'italic' || labelsFontStyle == 'bolditalic') ? 'italic' : 'normal'
+				"font-weight": labelsFontStyle == 'bold' || labelsFontStyle == 'bolditalic' ? 'bold' : 'normal',
+				"font-style": labelsFontStyle == 'italic' || labelsFontStyle == 'bolditalic' ? 'italic' : 'normal'
 			});
 		}
 
@@ -268,7 +266,7 @@ var FormPreview = function(context) {
 		});
 
 		// responsive field width
-		if( options["fields-width"].getValue().length > 0 ) {
+		if (options["fields-width"].getValue().length > 0) {
 			$elements.fields.css('width', '100%');
 		}
 
@@ -285,31 +283,31 @@ var FormPreview = function(context) {
 		});
 
 		// responsive buttons width
-		if( options["buttons-width"].getValue().length ) {
+		if (options["buttons-width"].getValue().length) {
 			$elements.buttons.css('width', '100%');
 		}
 
 		// add border style if border-width is set and bigger than 0
-		if( options["buttons-border-width"].getValue() > 0 ) {
-			$elements.buttons.css( 'border-style', 'solid' );
+		if (options["buttons-border-width"].getValue() > 0) {
+			$elements.buttons.css('border-style', 'solid');
 		}
 
 		// add background reset if custom button background was set
-		if( options["buttons-background-color"].getColorValue().length ) {
+		if (options["buttons-background-color"].getColorValue().length) {
 			$elements.buttons.css({
 				"background-image": "none",
 				"filter": "none"
 			});
 
 			// calculate hover color
-			var hoverColor = lightenColor( options["buttons-background-color"].getColorValue(), -20 );
+			var hoverColor = lightenColor(options["buttons-background-color"].getColorValue(), -20);
 			options["buttons-hover-background-color"].setValue(hoverColor);
 		} else {
 			options["buttons-hover-background-color"].setValue('');
 		}
 
-		if( options["buttons-border-color"].getColorValue().length ) {
-			var hoverColor = lightenColor( options["buttons-border-color"].getColorValue(), -20 );
+		if (options["buttons-border-color"].getColorValue().length) {
+			var hoverColor = lightenColor(options["buttons-border-color"].getColorValue(), -20);
 			options["buttons-hover-border-color"].setValue(hoverColor);
 		} else {
 			options["buttons-hover-border-color"].setValue('');
@@ -330,8 +328,8 @@ var FormPreview = function(context) {
 
 	function setButtonHoverStyles() {
 		// calculate darker color
-		$elements.buttons.css('background-color', options["buttons-hover-background-color"].getColorValue() );
-		$elements.buttons.css('border-color', options["buttons-hover-border-color"].getColorValue() );
+		$elements.buttons.css('background-color', options["buttons-hover-background-color"].getColorValue());
+		$elements.buttons.css('border-color', options["buttons-hover-border-color"].getColorValue());
 	}
 
 	function setDefaultButtonStyles() {
@@ -342,40 +340,38 @@ var FormPreview = function(context) {
 	}
 
 	function setFieldFocusStyles() {
-		if( options["fields-focus-outline-color"].getColorValue().length ) {
-			$elements.fields.css('outline', '2px solid ' + options["fields-focus-outline-color"].getColorValue() );
+		if (options["fields-focus-outline-color"].getColorValue().length) {
+			$elements.fields.css('outline', '2px solid ' + options["fields-focus-outline-color"].getColorValue());
 		} else {
 			setDefaultFieldStyles();
 		}
 	}
 
 	function setDefaultFieldStyles() {
-		$elements.fields.css('outline', '' );
+		$elements.fields.css('outline', '');
 	}
 
 	return {
 		init: init,
 		applyStyles: applyStyles
-	}
-
+	};
 };
-
 
 module.exports = FormPreview;
 
 },{"./_option.js":4}],4:[function(require,module,exports){
 'use strict';
 
-var Option = function( element ) {
+var Option = function Option(element) {
 	this.element = element;
 	this.$element = window.jQuery(element);
 };
 
-Option.prototype.getColorValue = function() {
+Option.prototype.getColorValue = function () {
 	this.element.value = this.element.value.trim();
 
-	if( this.element.value.length > 0 ) {
-		if( this.element.className.indexOf('wp-color-picker') !== -1) {
+	if (this.element.value.length > 0) {
+		if (this.element.className.indexOf('wp-color-picker') !== -1) {
 			return this.$element.wpColorPicker('color');
 		} else {
 			return this.element.value;
@@ -385,11 +381,11 @@ Option.prototype.getColorValue = function() {
 	return '';
 };
 
-Option.prototype.getPxOrPercentageValue = function(fallback) {
+Option.prototype.getPxOrPercentageValue = function (fallback) {
 	var value = this.element.value.trim();
 
-	if( value.length > 0 ) {
-		if( value.substring(value.length-2, value.length) !== 'px' && value.substring(value.length-1, value.length) !== '%') {
+	if (value.length > 0) {
+		if (value.substring(value.length - 2, value.length) !== 'px' && value.substring(value.length - 1, value.length) !== '%') {
 			value = parseInt(value) + 'px';
 		}
 		return value;
@@ -398,35 +394,36 @@ Option.prototype.getPxOrPercentageValue = function(fallback) {
 	return fallback || '';
 };
 
-Option.prototype.getPxValue = function(fallback) {
+Option.prototype.getPxValue = function (fallback) {
 	this.element.value = this.element.value.trim();
 
-	if( this.element.value.length > 0 ) {
-		return parseInt( this.element.value ) + "px";
+	if (this.element.value.length > 0) {
+		return parseInt(this.element.value) + "px";
 	}
 
 	return fallback || '';
 };
 
-Option.prototype.getValue = function(fallback) {
+Option.prototype.getValue = function (fallback) {
 	this.element.value = this.element.value.trim();
 
-	if( this.element.value.length > 0 ) {
+	if (this.element.value.length > 0) {
 		return this.element.value;
 	}
 
 	return fallback || '';
 };
 
-Option.prototype.clear = function() {
+Option.prototype.clear = function () {
 	this.element.value = '';
 };
 
-Option.prototype.setValue = function(value) {
+Option.prototype.setValue = function (value) {
 	this.element.value = value;
 };
 
 module.exports = Option;
+
 },{}],5:[function(require,module,exports){
 'use strict';
 
@@ -441,8 +438,8 @@ var original_send_to_editor = window.send_to_editor;
 var accordion;
 
 // init
-preview = new FormPreview( iframeElement );
-$(iframeElement).load(function() {
+preview = new FormPreview(iframeElement);
+$(iframeElement).load(function () {
 	preview.init();
 	preview.applyStyles();
 });
@@ -451,30 +448,30 @@ $(iframeElement).load(function() {
 accordion = new Accordion(document.querySelector('.mc4wp-accordion'));
 
 // show generated CSS button
-$(".mc4wp-show-css").click(function() {
+$(".mc4wp-show-css").click(function () {
 	var $generatedCss = $("#mc4wp_generated_css");
 	$generatedCss.toggle();
-	var text = ( $generatedCss.is(':visible') ? 'Hide' : 'Show' ) + " generated CSS";
+	var text = ($generatedCss.is(':visible') ? 'Hide' : 'Show') + " generated CSS";
 	$(this).text(text);
 });
 
-$(".mc4wp-form-select").change( function() {
+$(".mc4wp-form-select").change(function () {
 	$(this).parents('form').submit();
 });
 
 // show thickbox when clicking on "upload-image" buttons
-$(".upload-image").click( function() {
+$(".upload-image").click(function () {
 	$imageUploadTarget = $(this).siblings('input');
 	tb_show('', 'media-upload.php?type=image&TB_iframe=true');
 });
 
-$("#form-css-settings").change(function() {
+$("#form-css-settings").change(function () {
 	this.checkValidity();
-})
+});
 
 // attach handler to "send to editor" button
-window.send_to_editor = function(html){
-	if( $imageUploadTarget ) {
+window.send_to_editor = function (html) {
+	if ($imageUploadTarget) {
 		var imgurl = $(html).attr('src'); // $('img',html).attr('src');
 		$imageUploadTarget.val(imgurl);
 		tb_remove();

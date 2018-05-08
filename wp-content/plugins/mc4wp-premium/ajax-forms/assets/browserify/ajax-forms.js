@@ -8,32 +8,32 @@ var busy = false;
 var config = new ConfigStore('mc4wp_ajax_vars');
 
 // failsafe against including script twice
-if( config.get('ready') ) {
-	return;
+if( ! config.get('ready') ) {
+	forms.on('submit', function( form, event ) {
+		// does this form have AJAX enabled?
+		if( form.element.getAttribute('class').indexOf('mc4wp-ajax') < 0 ) {
+			return;
+		}
+
+		// blur active input field
+		if(document.activeElement && document.activeElement.tagName === 'INPUT') {
+			document.activeElement.blur();
+		}
+
+		try{
+			submit(form);
+		} catch(e) {
+			console.error(e);
+			return true;
+		}
+
+		event.returnValue = false;
+		event.preventDefault();
+		return false;
+	});
 }
 
-forms.on('submit', function( form, event ) {
-
-	// does this form have AJAX enabled?
-	// @todo move to data attribute?
-	if( form.element.getAttribute('class').indexOf('mc4wp-ajax') < 0 ) {
-		return;
-	}
-
-	try{
-		submit(form);
-	} catch(e) {
-		console.error(e);
-		return true;
-	}
-
-	event.returnValue = false;
-	event.preventDefault();
-	return false;
-});
-
 function submit( form ) {
-
 	var loader = new Loader(form.element);
 	var loadingChar = config.get('loading_character');
 	if( loadingChar ) {
@@ -82,37 +82,43 @@ function submit( form ) {
 	}
 
 	function process( response ) {
-		forms.trigger('submitted', [form]);
+		trigger('submitted', form, null);
 
 		if( response.error ) {
 			form.setResponse(response.error.message);
-			forms.trigger('error', [form, response.error.errors]);
+			trigger('error', form, response.error.errors);
 		} else {
 			var data  = form.getData();
 
 			// trigger events
-			forms.trigger('success', [form, data]);
-			forms.trigger( response.data.event, [form, data ]);
+			trigger('success', form, data);
+			trigger( response.data.event, form, data);
 
-			// for BC: always trigger "subscribed" event when firing "subscriber_updated" event
-			if( response.data.event === 'subscriber_updated' ) {
-                forms.trigger( 'subscribed', [form, data ]);
+			// for BC: always trigger "subscribed" event when firing "updated_subscriber" event
+			if( response.data.event === 'updated_subscriber' ) {
+                trigger('subscribed', form, data);
 			}
 
 			if( response.data.hide_fields ) {
 				form.element.querySelector('.mc4wp-form-fields').style.display = 'none';
 			}
 
-			// Redirect to URL or show success message
+			// show success message
+			form.setResponse(response.data.message);
+
+			// reset form element
+			form.element.reset();
+
+			// maybe redirect to url
 			if( response.data.redirect_to ) {
 				window.location.href = response.data.redirect_to;
-			} else {
-				form.setResponse(response.data.message);
 			}
-
-			// finally, reset form element
-			form.element.reset();
 		}
+	}
+
+	function trigger(event, form, data) {
+		forms.trigger(event, [form, data]);
+		forms.trigger(form.id + "." + event, [form, data]);
 	}
 
 	function clean() {

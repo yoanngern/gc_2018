@@ -1,9 +1,10 @@
 'use strict';
 
 var config = mc4wp_ecommerce;
-var Wizard = require('./_wizard.js')(config.i18n);
-var qwest = require('qwest');
-var m = window.m = require('mithril');
+var i18n = mc4wp_ecommerce.i18n;
+var m = require('mithril');
+var Wizard = require('./_wizard.js');
+var QueueProcessor = require('./_queue-processor.js');
 
 // ask for confirmation for elements with [data-confirm] attribute
 require('./_confirm-attr.js')();
@@ -18,7 +19,9 @@ var productBarMount = document.getElementById('mc4wp-ecommerce-products-progress
 var productsWizard = new Wizard(productMount, productBarMount, productCounts.tracked, productCounts.all );
 productsWizard.on('tick', productTicker);
 productsWizard.on('done', enableNextButtons);
-productsWizard.ready() && productsWizard.stop();
+if( productsWizard.finished() ) {
+    productsWizard.stop();
+}
 
 // order wizard
 var orderCounts = mc4wp_ecommerce.order_count;
@@ -28,12 +31,9 @@ var orderBarMount = document.getElementById('mc4wp-ecommerce-orders-progress-bar
 var ordersWizard = new Wizard(orderMount, orderBarMount, orderCounts.tracked, orderCounts.all );
 ordersWizard.on('tick', orderTicker);
 ordersWizard.on('done', enableNextButtons);
-ordersWizard.ready() && ordersWizard.stop();
-
-// set global qwest options
-qwest.setDefaultOptions({
-	timeout: 60000
-});
+if(ordersWizard.finished()) {
+    ordersWizard.stop();
+}
 
 function enableNextButtons(e) {
     [].forEach.call(nextButtons, function(b) {
@@ -42,24 +42,27 @@ function enableNextButtons(e) {
 }
 
 function orderTicker(wizard) {
-    qwest.post(ajaxurl + "?action=mc4wp_ecommerce_synchronize_orders", {
-        order_id: orderIds[wizard.index]
-    })
-        .then(requestSuccessHandler(wizard))
-        .catch(requestErrorHandler(wizard));
+    m.request({
+        method: "POST",
+        url: ajaxurl + "?action=mc4wp_ecommerce_synchronize_orders",
+        data: { order_id: orderIds[wizard.index] }
+    }).then(requestSuccessHandler(wizard))
+      .catch(requestErrorHandler(wizard));
 }
 
 
 function productTicker(wizard) {
-    qwest.post(ajaxurl + "?action=mc4wp_ecommerce_synchronize_products", {
-        product_id: productIds[wizard.index]
-    })
-        .then(requestSuccessHandler(wizard))
-        .catch(requestErrorHandler(wizard));
+    m.request({
+        method: "POST",
+        url: ajaxurl + "?action=mc4wp_ecommerce_synchronize_products",
+        data: { product_id: productIds[wizard.index] }
+    }).then(requestSuccessHandler(wizard))
+      .catch(requestErrorHandler(wizard));
 }
 
 function requestErrorHandler(wizard) {
-    return function(e, xhr, response) {
+    return function(e) {
+        console.log(e);
         wizard.logger.log(e);
 
         // proceed anyway
@@ -68,7 +71,7 @@ function requestErrorHandler(wizard) {
 }
 
 function requestSuccessHandler(wizard) {
-    return function(xhr, response) {
+    return function(response) {
         if( response.data && response.data.message ) {
             wizard.status(response.data.message, response.success);
         }
@@ -78,8 +81,7 @@ function requestSuccessHandler(wizard) {
 }
 
 // queue processor
-var qp = require('./_queue-processor.js')(qwest, config.i18n);
 var element = document.getElementById('queue-processor');
 if( element ) {
-    m.mount( element, qp );
+    m.mount( element, QueueProcessor );
 }

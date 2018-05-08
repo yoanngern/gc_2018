@@ -9,17 +9,17 @@
 class MC4WP_Form_Notifications_Admin {
 
 	/**
-	 * @var MC4WP_Plugin
+	 * @var string
 	 */
-	protected $plugin;
+	protected $plugin_file;
 
 	/**
 	 * MC4WP_Form_Notifications_Admin constructor.
 	 *
-	 * @param MC4WP_Plugin $plugin
+	 * @param string $plugin_file
 	 */
-	public function __construct( MC4WP_Plugin $plugin ) {
-		$this->plugin = $plugin;
+	public function __construct( $plugin_file ) {
+		$this->plugin_file = $plugin_file;
 	}
 
 	/**
@@ -43,7 +43,7 @@ class MC4WP_Form_Notifications_Admin {
 			return;
 		}
 
-		wp_enqueue_script( 'mc4wp-email-notifications', $this->plugin->url( "/assets/js/admin{$suffix}.js" ), array( 'mc4wp-forms-admin' ), $this->plugin->version(), true );
+		wp_enqueue_script( 'mc4wp-email-notifications', plugins_url( "/assets/js/admin{$suffix}.js", $this->plugin_file ), array( 'mc4wp-forms-admin' ), MC4WP_PREMIUM_VERSION, true );
 	}
 
 	/**
@@ -51,14 +51,14 @@ class MC4WP_Form_Notifications_Admin {
 	 */
 	public function maybe_run_upgrade_routines() {
 		$from_version = get_option( 'mc4wp_email_notifications_version', 0 );
-		$to_version = $this->plugin->version();
+		$to_version = MC4WP_PREMIUM_VERSION;
 
 		// we're at the specified version already
 		if( version_compare( $from_version, $to_version, '>=' ) ) {
 			return;
 		}
 
-		$upgrade_routines = new MC4WP_Upgrade_Routines( $from_version, $to_version, $this->plugin->dir( '/migrations' ) );
+		$upgrade_routines = new MC4WP_Upgrade_Routines( $from_version, $to_version, dirname( $this->plugin_file ) . '/migrations' );
 		$upgrade_routines->run();
 		update_option( 'mc4wp_email_notifications_version', $to_version );
 	}
@@ -79,7 +79,7 @@ class MC4WP_Form_Notifications_Admin {
 	 */
 	public function output_settings( $opts, $form ) {
 		$opts = $opts['email_notification'];
-		include $this->plugin->dir( '/views/settings.php' );
+		include dirname( $this->plugin_file ) . '/views/settings.php' ;
 	}
 
 	/**

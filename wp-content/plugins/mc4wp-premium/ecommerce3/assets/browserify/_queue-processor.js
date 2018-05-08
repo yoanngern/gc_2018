@@ -1,54 +1,45 @@
 'use strict';
 
-var qwest;
+var m = require('mithril');
 var qp = {};
-var i18n;
-
-function process(e) {
-    var ctrl = this;
-
-    e && e.preventDefault();
-
-    ctrl.working = true;
-    ctrl.done = false;
-
-    qwest.post( ajaxurl, {
-        action: "mc4wp_ecommerce_process_queue"
-    }).then(function(xhr, response ) {
-        ctrl.done = true;
-        ctrl.working = false;
-        m.redraw();
-    }).catch(function(e, xhr, response) {
-        console.log(e);
-    });
-}
-
-qp.controller = function() {
-   return {
-       working: false,
-       done: false
-   }
+var i18n = mc4wp_ecommerce.i18n;
+var state = {
+   working: false,
+   done: false
 };
 
-qp.view = function(ctrl) {
+function process(e) {
+    e && e.preventDefault();
+
+    state.working = true;
+    state.done = false;
+
+    m.request({
+      method: "POST",
+      url: ajaxurl + "?action=" + "mc4wp_ecommerce_process_queue",
+    }).then(function(result) {
+       state.done = true;
+       state.working = false;
+    }).catch(function(e) {
+       console.log(e);
+    })
+}
+
+qp.view = function() {
     return m('form', {
         method: "POST",
-        onsubmit: process.bind(ctrl)
+        onsubmit: process,
     }, [
        m('p', [
            m( 'input', {
                type: "submit",
                className: "button",
-               value: ctrl.done ? i18n.done : i18n.process,
-               disabled: ctrl.working || ctrl.done
+               value: state.done ? i18n.done : i18n.process,
+               disabled: state.working || state.done
            }),
-           ctrl.working ? [ ' ', m('span.mc4wp-loader'), ' ', m('span.help', i18n.processing )] : ''
+           state.working ? [ ' ', m('span.mc4wp-loader'), ' ', m('span.help', i18n.processing )] : ''
        ])
     ]);
 };
 
-module.exports = function(a, b) {
-    qwest = a;
-    i18n = b;
-    return qp;
-};
+module.exports = qp;

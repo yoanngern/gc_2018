@@ -67,7 +67,7 @@ class MC4WP_Ecommerce_Helper {
 		$query = "SELECT %s
 		FROM {$this->db->posts}	p
 		WHERE p.post_type = 'product'
-		AND p.post_status IN('publish', 'draft', 'private')";
+		AND p.post_status IN('publish', 'draft', 'private', 'trash')";
 
 		$query = sprintf( $query, $select ) . ' ';
 

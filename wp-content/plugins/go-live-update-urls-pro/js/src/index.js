@@ -1,3 +1,7 @@
+if (!global._babelPolyfill) {
+	require('babel-polyfill');
+}
+
 import App from './containers/App';
 import ThickboxLoader from './util/thickbox-loader';
 import ReactDOM from 'react-dom';

@@ -1,0 +1,12 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+pre {
+    overflow: hidden;
+    width: calc(100% - 30px);
+    padding: 15px;
+    background-color: white;
+    white-space: normal;
+}

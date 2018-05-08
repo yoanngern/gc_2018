@@ -3,9 +3,9 @@
 class MC4WP_Ecommerce_Cart_Observer {
 
 	/**
-	 * @var MC4WP_Plugin
+	 * @var string
 	 */
-	private $plugin;
+	private $plugin_file;
 
 	/**
 	 * @var MC4WP_Queue
@@ -20,12 +20,12 @@ class MC4WP_Ecommerce_Cart_Observer {
 	/**
 	 * MC4WP_Ecommerce_Tracker constructor.
 	 *
-	 * @param MC4WP_Plugin $plugin
+	 * @param string $plugin_file
 	 * @var MC4WP_Ecommerce $ecommerce
 	 * @param MC4WP_Queue $queue
 	 */
-	public function __construct( MC4WP_Plugin $plugin, MC4WP_Ecommerce $ecommerce, MC4WP_Queue $queue ) {
-		$this->plugin = $plugin;
+	public function __construct( $plugin_file, MC4WP_Ecommerce $ecommerce, MC4WP_Queue $queue ) {
+		$this->plugin_file = $plugin_file;
 		$this->ecommerce = $ecommerce;
 		$this->queue = $queue;
 	}
@@ -41,8 +41,9 @@ class MC4WP_Ecommerce_Cart_Observer {
 		add_action( 'woocommerce_checkout_order_processed', array( $this, 'on_order_processed' ) );
 		add_action( 'woocommerce_after_cart_item_restored', array( $this, 'on_cart_updated' ) );
 		add_action( 'woocommerce_after_cart_item_quantity_update', array( $this, 'on_cart_updated' ) );
-		add_action( 'woocommerce_add_to_cart', array( $this, 'on_cart_updated' ) );
+		add_action( 'woocommerce_add_to_cart', array( $this, 'on_cart_updated' ), 9 );
 		add_action( 'woocommerce_cart_item_removed', array( $this, 'on_cart_updated' ) );
+		add_action( 'woocommerce_cart_emptied', array( $this, 'on_cart_updated' ) );
 		add_action( 'wp_login', array( $this, 'on_cart_updated' ) );
 	}
 
@@ -84,8 +85,10 @@ class MC4WP_Ecommerce_Cart_Observer {
 		// remove pending update & delete jobs
 		$this->remove_pending_jobs( 'delete_cart', $cart_id );
 		$this->remove_pending_jobs( 'update_cart', $cart_id );
+		$this->queue->save();
 
 		wp_redirect( remove_query_arg( 'mc_cart_id' ) );
+		exit;
 	}
 
 	/**
@@ -121,7 +124,7 @@ class MC4WP_Ecommerce_Cart_Observer {
 	public function enqueue_assets() {
 		if( is_checkout() && ! is_user_logged_in() ) {
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-			wp_enqueue_script( 'mc4wp-ecommerce-cart', $this->plugin->url( "/assets/js/cart{$suffix}.js" ), array(), $this->plugin->version(), true );
+			wp_enqueue_script( 'mc4wp-ecommerce-cart', plugins_url( "/assets/js/cart{$suffix}.js", $this->plugin_file ), array(), MC4WP_PREMIUM_VERSION, true );
 			wp_localize_script( 'mc4wp-ecommerce-cart', 'mc4wp_ecommerce_cart', array(
 				'ajax_url' => admin_url( 'admin-ajax.php' )
 			)
@@ -136,7 +139,8 @@ class MC4WP_Ecommerce_Cart_Observer {
 
 		// make sure we have at least a valid email_address
 		if( empty( $data->billing_email ) || ! is_email( $data->billing_email ) ) {
-			return;
+			wp_send_json_error();
+			exit;
 		}
 
 		try {
@@ -145,7 +149,7 @@ class MC4WP_Ecommerce_Cart_Observer {
 		} catch( Exception $e ) {
 			// don't schedule anything when cart has no order lines.
 			wp_send_json_error();
-			return;
+			exit;
 		}
 
 		$cart_id = $cart_data['id'];
@@ -168,7 +172,9 @@ class MC4WP_Ecommerce_Cart_Observer {
 			$this->add_pending_job( 'delete_cart', array( $cart_id ) );
 		}
 
+		$this->queue->save();
 		wp_send_json_success();
+		exit;
 	}
 
 	// hook: woocommerce_checkout_order_processed
@@ -182,17 +188,24 @@ class MC4WP_Ecommerce_Cart_Observer {
 
 		// schedule cart deletion
 		$this->add_pending_job( 'delete_cart', array( $cart_id ) );
+		$this->queue->save();
 	}
 
 	// hook: woocommerce_add_to_cart, woocommerce_cart_item_removed
 	public function on_cart_updated() {
-		// TODO: Get user data for guests from some cookie or session.
+		// check if we have a logged in user
 		$user = wp_get_current_user();
-		if( ! $user || empty( $user->billing_email ) ) {
+		if( ! $user instanceof WP_User || ! $user->exists() ) {
+			return; // TODO: Get user data for guests from some cookie or session?
+		}
+
+		// get email address from billing_email or user_email property
+		$email_address = ! empty( $user->billing_email ) ? $user->billing_email : $user->user_email;
+		if( empty( $email_address ) ) {
+			$this->get_log()->info("E-Commerce: Skipping cart update for user without email address.");
 			return;
 		}
 
-		$email_address = $user->billing_email;
 		$cart_id = $this->ecommerce->transformer->get_cart_id( $email_address );
 		$wc_cart = WC()->cart;
 
@@ -203,6 +216,7 @@ class MC4WP_Ecommerce_Cart_Observer {
 
 			// schedule cart deletion
 			$this->add_pending_job( 'delete_cart', array( $cart_id ) );
+			$this->queue->save();
 			return;
 		}
 
@@ -210,7 +224,7 @@ class MC4WP_Ecommerce_Cart_Observer {
 			$customer_data = $this->ecommerce->transformer->customer( $user );
 			$cart_data = $this->ecommerce->transformer->cart( $customer_data, $wc_cart );
 		} catch( Exception $e ) {
-			$this->get_log()->error( $e->getMessage() );
+			$this->get_log()->warning( sprintf( 'E-Commerce: Incomplete cart data. %s', $e->getMessage() ) );
 			return;
 		}
 
@@ -219,6 +233,7 @@ class MC4WP_Ecommerce_Cart_Observer {
 
 		// schedule new update with latest data
 		$this->add_pending_job( 'update_cart', array( $cart_id, $cart_data ) );
+		$this->queue->save();
 	}
 
 	/**

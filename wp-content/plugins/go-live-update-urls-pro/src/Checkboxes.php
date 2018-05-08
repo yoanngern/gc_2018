@@ -8,6 +8,13 @@
  *
  */
 class Go_Live_Update_URLS_Pro_Checkboxes {
+	const COMMENTS = 'comments';
+	const CUSTOM = 'custom';
+	const OPTIONS = 'options';
+	const POSTS = 'posts';
+	const TERMS = 'terms';
+	const USER = 'user';
+
 	/**
 	 * checkboxes
 	 *
@@ -33,7 +40,7 @@ class Go_Live_Update_URLS_Pro_Checkboxes {
 	/**
 	 * Retrieve the list of tables to update based on
 	 * which types are checked.
-	 * We we have no matching sections is it assumed we have an
+	 * If we have no matching sections is it assumed we have an
 	 * array of tables not sections and therefor return what we
 	 * started with.
 	 *
@@ -57,18 +64,22 @@ class Go_Live_Update_URLS_Pro_Checkboxes {
 		//see https://github.com/kalessil/phpinspectionsea/blob/master/docs/performance.md#slow-array-function-used-in-loop
 		$tables = call_user_func_array( 'array_merge', $tables );
 
-		return array_flip( $tables );
+		if ( version_compare( GO_LIVE_UPDATE_URLS_VERSION, '5.0.1', '<' ) ) {
+			return array_flip( $tables );
+		}
+
+		return $tables;
 	}
 
 
 	private function create_checkbox_list() {
 		$this->checkboxes = array(
-			'posts'    => $this->posts(),
-			'comments' => $this->comments(),
-			'terms'    => $this->terms(),
-			'options'  => $this->options(),
-			'user'     => $this->users(),
-			'custom'   => $this->custom(),
+			self::POSTS    => $this->posts(),
+			self::COMMENTS => $this->comments(),
+			self::TERMS    => $this->terms(),
+			self::OPTIONS  => $this->options(),
+			self::USER     => $this->users(),
+			self::CUSTOM   => $this->custom(),
 		);
 		if ( is_multisite() ) {
 			$this->checkboxes['network'] = $this->network();
@@ -171,14 +182,17 @@ class Go_Live_Update_URLS_Pro_Checkboxes {
 
 
 	public function custom() {
-		static $custom;
-		if ( ! empty( $custom ) ) {
-			return $custom;
+		$default_tables = $this->wpdb->tables();
+		$db             = Go_Live_Update_Urls_Database::instance();
+
+		//basic version 5.0.1+
+		if ( method_exists( $db, 'get_all_table_names' ) ) {
+			$all_tables = $db->get_all_table_names();
+		} else {
+			$all_tables = wp_list_pluck( $db->get_all_tables(), 'TABLE_NAME' );
 		}
 
-		$default_tables = $this->wpdb->tables();
-		$all_tables     = wp_list_pluck( Go_Live_Update_Urls_Database::instance()->get_all_tables(), 'TABLE_NAME' );
-		$all_tables     = array_flip( $all_tables );
+		$all_tables = array_flip( $all_tables );
 		foreach ( $default_tables as $table ) {
 			unset( $all_tables[ $table ] );
 		}
@@ -189,8 +203,6 @@ class Go_Live_Update_URLS_Pro_Checkboxes {
 		);
 
 		return $custom;
-
-
 	}
 
 

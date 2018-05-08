@@ -93,6 +93,10 @@ class Admin {
 				$license->activated = false;
 				$license->token = '';
 			}
+		} catch(Exception $e) {
+			// connection or parsing problem... uh oh
+			// TODO: Write to debug log?
+			return;
 		}
 
 		$this->update_license($license);

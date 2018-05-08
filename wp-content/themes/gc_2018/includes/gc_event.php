@@ -155,7 +155,7 @@ function update_event( $post_id ) {
 	$my_post = array(
 		'ID'         => $post_id,
 		'post_title' => $title,
-		'post_name' => $post_id
+		'post_name'  => $post_id
 	);
 
 
@@ -351,9 +351,10 @@ add_filter( 'manage_edit-gc_event_sortable_columns', 'gc_event_sort_column' );
  */
 function gc_order_events( $query ) {
 
-	$post_status = $_GET['post_status'];
 
-	if ( $post_status == '' ) {
+	if ( isset( $_GET['post_status'] ) ) {
+		$post_status = $_GET['post_status'];
+	} else {
 		$post_status = 'all';
 	}
 

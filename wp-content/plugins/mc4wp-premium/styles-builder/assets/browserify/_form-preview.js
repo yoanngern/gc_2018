@@ -52,13 +52,14 @@ var FormPreview = function(context) {
 	// initialize form preview
 	function init() {
 		var $form = $context.contents().find('.mc4wp-form');
+		var $fields = $form.find('.mc4wp-form-fields');
 
 		$elements = {
 			form: $form,
-			labels: $form.find('label'),
-			fields: $form.find('input[type="text"], input[type="email"], input[type="url"], input[type="number"], input[type="date"], select, textarea'),
-			choices: $form.find('input[type="radio"], input[type="checkbox"]'),
-			buttons: $form.find('input[type="submit"], input[type="button"], button'),
+			labels: $fields.find('label'),
+			fields: $fields.find('input[type="text"], input[type="email"], input[type="url"], input[type="number"], input[type="date"], select, textarea'),
+			choices: $fields.find('input[type="radio"], input[type="checkbox"]'),
+			buttons: $fields.find('input[type="submit"], input[type="button"], button'),
 			messages: $form.find('.mc4wp-alert'),
 			css: $context.contents().find('#custom-css')
 		};

@@ -18,15 +18,12 @@ require_once __DIR__ . '/includes/class-cart-observer.php';
 // load settings
 $settings = mc4wp_ecommerce_get_settings();
 
-// setup objects
-$plugin = new MC4WP_Plugin(__FILE__, MC4WP_PREMIUM_VERSION);
-
 // register ecommerce & tracker in service container (for lazy loading)
 $mc4wp = mc4wp();
 $mc4wp['ecommerce.options'] = $settings;
 $mc4wp['ecommerce.tracker'] = function () use ($settings) {
 	require_once __DIR__ . '/includes/class-tracker.php';
-	return new MC4WP_Ecommerce_Tracker($settings);
+	return new MC4WP_Ecommerce_Tracker(__FILE__, $settings);
 };
 $mc4wp['ecommerce.transformer'] = function () use ($mc4wp, $settings) {
 	if (!defined('WOOCOMMERCE_VERSION') || version_compare(WOOCOMMERCE_VERSION, '3.0', '<')) {
@@ -45,6 +42,10 @@ $mc4wp['ecommerce.queue'] = function () {
 	return new MC4WP_Queue('mc4wp_ecommerce_queue');
 };
 
+$mc4wp['ecommerce.worker'] = function() use($mc4wp) {
+	return new MC4WP_Ecommerce_Worker($mc4wp['ecommerce'], $mc4wp['ecommerce.queue']);
+};
+
 // enable queue & worker if e-commerce is enabled in settings
 if ($settings['enable_object_tracking']) {
 	add_filter('cron_schedules', '_mc4wp_ecommerce_cron_schedules');
@@ -53,17 +54,16 @@ if ($settings['enable_object_tracking']) {
 	$mc4wp['ecommerce.tracker']->hook();
 
 	// setup worker (processes items from queue)
-	$worker = new MC4WP_Ecommerce_Worker($mc4wp['ecommerce'], $mc4wp['ecommerce.queue']);
-	$worker->hook();
+	$mc4wp['ecommerce.worker']->hook();
 
 	// setup object observer  (adds jobs to queue)
-	$cart_tracker = new MC4WP_Ecommerce_Object_Observer($mc4wp['ecommerce'], $mc4wp['ecommerce.queue']);
-	$cart_tracker->hook();
+	$object_observer = new MC4WP_Ecommerce_Object_Observer($mc4wp['ecommerce'], $mc4wp['ecommerce.queue']);
+	$object_observer->hook();
 
 	// setup cart observer (adds jobs to queue)
 	if ($settings['enable_cart_tracking']) {
-		$cart_tracker = new MC4WP_Ecommerce_Cart_Observer($plugin, $mc4wp['ecommerce'], $mc4wp['ecommerce.queue']);
-		$cart_tracker->hook();
+		$cart_observer = new MC4WP_Ecommerce_Cart_Observer(__FILE__, $mc4wp['ecommerce'], $mc4wp['ecommerce.queue']);
+		$cart_observer->hook();
 	}
 }
 
@@ -77,7 +77,7 @@ if (is_admin()) {
 		require_once __DIR__ . '/includes/class-admin.php';
 		require_once __DIR__ . '/includes/class-object-count.php';
 
-		$admin = new MC4WP_Ecommerce_Admin($plugin, $mc4wp['ecommerce.queue'], $settings);
+		$admin = new MC4WP_Ecommerce_Admin(__FILE__, $mc4wp['ecommerce.queue'], $settings);
 		$admin->add_hooks();
 	}
 } 

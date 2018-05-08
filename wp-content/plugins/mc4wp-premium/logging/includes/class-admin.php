@@ -230,8 +230,6 @@ class MC4WP_Logging_Admin {
         if( $item ) {
             $mailchimp = new MC4WP_MailChimp();
             $list = $mailchimp->get_list( $item->list_id );
-            $fields = empty( $item->merge_fields ) ? array() : json_decode( $item->merge_fields );
-            $interests = empty( $item->interests ) ? array() : json_decode( $item->interests );
         } else {
             $current_tab = 'log_item_not_found';
         }
@@ -255,8 +253,8 @@ class MC4WP_Logging_Admin {
 		$start_day = ( isset( $_GET['start_day'] ) ) ? $_GET['start_day'] : 0;
 		$start_month = ( isset( $_GET['start_month'] ) ) ? $_GET['start_month'] : 0;
 		$start_year = ( isset( $_GET['start_year'] ) ) ? $_GET['start_year'] : 0;
-		$end_day = ( isset( $_GET['end_day'] ) ) ? $_GET['end_day'] : date('d');
-		$end_month = ( isset( $_GET['end_month'] ) ) ? $_GET['end_month'] : date('m');
+		$end_day = ( isset( $_GET['end_day'] ) ) ? $_GET['end_day'] : date('j');
+		$end_month = ( isset( $_GET['end_month'] ) ) ? $_GET['end_month'] : date('n');
 		$end_year = ( isset( $_GET['end_year'] ) ) ? $_GET['end_year'] : date('Y');
 
 		include $this->plugin->dir( '/views/admin-reports.php' );

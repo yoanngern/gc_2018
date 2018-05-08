@@ -1,6 +1,7 @@
 import {ACTIONS} from '../globals/config';
 import {errorResults, getResults, fixIssue, showLoading} from './results';
 import {update_new_url} from './url';
+import {emptyHistory, getHistory} from "./history";
 
 export default class Requests {
 	constructor(){
@@ -11,7 +12,7 @@ export default class Requests {
 		}.bind( this );
 	}
 
-	getResults( $clear = true ){
+	getTestResults( $clear = true ){
 		if( $clear ){
 			//clear old ones
 			this.dispatch( getResults( {} ) );
@@ -31,6 +32,24 @@ export default class Requests {
 		} ).fail( this._fail );
 	}
 
+	getHistory(){
+		let data = {
+			action : ACTIONS.get_history,
+		};
+		$.post( ajaxurl, data, ( response ) =>{
+			if( response.success ){
+				if( 0 === response.data.length ){
+					this._empty_history();
+				} else {
+					this.dispatch(getHistory(response.data));
+				}
+			} else {
+				this._empty_history();
+			}
+		} ).fail( this._empty_history );
+	}
+
+
 	fixIssue( $test_id ){
 		let data = {
 			action : ACTIONS.get_fixed,
@@ -44,7 +63,7 @@ export default class Requests {
 			if( response.success ){
 				this.dispatch( update_new_url( response.data.fixed ) );
 				this.dispatch( fixIssue( response.data ) );
-				this.getResults( false );
+				this.getTestResults( false );
 			} else {
 				this._fail()
 			}
@@ -54,4 +73,8 @@ export default class Requests {
     _fail(){
 	    this.dispatch( errorResults() );
     }
+
+    _empty_history() {
+		this.dispatch( emptyHistory() );
+	}
 }

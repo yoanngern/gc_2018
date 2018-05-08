@@ -98,17 +98,21 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
 	 * [--offset=<offset>]
 	 * : Skip the first # orders. Default: 0
 	 *
+     * [--delay=<delay>]
+     * : Add a delay (in ms) between each product. Default: 0
+     *
 	 * ## EXAMPLES
 	 *
-	 *     wp mc4wp-ecommerce add-orders --limit=5000 --offset=1000
+	 *     wp mc4wp-ecommerce add-orders --limit=5000 --offset=1000 --delay=500
 	 *
-	 * @synopsis [--limit=<limit>] [--offset=<offset>]
+	 * @synopsis [--limit=<limit>] [--offset=<offset>] [--delay=<delay>]
 	 *
 	 * @subcommand add-orders
 	 */
 	public function add_orders( $args, $assoc_args = array() ) {
 		$offset = empty( $assoc_args['offset'] ) ? 0 : (int) $assoc_args['offset'];
 		$limit = empty( $assoc_args['limit'] ) ? 1000 : (int) $assoc_args['limit'];
+        $delay = empty( $assoc_args['delay'] ) ? 0 : (int) $assoc_args['delay'] * 1000;
 
 		$helper = new MC4WP_Ecommerce_Helper();
 		$ids = $helper->get_untracked_order_ids();
@@ -119,6 +123,7 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
 
         foreach( $ids as $id ) {
             $this->add_order( array( $id ) );
+            usleep( $delay );
         }
 
         WP_CLI::line( 'Done!' );
@@ -163,17 +168,21 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
 	 * [--offset=<offset>]
 	 * : Skip the first # products. Default: 0
 	 *
+     * [--delay=<delay>]
+     * : Add a delay (in ms) between each product. Default: 0
+     *
 	 * ## EXAMPLES
 	 *
-	 *     wp mc4wp-ecommerce add-products --limit=5000 --offset=1000
+	 *     wp mc4wp-ecommerce add-products --limit=5000 --offset=1000 --delay=500
 	 *
-	 * @synopsis [--limit=<limit>] [--offset=<offset>]
+	 * @synopsis [--limit=<limit>] [--offset=<offset>] [--delay=<delay>]
 	 *
 	 * @subcommand add-products
 	 */
 	public function add_products( $args, $assoc_args = array() ) {
         $offset = empty( $assoc_args['offset'] ) ? 0 : (int) $assoc_args['offset'];
         $limit = empty( $assoc_args['limit'] ) ? 1000 : (int) $assoc_args['limit'];
+        $delay = empty( $assoc_args['delay'] ) ? 0 : (int) $assoc_args['delay'] * 1000;
 
         $helper = new MC4WP_Ecommerce_Helper();
         $ids = $helper->get_untracked_product_ids();
@@ -183,6 +192,7 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
 
         foreach( $ids as $product_id ) {
             $this->add_product( array( $product_id ) );
+            usleep( $delay );
         }
 
         WP_CLI::line( 'Done!' );
@@ -278,26 +288,79 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
     }
 
     /**
-     * Processes the job queue.
+     * Processes all queued background jobs.
+     *
+     * @param $args
+     * @param $assoc_args
+     *
+     * [--delay=<delay>]
+     * : Add a delay (in ms) between each job. Default: 0
+     *
+     * ## EXAMPLES
+     *
+     *     wp mc4wp-ecommerce process-queue --delay=500
+     *
+     * @synopsis [--delay=<delay>]
+     *
+     * @subcommand process-queue
+     */
+    public function process_queue( $args, $assoc_args = array() ) {
+        $delay = empty( $assoc_args['delay'] ) ? 0 : (int) $assoc_args['delay'] * 1000;
+
+        /** @var MC4WP_Queue $queue */
+        $queue = mc4wp('ecommerce.queue');
+        $worker = mc4wp('ecommerce.worker');
+        $count = count( $queue->all() );
+        WP_CLI::line( sprintf( '%d pending jobs in queue.', $count ) );
+
+        while( ( $job = $queue->get() ) ) {
+
+            // ensure job data matches expected format
+            if( empty( $job->data['method'] ) || ! method_exists( $worker, $job->data['method'] ) ) {
+                $queue->delete( $job );
+                continue;
+            }
+
+            // call job method with args
+            try {
+                WP_CLI::line( sprintf( 'Processing job: %s %s', $job->data['method'], join(' ', $job->data['args'] ) ) );
+                $success = call_user_func_array( array( $worker, $job->data['method'] ), $job->data['args'] );
+            } catch( Error $e ) {
+                $message = sprintf( 'Failed processing job. %s in %s:%d', $e->getMessage(), $e->getFile(), $e->getLine() );
+                WP_CLI::warning( $message );
+            }
+
+            // remove job from queue & force save
+            $queue->delete( $job );
+            $queue->save();
+
+            // delay execution by the specified delay
+            usleep( $delay );
+        }
+
+
+        WP_CLI::success( 'Done!' );
+    }
+
+     /**
+     * Resets (empties) the job queue.
      *
      * @param $args
      * @param $assoc_args
      *
      * ## EXAMPLES
      *
-     *     wp mc4wp-ecommerce process-queue
+     *     wp mc4wp-ecommerce reset-queue
      *
-     * @subcommand process-queue
+     * @subcommand reset-queue
      */
-    public function process_queue( $args, $assoc_args = array() ) {
+    public function reset_queue( $args, $assoc_args = array() ) {
         /** @var MC4WP_Queue $queue */
         $queue = mc4wp('ecommerce.queue');
         $count = count( $queue->all() );
-
-        WP_CLI::line( sprintf( '%d pending jobs in queue.', $count ) );
-
-        do_action( 'mc4wp_ecommerce_process_queue' );
-        
+        WP_CLI::line( sprintf( 'Deleting %d pending jobs in queue.', $count ) );
+        $queue->reset();
+        $queue->save();        
         WP_CLI::success( 'Done!' );
     }
 

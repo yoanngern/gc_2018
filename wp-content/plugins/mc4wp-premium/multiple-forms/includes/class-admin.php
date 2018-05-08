@@ -8,17 +8,17 @@
 class MC4WP_Multiple_Forms_Admin {
 
 	/**
-	 * @var MC4WP_Plugin
+	 * @var string
 	 */
-	protected $plugin;
+	protected $plugin_file;
 
 	/**
 	 * Constructor
 	 *
-	 * @param MC4WP_Plugin $plugin
+	 * @param string $plugin_file
 	 */
-	public function __construct( MC4WP_Plugin $plugin ) {
-		$this->plugin = $plugin;
+	public function __construct( $plugin_file ) {
+		$this->plugin_file = $plugin_file;
 	}
 
 	/**
@@ -43,7 +43,7 @@ class MC4WP_Multiple_Forms_Admin {
 		}
 
 		$table = new MC4WP_Forms_Table( new MC4WP_MailChimp() );
-		include $this->plugin->dir( '/views/forms-overview.php' );
+		include dirname( $this->plugin_file ) . '/views/forms-overview.php';
 	}
 
 	public function show_new_form_button() {

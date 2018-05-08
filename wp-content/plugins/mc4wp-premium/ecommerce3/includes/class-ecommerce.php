@@ -13,7 +13,7 @@ class MC4WP_Ecommerce {
 	const META_KEY = 'mc4wp_updated_at';
 
 	/**
-	* @var MC4WP_Ecommerce_Object_Transformer|MC4WP_Ecommerce_Object_Transformer_Legacy
+	* @var MC4WP_Ecommerce_Object_Transformer
 	*/
 	public $transformer;
 
@@ -25,11 +25,19 @@ class MC4WP_Ecommerce {
 	/**
 	* Constructor
 	*
-	* @param MC4WP_Ecommerce_Object_Transformer|MC4WP_Ecommerce_Object_Transformer_Legacy $transformer
+	* @param string $store_id
+	* @param MC4WP_Ecommerce_Object_Transformer $transformer
 	*/
 	public function __construct( $store_id, $transformer ) {
 		$this->store_id = $store_id;
 		$this->transformer = $transformer;
+	}
+
+	/**
+	* @param string $store_id
+	*/
+	public function set_store_id( $store_id ) {
+		$this->store_id = $store_id;
 	}
 
 	/**
@@ -166,6 +174,11 @@ class MC4WP_Ecommerce {
 			}
 		}
 
+		// throw exception if order contains no lines
+		if( empty( $data['lines'] ) ) {
+			throw new Exception("Order contains no items.");
+		}
+
 		// add OR update order in MailChimp
 		return $this->is_object_tracked( $order_id ) ? $this->order_update( $order, $data ) : $this->order_add( $order, $data );
 	}
@@ -208,19 +221,21 @@ class MC4WP_Ecommerce {
 	private function order_add( WC_Order $order, array $data, $recurse = true ) {
 		$api = $this->get_api();
 		$store_id = $this->store_id;
+		
+		// check for method existence first because wc pre-3.0
 		$order_id = method_exists( $order, 'get_id' ) ? $order->get_id() : $order->id;
+		$order_number = method_exists( $order, 'get_number' ) ? $order->get_number() : $order_id;
 
 		try {
 			$response = $api->add_ecommerce_store_order( $store_id, $data );
 		}  catch( MC4WP_API_Exception $e ) {
-
 			// update order if it already exists
-			if( $recurse && stripos( $e->detail, 'already exists' ) ) {
+			if( $recurse && stripos( $e->detail, 'order with the provided ID already exists' ) !== false ) {
 				return $this->order_update( $order, $data, false );
 			}
 
 			// if campaign_id data is corrupted somehow, retry without campaign data.
-			if( ! empty( $data['campaign_id'] ) && stripos( $e->detail, 'campaign with the provided ID does not exist' ) ) {
+			if( ! empty( $data['campaign_id'] ) && stripos( $e->detail, 'campaign with the provided ID does not exist' ) !== false  ) {
 				unset( $data['campaign_id'] );
 				return $this->order_add( $order, $data );
 			}
@@ -242,13 +257,25 @@ class MC4WP_Ecommerce {
 	private function order_update( WC_Order $order, array $data, $recurse = true ) {
 		$api = $this->get_api();
 		$store_id = $this->store_id;
+
+		// check for method existence first because wc pre-3.0
 		$order_id = method_exists( $order, 'get_id' ) ? $order->get_id() : $order->id;
+		$order_number = method_exists( $order, 'get_number' ) ? $order->get_number() : $order_id;
 
 		try {
-			$response = $api->update_ecommerce_store_order( $store_id, $order_id, $data );
+			// use order number here as that is what we send in order_add too.
+			$response = $api->update_ecommerce_store_order( $store_id, $order_number, $data );
 		} catch( MC4WP_API_Resource_Not_Found_Exception $e ) {
 			if( $recurse ) {
 				return $this->order_add( $order, $data, false );
+			}
+
+			throw $e;
+		} catch( MC4WP_API_Exception $e ) {
+			// if campaign_id data is corrupted somehow, retry without campaign data.
+			if( ! empty( $data['campaign_id'] ) && stripos( $e->detail, 'campaign with the provided ID does not exist' ) !== false  ) {
+				unset( $data['campaign_id'] );
+				return $this->order_update( $order, $data );
 			}
 
 			throw $e;
@@ -256,6 +283,23 @@ class MC4WP_Ecommerce {
 
 		$this->touch( $order_id );
 		return true;
+	}
+
+	/**
+	* Since MailChimp does not allow connecting two sites that share the same domain (they strip off the entire subdirectory part) we generate a unique domain here.
+	* @return string
+	*/
+	private function get_site_domain() {
+		$domain = str_ireplace( array( 'https://', 'http://', '://' ), '', get_option( 'siteurl' ) );
+
+		if( is_multisite() && strpos( $domain, '/' ) > strpos( $domain, '.' ) ) {
+			$subdir_pos = strpos( $domain, '/' );
+			$subdir = substr( $domain, $subdir_pos + 1 );
+			$domain = substr( $domain, 0, $subdir_pos );
+			$domain = $subdir . '.' . $domain;
+		}
+
+		return $domain;
 	}
 
 	/**
@@ -268,9 +312,10 @@ class MC4WP_Ecommerce {
 	public function update_store( array $data ) {
 		$api = $this->get_api();
 		$store_id = $this->store_id;
-		$data['id'] = $store_id;
+
+		$data['id'] = (string) $store_id;
 		$data['platform'] = 'WooCommerce';
-		$data['domain'] = str_ireplace( array( 'https://', 'http://', '://' ), '', get_option( 'siteurl' ) );
+		$data['domain'] = $this->get_site_domain();
 		$data['email_address'] = get_option( 'admin_email' );
 		$data['primary_locale'] = substr( get_locale(), 0, 2 );
 		$data['address'] = array(
@@ -302,6 +347,9 @@ class MC4WP_Ecommerce {
 				// delete local tracking indicators
 				delete_post_meta_by_key( MC4WP_Ecommerce::META_KEY );
 
+				// delete old store
+				$api->delete_ecommerce_store( $store_id );
+
 				// add new store
 				$res = $api->add_ecommerce_store( $data );
 			} else {
@@ -314,10 +362,27 @@ class MC4WP_Ecommerce {
 		return $res;
 	}
 
+	public function ensure_connected_site() {
+		$api = $this->get_api();
+		$client = $api->get_client();
+
+		try {
+			// first, query site to see if it exists
+			$resource = sprintf( '/connected-sites/%s', $this->store_id );
+			$response = $client->get( $resource, array() );
+		} catch( MC4WP_API_Resource_Not_Found_Exception $e ) {
+			// if it does not exist, add it
+			$response = $client->post( '/connected-sites', array( 
+				'foreign_id' => $this->store_id, 
+				'domain' => $this->get_site_domain(),
+			) );
+		}
+	}
+
 	public function verify_store_script_installation() {
 		$api = $this->get_api();
 		$client = $api->get_client();
-		$resource = sprintf( 'connected-sites/%s/actions/verify-script-installation', $this->store_id );
+		$resource = sprintf( '/connected-sites/%s/actions/verify-script-installation', $this->store_id );
 		$client->post( $resource, array() );
 	}
 
@@ -459,7 +524,7 @@ class MC4WP_Ecommerce {
 	}
 
 	/**
-	* Ensures the existence of a deleted product in MailChimp, to be used in orders references a no-longer existing product.
+	* Ensures the existence of a deleted product in MailChimp, to be used in orders referencing a no-longer existing product.
 	*
 	* @return void
 	*/
@@ -473,9 +538,9 @@ class MC4WP_Ecommerce {
 		// create or update deleted product in MailChimp
 		$store_id = $this->store_id;
 		$api = $this->get_api();
+
 		$product_id = 'deleted';
 		$product_title = '(deleted product)';
-
 		$data = array(
 			'id' => $product_id,
 			'title' => $product_title,
@@ -494,7 +559,7 @@ class MC4WP_Ecommerce {
 			$response = $api->add_ecommerce_store_product( $store_id, $data );
 		}
 
-		// set flag to short-circuit this function next time.
+		// set flag to short-circuit this function next time it runs
 		$exists = true;
 	}
 }

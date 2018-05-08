@@ -363,10 +363,19 @@ class MC4WP_Logger {
         }
 
         $objects = array();
-        foreach( $results as $raw ) {
+        foreach( $results as $raw_result ) {
             // create object and set properties
             $object = new MC4WP_Log_Item;
-            foreach( $raw as $property => $value ) {
+            foreach( $raw_result as $property => $value ) {
+
+            	if( in_array( $property, array( 'success' ) ) ) {
+            		continue;
+            	}
+
+            	if( in_array( $property, array( 'merge_fields', 'interests') ) && is_string( $value ) ) {
+            		$value = json_decode( $value );
+            	}
+
                 $object->$property = $value;
             }
 

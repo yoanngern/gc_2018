@@ -24,8 +24,10 @@ class MC4WP_Ecommerce_Admin_Ajax {
     public function synchronize_products() {
         $this->authorize();
 
+
         // make sure product_id is given
-        if( empty( $_POST['product_id'] ) ) {
+        $data = json_decode( stripslashes( file_get_contents("php://input") ), false );
+        if( empty( $data->product_id ) ) {
             wp_send_json_error(
                 array(
                     'message' => sprintf( 'Invalid product ID.' )
@@ -33,7 +35,7 @@ class MC4WP_Ecommerce_Admin_Ajax {
             );
         }
 
-        $product_id = (int) $_POST['product_id'];
+        $product_id = (int) $data->product_id;
         $ecommerce = $this->get_ecommerce();
 
         try {
@@ -60,7 +62,8 @@ class MC4WP_Ecommerce_Admin_Ajax {
         $this->authorize();
 
         // make sure order_id is given
-        if( empty( $_POST['order_id'] ) ) {
+        $data = json_decode( stripslashes( file_get_contents("php://input") ), false );
+        if( empty( $data->order_id ) ) {
             wp_send_json_error(
                 array(
                     'message' => sprintf( 'Invalid order ID.' )
@@ -68,7 +71,7 @@ class MC4WP_Ecommerce_Admin_Ajax {
             );
         }
 
-        $order_id = (int) $_POST['order_id'];
+        $order_id = (int) $data->order_id;
 
         // unset tracking cookies temporarily because these would be the admin's cookie
         unset( $_COOKIE['mc_tc'] );

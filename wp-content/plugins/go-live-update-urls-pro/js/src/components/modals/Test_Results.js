@@ -34,7 +34,7 @@ class Test_Results extends Component {
 
 Test_Results.propTypes = {
 	results : PropTypes.object.isRequired,
-	fix_issue : PropTypes.func.isRequired,
+	fix_issue : PropTypes.func.isRequired
 };
 
 Test_Results.defaultProps = {};

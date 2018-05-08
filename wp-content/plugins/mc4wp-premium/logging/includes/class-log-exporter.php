@@ -104,12 +104,12 @@ class MC4WP_Log_Exporter {
 				fputcsv( $handle, array(
                         $item->list_id,
                         $item->email_address,
-                        $item->merge_fields,
-                        $item->interests,
+                        empty( $item->merge_fields ) ? '' : json_encode( $item->merge_fields ),
+                        empty( $item->interests ) ? '' : json_encode( $item->interests ),
                         $item->status,
                         $item->vip,
-                        $item->ip_signup,
-                        $item->language,
+                        (string) $item->ip_signup,
+                        (string) $item->language,
                         $item->type,
                         $item->url,
                         $item->datetime

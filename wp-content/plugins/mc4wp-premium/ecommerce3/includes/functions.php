@@ -20,15 +20,24 @@ function mc4wp_ecommerce_get_settings() {
             'name' => get_bloginfo( 'name' ),
             'currency_code' => get_woocommerce_currency(),
             'is_syncing' => 1,
-            'mcjs_url' => '',
         ),
+        'mcjs_url' => '',
         'last_updated' => null,
     );
-    $options = array_replace_recursive( $defaults, $options );
+
+    // merge saved options with defaults
+    $options = array_merge( $defaults, $options );
+    $options['store'] = array_merge( $defaults['store'], $options['store'] );
 
      // fill store_id dynamically if it's empty
     if( empty( $options['store_id'] ) ) {
-        $options['store_id'] = (string) md5( str_ireplace( array( 'https://', 'http://' ), '', get_option( 'siteurl' ) ) );
+        $options['store_id'] = (string) md5( get_option( 'siteurl', '' ) );
+    }
+
+    // backwards compat for moved mcjs_url prop
+    if( empty( $options['mcjs_url'] ) && ! empty( $options['store']['mcjs_url'] ) ) {
+        $options['mcjs_url'] = $options['store']['mcjs_url'];
+        unset( $options['store']['mcjs_url'] );
     }
 
     /**
@@ -104,9 +113,11 @@ function _mc4wp_ecommerce_cron_schedules( $schedules ) {
  */
 function _mc4wp_ecommerce_schedule_events() {
     $expected_next = time() + 300;
-    $actual_next = wp_next_scheduled( 'mc4wp_ecommerce_process_queue' );
+    $event_name = 'mc4wp_ecommerce_process_queue';
+    
+    $actual_next = wp_next_scheduled( $event_name );
 
     if( ! $actual_next || $actual_next > $expected_next ) {
-        wp_schedule_event( $expected_next, 'every5minutes', 'mc4wp_ecommerce_process_queue' );
+        wp_schedule_event( $expected_next, 'every5minutes', $event_name );
     }
 }

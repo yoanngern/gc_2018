@@ -8,9 +8,9 @@
 class MC4WP_Ecommerce_Admin {
 
 	/**
-	* @var MC4WP_Plugin
+	* @var string
 	*/
-	protected $plugin;
+	protected $plugin_file;
 
 	/**
 	* @var array
@@ -26,11 +26,11 @@ class MC4WP_Ecommerce_Admin {
 	* MC4WP_Ecommerce_Admin constructor.
 	*
 	* @param MC4WP_Queue $queue
-	* @param MC4WP_Plugin $plugin
+	* @param string $plugin_file
 	* @param array $settings
 	*/
-	public function __construct( MC4WP_Plugin $plugin, $queue, $settings ) {
-		$this->plugin = $plugin;
+	public function __construct( $plugin_file, $queue, $settings ) {
+		$this->plugin_file = $plugin_file;
 		$this->queue = $queue;
 		$this->settings = $settings;
 
@@ -68,25 +68,21 @@ class MC4WP_Ecommerce_Admin {
 	* Runs logic for saving e-commerce settings & wizard.
 	*/
 	public function save_settings() {
+		// check if queue processor is scheduled
+		_mc4wp_ecommerce_schedule_events();
+		
 		$ecommerce = $this->get_ecommerce();
 		$messages = $this->get_admin_messages();
 
 		check_admin_referer( 'save_ecommerce_settings' );
 		$dirty = stripslashes_deep( $_POST['mc4wp_ecommerce'] );
-		$dirty['platform'] = 'mc4wp';
 
 		// merge with current settings to allow passing partial arrays
 		$current = $this->settings;
 		$dirty = array_replace_recursive( $current, $dirty );
 		$diff = array_diff( $dirty['store'], $current['store'] );
 
-		// force update store when load_mcjs_script is enabled but mcjs url is empty
-		if( $dirty['load_mcjs_script'] && empty( $dirty['store']['mcjs_url'] ) ) {
-			$diff = true;
-		}
-
 		if( ! empty( $diff ) ) {
-
 			try {
 				$store_data = $ecommerce->update_store( $dirty['store'] );
 			} catch( Exception $e ) {
@@ -95,23 +91,33 @@ class MC4WP_Ecommerce_Admin {
 				return; // return means we're not saving
 			}
 
-			// store mc.js url
-			$dirty['store']['mcjs_url'] = $store_data->connected_site->site_script->url;
+			// store actual store ID + mc.js script url
+			$dirty['store_id'] = $store_data->id;
+			$dirty['mcjs_url'] = $store_data->connected_site->site_script->url;
+			$ecommerce->set_store_id( $store_data->id );
 		}
+
 
 		// verify script installation after it is toggled
 		if( $dirty['load_mcjs_script'] == 1 && $current['load_mcjs_script'] == 0) {
-			$ecommerce->verify_store_script_installation();
+			try{
+				$ecommerce->ensure_connected_site();
+				$ecommerce->verify_store_script_installation();
+			} catch( MC4WP_API_Exception $e ) {
+				// error verifying script installation (store not found)
+				$this->get_log()->error( sprintf( 'E-Commerce: error verifying script installation. %s', $e ) );
+				$messages->flash( "Error enabling MC.js. Please re-connect your store to MailChimp.", 'error' );
+				return; // return means we're not saving
+			}
 		}
 
 		// save new settings if something changed
-		if( $dirty != $current ) {
+		if( $dirty != $current || ! empty( $diff ) ) {
 			update_option( 'mc4wp_ecommerce', $dirty );
 			$messages->flash( 'Settings saved!' );
 		}
 
-		// check if queue processor is scheduled
-		_mc4wp_ecommerce_schedule_events();
+		
 	}
 
 	/**
@@ -156,9 +162,9 @@ class MC4WP_Ecommerce_Admin {
 		$order_count = new MC4WP_Ecommerce_Object_Count( $helper->get_order_count( false ), $helper->get_order_count( true ) );
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		$assets_url = $this->plugin->url( '/assets' );
-		wp_enqueue_style( 'mc4wp-ecommerce-admin', $assets_url . '/css/admin' . $suffix . '.css', array(), $this->plugin->version() );
-		wp_enqueue_script( 'mc4wp-ecommerce-admin', $assets_url . '/js/admin' . $suffix . '.js', array(), $this->plugin->version(), true );
+		$assets_url = plugins_url( '/assets', $this->plugin_file );
+		wp_enqueue_style( 'mc4wp-ecommerce-admin', $assets_url . '/css/admin' . $suffix . '.css', array(), MC4WP_PREMIUM_VERSION );
+		wp_enqueue_script( 'mc4wp-ecommerce-admin', $assets_url . '/js/admin' . $suffix . '.js', array(), MC4WP_PREMIUM_VERSION, true );
 		wp_localize_script( 'mc4wp-ecommerce-admin', 'mc4wp_ecommerce', array(
 			'i18n' => array(
 				'done' => __( 'All done!', 'mc4wp-ecommerce' ),
@@ -201,19 +207,25 @@ class MC4WP_Ecommerce_Admin {
 		delete_post_meta_by_key( MC4WP_Ecommerce::META_KEY );
 
 		// remove store in mailchimp
-		$store_id = $this->settings['store_id'];
-
 		try {
-			$this->get_api()->delete_ecommerce_store( $store_id );
+			$this->get_api()->delete_ecommerce_store( $this->settings['store_id'] );
 		} catch( MC4WP_API_Resource_Not_Found_Exception $e ) {
 			// good.
 		} catch( Exception $e ) {
 			// bad.
 			$this->get_admin_messages()->flash( (string) $e, 'error' );
+			return;
 		}
 
         $this->settings['store_id'] = '';
         update_option( 'mc4wp_ecommerce', $this->settings );
+	}
+
+	/**
+	 * @return MC4WP_Debug_Log
+	 */
+	private function get_log() {
+		return mc4wp('log');
 	}
 
 	/**

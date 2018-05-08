@@ -36,7 +36,6 @@ class MC4WP_Ecommerce_Worker {
      * TODO: Re-schedule failed jobs in a separate queue maybe?
      */
     public function work() {
-
         while( ( $job = $this->queue->get() ) ) {
 
             // ensure job data matches expected format

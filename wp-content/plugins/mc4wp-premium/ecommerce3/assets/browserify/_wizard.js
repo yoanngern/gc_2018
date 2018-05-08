@@ -4,7 +4,7 @@ var Bar = require('./_progress-bar.js');
 var Logger = require( './_logger');
 var EventEmitter = require('wolfy87-eventemitter');
 var heir = require('heir');
-var i18n;
+var i18n = mc4wp_ecommerce.i18n;
 
 function Wizard(element, barElement, start, end ) {
     this.element = element;
@@ -39,14 +39,14 @@ Wizard.prototype.status = function(text, positive) {
     var el = this.statusElement.cloneNode(true);
     var parentNode = this.statusElement.parentNode;
 
-    el.innerText = text;
+    el.innerText = text.split("\n")[0]; // log a single line only
     el.style.color = !!positive ? 'limegreen' : 'orangered';
 
     parentNode.removeChild(this.statusElement);
     parentNode.insertBefore(el, this.statusElement.nextSibling);
     this.statusElement = el;
 
-    this.logger.log(text);
+    this.logger.log(text); // write full text to logger
 };
 
 Wizard.prototype.toggle = function(e) {
@@ -79,7 +79,7 @@ Wizard.prototype.stop = function(e) {
     this.emitEvent('done', [this]);
 };
 
-Wizard.prototype.ready = function() {
+Wizard.prototype.finished = function() {
     return this.alpha + this.index >= this.omega;
 };
 
@@ -87,15 +87,14 @@ Wizard.prototype.tick = function() {
     this.progress.tick();
     this.index++;
 
-    if(this.ready()) {
+    if(this.finished()) {
         this.stop();
     }
 
-    this.running && this.emitEvent('tick', [this]);
+    if( this.running ) {
+        this.emitEvent('tick', [this]);
+    }
 };
 
 
-module.exports = function(a) {
-    i18n = a;
-    return Wizard;
-};
+module.exports = Wizard;

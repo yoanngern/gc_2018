@@ -2,11 +2,13 @@
 
 class MC4WP_Custom_Color_Theme_Admin {
 
+	private $plugin_file;
+
 	/**
-	 * @param MC4WP_Plugin $plugin
+	 * @param string $plugin_file
 	 */
-	public function __construct( $plugin ) {
-		$this->plugin = $plugin;
+	public function __construct( $plugin_file ) {
+		$this->plugin_file = $plugin_file;
 	}
 
 	/**
@@ -44,7 +46,7 @@ class MC4WP_Custom_Color_Theme_Admin {
 	 * @param $opts
 	 */
 	function add_custom_color_option( $opts ) {
-		include $this->plugin->dir( '/views/setting.php' );
+		include dirname( $this->plugin_file ) . '/views/setting.php';
 	}
 
 	/**

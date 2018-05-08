@@ -58,7 +58,7 @@
 			padding: '2px',
 			'background-color': '#fee',
 			opacity: 0.80
-		}).appendTo("body").fadeIn(200);
+		}).appendTo(document.body).fadeIn(200);
 	}
 
 	function toggleCustomRangeOptions(e) {
@@ -67,8 +67,10 @@
 	}
 
 	function plotHover(event, pos, item) {
-		$("#x").text(pos.x.toFixed(2));
-		$("#y").text(pos.y.toFixed(2));
+		var xEl = document.getElementById('x');
+		var yEl = document.getElementById('y');
+		if(xEl) { xEl.innerText = pos.x.toFixed(2); }
+		if(yEl) { yEl.innerText = pos.y.toFixed(2); }
 
 		if (item) {
 			if (previousPoint != item.dataIndex) {
@@ -94,6 +96,4 @@
 	$graph.bind("plothover", plotHover);
 
 	plotGraph();
-
-
 })(window.jQuery);

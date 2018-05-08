@@ -3,14 +3,14 @@
 Plugin Name: MailChimp for WordPress - Premium
 Plugin URI: https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp-pro&utm_campaign=plugins-page
 Description: Premium functionality to MailChimp for WordPress.
-Version: 3.3.24
+Version: 3.3.32
 Author: ibericode
 Author URI: https://ibericode.com/
 License: GPL v3
 Text Domain: mailchimp-for-wp
 
 MailChimp for WordPress alias MC4WP
-Copyright (C) 2012-2017, Danny van Kooten, danny@ibericode.com
+Copyright (C) 2012-2018, Danny van Kooten, danny@ibericode.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 defined( 'ABSPATH' ) or exit;
 
 // Define some useful constants
-define( 'MC4WP_PREMIUM_VERSION', '3.3.24' );
+define( 'MC4WP_PREMIUM_VERSION', '3.3.32' );
 define( 'MC4WP_PREMIUM_PLUGIN_FILE', __FILE__ );
 /**
  * Loads the various premium add-on plugins
@@ -76,6 +76,7 @@ function _mc4wp_premium_load() {
 	if( version_compare( PHP_VERSION, '5.3', '>=' ) ) {
 		$plugins[] = 'ecommerce-loader';
 		$plugins[] = 'licensing';
+		$plugins[] = 'append-form-to-post';
 	}
 
 

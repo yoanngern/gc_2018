@@ -9,15 +9,15 @@
 class MC4WP_Styles_Builder_Admin {
 
 	/**
-	 * @var MC4WP_Plugin
+	 * @var string
 	 */
-	protected $plugin;
+	protected $plugin_file;
 
 	/**
-	 * @param MC4WP_Plugin $plugin
+	 * @param string $plugin_file
 	 */
-	public function __construct(MC4WP_Plugin $plugin) {
-		$this->plugin = $plugin;
+	public function __construct( $plugin_file ) {
+		$this->plugin_file = $plugin_file;
 	}
 
 	/**
@@ -48,14 +48,14 @@ class MC4WP_Styles_Builder_Admin {
 	 */
 	public function run_upgrade_routines() {
 		$from_version = get_option('mc4wp_styles_builder_version', 0);
-		$to_version = $this->plugin->version();
+		$to_version = MC4WP_PREMIUM_VERSION;
 
 		// we're at the specified version already
 		if (version_compare($from_version, $to_version, '>=')) {
 			return;
 		}
 
-		$upgrade_routines = new MC4WP_Upgrade_Routines($from_version, $to_version, $this->plugin->dir('/includes/migrations'));
+		$upgrade_routines = new MC4WP_Upgrade_Routines($from_version, $to_version, dirname($this->plugin_file) . '/includes/migrations');
 		$upgrade_routines->run();
 		update_option('mc4wp_styles_builder_version', $to_version);
 	}
@@ -88,8 +88,8 @@ class MC4WP_Styles_Builder_Admin {
 		wp_enqueue_style('thickbox');
 
 		// our own scripts
-		wp_enqueue_style('mc4wp-styles-builder', $this->plugin->url('/assets/css/admin' . $suffix . '.css'), array(), $this->plugin->version());
-		wp_enqueue_script('mc4wp-styles-builder', $this->plugin->url('/assets/js/styles-builder' . $suffix . '.js'), array('jquery'), $this->plugin->version(), true);
+		wp_enqueue_style('mc4wp-styles-builder', plugins_url('/assets/css/admin' . $suffix . '.css', $this->plugin_file), array(), MC4WP_PREMIUM_VERSION);
+		wp_enqueue_script('mc4wp-styles-builder', plugins_url('/assets/js/styles-builder' . $suffix . '.js', $this->plugin_file ), array('jquery'), MC4WP_PREMIUM_VERSION, true);
 	}
 
 	/**

@@ -7,20 +7,6 @@
  */
 class MC4WP_Form_Notification_Factory {
 
-	/**
-	 * @var MC4WP_Plugin
-	 */
-	protected $plugin;
-
-	/**
-	 * MC4WP_Form_Notification_Factory constructor.
-	 *
-	 * @param MC4WP_Plugin $plugin
-	 */
-	public function __construct( MC4WP_Plugin $plugin ) {
-		$this->plugin = $plugin;
-	}
-
 	public function add_hooks() {
 		add_filter( 'mc4wp_form_settings', array( $this, 'settings' ) );
 		add_action( 'mc4wp_form_subscribed',array( $this, 'send_form_notification' ), 10, 4 );
@@ -33,13 +19,13 @@ class MC4WP_Form_Notification_Factory {
 	 * @return array
 	 */
 	public function settings( $settings ) {
-
-		static $defaults;
-
-		// load defaults
-		if( ! $defaults ) {
-			$defaults = include $this->plugin->dir( '/config/default-settings.php' );
-		}
+		$defaults = array(
+			'enabled' => 0,
+			'subject' => 'New form submission - MailChimp for WordPress',
+			'recipients' => get_bloginfo( 'admin_email' ),
+			'message_body' => 'Form was submitted with the following data.' . "\r\n\r\n" . '[_ALL_]',
+			'content_type' => 'text/html',
+		);
 
 		// make sure container is an array
 		if( empty( $settings['email_notification'] ) ) {
@@ -51,7 +37,6 @@ class MC4WP_Form_Notification_Factory {
 
 		return $settings;
 	}
-
 
 	/**
 	 * @param MC4WP_Form $form

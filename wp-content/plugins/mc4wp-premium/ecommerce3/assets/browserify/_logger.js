@@ -1,5 +1,7 @@
 'use strict';
 
+var m = require('mithril');
+
 function scrollToBottom(element, initialized, context) {
     element.scrollTop = element.scrollHeight;
 }
@@ -27,7 +29,6 @@ Logger.prototype.toggle = function() {
 };
 
 Logger.prototype.view = function() {
-
     if( this.items.length <= 0 ) {
         return '';
     }

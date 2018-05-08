@@ -21,7 +21,6 @@ class MC4WP_Log_Item {
     public $language;
     public $type;
     public $url;
-    public $success;
     public $datetime;
     public $related_object_ID;
 
@@ -47,5 +46,18 @@ class MC4WP_Log_Item {
             case 'list_ids':
                 return $this->list_id;
         }
+    }
+
+    public function to_json() {
+        return (object) array(
+            'email_address' => $this->email_address,
+            'status' => $this->status,
+            'merge_fields' => $this->merge_fields,
+            'interests' => $this->interests,
+            'language' => $this->language,
+            'ip_signup' => $this->ip_signup,
+            'email_type' => $this->email_type,
+            'vip' => $this->vip,
+        );
     }
 }

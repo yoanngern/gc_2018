@@ -81,6 +81,7 @@ class MC4WP_Ecommerce_Object_Observer {
         }
 
         $this->add_pending_job( 'add_product', $post_id );
+        $this->queue->save();
     }
 
     // hook: save_post_shop_order
@@ -100,6 +101,7 @@ class MC4WP_Ecommerce_Object_Observer {
 
         // add new job
         $this->add_pending_job( $method, $post_id );
+        $this->queue->save();
     }
 
     // hook: delete_post
@@ -110,13 +112,17 @@ class MC4WP_Ecommerce_Object_Observer {
         if( $post->post_type === 'product' ) {
             $this->remove_pending_jobs( 'add_product', $post_id );
             $this->add_pending_job( 'delete_product', $post_id );
+            $this->queue->save();
         }
 
         // orders
         if( $post->post_type === 'shop_order' ) {
             $this->remove_pending_jobs( 'add_order', $post_id );
             $this->add_pending_job( 'delete_order', $post_id );
+             $this->queue->save();
         }
+
+
     }
 
     // hook: profile_update
@@ -124,8 +130,9 @@ class MC4WP_Ecommerce_Object_Observer {
         $user = get_userdata( $user_id );
 
         // was updated user a customer with an email address?
-        if( in_array( 'customer', $user->roles ) && ! empty( $user->billing_email ) ) {
+        if( in_array( 'customer', $user->roles ) && ( ! empty( $user->billing_email ) || ! empty( $user->user_email ) ) ) {
             $this->add_pending_job( 'update_customer', $user_id );
+            $this->queue->save();
         }
     }
 

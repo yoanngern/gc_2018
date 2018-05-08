@@ -7,7 +7,7 @@
 		"uuidString": "35FCC746-D50B-47EC-8292-55E51DFD872E"
 		}
 	],
-"creatorBuild": "26330",
+"creatorBuild": "26680",
 "files": {
 	"\/404.php": {
 		"cB": 0,
@@ -4230,6 +4230,16 @@
 		"oF": 0,
 		"oS": 3
 		},
+	"\/style_v1_5.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/style_v1_5-min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"\/template-parts\/city\/city.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -4370,13 +4380,6 @@
 		"oAP": "\/template-parts\/event\/single.php",
 		"oF": 0
 		},
-	"\/template-parts\/form\/simple.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/form\/simple.php",
-		"oF": 0
-		},
 	"\/template-parts\/people\/index.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -4491,7 +4494,8 @@
 	"creationDate": 508953428,
 	"displayValue": "Gospel Center 2018",
 	"displayValueWasSetByUser": 1,
-	"iconImageName": "meme-hart"
+	"iconImageName": "meme-hart",
+	"iconImageWasSetByUser": 0
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
@@ -5886,7 +5890,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "gc-oron.org",
+	"externalServerAddress": "gc-lausanne.org",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",
@@ -6294,6 +6298,7 @@
 		"autoOutputPathReplace1": "",
 		"autoOutputPathReplace2": "",
 		"autoOutputPathStyle": 0,
+		"outputFormat": 0,
 		"quality": 100
 		},
 	"languageDefaultsJS": {

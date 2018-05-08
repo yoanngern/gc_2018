@@ -1,7 +1,7 @@
 'use strict';
 
 var m = require('mithril');
-var algoliasearch = require('algoliasearch');
+var algoliasearch = require('algoliasearch/lite');
 
 function addEvent(element, event, handler) {
 	if(element.addEventListener){
@@ -101,13 +101,13 @@ Lucy.prototype.getDOM = function() {
 						type: 'text',
 						value: this.searchQuery,
 						onkeyup: listenForInput.bind(this),
-						config: (function(el) { this.opened && el.focus(); }).bind(this),
+						onupdate: (function(vnode) { console.log(this); if(this.opened) { vnode.dom.focus(); } }).bind(this),
 						placeholder: 'What are you looking for?'
 					}),
 					m('span', {
 						"class": 'loader',
-						config: (function(element) {
-							this.loader = element;
+						oncreate: (function(vnode) {
+							this.loader = vnode.dom;
 						}).bind(this)
 					}),
 					m('input', { type: 'submit' })

@@ -16,8 +16,12 @@ var config = {
 			href: "https://github.com/ibericode/mc4wp-snippets"
 		},
 		{
-			text: "<span class=\"dashicons dashicons-editor-break\"></span> Changelog",
-			href: "https://mc4wp.com/changelog/"
+			text: "<span class=\"dashicons dashicons-editor-break\"></span> Changelog (free plugin)",
+			href: "https://wordpress.org/plugins/mailchimp-for-wp/#developers"
+		},
+		{
+			text: "<span class=\"dashicons dashicons-editor-break\"></span> Changelog (Premium plugin)",
+			href: "https://account.mc4wp.com/changelog/premium"
 		}
 	],
 	contactLink: 'mailto:support@mc4wp.com'

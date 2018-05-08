@@ -1,9 +1,11 @@
 (function () { var require = undefined; var define = undefined; (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-function ProgressBar( element, count ) {
+"use strict";
+
+function ProgressBar(element, count) {
 	var wrapper = element,
-		bar = document.createElement('div'),
-		step_size = 100 / count,
-		progress = 0;
+	    bar = document.createElement('div'),
+	    step_size = 100 / count,
+	    progress = 0;
 
 	wrapper.style.height = "40px";
 	wrapper.style.width = "100%";
@@ -18,18 +20,20 @@ function ProgressBar( element, count ) {
 	bar.style.color = 'white';
 	bar.style.fontSize = '16px';
 	bar.style.width = progress + "%";
-	wrapper.appendChild( bar );
+	wrapper.appendChild(bar);
 
-	function tick( ticks ) {
-		if( done() ) { return; }
+	function tick(ticks) {
+		if (done()) {
+			return;
+		}
 
 		ticks = ticks === undefined ? 1 : ticks;
-		progress += ( step_size * ticks );
+		progress += step_size * ticks;
 		bar.style.width = progress + "%";
 
-		bar.innerText = parseInt( progress ) + "%";
+		bar.innerText = parseInt(progress) + "%";
 
-		if( done() ) {
+		if (done()) {
 			bar.innerText = 'Done!';
 		}
 	}
@@ -41,50 +45,51 @@ function ProgressBar( element, count ) {
 	return {
 		'tick': tick,
 		'done': done
-	}
+	};
 }
 
 module.exports = ProgressBar;
+
 },{}],2:[function(require,module,exports){
-function request( url, options ) {
+'use strict';
+
+function request(url, options) {
 
 	var request = new XMLHttpRequest();
-	request.onreadystatechange = function() {
+	request.onreadystatechange = function () {
 		if (this.readyState === 4) {
 			if (this.status >= 200 && this.status < 400) {
 				options.onSuccess && options.onSuccess(this.responseText);
 			} else {
-				options.onError && options.onError( this.status, this.responseText);
+				options.onError && options.onError(this.status, this.responseText);
 			}
 		}
 	};
 	request.open(options.method || 'GET', url, true);
 
-	if( options.method && options.method.toUpperCase() === 'POST' ) {
+	if (options.method && options.method.toUpperCase() === 'POST') {
 		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 	}
 
-	request.send( options.data || {} );
+	request.send(options.data || {});
 	return request;
 }
 
 module.exports = request;
+
 },{}],3:[function(require,module,exports){
 'use strict';
-
 
 var ProgressBar = require('./_progress-bar.js');
 var request = require('./_request.js');
 var count = mc4wp_ecommerce.untracked_order_count;
 var form = document.getElementById('add-untracked-orders-form');
 var progressBarMount = document.getElementById('add-untracked-orders-progress');
-var progress_bar,
-	progress_poll,
-	worker;
+var progress_bar, progress_poll, worker;
 
 // hook into form submit
-if( form ) {
-	form.addEventListener('submit', start );
+if (form) {
+	form.addEventListener('submit', start);
 }
 
 function start(e) {
@@ -102,30 +107,30 @@ function start(e) {
 }
 
 function work() {
-	var limit = parseInt( form.elements["limit"].value );
-	var offset = parseInt( form.elements["offset"].value );
+	var limit = parseInt(form.elements["limit"].value);
+	var offset = parseInt(form.elements["offset"].value);
 	var url = ajaxurl + "?action=mc4wp_ecommerce_add_untracked_orders&offset=" + offset + "&limit=" + limit;
 	var previousCount = count;
 
-	worker = request( url, {
-		onSuccess: function(data) {
+	worker = request(url, {
+		onSuccess: function onSuccess(data) {
 			updateProgress(data);
 
-			if( previousCount <= data ) {
+			if (previousCount <= data) {
 				// We're not making progress..
 				var textElement = document.createElement('p');
 				textElement.style.color = 'red';
 				textElement.innerHTML = "We're stuck. Please <a href=\"admin.php?page=mailchimp-for-wp-other\">check the debug log</a> for errors.";
 				progressBarMount.parentNode.appendChild(textElement);
-			} else if( data > 0 ) {
+			} else if (data > 0) {
 				// Keep going if there's more
 				work();
 			}
 		},
 
-		onError: function( code, response ) {
+		onError: function onError(code, response) {
 			// if we got a 504 Gateway Timeout, try again.
-			if( code == 504 ) {
+			if (code == 504) {
 				work();
 			}
 		}
@@ -133,28 +138,29 @@ function work() {
 }
 
 function updateProgress(new_count) {
-	progress_bar.tick( count - new_count );
+	progress_bar.tick(count - new_count);
 	count = new_count;
 }
 
 function fetchProgress() {
-	if( progress_bar.done() ) {
+	if (progress_bar.done()) {
 
 		// refresh page
-		window.setTimeout( function() {
-			window.location.reload()
-		}, 2500 );
+		window.setTimeout(function () {
+			window.location.reload();
+		}, 2500);
 
 		return;
 	}
 
 	var url = ajaxurl + "?action=mc4wp_ecommerce_get_untracked_orders_count";
-	request( url, {
-		onSuccess: function(data) {
+	request(url, {
+		onSuccess: function onSuccess(data) {
 			updateProgress(data);
-			window.setTimeout( fetchProgress, 2000 );
+			window.setTimeout(fetchProgress, 2000);
 		}
 	});
 }
+
 },{"./_progress-bar.js":1,"./_request.js":2}]},{},[3]);
  })();

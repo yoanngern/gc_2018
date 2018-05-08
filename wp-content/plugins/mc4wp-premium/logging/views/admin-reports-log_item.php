@@ -49,8 +49,8 @@ defined( 'ABSPATH' ) or exit;
 	<tr>
 		<th><?php esc_html_e( 'Merge Fields', 'mailchimp-for-wp' ); ?></th>
 		<td><?php
-			foreach( $fields as $tag => $value ) {
-				if( in_array( $tag, array( 'GROUPINGS', 'OPTIN_IP' ) ) ) { continue; }
+			foreach( (array) $item->merge_fields as $tag => $value ) {
+				if( in_array( $tag, array( 'INTERESTS', 'GROUPINGS', 'OPTIN_IP' ) ) ) { continue; }
 
 				// address fields and other array style fields
 				$value = is_array( $value ) ? join( ', ', $value ) : $value;
@@ -64,18 +64,17 @@ defined( 'ABSPATH' ) or exit;
 					printf( '<strong>%s</strong>: %s <br />', esc_html( $tag ), esc_html( $value ) );
 				}
 			}
-
-			if( empty( $fields ) ) {
+			
+			if( empty( $item->merge_fields ) ) {
 				echo '&mdash;';
 			}
-
 			?>
 		</td>
 	</tr>
 	<tr>
 		<th><?php _e( 'Interests', 'mailchimp-for-wp' ); ?></th>
 		<td><?php
-			foreach( $interests as $id => $value ) {
+			foreach( (array) $item->interests as $id => $value ) {
 
 				// only show interests which were marked as "true"
 				if( ! $value ) {
@@ -98,17 +97,17 @@ defined( 'ABSPATH' ) or exit;
 
 				printf( '%s <br />', $name );
 			}
-
+			
 			// for BC with v3.x
 			if( ! empty( $fields->GROUPINGS ) && method_exists( $list, 'get_grouping' ) ) {
-				foreach( $fields->GROUPINGS  as $value ) {
+				foreach( (array) $fields->GROUPINGS  as $value ) {
 					$grouping = $list->get_grouping( $value->id );
 					$name = sprintf( '<strong>%s</strong>: %s', $grouping->name, join( ', ', $value->groups ) );
 					printf( '%s <br />', $name );
 				}
 			}
 
-			if( empty( $fields->GROUPINGS ) && empty( $interests ) ) {
+			if( empty( $fields->GROUPINGS ) && empty( $item->interests ) ) {
 				echo '&mdash;';
 			}
 			?>
@@ -160,7 +159,9 @@ defined( 'ABSPATH' ) or exit;
 
 if( WP_DEBUG ) {
 	echo '<h4>' . __( 'Raw', 'mailchimp-for-wp' ) . '</h4>';
-	echo '<pre>' . esc_html( print_r( $item, true ) ) . '</pre>';
+	echo '<pre>';
+    echo version_compare( PHP_VERSION, '5.4', '>=' ) ? json_encode( $item->to_json(), JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT ) : json_encode( $item->to_json() ); 
+    echo '</pre>';
 }
 
 ?>

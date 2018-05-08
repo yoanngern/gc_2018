@@ -36,7 +36,7 @@ if( DEBUG ){
 		'react-hot-loader/patch',
 		'webpack-dev-server/client?http://localhost:3000',
 		'webpack/hot/only-dev-server',
-		'babel-polyfill',
+		//'babel-polyfill', conflicts with WPSEO so added to index.js instead
 		'./src/index.js'
 	];
 
@@ -58,7 +58,10 @@ if( DEBUG ){
 	plugins.push( new WebpackCleanupPlugin() );
 
 	devtool   = false;
-	entry     = ['babel-polyfill', './src/index'];
+	entry     = [
+		//'babel-polyfill', conflicts with WPSEO so added to index.js instead'babel-polyfill',
+		'./src/index'
+	];
 	cssloader = ExtractTextPlugin.extract( {
 		use : 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!postcss-loader'
 	} );

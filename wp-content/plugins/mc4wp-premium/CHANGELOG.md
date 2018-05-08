@@ -1,6 +1,96 @@
 Changelog
 ==========
 
+#### 3.3.32 - April 10, 2018
+
+**Fixes**
+
+- E-commerce: Send correct product variation ID to MailChimp again.
+- E-commerce: Redirect after re-populating cart from MailChimp to clear URL parameters.
+
+**Improvements**
+
+- Forms: Blur active input element after submitting form with RETURN key, so that keyboard disappears on mobile.
+
+
+#### 3.3.31 - March 28, 2018
+
+**Fixes**
+
+- Reports: Log items were sometimes counted on multiple days in the reports graph.
+- E-commerce: On certain servers, background jobs were not queued up for updated carts or orders.
+
+**Improvements**
+
+- E-commerce: Stop unnecessary info logging for guest checkouts.
+- E-commerce: MailChimp does not allow connecting more than one site sharing the same domain, so attempting to load MC.js on WordPress Multisite with a subdirectory set-up would not work. We are now generating a unique subdomain and sending that to MailChimp (instead of the subdirectory) so that everything works as expected.
+- E-commerce: When order update fails because of an invalid `campaign_id`, retry without that parameter.
+
+
+#### 3.3.30 - March 20, 2018
+
+**Improvements**
+
+- E-commerce: campaign tracking cookies are now set via JavaScript so that it works with pages served from cache.
+
+**Additions**
+
+- Form setting to automatically append that form to all posts (in a certain category).
+
+
+#### 3.3.29 - March 12, 2018
+
+**Fixes**
+
+- "Order already exists" errors when using custom order numbers.
+
+**Improvements**
+
+- Improved handling of deleted product variations for historical orders.
+
+
+#### 3.3.28 - February 26, 2018
+
+**Fixes**
+
+- Catch exception when periodic license check fails.
+
+**Improvements** 
+
+- Forms: show success message even when redirecting to another page.
+- E-commerce: validate product existence before sending to MailChimp.
+- E-commerce: only send product variants if variable product has existing children.
+- E-commerce: throw exception when order has no order lines.
+- Reports: Print submission data as JSON instead of PHP object.
+
+
+### 3.3.27 - February 2, 2018
+
+**Fixes**
+
+- Reports: "Last year" view not showing the correct graph.
+- E-Commerce: Send products in "trash" to MailChimp too, but with stock inventory of 0.
+
+**Improvements**
+
+- Minor memory usage improvements.
+- Updated all JavaScript dependencies.
+- E-Commerce: Fallback on `user_email` for abandoned cart tracking, when `billing_email` is unknown.
+
+**Additions**
+
+- E-Commerce: Add `--delay` option to [all bulk WP CLI commands](https://kb.mc4wp.com/ecommerce-wp-cli-commands/).
+- E-Commerce: Add `wp mc4wp-ecommerce reset-queue` command to clear all queued jobs.
+
+
+### 3.3.25 - January 8, 2018
+
+**Fixes**
+
+- Fire correct event `updated_subscriber` when using AJAX forms.
+- Fire individual form events when using AJAX forms.
+
+
 ### 3.3.24 - December 22, 2017
 
 **Additions**

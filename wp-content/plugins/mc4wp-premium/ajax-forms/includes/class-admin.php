@@ -3,13 +3,6 @@
 class MC4WP_AJAX_Forms_Admin {
 
 	/**
-	 * @param MC4WP_Plugin $plugin
-	 */
-	public function __construct( MC4WP_Plugin $plugin ) {
-		$this->plugin = $plugin;
-	}
-
-	/**
 	 * Add hooks
 	 */
 	public function add_hooks() {

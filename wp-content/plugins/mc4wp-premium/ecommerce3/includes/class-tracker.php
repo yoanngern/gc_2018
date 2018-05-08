@@ -2,7 +2,15 @@
 
 class MC4WP_Ecommerce_Tracker {
 
-	public function __construct( $settings ) {
+	private $plugin_file;
+	private $settings;
+
+	/**
+	* @var string $plugin_file
+	* @var array $settings
+	*/
+	public function __construct( $plugin_file, $settings ) {
+		$this->plugin_file = $plugin_file;
 		$this->settings = $settings;
 	}
 
@@ -10,44 +18,25 @@ class MC4WP_Ecommerce_Tracker {
 	 * Add hooks
 	 */
 	public function hook() {
-		add_action( 'init', array( $this, 'listen' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_action( 'wp_footer', array( $this, 'output_mcjs_script' ), 60 );
 		add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'attach_order_meta' ), 50 );
 	}
 
 	/**
-	 * Listen for "mc_tc" in the URL.
+	 * Enqueue script on checkout page that periodically sends form data for guest checkouts.
 	 */
-	public function listen() {
-		static $keys = array(
-			'mc_tc',
-			'mc_cid',
-			'mc_eid',
-		);
-		$cookie_expiration_time = 14 * 24 * 60 * 60; // 14 days
-		$expires_at = time() + $cookie_expiration_time;
-
-		foreach( $keys as $key ) {
-			$value = $this->get_url_value( $key );
-
-			if( ! empty( $value ) ) {
-				setcookie( $key, $value, $expires_at, '/' );
-			}
-		}
-
-		// set landing_site cookie
-		if( ! empty( $_GET['mc_cid'] )&& empty( $_COOKIE['mc_landing_site'] ) && ! is_admin() ) {
-			setcookie( 'mc_landing_site', home_url( $_SERVER['REQUEST_URI'] ), $expires_at, '/' );
-		}
-
+	public function enqueue_assets() {
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		wp_enqueue_script( 'mc4wp-ecommerce-tracker', plugins_url( "/assets/js/tracker{$suffix}.js", $this->plugin_file ), array(), MC4WP_PREMIUM_VERSION, true );		
 	}
 
 	public function output_mcjs_script() {
-		if( ! $this->settings['load_mcjs_script'] || empty( $this->settings['store']['mcjs_url'] ) ) {
+		if( ! $this->settings['load_mcjs_script'] || empty( $this->settings['mcjs_url'] ) ) {
 			return;
 		}
 
-		printf( '<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","%s");</script>', $this->settings['store']['mcjs_url'] );
+		printf( '<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","%s");</script>', $this->settings['mcjs_url'] );
 	}
 
 	/**
@@ -113,11 +102,7 @@ class MC4WP_Ecommerce_Tracker {
 	 * @return string
 	 */
 	protected function get_url_value( $key ) {
-		if( empty( $_GET[ $key ] ) ) {
-			return '';
-		}
-
-		return sanitize_text_field( $_GET[ $key ] );
+		return empty( $_GET[$key] ) ? '' : (string) $_GET[ $key ];
 	}
 
 	/**
@@ -126,11 +111,7 @@ class MC4WP_Ecommerce_Tracker {
 	 * @return string
 	 */
 	protected function get_cookie_value( $key ) {
-		if( empty( $_COOKIE[ $key ] ) ) {
-			return '';
-		}
-
-		return sanitize_text_field( $_COOKIE[ $key ] );
+		return empty( $_COOKIE[ $key ] ) ? '' : (string) $_COOKIE[ $key ];
 	}
 
 	/**

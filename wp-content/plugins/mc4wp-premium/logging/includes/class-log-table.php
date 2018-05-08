@@ -296,7 +296,7 @@ class MC4WP_Log_Table extends WP_List_Table {
 	 * The text to show when there are no log items to show.
 	 */
 	public function no_items() {
-		_e( 'No subscribe requests found.', 'mailchimp-for-wp' );
+		_e( 'No log items.', 'mailchimp-for-wp' );
 	}
 
 	public function get_view_link( $key, $view ) {
