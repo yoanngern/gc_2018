@@ -51,9 +51,8 @@ function listenForInput(event) {
 	}
 }
 
-var Lucy = function( siteUrl, algoliaAppId, algoliaAppKey, algoliaIndexName, links, contactLink ) {
+var Lucy = function( algoliaAppId, algoliaAppKey, algoliaIndexName, links, contactLink ) {
 
-	this.siteUrl = siteUrl;
 	this.algolia = algoliasearch( algoliaAppId, algoliaAppKey ).initIndex( algoliaIndexName );
 	this.opened = false;
 	this.loader = null;
@@ -63,12 +62,7 @@ var Lucy = function( siteUrl, algoliaAppId, algoliaAppKey, algoliaIndexName, lin
 	this.element.setAttribute('class','lucy closed');
 	this.hrefLinks = links;
 	this.hrefContactLink = contactLink;
-
-	// make sure site url does not have trailing slash
-	if( this.siteUrl.charAt(this.siteUrl.length - 1) == "/") {
-		this.siteUrl = this.siteUrl.substr(0, this.siteUrl.length - 1);
-	}
-
+	
 	document.body.appendChild(this.element);
 	m.mount(this.element, { view: this.getDOM.bind(this) });
 };
@@ -181,8 +175,6 @@ Lucy.prototype.search = function(query) {
 
 	// search
 	var handleAlgoliaResults = function( error, result ) {
-
-		var urlPrefix = this.siteUrl;
 		this.searchResults = [];
 
 		/* clear loader */
@@ -194,11 +186,8 @@ Lucy.prototype.search = function(query) {
 			return;
 		}
 
-		var parser = document.createElement('a');
 		this.searchResults = result.hits.map(function(r) {
-			parser.href = r.path;
-			var url = urlPrefix + parser.pathname + ( parser.search || '' );
-			return { href: url, text: r._highlightResult.title.value};
+			return { href: r.url, text: r._highlightResult.title.value};
 		});
 
 		m.redraw();

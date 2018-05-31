@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Elementor admin class.
+ * Elementor admin.
  *
  * Elementor admin handler class is responsible for initializing Elementor in
  * WordPress admin.
@@ -34,7 +34,7 @@ class Admin {
 			[
 				'jquery-ui-position',
 			],
-			'4.2.1',
+			'4.3.2',
 			true
 		);
 
@@ -90,7 +90,7 @@ class Admin {
 			'elementor-icons',
 			ELEMENTOR_ASSETS_URL . 'lib/eicons/css/elementor-icons' . $suffix . '.css',
 			[],
-			'3.2.1'
+			'3.3.0'
 		);
 
 		wp_register_style(
@@ -132,7 +132,10 @@ class Admin {
 		<div id="elementor-switch-mode">
 			<input id="elementor-switch-mode-input" type="hidden" name="_elementor_post_mode" value="<?php echo Plugin::$instance->db->is_built_with_elementor( $post->ID ); ?>" />
 			<button id="elementor-switch-mode-button" type="button" class="button button-primary button-hero">
-				<span class="elementor-switch-mode-on"><?php echo __( '&#8592; Back to WordPress Editor', 'elementor' ); ?></span>
+				<span class="elementor-switch-mode-on">
+					<i class="eicon-arrow-<?php echo ( is_rtl() ) ? 'right' : 'left'; ?>" aria-hidden="true"></i>
+					<?php echo __( 'Back to WordPress Editor', 'elementor' ); ?>
+				</span>
 				<span class="elementor-switch-mode-off">
 					<i class="eicon-elementor" aria-hidden="true"></i>
 					<?php echo __( 'Edit with Elementor', 'elementor' ); ?>
@@ -757,7 +760,19 @@ class Admin {
 		}
 
 		$post_data = isset( $_GET['post_data'] ) ? $_GET['post_data'] : [];
-		$meta = apply_filters( 'elementor/admin/create_new_post/meta', [] );
+
+		$meta = [];
+
+		/**
+		 * Create new post meta data.
+		 *
+		 * Filters the meta data of any new post created.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param array $meta Post meta data.
+		 */
+		$meta = apply_filters( 'elementor/admin/create_new_post/meta', $meta );
 
 		$post_data['post_type'] = $post_type;
 

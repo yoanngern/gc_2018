@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Go Live Update URLS Pro\n"
-"POT-Creation-Date: 2017-11-03 10:56-0400\n"
+"POT-Creation-Date: 2018-05-17 10:57-0400\n"
 "PO-Revision-Date: 2017-11-03 10:56-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.7\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: go-live-update-urls-pro.php\n"
@@ -21,108 +21,133 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: go-live-update-urls-pro.php:77
+#. translators: {%1$s}[<a>]{%2$s}[</a>] https://wordpress.org/plugins/go-live-update-urls/
+#: go-live-update-urls-pro.php:88
+#, php-format
+msgctxt "{<a>}{</a>}"
 msgid ""
-"Go Live Update Urls Pro requires the Go Live Update Urls plugin to be "
-"installed and active."
+"Go Live Update Urls Pro requires the basic version of %1$sGo Live Update "
+"Urls %3$s+%2$s to be installed and active."
 msgstr ""
 
-#: src/Checkboxes.php:94
+#: src/Checkboxes.php:109
 msgid "Comments"
 msgstr ""
 
-#: src/Checkboxes.php:105
+#: src/Checkboxes.php:120
 msgid "Users"
 msgstr ""
 
-#: src/Checkboxes.php:115
+#: src/Checkboxes.php:131
 msgid "Categories, Tags, Custom Taxonomies"
 msgstr ""
 
-#: src/Checkboxes.php:134
+#: src/Checkboxes.php:148
 msgid "Site Options, Widgets"
 msgstr ""
 
-#: src/Checkboxes.php:144
+#: src/Checkboxes.php:158
 msgid "Posts, Pages, Custom Post Types"
 msgstr ""
 
-#: src/Checkboxes.php:156
+#: src/Checkboxes.php:170
 msgid "Network Settings"
 msgstr ""
 
-#: src/Checkboxes.php:179
+#: src/Checkboxes.php:204
 msgid "Custom tables created by plugins"
 msgstr ""
 
-#: src/Factory.php:53
+#: src/Core.php:77
 msgid "The URLS in the checked sections have been updated."
 msgstr ""
 
-#: src/Factory.php:110
+#: src/Core.php:134
 msgid "Only the checked sections will be updated."
 msgstr ""
 
-#: src/Factory.php:115
+#: src/Core.php:139
 msgid "All tables are safe to update."
 msgstr ""
 
-#: src/Styles.php:35
+#: src/Styles.php:37
 msgid "Could not update test results at this time."
 msgstr ""
 
-#: src/Styles.php:36
+#: src/Styles.php:38
 msgid "Click to automatically fix New URL"
 msgstr ""
 
-#: src/Styles.php:37
+#: src/Styles.php:39
 msgid "Close Results"
 msgstr ""
 
-#: src/Styles.php:38
-msgid "Fail"
-msgstr ""
-
-#: src/Styles.php:39
-msgid "Fix Issue"
-msgstr ""
-
 #: src/Styles.php:40
-msgid "New URL"
+msgid "Date"
 msgstr ""
 
 #: src/Styles.php:41
-msgid "Old URL"
+msgid "Fail"
 msgstr ""
 
 #: src/Styles.php:42
-msgid "Pass"
+msgid "Fix Issue"
 msgstr ""
 
 #: src/Styles.php:43
-msgid "Something went wrong."
+msgid "Site Address (URL) History"
 msgstr ""
 
 #: src/Styles.php:44
-msgid ""
-"Clicking this button will run some tests against the entered Old URL and New "
-"URL."
-msgstr ""
-
-#: src/Styles.php:44
-msgid "It will not make any changes to your site."
+msgid "Click to choose from previous changes made to the Site Address (URL)."
 msgstr ""
 
 #: src/Styles.php:45
-msgid "Test Change"
+msgid "No Site Address history could be found."
 msgstr ""
 
 #: src/Styles.php:46
-msgid "Test Results"
+msgid "New URL"
 msgstr ""
 
 #: src/Styles.php:47
+msgid "Old URL"
+msgstr ""
+
+#: src/Styles.php:48
+msgid "Pass"
+msgstr ""
+
+#: src/Styles.php:49
+msgid "Something went wrong."
+msgstr ""
+
+#: src/Styles.php:50
+msgid "Click to run some tests against the entered Old URL and New URL."
+msgstr ""
+
+#: src/Styles.php:50
+msgid "This will not make any changes to your site."
+msgstr ""
+
+#: src/Styles.php:51
+msgid "Test the URLs"
+msgstr ""
+
+#: src/Styles.php:52
+msgid "Test Results"
+msgstr ""
+
+#: src/Styles.php:53
 msgid "Unable to test."
+msgstr ""
+
+#: src/Styles.php:54
+msgid "Use"
+msgstr ""
+
+#: src/Styles.php:55
+msgid "Use this Old URL and New URL."
 msgstr ""
 
 #: src/Tests/Ajax.php:44 src/Tests/Ajax.php:69
@@ -135,8 +160,7 @@ msgstr ""
 
 #: src/Tests/Domain.php:17
 msgid ""
-"Unable to test the New URL because neither the Old URL nor the New URL is "
-"the current URL of this site. Try fixing any listed issues first."
+"Unable to verify whether or not this site is accessible from the new url."
 msgstr ""
 
 #: src/Tests/Domain.php:18
@@ -148,7 +172,7 @@ msgstr ""
 msgid "This site is accessible from the New URL."
 msgstr ""
 
-#: src/Tests/Domain.php:86
+#: src/Tests/Domain.php:128
 msgid "Verify this site is accessible from the New URL."
 msgstr ""
 
@@ -192,13 +216,15 @@ msgstr ""
 msgid "Verify the Old URL and New URL have matching trailing slashes."
 msgstr ""
 
-#: src/Update.php:90
-msgid ""
-"An Unexpected HTTP Error occurred during the API request.</p> <p><a href=\"?"
-"\" onclick=\"document.location.reload(); return false;\">Try again</a>"
+#: src/Update.php:97
+msgid "An Unexpected HTTP Error occurred during the API request."
 msgstr ""
 
-#: src/Update.php:95
+#: src/Update.php:97
+msgid "Try again"
+msgstr ""
+
+#: src/Update.php:102
 msgid "An unknown error occurred"
 msgstr ""
 

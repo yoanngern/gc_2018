@@ -84,7 +84,7 @@ class Share_Buttons extends Base_Widget {
 			'share_buttons',
 			[
 				'type' => Controls_Manager::REPEATER,
-				'fields' => array_values( $repeater->get_controls() ),
+				'fields' => $repeater->get_controls(),
 				'default' => [
 					[
 						'button' => 'facebook',
@@ -128,7 +128,6 @@ class Share_Buttons extends Base_Widget {
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'yes',
 				'condition' => [
 					'view' => 'icon-text',
@@ -143,7 +142,6 @@ class Share_Buttons extends Base_Widget {
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'condition' => [
 					'view!' => 'icon',
 				],
@@ -262,7 +260,7 @@ class Share_Buttons extends Base_Widget {
 				'label' => __( 'URL', 'elementor-pro' ),
 				'type' => Controls_Manager::URL,
 				'show_external' => false,
-				'placeholder' => 'http://your-link.com',
+				'placeholder' => __( 'https://your-link.com', 'elementor-pro' ),
 				'condition' => [
 					'share_url_type' => 'custom',
 				],
@@ -604,7 +602,7 @@ class Share_Buttons extends Base_Widget {
 				$has_counter = $this->has_counter( $network_name );
 				?>
 				<div class="elementor-grid-item">
-					<div class="<?php echo $button_classes . $social_network_class; ?>">
+					<div class="<?php echo esc_attr( $button_classes . $social_network_class ); ?>">
 						<?php if ( 'icon' === $settings['view'] || 'icon-text' === $settings['view'] ) : ?>
 							<span class="elementor-share-btn__icon">
 								<i class="<?php echo self::get_network_class( $network_name ); ?>"></i>

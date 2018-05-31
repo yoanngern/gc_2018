@@ -586,7 +586,7 @@ class Portfolio extends Base_Widget {
 		<ul class="elementor-portfolio__filters">
 			<li class="elementor-portfolio__filter elementor-active" data-filter="__all"><?php echo __( 'All', 'elementor-pro' ); ?></li>
 			<?php foreach ( $terms as $term ) { ?>
-				<li class="elementor-portfolio__filter" data-filter="<?php echo $term->term_id; ?>"><?php echo $term->name; ?></li>
+				<li class="elementor-portfolio__filter" data-filter="<?php echo esc_attr( $term->term_id ); ?>"><?php echo $term->name; ?></li>
 			<?php } ?>
 		</ul>
 		<?php

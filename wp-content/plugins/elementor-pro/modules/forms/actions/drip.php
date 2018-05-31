@@ -138,8 +138,6 @@ class Drip extends Integration_Base {
 			[
 				'label' => __( 'Form Fields', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'elementor-pro' ),
-				'label_off' => __( 'No', 'elementor-pro' ),
 				'default' => 'no',
 				'description' => __( 'Send all form fields to drip as custom fields', 'elementor-pro' ),
 				'condition' => [
@@ -262,7 +260,7 @@ class Drip extends Integration_Base {
 					break;
 
 				case 'credit':
-					$custom_fields[ $meta_type ] = __( 'Powered by', 'elementor-pro' ) . ' https://elementor.com/pro/';
+					$custom_fields[ $meta_type ] = sprintf( __( 'Powered by %s', 'elementor-pro' ), 'https://elementor.com/pro/' );
 					break;
 			}
 		}

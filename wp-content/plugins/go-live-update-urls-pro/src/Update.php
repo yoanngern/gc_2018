@@ -8,12 +8,13 @@
  * @author Mat Lipe <mat@matlipe.com>
  *
  */
-class Go_Live_Update_URLS_Pro_Update{
+final class Go_Live_Update_URLS_Pro_Update {
+	public $api_url = 'http://matlipe.com/plugins/'; //must use http: because PHP 5.2 does not support tlsv1.2 which is the only thing the server supports
 
-	public $api_url = 'https://matlipe.com/plugins/';
 	public $plugin_slug = 'go-live-update-urls-pro';
 
-	protected function hook(){
+
+	private function hook() {
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_for_update' ) );
 		add_filter( 'plugins_api', array( $this, 'plugin_api_call' ), 10, 3 );
 
@@ -113,7 +114,7 @@ class Go_Live_Update_URLS_Pro_Update{
 	 *
 	 * @var self
 	 */
-	protected static $instance;
+	private static $instance;
 
 
 	/**

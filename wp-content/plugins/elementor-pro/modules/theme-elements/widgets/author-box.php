@@ -2,14 +2,11 @@
 namespace ElementorPro\Modules\ThemeElements\Widgets;
 
 use Elementor\Controls_Manager;
-use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
-use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Color;
 use Elementor\Scheme_Typography;
 use Elementor\Utils;
-use ElementorPro\Base\Base_Widget;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -58,7 +55,6 @@ class Author_Box extends Base {
 				'prefix_class' => 'elementor-author-box--avatar-',
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'yes',
 				'separator' => 'before',
 				'condition' => [
@@ -93,7 +89,6 @@ class Author_Box extends Base {
 				'prefix_class' => 'elementor-author-box--name-',
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'yes',
 				'condition' => [
 					'source!' => 'custom',
@@ -162,7 +157,6 @@ class Author_Box extends Base {
 				'prefix_class' => 'elementor-author-box--biography-',
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'yes',
 				'condition' => [
 					'source!' => 'custom',
@@ -180,7 +174,6 @@ class Author_Box extends Base {
 				'prefix_class' => 'elementor-author-box--link-',
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'no',
 				'condition' => [
 					'source!' => 'custom',
@@ -194,7 +187,7 @@ class Author_Box extends Base {
 			[
 				'label' => __( 'Link To', 'elementor-pro' ),
 				'type' => Controls_Manager::URL,
-				'placeholder' => 'http://your-link.com',
+				'placeholder' => __( 'https://your-link.com', 'elementor-pro' ),
 				'condition' => [
 					'source' => 'custom',
 				],
@@ -221,7 +214,7 @@ class Author_Box extends Base {
 			[
 				'label' => __( 'Archive Button', 'elementor-pro' ),
 				'type' => Controls_Manager::URL,
-				'placeholder' => 'http://your-link.com',
+				'placeholder' => __( 'https://your-link.com', 'elementor-pro' ),
 				'condition' => [
 					'source' => 'custom',
 				],
@@ -364,7 +357,6 @@ class Author_Box extends Base {
 			[
 				'label' => __( 'Border', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
 				'selectors' => [
 					'{{WRAPPER}} .elementor-author-box__avatar img' => 'border-style: solid',
 				],

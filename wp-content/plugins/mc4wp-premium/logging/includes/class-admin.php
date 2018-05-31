@@ -24,6 +24,7 @@ class MC4WP_Logging_Admin {
 		add_action( 'mc4wp_dashboard_setup', array( $this, 'register_dashboard_widget' ) );
 		add_action( 'mc4wp_admin_log_export', array( $this, 'run_log_exporter' ) );
 		add_action( 'mc4wp_admin_log_empty', array( $this, 'run_log_empty' ) );
+		add_action( 'mc4wp_admin_log_set_purge_schedule', array( $this, 'set_purge_schedule' ) );
 		add_action( 'mc4wp_admin_enqueue_assets', array( $this, 'enqueue_assets' ) );
 		add_action( 'mc4wp_admin_after_integration_settings', array( $this, 'show_link_to_integration_log' ), 60 );
 		add_filter( 'set-screen-option', array( $this, 'set_screen_option' ), 10, 3 );
@@ -197,6 +198,11 @@ class MC4WP_Logging_Admin {
 	 * Show log page
 	 */
 	public function show_advanced_page() {
+		$options = get_option( 'mc4wp' );
+		if( empty( $options['log_purge_days'] ) ) {
+			$options['log_purge_days'] = 365;
+		}
+
 		$current_tab = 'advanced';
 		include $this->plugin->dir( '/views/admin-reports.php' );
 	}
@@ -291,4 +297,15 @@ class MC4WP_Logging_Admin {
 			return $value;
 		}
 	}
+
+	/**
+	* Set-up the schedule to periodically delete all log items older than X days
+	*/
+	public function set_purge_schedule() {
+		$options = get_option( 'mc4wp', array() );
+		$options['log_purge_days'] = (int) $_POST['log_purge_days'];
+		update_option( 'mc4wp', $options );
+		_mc4wp_logging_schedule_purge_event();
+	}
+
 }

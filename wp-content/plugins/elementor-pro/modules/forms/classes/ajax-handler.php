@@ -33,9 +33,9 @@ class Ajax_Handler {
 
 	public static function get_default_messages() {
 		return [
-			self::SUCCESS => __( 'The form was sent successfully!', 'elementor-pro' ),
-			self::ERROR => __( 'Please fill in the required fields.', 'elementor-pro' ),
-			self::FIELD_REQUIRED => __( 'Required', 'elementor-pro' ),
+			self::SUCCESS => __( 'The form was sent successfully.', 'elementor-pro' ),
+			self::ERROR => __( 'An errors occurred.', 'elementor-pro' ),
+			self::FIELD_REQUIRED => __( 'This field is required.', 'elementor-pro' ),
 			self::INVALID_FORM => __( 'There\'s something wrong. The form is invalid.', 'elementor-pro' ),
 			self::SERVER_ERROR => __( 'Server error. Form not sent.', 'elementor-pro' ),
 			self::SUBSCRIBER_ALREADY_EXISTS => __( 'Subscriber already exists.', 'elementor-pro' ),
@@ -125,6 +125,16 @@ class Ajax_Handler {
 			$cf7db->run( $record, $this );
 		}
 
+		/**
+		 * New Elementor form record.
+		 *
+		 * Fires before a new form record is send by ajax.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Form_Record  $record An instance of the form record.
+		 * @param Ajax_Handler $this   An instance of the ajax handler.
+		 */
 		do_action( 'elementor_pro/forms/new_record', $record, $this );
 
 		$this->send();

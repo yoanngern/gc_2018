@@ -10,10 +10,12 @@
 class Go_Live_Update_URLS_Pro_Checkboxes {
 	const COMMENTS = 'comments';
 	const CUSTOM = 'custom';
+	const NETWORK = 'network';
 	const OPTIONS = 'options';
 	const POSTS = 'posts';
 	const TERMS = 'terms';
 	const USER = 'user';
+
 
 	/**
 	 * checkboxes
@@ -32,8 +34,8 @@ class Go_Live_Update_URLS_Pro_Checkboxes {
 
 	public function __construct() {
 		$this->wpdb = $GLOBALS['wpdb'];
-
 		$this->create_checkbox_list();
+
 	}
 
 
@@ -41,7 +43,7 @@ class Go_Live_Update_URLS_Pro_Checkboxes {
 	 * Retrieve the list of tables to update based on
 	 * which types are checked.
 	 * If we have no matching sections is it assumed we have an
-	 * array of tables not sections and therefor return what we
+	 * array of tables not sections and therefore return what we
 	 * started with.
 	 *
 	 *
@@ -62,18 +64,12 @@ class Go_Live_Update_URLS_Pro_Checkboxes {
 			return $sections;
 		}
 		//see https://github.com/kalessil/phpinspectionsea/blob/master/docs/performance.md#slow-array-function-used-in-loop
-		$tables = call_user_func_array( 'array_merge', $tables );
-
-		if ( version_compare( GO_LIVE_UPDATE_URLS_VERSION, '5.0.1', '<' ) ) {
-			return array_flip( $tables );
-		}
-
-		return $tables;
+		return call_user_func_array( 'array_merge', $tables );
 	}
 
 
-	private function create_checkbox_list() {
-		$this->checkboxes = array(
+	protected function create_checkbox_list() {
+		$checkboxes = array(
 			self::POSTS    => $this->posts(),
 			self::COMMENTS => $this->comments(),
 			self::TERMS    => $this->terms(),
@@ -82,8 +78,9 @@ class Go_Live_Update_URLS_Pro_Checkboxes {
 			self::CUSTOM   => $this->custom(),
 		);
 		if ( is_multisite() ) {
-			$this->checkboxes['network'] = $this->network();
+			$checkboxes[ self::NETWORK ] = $this->network();
 		}
+		$this->checkboxes = apply_filters( 'go-live-update-urls-pro/checkboxes/list', $checkboxes, $this );
 	}
 
 
@@ -107,7 +104,7 @@ class Go_Live_Update_URLS_Pro_Checkboxes {
 	}
 
 
-	private function comments() {
+	protected function comments() {
 		return (object) array(
 			'label'  => __( 'Comments', 'go-live-update-urls' ),
 			'tables' => array(
@@ -118,37 +115,35 @@ class Go_Live_Update_URLS_Pro_Checkboxes {
 	}
 
 
-	private function users() {
+	protected function users() {
 		return (object) array(
 			'label'  => __( 'Users', 'go-live-update-urls' ),
 			'tables' => array(
+				$this->wpdb->users,
 				$this->wpdb->usermeta,
 			),
 		);
 	}
 
 
-	private function terms() {
+	protected function terms() {
 		$data = (object) array(
 			'label'  => __( 'Categories, Tags, Custom Taxonomies', 'go-live-update-urls' ),
 			'tables' => array(
 				$this->wpdb->terms,
 				$this->wpdb->term_relationships,
 				$this->wpdb->term_taxonomy,
+				$this->wpdb->termmeta,
 			),
 		);
 
-		//term meta support since WP 4.4
-		if ( isset( $this->wpdb->termmeta ) ) {
-			$data->tables[] = $this->wpdb->termmeta;
-		}
 
 		return $data;
 
 	}
 
 
-	private function options() {
+	protected function options() {
 		return (object) array(
 			'label'  => __( 'Site Options, Widgets', 'go-live-update-urls' ),
 			'tables' => array(
@@ -158,7 +153,7 @@ class Go_Live_Update_URLS_Pro_Checkboxes {
 	}
 
 
-	private function posts() {
+	protected function posts() {
 		return (object) array(
 			'label'  => __( 'Posts, Pages, Custom Post Types', 'go-live-update-urls' ),
 			'tables' => array(
@@ -170,14 +165,22 @@ class Go_Live_Update_URLS_Pro_Checkboxes {
 	}
 
 
-	private function network() {
-		return (object) array(
+	protected function network() {
+		$tables = array(
 			'label'  => __( 'Network Settings', 'go-live-update-urls' ),
 			'tables' => array(
-				$this->wpdb->sitemeta,
+				$this->wpdb->blogs,
 				$this->wpdb->site,
+				$this->wpdb->sitemeta,
 			),
 		);
+		//WP 5.0.0+
+		if ( isset( $this->wpdb->blogmeta ) ) {
+			$tables['tables'][] = $this->wpdb->blogmeta;
+		}
+
+		return (object) $tables;
+
 	}
 
 

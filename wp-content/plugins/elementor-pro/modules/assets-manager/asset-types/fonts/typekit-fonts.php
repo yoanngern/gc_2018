@@ -127,7 +127,7 @@ class Typekit_Fonts extends Font_Base {
 		$font_family   = sanitize_text_field( $_POST['font'] );
 		$typekit_fonts = $this->get_kit_fonts();
 		if ( ! $typekit_fonts || ! is_array( $typekit_fonts ) ) {
-			$error_message = __( 'Error with typekit fonts ', 'elementor-pro' );
+			$error_message = __( 'Error with typekit fonts', 'elementor-pro' );
 			throw new \Exception( $error_message );
 		}
 		if ( ! in_array( $font_family, array_keys( $typekit_fonts ) ) ) {

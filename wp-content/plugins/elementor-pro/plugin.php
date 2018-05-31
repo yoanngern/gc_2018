@@ -46,7 +46,7 @@ class Plugin {
 	 */
 	public function __clone() {
 		// Cloning instances of the class is forbidden
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'elementor-pro' ), '1.0.0' );
+		_doing_it_wrong( __FUNCTION__, __( 'Something went wrong.', 'elementor-pro' ), '1.0.0' );
 	}
 
 	/**
@@ -57,7 +57,7 @@ class Plugin {
 	 */
 	public function __wakeup() {
 		// Unserializing instances of the class is forbidden
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'elementor-pro' ), '1.0.0' );
+		_doing_it_wrong( __FUNCTION__, __( 'Something went wrong.', 'elementor-pro' ), '1.0.0' );
 	}
 
 	/**
@@ -144,6 +144,7 @@ class Plugin {
 			ELEMENTOR_PRO_URL . 'assets/js/frontend' . $suffix . '.js',
 			[
 				'jquery',
+				'sticky-kit',
 			],
 			ELEMENTOR_PRO_VERSION,
 			true
@@ -154,10 +155,21 @@ class Plugin {
 			'nonce' => wp_create_nonce( 'elementor-pro-frontend' ),
 		];
 
+		/**
+		 * Localize frontend settings.
+		 *
+		 * Filters the frontend localized settings.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $locale_settings Localized settings.
+		 */
+		$locale_settings = apply_filters( 'elementor_pro/frontend/localize_settings', $locale_settings );
+
 		wp_localize_script(
 			'elementor-pro-frontend',
 			'ElementorProFrontendConfig',
-			apply_filters( 'elementor_pro/frontend/localize_settings', $locale_settings )
+			$locale_settings
 		);
 	}
 
@@ -191,10 +203,21 @@ class Plugin {
 			'isActive' => $is_license_active,
 		];
 
+		/**
+		 * Localize editor settings.
+		 *
+		 * Filters the editor localized settings.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $locale_settings Localized settings.
+		 */
+		$locale_settings = apply_filters( 'elementor_pro/editor/localize_settings', $locale_settings );
+
 		wp_localize_script(
 			'elementor-pro',
 			'ElementorProConfig',
-			apply_filters( 'elementor_pro/editor/localize_settings', $locale_settings )
+			$locale_settings
 		);
 	}
 
@@ -220,14 +243,26 @@ class Plugin {
 			'0.2.17',
 			true
 		);
+
+		wp_register_script(
+			'sticky-kit',
+			ELEMENTOR_PRO_URL . 'assets/lib/sticky-kit/jquery.sticky-kit' . $suffix . '.js',
+			[
+				'jquery',
+			],
+			'1.1.2',
+			true
+		);
 	}
 
 	public function enqueue_editor_styles() {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
+		$direction_suffix = is_rtl() ? '-rtl' : '';
+
 		wp_enqueue_style(
 			'elementor-pro',
-			ELEMENTOR_PRO_URL . 'assets/css/editor' . $suffix . '.css',
+			ELEMENTOR_PRO_URL . 'assets/css/editor' . $direction_suffix . $suffix . '.css',
 			[
 				'elementor-editor',
 			],
@@ -238,20 +273,16 @@ class Plugin {
 	public function elementor_init() {
 		$this->modules_manager = new Manager();
 
-		$elementor = \Elementor\Plugin::$instance;
+		self::elementor()->editor->add_editor_template( __DIR__ . '/includes/templates/editor.php' );
 
-		// Add element category in panel
-		$elementor->elements_manager->add_category(
-			'pro-elements',
-			[
-				'title' => __( 'Pro Elements', 'elementor-pro' ),
-				'icon' => 'font',
-			],
-			1
-		);
-
-		$elementor->editor->add_editor_template( __DIR__ . '/includes/templates/editor.php' );
-
+		/**
+		 * Elementor Pro init.
+		 *
+		 * Fires on Elementor Pro init, after Elementor has finished loading but
+		 * before any headers are sent.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'elementor_pro/init' );
 	}
 

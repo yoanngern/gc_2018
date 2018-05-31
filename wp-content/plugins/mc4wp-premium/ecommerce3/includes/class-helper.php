@@ -31,7 +31,38 @@ class MC4WP_Ecommerce_Helper {
 		return $this->db->get_col( $query );
 	}
 
-	public function get_order_count( $untracked_only = false ) {
+	/**
+	* @return int
+	*/
+	public function get_untracked_order_count() {
+		$transient_name = 'mc4wp_ecommerce_untracked_order_count';
+		$cached = get_transient( $transient_name );
+		if( is_numeric( $cached ) ) {
+			return (int) $cached;
+		}
+
+		$untracked_only = true;
+		$count = $this->count_orders( $untracked_only );
+		set_transient( $transient_name, $count, 60 * 60 );
+		return $count;
+	}
+
+	/**
+	* @return int
+	*/
+	public function get_order_count() {
+		$transient_name = 'mc4wp_ecommerce_order_count';
+		$cached = get_transient( $transient_name );
+		if( is_numeric( $cached ) ) {
+			return (int) $cached;
+		}
+
+		$count = $this->count_orders( false );
+		set_transient( $transient_name, $count, 60 * 60 );
+		return $count;
+	}
+
+	private function count_orders( $untracked_only = false ) {		
 		$query = $this->get_order_query( 'COUNT(DISTINCT(p.id))', $untracked_only );
 		return $this->db->get_var( $query );
 	}
@@ -52,7 +83,41 @@ class MC4WP_Ecommerce_Helper {
 		return $this->db->get_col( $query );
 	}
 
-	public function get_product_count( $untracked_only = false ) {
+	/**
+	* @return int
+	*/
+	public function get_product_count() {
+		$transient_name = 'mc4wp_ecommerce_product_count';
+		$cached = get_transient( $transient_name );
+		if( is_numeric( $cached ) ) {
+			return (int) $cached;
+		}
+
+		$count = $this->count_products( false );
+		set_transient( $transient_name, $count, 60 * 60 );
+		return $count;
+	}
+
+	/**
+	* @return int
+	*/
+	public function get_untracked_product_count() {
+		$transient_name = 'mc4wp_ecommerce_untracked_product_count';
+		$cached = get_transient( $transient_name );
+		if( is_numeric( $cached ) ) {
+			return (int) $cached;
+		}
+
+		$untracked_only = true;
+		$count = $this->count_products( $untracked_only );
+		set_transient( $transient_name, $count, 60 * 60 );
+		return $count;
+	}
+
+	/**
+	* @return int
+	*/
+	private function count_products( $untracked_only = false ) {
 		$query = $this->get_product_query( 'COUNT(DISTINCT(p.id))', $untracked_only );
 		return (int) $this->db->get_var( $query );
 	}
@@ -169,8 +234,8 @@ class MC4WP_Ecommerce_Helper {
 
 		$query = "SELECT COUNT(DISTINCT(posts.id))
 		FROM {$this->db->posts} as posts
-		LEFT JOIN {$this->db->postmeta} AS meta ON posts.ID = meta.post_id AND meta.meta_key = '_billing_email'
-		WHERE meta.meta_value     = %s
+		LEFT JOIN {$this->db->postmeta} AS meta ON posts.ID = meta.post_id  
+		WHERE meta.meta_key = '_billing_email' AND meta.meta_value     = %s
 		AND posts.post_type     = 'shop_order'
 		AND posts.post_status   IN( '{$in}' )
 		";

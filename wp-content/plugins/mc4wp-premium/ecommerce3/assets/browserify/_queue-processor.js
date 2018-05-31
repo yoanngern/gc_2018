@@ -5,8 +5,21 @@ var qp = {};
 var i18n = mc4wp_ecommerce.i18n;
 var state = {
    working: false,
-   done: false
+   done: false,
+   action: "process",
 };
+
+function chooseProcess(e) {
+  state.action = e.target.value; 
+}
+
+function chooseReset(e) {
+  if(confirm(i18n.confirmation)) { 
+    state.action = e.target.value; 
+  } else { 
+    e.preventDefault(); 
+  }
+}
 
 function process(e) {
     e && e.preventDefault();
@@ -16,7 +29,7 @@ function process(e) {
 
     m.request({
       method: "POST",
-      url: ajaxurl + "?action=" + "mc4wp_ecommerce_process_queue",
+      url: ajaxurl + "?action=" + "mc4wp_ecommerce_"+ state.action +"_queue",
     }).then(function(result) {
        state.done = true;
        state.working = false;
@@ -31,14 +44,23 @@ qp.view = function() {
         onsubmit: process,
     }, [
        m('p', [
-           m( 'input', {
+          m( 'button', {
                type: "submit",
-               className: "button",
-               value: state.done ? i18n.done : i18n.process,
-               disabled: state.working || state.done
-           }),
-           state.working ? [ ' ', m('span.mc4wp-loader'), ' ', m('span.help', i18n.processing )] : ''
-       ])
+               className: "button button-primary",
+               value: 'process',
+               disabled: state.working || state.done,
+               onclick: chooseProcess,
+           }, state.done && state.action === 'process' ? i18n.done : i18n.process),
+          m.trust('&nbsp; or &nbsp;'),
+          m( 'button', {
+               type: "submit",
+               className: "button button-link-delete",
+               value: 'reset',
+               disabled: state.working || state.done,
+               onclick: chooseReset,
+           }, state.done && state.action === 'reset' ? i18n.done : i18n.reset),
+       ]),
+       state.working ? m('p', [ ' ', m('span.mc4wp-loader'), ' ', m('span.help', i18n.processing )]) : ''
     ]);
 };
 

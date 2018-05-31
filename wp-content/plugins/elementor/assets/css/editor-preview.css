@@ -1,4 +1,4 @@
-/*! elementor - v2.0.5 - 11-04-2018 */
+/*! elementor - v2.0.14 - 29-05-2018 */
 @charset "UTF-8";
 .elementor-panel-box {
   margin-top: 10px;
@@ -564,7 +564,8 @@
 .elementor-control-type-url .elementor-control-url-external-hide .elementor-control-url-more {
   display: none; }
 
-.elementor-control-type-url .elementor-control-url-external-show .elementor-input {
+.elementor-control-type-url .elementor-control-url-external-show .elementor-input,
+.elementor-control-type-url .elementor-control-url-external-show .elementor-input-style {
   padding-right: 46px;
   height: 26px; }
 
@@ -577,7 +578,7 @@
   right: 0;
   height: 26px;
   width: 40px;
-  border-left: 1px solid;
+  border-left: 1px solid #d5dadf;
   cursor: pointer;
   font-size: 10px;
   -webkit-border-radius: 0 3px 3px 0;
@@ -1378,8 +1379,6 @@
         color: #fff; }
       .pen-input-wrapper .pen-url-input::-webkit-input-placeholder {
         color: #d5dadf; }
-      .pen-input-wrapper .pen-url-input::-moz-placeholder {
-        color: #d5dadf; }
       .pen-input-wrapper .pen-url-input:-ms-input-placeholder {
         color: #d5dadf; }
       .pen-input-wrapper .pen-url-input::-ms-input-placeholder {
@@ -1448,9 +1447,10 @@
   height: 27px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box; }
-  .elementor-dynamic-cover__settings {
-    color: #d5dadf;
-    cursor: pointer; }
+  .elementor-dynamic-cover__settings i {
+    color: #d5dadf; }
+    .elementor-dynamic-cover__settings i.fa-wrench {
+      cursor: pointer; }
   .elementor-dynamic-cover__title {
     padding: 0 8px;
     -webkit-box-flex: 1;
@@ -1903,7 +1903,7 @@ html.elementor-html {
   -o-transition: all .1s;
   transition: all .1s; }
 
-.elementor-editor-active .elementor-widget.elementor-element-editable, .elementor-editor-active .elementor-widget.elementor-widget-can-edit:hover {
+.elementor-editor-active .elementor-widget.elementor-element-editable, .elementor-editor-active .elementor-widget.elementor-element-edit-mode:hover {
   outline: 1px solid #71d7f7; }
 
 .elementor-editor-active .elementor-widget:not(:hover) .elementor-editor-element-settings {

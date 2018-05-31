@@ -109,7 +109,6 @@ class Slides extends Base_Widget {
 			[
 				'label' => __( 'Ken Burns Effect', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
 				'default' => '',
 				'separator' => 'before',
 				'conditions' => [
@@ -151,7 +150,6 @@ class Slides extends Base_Widget {
 			[
 				'label' => __( 'Background Overlay', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
 				'default' => '',
 				'separator' => 'before',
 				'conditions' => [
@@ -176,7 +174,6 @@ class Slides extends Base_Widget {
 					'terms' => [
 						[
 							'name' => 'background_overlay',
-							'operator' => '==',
 							'value' => 'yes',
 						],
 					],
@@ -225,7 +222,7 @@ class Slides extends Base_Widget {
 			[
 				'label' => __( 'Link', 'elementor-pro' ),
 				'type' => Controls_Manager::URL,
-				'placeholder' => __( 'http://your-link.com', 'elementor-pro' ),
+				'placeholder' => __( 'https://your-link.com', 'elementor-pro' ),
 			]
 		);
 
@@ -260,7 +257,6 @@ class Slides extends Base_Widget {
 			[
 				'label' => __( 'Custom', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
 				'description' => __( 'Set custom style that will only affect this specific slide.', 'elementor-pro' ),
 			]
 		);
@@ -297,7 +293,6 @@ class Slides extends Base_Widget {
 					'terms' => [
 						[
 							'name' => 'custom_style',
-							'operator' => '==',
 							'value' => 'yes',
 						],
 					],
@@ -337,7 +332,6 @@ class Slides extends Base_Widget {
 					'terms' => [
 						[
 							'name' => 'custom_style',
-							'operator' => '==',
 							'value' => 'yes',
 						],
 					],
@@ -372,7 +366,6 @@ class Slides extends Base_Widget {
 					'terms' => [
 						[
 							'name' => 'custom_style',
-							'operator' => '==',
 							'value' => 'yes',
 						],
 					],
@@ -394,7 +387,6 @@ class Slides extends Base_Widget {
 					'terms' => [
 						[
 							'name' => 'custom_style',
-							'operator' => '==',
 							'value' => 'yes',
 						],
 					],
@@ -412,6 +404,7 @@ class Slides extends Base_Widget {
 				'label' => __( 'Slides', 'elementor-pro' ),
 				'type' => Controls_Manager::REPEATER,
 				'show_label' => true,
+				'fields' => $repeater->get_controls(),
 				'default' => [
 					[
 						'heading' => __( 'Slide 1 Heading', 'elementor-pro' ),
@@ -432,7 +425,6 @@ class Slides extends Base_Widget {
 						'background_color' => '#1abc9c',
 					],
 				],
-				'fields' => array_values( $repeater->get_controls() ),
 				'title_field' => '{{{ heading }}}',
 			]
 		);
@@ -493,7 +485,6 @@ class Slides extends Base_Widget {
 			[
 				'label' => __( 'Pause on Hover', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
 				'default' => 'yes',
 			]
 		);
@@ -503,7 +494,6 @@ class Slides extends Base_Widget {
 			[
 				'label' => __( 'Autoplay', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
 				'default' => 'yes',
 			]
 		);
@@ -528,7 +518,6 @@ class Slides extends Base_Widget {
 			[
 				'label' => __( 'Infinite Loop', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
 				'default' => 'yes',
 			]
 		);
@@ -1196,7 +1185,7 @@ class Slides extends Base_Widget {
 		] );
 
 		?>
-		<div class="elementor-slides-wrapper elementor-slick-slider" dir="<?php echo $direction; ?>">
+		<div class="elementor-slides-wrapper elementor-slick-slider" dir="<?php echo esc_attr( $direction ); ?>">
 			<div <?php echo $this->get_render_attribute_string( 'slides' ); ?>>
 				<?php echo implode( '', $slides ); ?>
 			</div>
@@ -1245,7 +1234,7 @@ class Slides extends Base_Widget {
 		<div class="elementor-slides-wrapper elementor-slick-slider" dir="{{ direction }}">
 			<div data-slider_options="{{ sliderOptionsStr }}" class="elementor-slides {{ dotsClass }} {{ arrowsClass }}" data-animation="{{ settings.content_animation }}">
 				<# _.each( settings.slides, function( slide ) { #>
-					<div class="elementor-repeater-item-{{ slide._id }}">
+					<div class="elementor-repeater-item-{{ slide._id }} slick-slide">
 						<#
 						var kenClass = '';
 

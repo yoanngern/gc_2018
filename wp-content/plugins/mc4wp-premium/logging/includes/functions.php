@@ -16,3 +16,16 @@ function mc4wp_logging_gmt_date_format( $datetime, $format = '' ) {
 
     return date( $format, $local_datetime );
 }
+
+/**
+ * Schedule the purge logging events with WP Cron.
+ */
+function _mc4wp_logging_schedule_purge_event() {
+    $expected_next = time() + ( 60 * 60 * 24 );
+    $event_name = 'mc4wp_logging_purge_old_items';
+    $actual_next = wp_next_scheduled( $event_name );
+
+    if( ! $actual_next || $actual_next > $expected_next ) {
+        wp_schedule_event( $expected_next, 'daily', $event_name );
+    }
+}

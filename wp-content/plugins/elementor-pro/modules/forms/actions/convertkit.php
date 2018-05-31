@@ -5,7 +5,6 @@ use Elementor\Controls_Manager;
 use ElementorPro\Modules\Forms\Classes\Form_Record;
 use ElementorPro\Modules\Forms\Classes\Integration_Base;
 use ElementorPro\Modules\Forms\Controls\Fields_Map;
-use ElementorPro\Modules\Forms\Classes\Action_Base;
 use ElementorPro\Modules\Forms\Classes\Convertkit_Handler;
 use ElementorPro\Classes\Utils;
 use Elementor\Settings;
@@ -69,7 +68,7 @@ class Convertkit extends Integration_Base {
 			[
 				'label' => __( 'Custom API Key', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
-				'description' => __( 'Use this field to set a custom API key for the current form', 'elementor-pro' ),
+				'description' => __( 'Use this field to set a custom API Key for the current form', 'elementor-pro' ),
 				'condition' => [
 					'convertkit_api_key_source' => 'custom',
 				],

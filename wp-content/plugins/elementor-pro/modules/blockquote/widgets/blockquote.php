@@ -7,8 +7,6 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Color;
 use Elementor\Widget_Base;
-use ElementorPro\Modules\Social\Classes\Facebook_SDK_Manager;
-use ElementorPro\Modules\Social\Module;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -87,7 +85,7 @@ class Blockquote extends Widget_Base {
 				'label' => __( 'Content', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXTAREA,
 				'default' => __( 'Click edit button to change this text. Lorem ipsum dolor sit amet consectetur adipiscing elit dolor', 'elementor-pro' ) . '. ' . __( 'Click edit button to change this text. Lorem ipsum dolor sit amet consectetur adipiscing elit dolor', 'elementor-pro' ),
-				'placeholder' => __( 'Your Quote', 'elementor-pro' ),
+				'placeholder' => __( 'Enter your quote', 'elementor-pro' ),
 				'rows' => 10,
 			]
 		);
@@ -110,7 +108,6 @@ class Blockquote extends Widget_Base {
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'On', 'elementor-pro' ),
 				'label_off' => __( 'Off', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'yes',
 			]
 		);
@@ -200,7 +197,7 @@ class Blockquote extends Widget_Base {
 			'url',
 			[
 				'label' => __( 'URL', 'elementor-pro' ),
-				'placeholder' => 'http://your-link.com',
+				'placeholder' => __( 'https://your-link.com', 'elementor-pro' ),
 				'label_block' => true,
 				'condition' => [
 					'url_type' => 'custom',

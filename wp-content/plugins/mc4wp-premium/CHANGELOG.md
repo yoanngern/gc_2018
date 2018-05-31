@@ -1,6 +1,58 @@
 Changelog
 ==========
 
+#### 4.4.1 - May 21, 2018
+
+**Fixes**
+
+- E-commerce: Error when running abandoned cart recovery with older WooCommerce versions (before 3.2).
+- AJAX forms: Notice for unexisting variable.
+
+**Improvements**
+
+- E-commerce: Failsafe return value of `wc_get_product`
+
+
+#### 4.4 - May 11, 2018
+
+**Improvements**
+
+- E-commerce: move slower operations (like calculating the customer's order total) when generating abandoned cart data to a background job, to speed up website for the visitor.
+- E-commerce: store results of slow queries in a 1-hour cache to speed up e-commerce settings page.
+
+**Additions**
+
+- E-commerce: added filter `mc4wp_ecommerce_schedule_process_queue_event` which can be used to disable the WP Cron event that is scheduled.
+- Logging: add setting to automatically delete log items older than a number of days.
+- Logging: include log data in GDPR export request.
+- Logging: erase log data in GDPR erase request.
+
+
+#### 3.3.34 - April 23, 2018
+
+**Fixes**
+
+- E-commerce: issue with updating orders when using custom order numbering.
+
+**Improvements**
+
+- E-commerce: add button to clear all pending background jobs.
+- E-commerce: soften error message when an order without items is skipped through the order synchronisation wizard.
+- Logging: all logging can now be disabled by setting `define( 'MC4WP_LOGGING', false );`
+
+
+#### 3.3.33 - April 17, 2018
+
+**Fixes**
+
+- Links in "Need help?" box search results not pointing to the correct domain.
+
+**Improvements**
+
+- E-commerce: Process queue every 3 minutes instead of every 5 minutes.
+- E-commerce: Use less important log level when order or cart contains no items.
+
+
 #### 3.3.32 - April 10, 2018
 
 **Fixes**

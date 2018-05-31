@@ -141,7 +141,7 @@ class MC4WP_AJAX_Forms {
 
 		// success
 		$data = array(
-			'event'  => $event,
+			'event' => '',
 			'message' => $form->get_response_html(),
 			'hide_fields' => (bool) $form->settings['hide_after_success']
 		);

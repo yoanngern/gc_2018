@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Elementor frontend class.
+ * Elementor frontend.
  *
  * Elementor frontend handler class is responsible for initializing Elementor in
  * the frontend.
@@ -114,6 +114,13 @@ class Frontend {
 	private $admin_bar_edit_documents = [];
 
 	/**
+	 * @var string[]
+	 */
+	private $body_classes = [
+		'elementor-default',
+	];
+
+	/**
 	 * Init.
 	 *
 	 * Initialize Elementor front end. Hooks the needed actions to run Elementor
@@ -142,7 +149,8 @@ class Frontend {
 			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
 		}
 
-		add_action( 'wp_head', [ $this, 'print_fonts_links' ] );
+		// Priority 7 to allow google fonts in header template to load in <head> tag
+		add_action( 'wp_head', [ $this, 'print_fonts_links' ], 7 );
 		add_action( 'wp_footer', [ $this, 'wp_footer' ] );
 
 		// Add Edit with the Elementor in Admin Bar.
@@ -172,6 +180,17 @@ class Frontend {
 	}
 
 	/**
+	 * @param string|array $class
+	 */
+	public function add_body_class( $class ) {
+		if ( is_array( $class ) ) {
+			$this->body_classes = array_merge( $this->body_classes, $class );
+		} else {
+			$this->body_classes[] = $class;
+		}
+	}
+
+	/**
 	 * Body tag classes.
 	 *
 	 * Add new elementor classes to the body tag.
@@ -187,7 +206,7 @@ class Frontend {
 	 * @return array Body tag classes.
 	 */
 	public function body_class( $classes = [] ) {
-		$classes[] = 'elementor-default';
+		$classes = array_merge( $classes, $this->body_classes );
 
 		$id = get_the_ID();
 
@@ -311,7 +330,7 @@ class Frontend {
 			[
 				'jquery-ui-position',
 			],
-			'4.2.1',
+			'4.3.2',
 			true
 		);
 
@@ -365,7 +384,7 @@ class Frontend {
 			'elementor-icons',
 			ELEMENTOR_ASSETS_URL . 'lib/eicons/css/elementor-icons' . $suffix . '.css',
 			[],
-			'3.2.1'
+			'3.3.0'
 		);
 
 		wp_register_style(
@@ -434,16 +453,16 @@ class Frontend {
 			],
 		];
 
+		$elementor_frontend_config['settings'] = SettingsManager::get_settings_frontend_config();
+
 		if ( is_singular() ) {
 			$post = get_post();
-			$elementor_frontend_config['settings'] = SettingsManager::get_settings_frontend_config();
 			$elementor_frontend_config['post'] = [
 				'id' => $post->ID,
 				'title' => $post->post_title,
 				'excerpt' => $post->post_excerpt,
 			];
 		} else {
-			$elementor_frontend_config['settings'] = [];
 			$elementor_frontend_config['post'] = [
 				'id' => 0,
 				'title' => wp_get_document_title(),
@@ -577,14 +596,18 @@ class Frontend {
 					 *
 					 * Fires when Elementor frontend fonts are printed on the HEAD tag.
 					 *
+					 * The dynamic portion of the hook name, `$font_type`, refers to the font type.
+					 *
 					 * @since 2.0.0
+					 *
+					 * @param string $font Font name.
 					 */
 					do_action( "elementor/fonts/print_font_links/{$font_type}", $font );
 			}
 		}
 		$this->fonts_to_enqueue = [];
 
-		$this->print_google_fonts( $google_fonts );
+		$this->enqueue_google_fonts( $google_fonts );
 	}
 
 	/**
@@ -600,7 +623,7 @@ class Frontend {
 	 * @param array $google_fonts Optional. Google fonts to print in the frontend.
 	 *                            Default is an empty array.
 	 */
-	private function print_google_fonts( $google_fonts = [] ) {
+	private function enqueue_google_fonts( $google_fonts = [] ) {
 		static $google_fonts_index = 0;
 
 		$print_google_fonts = true;
@@ -807,7 +830,7 @@ class Frontend {
 		}
 
 		?>
-		<div class="elementor elementor-<?php echo esc_attr( $post_id ); ?>">
+		<div class="<?php echo esc_attr( $document->get_container_classes() ); ?>">
 			<div class="elementor-inner">
 				<div class="elementor-section-wrap">
 					<?php $this->_print_elements( $data ); ?>
@@ -991,6 +1014,10 @@ class Frontend {
 			add_filter( 'the_content', $filter );
 		}
 		$this->content_removed_filters = [];
+	}
+
+	public function has_elementor_in_page() {
+		return $this->_has_elementor_in_page;
 	}
 
 	/**

@@ -29,7 +29,7 @@ class MC4WP_Logging_Installer {
         `vip` TINYINT(1) NULL,
         `related_object_ID` BIGINT(20) NULL,
         `url` VARCHAR(255) NULL,
-        `datetime` timestamp DEFAULT CURRENT_TIMESTAMP,
+        `datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         `success` TINYINT(1) DEFAULT 1,
         PRIMARY KEY  (ID)
 		) $charset_collate";

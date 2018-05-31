@@ -4,7 +4,6 @@ namespace ElementorPro\Modules\Forms\Classes;
 use Elementor\Settings;
 use Elementor\Widget_Base;
 use ElementorPro\Classes\Utils;
-use ElementorPro\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -122,6 +121,7 @@ class Recaptcha_Handler {
 		$response_code = wp_remote_retrieve_response_code( $response );
 
 		if ( 200 !== (int) $response_code ) {
+			/* translators: %d: Response code. */
 			$ajax_handler->add_error( $field['id'], sprintf( __( 'Can not connect to the reCAPTCHA server (%d).', 'elementor-pro' ), $response_code ) );
 			return;
 		}

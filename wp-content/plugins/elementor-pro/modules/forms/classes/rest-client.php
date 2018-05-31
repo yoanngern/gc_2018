@@ -115,7 +115,7 @@ class Rest_Client {
 		$response_body = json_decode( wp_remote_retrieve_body( $response ), true );
 
 		if ( ! is_array( $response_body ) ) {
-			throw new \Exception( 'Rest Client Error: unexpected response type ' );
+			throw new \Exception( 'Rest Client Error: unexpected response type' );
 		}
 
 		$return = [

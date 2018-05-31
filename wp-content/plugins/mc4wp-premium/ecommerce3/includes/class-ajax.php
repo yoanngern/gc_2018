@@ -6,6 +6,7 @@ class MC4WP_Ecommerce_Admin_Ajax {
         add_action( 'wp_ajax_mc4wp_ecommerce_synchronize_products', array( $this, 'synchronize_products' ) );
         add_action( 'wp_ajax_mc4wp_ecommerce_synchronize_orders', array( $this, 'synchronize_orders' ) );
         add_action( 'wp_ajax_mc4wp_ecommerce_process_queue', array( $this, 'process_queue' ) );
+        add_action( 'wp_ajax_mc4wp_ecommerce_reset_queue', array( $this, 'reset_queue' ) );
     }
 
     /**
@@ -24,19 +25,17 @@ class MC4WP_Ecommerce_Admin_Ajax {
     public function synchronize_products() {
         $this->authorize();
 
+        $ecommerce = $this->get_ecommerce();
+        $product_id = empty( $_REQUEST['product_id'] ) ? 0 : (int) $_REQUEST['product_id'];
 
-        // make sure product_id is given
-        $data = json_decode( stripslashes( file_get_contents("php://input") ), false );
-        if( empty( $data->product_id ) ) {
+        // make sure product id is given
+        if( empty( $product_id ) ) {
             wp_send_json_error(
                 array(
                     'message' => sprintf( 'Invalid product ID.' )
                 )
             );
         }
-
-        $product_id = (int) $data->product_id;
-        $ecommerce = $this->get_ecommerce();
 
         try {
             $ecommerce->update_product( $product_id );
@@ -47,6 +46,10 @@ class MC4WP_Ecommerce_Admin_Ajax {
                 )
             );
         }
+
+        // delete product related transients
+        delete_transient( 'mc4wp_ecommerce_untracked_product_count' );
+        delete_transient( 'mc4wp_ecommerce_product_count' );
 
         wp_send_json_success(
             array(
@@ -61,17 +64,18 @@ class MC4WP_Ecommerce_Admin_Ajax {
     public function synchronize_orders() {
         $this->authorize();
 
-        // make sure order_id is given
-        $data = json_decode( stripslashes( file_get_contents("php://input") ), false );
-        if( empty( $data->order_id ) ) {
+        $ecommerce = $this->get_ecommerce();
+        $order_id = empty( $_REQUEST['order_id'] ) ? 0 : (int) $_REQUEST['order_id'];
+
+        // make sure order id is given
+        if( empty( $order_id ) ) {
             wp_send_json_error(
                 array(
                     'message' => sprintf( 'Invalid order ID.' )
                 )
             );
+            exit;
         }
-
-        $order_id = (int) $data->order_id;
 
         // unset tracking cookies temporarily because these would be the admin's cookie
         unset( $_COOKIE['mc_tc'] );
@@ -83,18 +87,35 @@ class MC4WP_Ecommerce_Admin_Ajax {
         try {
             $ecommerce->update_order( $order_id );
         } catch( Exception $e ) {
+            // order contains no items is a soft-error
+            if( $e->getCode() === MC4WP_Ecommerce::ERR_NO_ITEMS ) {
+                wp_send_json_error(
+                    array(
+                        'message' => sprintf( "Skipping order %d: %s", $order_id, $e->getMessage() )
+                    )
+                );
+                exit;
+            }
+
+            // more important errors
             wp_send_json_error(
                 array(
                     'message' => sprintf( "Error adding order %d: %s", $order_id, $e )
                 )
             );
+            exit;
         }
+
+        // delete order related transients
+        delete_transient( 'mc4wp_ecommerce_untracked_order_count' );
+        delete_transient( 'mc4wp_ecommerce_order_count' );
 
         wp_send_json_success(
             array(
                 'message' => sprintf( 'Success! Added order %d to MailChimp.', $order_id )
             )
         );
+        exit;
     }
 
     /**
@@ -102,9 +123,21 @@ class MC4WP_Ecommerce_Admin_Ajax {
      */
     public function process_queue() {
         $this->authorize();
-
         do_action( 'mc4wp_ecommerce_process_queue' );
         wp_send_json(true);
+        exit;
+    }
+
+     /**
+     * Process the background queue.
+     */
+    public function reset_queue() {
+        $this->authorize();
+        $queue = mc4wp('ecommerce.queue');
+        $queue->reset();
+        $queue->save();
+        wp_send_json(true);
+        exit;
     }
 
     /**

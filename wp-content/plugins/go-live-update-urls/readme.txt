@@ -2,10 +2,10 @@
 Contributors: Mat Lipe
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40matlipe%2ecom&lc=US&item_name=Go%20Live%20Update%20Urls&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: Go Live, Urls, Domain Changes 
-Requires at least: 4.5.0
-Tested up to: 4.9.4
+Requires at least: 4.6.0
+Tested up to: 4.9.5
 Requires PHP: 5.2.4
-Stable tag: 5.0.5
+Stable tag: 5.1.0
 
 == Description ==
 
@@ -13,7 +13,7 @@ Goes through entire site and replaces all instances of an old url with a new one
 
 <strong>Check out <a href="https://matlipe.com/product/go-live-update-urls-pro/" target="_blank">Go Live Update Urls Pro</a> for more features including priority support, the ability to test a URL before running, updating of tables created by plugins, and so much more!</strong>
 
-<blockquote><a href="https://matlipe.com/product/go-live-update-urls-pro/" target="_blank">Pro version 2.2.0</a> just dropped with lots of great new stuff!</blockquote>
+<blockquote><a href="https://matlipe.com/product/go-live-update-urls-pro/" target="_blank">Pro version 2.3.0</a> just dropped with lots of great new stuff!</blockquote>
 
 
 <h4>Features</h4>
@@ -34,16 +34,23 @@ Goes through entire site and replaces all instances of an old url with a new one
 * And much more
 
 <h4>Pro Features</h4>
+* Priority support.
 * Updates database tables created by plugins without fear of issues.
 * Database tables are organized into understandable sections.
 * Updates serialized data across any table.
-* Priority support.
 * Improved admin page.
 * Ability to test URL changes before running them.
 * URL testing report is provided for peace of mind. 
 * Optionally fix common mistakes when entering a URL automatically.
 * View and use history of your Site Address (URL).
 * Predictive URLs automatically fill in the OLD URL and NEW URL.
+* Access to members only support area.
+
+<h4>Currently ships with the following languages</h4>
+* English (US)
+* French (fr_FR)
+* German (de_DE)   
+* Spanish (es_ES)
 
 
 <h4>Contribute</h4>
@@ -81,6 +88,13 @@ If you wish to try to update tables mentioned as not safe anyway, you may make a
 1. Typical settings page. The verbiage will change slightly depending on your database structure
 
 == Changelog ==
+= 5.1.0 =
+* Added new languages including French, German, and Spanish
+* Support upcoming blogmeta table in WP 5.0.0+
+* Support updating urlencdode urls
+* Improved support for Visual Composer
+* Add PHP composer support
+
 = 5.0.0 =
 * Bring back PHP 5.2 support
 * Restructure entire codebase
@@ -113,6 +127,9 @@ If you wish to try to update tables mentioned as not safe anyway, you may make a
 
 
 == Upgrade Notice ==
+= 5.0.6 =
+Fixes bug with submit button in a small number of browsers
+
 = 5.0.4 =
 Fixes bug with database not updating properly
 

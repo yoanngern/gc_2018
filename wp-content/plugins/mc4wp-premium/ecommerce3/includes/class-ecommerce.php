@@ -22,6 +22,8 @@ class MC4WP_Ecommerce {
 	*/
 	private $store_id;
 
+	const ERR_NO_ITEMS = 29001;
+
 	/**
 	* Constructor
 	*
@@ -68,13 +70,22 @@ class MC4WP_Ecommerce {
 	* Add OR update a cart in MailChimp.
 	*
 	* @param string $cart_id
-	* @param array $cart_data
+	* @param object|WP_User $email_address
+	* @param array $cart_contents
 	*
 	* @return bool
 	*/
-	public function update_cart( $cart_id, array $cart_data ) {
+	public function update_cart( $cart_id, $customer, array $cart_contents ) {
 		$api = $this->get_api();
 		$store_id = $this->store_id;
+
+		if( is_array( $customer ) && isset( $customer['customer'] ) ) {
+			// For backwards compatibility with queue data from before MC4WP Premium v3.4
+			$cart_data = $customer;
+		} else {
+			$customer_data = $this->transformer->customer( $customer );
+			$cart_data = $this->transformer->cart( $customer_data, $cart_contents );
+		}		
 
 		// add (or update) customer
 		$customer_data = $api->add_ecommerce_store_customer( $store_id, $cart_data['customer'] );
@@ -176,7 +187,7 @@ class MC4WP_Ecommerce {
 
 		// throw exception if order contains no lines
 		if( empty( $data['lines'] ) ) {
-			throw new Exception("Order contains no items.");
+			throw new Exception("Order contains no items.", self::ERR_NO_ITEMS);
 		}
 
 		// add OR update order in MailChimp
@@ -224,7 +235,7 @@ class MC4WP_Ecommerce {
 		
 		// check for method existence first because wc pre-3.0
 		$order_id = method_exists( $order, 'get_id' ) ? $order->get_id() : $order->id;
-		$order_number = method_exists( $order, 'get_number' ) ? $order->get_number() : $order_id;
+		$order_number = method_exists( $order, 'get_order_number' ) ? $order->get_order_number() : $order_id;
 
 		try {
 			$response = $api->add_ecommerce_store_order( $store_id, $data );
@@ -260,7 +271,7 @@ class MC4WP_Ecommerce {
 
 		// check for method existence first because wc pre-3.0
 		$order_id = method_exists( $order, 'get_id' ) ? $order->get_id() : $order->id;
-		$order_number = method_exists( $order, 'get_number' ) ? $order->get_number() : $order_id;
+		$order_number = method_exists( $order, 'get_order_number' ) ? $order->get_order_number() : $order_id;
 
 		try {
 			// use order number here as that is what we send in order_add too.
@@ -501,7 +512,7 @@ class MC4WP_Ecommerce {
 			}
 
 			throw $e;
-		}
+		} 
 
 		$this->touch( $product_id );
 		return true;

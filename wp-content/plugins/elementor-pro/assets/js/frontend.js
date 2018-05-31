@@ -1,4 +1,4 @@
-/*! elementor-pro - v1.15.6 - 29-03-2018 */
+/*! elementor-pro - v2.0.7 - 16-05-2018 */
 (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 var ElementorProFrontend = function( $ ) {
 	var self = this;
@@ -17,7 +17,9 @@ var ElementorProFrontend = function( $ ) {
         animatedText: require( 'modules/animated-headline/assets/js/frontend/frontend' ),
 		carousel: require( 'modules/carousel/assets/js/frontend/frontend' ),
         social: require( 'modules/social/assets/js/frontend/frontend' ),
-        themeElements: require( 'modules/theme-elements/assets/js/frontend/frontend' )
+		themeElements: require( 'modules/theme-elements/assets/js/frontend/frontend' ),
+		themeBuilder: require( 'modules/theme-builder/assets/js/frontend/frontend' ),
+		sticky: require( 'modules/sticky/assets/js/frontend/frontend' )
     };
 
 	var initModules = function() {
@@ -37,7 +39,7 @@ var ElementorProFrontend = function( $ ) {
 
 window.elementorProFrontend = new ElementorProFrontend( jQuery );
 
-},{"modules/animated-headline/assets/js/frontend/frontend":2,"modules/carousel/assets/js/frontend/frontend":4,"modules/countdown/assets/js/frontend/frontend":8,"modules/forms/assets/js/frontend/frontend":10,"modules/nav-menu/assets/js/frontend/frontend":17,"modules/posts/assets/js/frontend/frontend":19,"modules/share-buttons/assets/js/frontend/frontend":23,"modules/slides/assets/js/frontend/frontend":25,"modules/social/assets/js/frontend/frontend":27,"modules/theme-elements/assets/js/frontend/frontend":29}],2:[function(require,module,exports){
+},{"modules/animated-headline/assets/js/frontend/frontend":2,"modules/carousel/assets/js/frontend/frontend":4,"modules/countdown/assets/js/frontend/frontend":8,"modules/forms/assets/js/frontend/frontend":10,"modules/nav-menu/assets/js/frontend/frontend":17,"modules/posts/assets/js/frontend/frontend":19,"modules/share-buttons/assets/js/frontend/frontend":23,"modules/slides/assets/js/frontend/frontend":25,"modules/social/assets/js/frontend/frontend":27,"modules/sticky/assets/js/frontend/frontend":29,"modules/theme-builder/assets/js/frontend/frontend":31,"modules/theme-elements/assets/js/frontend/frontend":34}],2:[function(require,module,exports){
 module.exports = function() {
     elementorFrontend.hooks.addAction( 'frontend/element_ready/animated-headline.default', require( './handlers/animated-headlines' ) );
 };
@@ -385,16 +387,34 @@ module.exports = elementorFrontend.Module.extend( {
 		return editSettings.activeItemIndex ? editSettings.activeItemIndex - 1 : Math.floor( ( this.getSlidesCount() - 1 ) / 2 );
 	},
 
-	getSlidesPerView: function() {
-		return Math.min( this.getSlidesCount(), +this.getElementSettings( 'slides_per_view' ) || this.getSettings( 'slidesPerView.desktop' ) );
+	getEffect: function() {
+		return this.getElementSettings( 'effect' );
+	},
+
+	getDeviceSlidesPerView: function( device ) {
+		var slidesPerViewKey = 'slides_per_view' + ( 'desktop' === device ? '' : '_' + device );
+
+		return Math.min( this.getSlidesCount(), +this.getElementSettings( slidesPerViewKey ) || this.getSettings( 'slidesPerView' )[ device ] );
+	},
+
+	getSlidesPerView: function( device ) {
+		if ( 'slide' === this.getEffect() ) {
+			return this.getDeviceSlidesPerView( device );
+		}
+
+		return 1;
+	},
+
+	getDesktopSlidesPerView: function() {
+		return this.getSlidesPerView( 'desktop' );
 	},
 
 	getTabletSlidesPerView: function() {
-		return Math.min( this.getSlidesCount(), +this.getElementSettings( 'slides_per_view_tablet' ) || this.getSettings( 'slidesPerView.tablet' ) );
+		return this.getSlidesPerView( 'tablet' );
 	},
 
 	getMobileSlidesPerView: function() {
-		return Math.min( this.getSlidesCount(), +this.getElementSettings( 'slides_per_view_mobile' ) || this.getSettings( 'slidesPerView.mobile' ) );
+		return this.getSlidesPerView( 'mobile' );
 	},
 
 	getSlidesToScroll: function() {
@@ -421,7 +441,7 @@ module.exports = elementorFrontend.Module.extend( {
 			paginationClickable: true,
 			grabCursor: true,
 			initialSlide: this.getInitialSlide(),
-			slidesPerView: this.getSlidesPerView(),
+			slidesPerView: this.getDesktopSlidesPerView(),
 			slidesPerGroup: this.getSlidesToScroll(),
 			spaceBetween: this.getSpaceBetween(),
 			paginationType: elementSettings.pagination,
@@ -430,7 +450,7 @@ module.exports = elementorFrontend.Module.extend( {
 			loop: 'yes' === elementSettings.loop,
 			loopedSlides: this.getSlidesCount(),
 			speed: elementSettings.speed,
-			effect: elementSettings.effect,
+			effect: this.getEffect(),
 			breakpoints: {
 				1024: {
 					slidesPerView: this.getTabletSlidesPerView(),
@@ -545,31 +565,35 @@ MediaCarousel = Base.extend( {
 		return defaultElements;
 	},
 
+	getEffect: function() {
+		if ( 'coverflow' === this.getElementSettings( 'skin' ) ) {
+			return 'coverflow';
+		}
+
+		return Base.prototype.getEffect.apply( this, arguments );
+	},
+
+	getSlidesPerView: function( device ) {
+		if ( this.isSlideshow() ) {
+			return 1;
+		}
+
+		if ( 'coverflow' === this.getElementSettings( 'skin' ) ) {
+			return this.getDeviceSlidesPerView( device );
+		}
+
+		return Base.prototype.getSlidesPerView.apply( this, arguments );
+	},
+
 	getSwiperOptions: function() {
 		var options = Base.prototype.getSwiperOptions.apply( this, arguments );
 
-		if ( 'coverflow' === this.getElementSettings( 'skin' ) ) {
-			options.effect = 'coverflow';
-		}
-
 		if ( this.isSlideshow() ) {
-			options.slidesPerView = 1;
-
 			delete options.pagination;
 			delete options.breakpoints;
 		}
 
 		return options;
-	},
-
-	getTabletSlidesPerView: function() {
-		var elementSettings = this.getElementSettings();
-
-		if ( ! elementSettings.slides_per_view_tablet && 'coverflow' === elementSettings.skin ) {
-			return Math.min( this.getSlidesCount(), 3 );
-		}
-
-		return Base.prototype.getTabletSlidesPerView.apply( this, arguments );
 	},
 
 	onInit: function() {
@@ -583,7 +607,7 @@ MediaCarousel = Base.extend( {
 			loop = 'yes' === elementSettings.loop;
 
 		var thumbsSliderOptions = {
-			slidesPerView: this.getSlidesPerView(),
+			slidesPerView: this.getDeviceSlidesPerView( 'desktop' ),
 			initialSlide: this.getInitialSlide(),
 			centeredSlides: true,
 			slideToClickedSlide: true,
@@ -597,11 +621,11 @@ MediaCarousel = Base.extend( {
 			},
 			breakpoints: {
 				1024: {
-					slidesPerView: this.getTabletSlidesPerView(),
+					slidesPerView: this.getDeviceSlidesPerView( 'tablet' ),
 					spaceBetween: this.getSpaceBetween( 'tablet' )
 				},
 				767: {
-					slidesPerView: this.getMobileSlidesPerView(),
+					slidesPerView: this.getDeviceSlidesPerView( 'mobile' ),
 					spaceBetween: this.getSpaceBetween( 'mobile' )
 				}
 			}
@@ -652,13 +676,9 @@ TestimonialCarousel = Base.extend( {
 		return defaultSettings;
 	},
 
-    getSwiperOptions: function() {
-        var options = Base.prototype.getSwiperOptions.apply( this, arguments );
-
-        options.effect = 'slide';
-
-        return options;
-    }
+	getEffect: function() {
+		return 'slide';
+	}
 } );
 
 module.exports = function( $scope ) {
@@ -1011,7 +1031,7 @@ module.exports = function( $scope, $ ) {
 	};
 
 	var onRecaptchaApiReady = function( callback ) {
-		if ( window.grecaptcha ) {
+		if ( window.grecaptcha && window.grecaptcha.render ) {
 			callback();
 		} else {
 			// If not ready check again by timeout..
@@ -1446,6 +1466,7 @@ module.exports = PostsHandler.extend( {
 
 },{"./posts":22}],22:[function(require,module,exports){
 module.exports = elementorFrontend.Module.extend( {
+
 	getElementName: function() {
 		return 'posts';
 	},
@@ -1578,27 +1599,14 @@ module.exports = elementorFrontend.Module.extend( {
 			return;
 		}
 
-		var heights = [],
-			distanceFromTop = elements.$postsContainer.position().top,
-			$shownPosts = elements.$posts.filter( ':visible' );
-
-		$shownPosts.each( function( index ) {
-			var row = Math.floor( index / colsCount ),
-				indexAtRow = index % colsCount,
-				$post = $( this ),
-				itemPosition = $post.position(),
-				itemHeight = $post.outerHeight();
-
-			if ( row ) {
-				$post.css( 'margin-top', '-' + ( itemPosition.top - distanceFromTop - heights[ indexAtRow ] ) + 'px' );
-
-				heights[ indexAtRow ] += itemHeight;
-			} else {
-				heights.push( itemHeight );
-			}
+		var masonry = new elementorFrontend.modules.Masonry( {
+			container: elements.$postsContainer,
+			items: elements.$posts.filter( ':visible' ),
+			columnsCount: this.getSettings( 'colsCount' ),
+			verticalSpaceBetween: 0
 		} );
 
-		elements.$postsContainer.height( Math.max.apply( Math, heights ) );
+		masonry.run();
 	},
 
 	run: function() {
@@ -1854,10 +1862,150 @@ module.exports = function( $scope, $ ) {
 
 },{}],29:[function(require,module,exports){
 module.exports = function() {
+    elementorFrontend.hooks.addAction( 'frontend/element_ready/section', require( './handlers/sticky' ) );
+};
+
+},{"./handlers/sticky":30}],30:[function(require,module,exports){
+var StickyHandler = elementorFrontend.Module.extend( {
+
+	getDefaultSettings: function() {
+		return {
+			classes: {
+				stickyActive: 'elementor-sticky--active'
+			}
+		};
+	},
+
+	bindEvents: function() {
+		elementorFrontend.addListenerOnce( this.$element.data( 'model-cid' ) + 'sticky', 'resize', this.run );
+	},
+
+	isActive: function() {
+		return undefined !== this.$element.data( 'sticky_kit' );
+	},
+
+	activateSticky: function() {
+		var classes = this.getSettings( 'classes' ),
+			$element = this.$element,
+			stickyOptions = {
+				sticky_class: classes.stickyActive,
+				parent: 'body'
+			},
+			$wpAdminBar = elementorFrontend.getElements( '$wpAdminBar' );
+
+		if ( $wpAdminBar.length && 'fixed' === $wpAdminBar.css( 'position' ) ) {
+			stickyOptions.offset_top = $wpAdminBar.height();
+		}
+
+		$element.stick_in_parent( stickyOptions );
+	},
+
+	deactivateSticky: function() {
+		this.$element.trigger( 'sticky_kit:detach' );
+	},
+
+	run: function() {
+		var isActive = this.isActive();
+
+		if ( ! this.getElementSettings( 'sticky' ) ) {
+			if ( isActive ) {
+				this.deactivateSticky();
+			}
+
+			return;
+		}
+
+		var currentDeviceMode = elementorFrontend.getCurrentDeviceMode(),
+			activeDevices = this.getElementSettings( 'sticky_on' );
+
+		if ( -1 !== activeDevices.indexOf( currentDeviceMode ) ) {
+			if ( ! isActive ) {
+				this.activateSticky();
+			}
+		} else {
+			if ( isActive ) {
+				this.deactivateSticky();
+			}
+		}
+	},
+
+	onElementChange: function( settingKey ) {
+		if ( 0 === settingKey.indexOf( 'sticky' ) ) {
+			this.run();
+		}
+	},
+
+	onInit: function() {
+		elementorFrontend.Module.prototype.onInit.apply( this, arguments );
+
+		this.run();
+	}
+} );
+
+module.exports = function( $scope ) {
+	new StickyHandler( { $element: $scope } );
+};
+
+},{}],31:[function(require,module,exports){
+module.exports = function() {
+
+	var PostsArchiveClassic = require( './handlers/archive-posts-skin-classic' ),
+		PostsArchiveCards = require( './handlers/archive-posts-skin-cards' );
+
+	elementorFrontend.hooks.addAction( 'frontend/element_ready/archive-posts.archive_classic', function( $scope ) {
+		new PostsArchiveClassic( { $element: $scope } );
+	} );
+
+	elementorFrontend.hooks.addAction( 'frontend/element_ready/archive-posts.archive_cards', function( $scope ) {
+		new PostsArchiveCards( { $element: $scope } );
+	} );
+
+	jQuery( function() {
+		// Go to elementor element - if the URL is something like http://domain.com/any-page?preview=true&theme_template_id=6479
+		var match = location.search.match( /theme_template_id=(\d*)/ ),
+			$element = match ? jQuery( '.elementor-' + match[1] ) : [];
+		if ( $element.length ) {
+			jQuery( 'html, body' ).animate( {
+				scrollTop: $element.offset().top - window.innerHeight / 2
+			} );
+		}
+	} );
+};
+
+},{"./handlers/archive-posts-skin-cards":32,"./handlers/archive-posts-skin-classic":33}],32:[function(require,module,exports){
+var PostsCardHandler = require( 'modules/posts/assets/js/frontend/handlers/cards' );
+
+module.exports = PostsCardHandler.extend( {
+
+	getElementName: function() {
+		return 'archive-posts';
+	},
+
+	getSkinPrefix: function() {
+		return 'archive_cards_';
+	}
+} );
+
+},{"modules/posts/assets/js/frontend/handlers/cards":20}],33:[function(require,module,exports){
+var PostsClassicHandler = require( 'modules/posts/assets/js/frontend/handlers/posts' );
+
+module.exports = PostsClassicHandler.extend( {
+
+	getElementName: function() {
+		return 'archive-posts';
+	},
+
+	getSkinPrefix: function() {
+		return 'archive_classic_';
+	}
+} );
+
+},{"modules/posts/assets/js/frontend/handlers/posts":22}],34:[function(require,module,exports){
+module.exports = function() {
     elementorFrontend.hooks.addAction( 'frontend/element_ready/search-form.default', require( './handlers/search-form' ) );
 };
 
-},{"./handlers/search-form":30}],30:[function(require,module,exports){
+},{"./handlers/search-form":35}],35:[function(require,module,exports){
 var SearchBerHandler = elementorFrontend.Module.extend( {
 
     getDefaultSettings: function() {

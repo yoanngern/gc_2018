@@ -29,6 +29,7 @@ class Elementor_Library extends \WP_Widget {
 		echo $args['before_widget'];
 
 		if ( ! empty( $instance['title'] ) ) {
+			/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
 		}
 
@@ -99,7 +100,7 @@ class Elementor_Library extends \WP_Widget {
 				foreach ( $templates as $template ) :
 					$selected = selected( $template['template_id'], $instance['template_id'] );
 					?>
-					<option value="<?php echo $template['template_id'] ?>" <?php echo $selected; ?> data-type="<?php echo $template['type']; ?>">
+					<option value="<?php echo $template['template_id'] ?>" <?php echo $selected; ?> data-type="<?php echo esc_attr( $template['type'] ); ?>">
 						<?php echo $template['title']; ?> (<?php echo $template['type']; ?>)
 					</option>
 				<?php endforeach; ?>

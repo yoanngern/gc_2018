@@ -6,7 +6,6 @@ use ElementorPro\Modules\Forms\Actions;
 use ElementorPro\Modules\Forms\Classes;
 use ElementorPro\Modules\Forms\Fields;
 use ElementorPro\Modules\Forms\Controls\Fields_Map;
-use ElementorPro\Modules\Forms\Widgets\Form;
 use ElementorPro\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -115,6 +114,9 @@ class Module extends Module_Base {
 		return $this->form_actions;
 	}
 
+	/**
+	 * Module constructor.
+	 */
 	public function __construct() {
 		parent::__construct();
 
@@ -172,6 +174,15 @@ class Module extends Module_Base {
 		if ( Classes\Ajax_Handler::is_form_submitted() ) {
 			$this->add_component( 'ajax_handler', new Classes\Ajax_Handler() );
 
+			/**
+			 * Elementor form submitted.
+			 *
+			 * Fires when the form is submitted.
+			 *
+			 * @since 2.0.0
+			 *
+			 * @param Module $this An instance of the form module.
+			 */
 			do_action( 'elementor_pro/forms/form_submitted', $this );
 		}
 	}

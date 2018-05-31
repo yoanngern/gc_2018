@@ -1,6 +1,7 @@
 <?php
 namespace ElementorPro\Modules\GlobalWidget;
 
+use Elementor\Core\Documents_Manager;
 use Elementor\Element_Base;
 use Elementor\TemplateLibrary\Source_Local;
 use Elementor\Widget_Base;
@@ -21,8 +22,6 @@ class Module extends Module_Base {
 
 	public function __construct() {
 		parent::__construct();
-
-		Source_Local::add_template_type( self::TEMPLATE_TYPE );
 
 		Widget_Base::add_edit_tool( 'save', [
 			'title' => sprintf( __( 'Save %s', 'elementor-pro' ), __( 'Widget', 'elementor-pro' ) ),
@@ -137,6 +136,14 @@ class Module extends Module_Base {
 		return $default_value && ! $this->is_widget_template( $template_id );
 	}
 
+	public function get_template_label_by_type( $template_label, $template_type ) {
+		if ( 'widget' === $template_type ) {
+			$template_label = 'Global Widget';
+		}
+
+		return $template_label;
+	}
+
 	/**
 	 * Remove user edit capabilities.
 	 *
@@ -223,23 +230,26 @@ class Module extends Module_Base {
 		);
 	}
 
+	/**
+	 * @param Documents_Manager $documents_manager
+	 */
+	public function register_documents( $documents_manager ) {
+		$documents_manager->register_document_type( self::TEMPLATE_TYPE, Documents\Widget::get_class_full_name() );
+	}
+
 	private function _add_hooks() {
+		add_action( 'elementor/documents/register', [ $this, 'register_documents' ] );
 		add_action( 'elementor/template-library/after_save_template', [ $this, 'set_template_widget_type_meta' ], 10, 2 );
-
 		add_action( 'elementor/template-library/after_update_template', [ $this, 'on_template_update' ] , 10, 2 );
-
 		add_action( 'elementor/editor/after_save', [ $this, 'set_global_widget_included_posts_list' ], 10, 2 );
 
 		add_filter( 'elementor_pro/editor/localize_settings', [ $this, 'add_templates_localize_data' ] );
-
 		add_filter( 'elementor/template-library/get_template', [ $this, 'filter_template_data' ] );
-
 		add_filter( 'elementor/element/get_child_type', [ $this, 'get_element_child_type' ], 10, 2 );
-
 		add_filter( 'elementor/utils/is_post_type_support', [ $this, 'is_post_type_support_elementor' ], 10, 3 );
-
 		add_filter( 'user_has_cap', [ $this, 'remove_user_edit_cap' ], 10, 3 );
 
 		add_filter( 'elementor/template_library/is_template_supports_export', [ $this, 'is_template_supports_export' ], 10, 2 );
+		add_filter( 'elementor/template-library/get_template_label_by_type', [ $this, 'get_template_label_by_type' ], 10, 2 );
 	}
 }

@@ -39,6 +39,7 @@ class Countdown extends Base_Widget {
 				'label' => __( 'Due Date', 'elementor-pro' ),
 				'type' => Controls_Manager::DATE_TIME,
 				'default' => date( 'Y-m-d H:i', strtotime( '+1 month' ) + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ),
+				/* translators: %s: Time zone. */
 				'description' => sprintf( __( 'Date set according to your timezone: %s.', 'elementor-pro' ), Utils::get_timezone_string() ),
 			]
 		);
@@ -64,7 +65,6 @@ class Countdown extends Base_Widget {
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'yes',
 			]
 		);
@@ -76,7 +76,6 @@ class Countdown extends Base_Widget {
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'yes',
 			]
 		);
@@ -88,7 +87,6 @@ class Countdown extends Base_Widget {
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'yes',
 			]
 		);
@@ -100,7 +98,6 @@ class Countdown extends Base_Widget {
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'yes',
 			]
 		);
@@ -112,7 +109,6 @@ class Countdown extends Base_Widget {
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'yes',
 				'separator' => 'before',
 			]
@@ -123,7 +119,6 @@ class Countdown extends Base_Widget {
 			[
 				'label' => __( 'Custom Label', 'elementor-pro' ),
 				'type' => Controls_Manager::SWITCHER,
-				'return_value' => 'yes',
 				'condition' => [
 					'show_labels!' => '',
 				],

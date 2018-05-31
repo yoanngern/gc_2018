@@ -56,6 +56,9 @@ class MC4WP_Ecommerce_Worker {
             $this->queue->delete( $job );
             $this->queue->save();
         }
+
+        // save again to handle deleted jobs properly too
+        $this->queue->save();
     }
 
     /**
@@ -67,7 +70,11 @@ class MC4WP_Ecommerce_Worker {
         try {
             $this->ecommerce->update_order( $id );
         } catch( Exception $e ) {
-            $this->get_log()->error( sprintf( "E-Commerce: Error adding order #%d. %s", $id, $e ) );
+            if( $e->getCode() === MC4WP_Ecommerce::ERR_NO_ITEMS) {
+                $this->get_log()->warning( sprintf( "E-Commerce: Skipping order #%d. %s", $id, $e->getMessage() ) );
+            } else {
+                $this->get_log()->error( sprintf( "E-Commerce: Error adding order #%d. %s", $id, $e ) );
+            }
             return false;
         }
 
@@ -133,15 +140,20 @@ class MC4WP_Ecommerce_Worker {
 
     /**
      * @param string $cart_id
-     * @param array $cart_data
+     * @param WP_User|object $customer
+     * @param array $cart_contents
      *
      * @return bool
      */
-    public function update_cart( $cart_id, array $cart_data ) {
+    public function update_cart( $cart_id, $customer, $cart_contents = array() ) {
         try {
-            $this->ecommerce->update_cart( $cart_id, $cart_data );
+            $this->ecommerce->update_cart( $cart_id, $customer, $cart_contents );
         } catch( Exception $e ) {
-            $this->get_log()->error( sprintf( "E-Commerce: Error updating cart #%s. %s", $cart_id, $e ) );
+            if( $e->getCode() === MC4WP_Ecommerce::ERR_NO_ITEMS ) {
+                 $this->get_log()->warning( sprintf( "E-Commerce: Skipping cart #%s. %s", $cart_id, $e->getMessage() ) );
+            } else {
+                $this->get_log()->error( sprintf( "E-Commerce: Error updating cart #%s. %s", $cart_id, $e ) );
+            }
             return false;
         }
 

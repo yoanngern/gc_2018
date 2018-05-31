@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Elementor post preview CSS file class.
+ * Elementor post preview CSS file.
  *
  * Elementor CSS file handler class is responsible for generating the post
  * preview CSS file.
@@ -41,6 +41,10 @@ class Post_Preview_CSS extends Post_CSS_File {
 		$parent_id = wp_get_post_parent_id( $post_id );
 
 		parent::__construct( $parent_id );
+	}
+
+	public function get_preview_id() {
+		return $this->preview_id;
 	}
 
 	/**

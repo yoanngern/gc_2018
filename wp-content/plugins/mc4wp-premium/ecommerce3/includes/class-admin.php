@@ -158,8 +158,8 @@ class MC4WP_Ecommerce_Admin {
 		$connected_list = null;
 
 		$helper = new MC4WP_Ecommerce_Helper();
-		$product_count = new MC4WP_Ecommerce_Object_Count( $helper->get_product_count( false ), $helper->get_product_count( true ) );
-		$order_count = new MC4WP_Ecommerce_Object_Count( $helper->get_order_count( false ), $helper->get_order_count( true ) );
+		$product_count = new MC4WP_Ecommerce_Object_Count( $helper->get_product_count(), $helper->get_untracked_product_count() );
+		$order_count = new MC4WP_Ecommerce_Object_Count( $helper->get_order_count(), $helper->get_untracked_order_count() );
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		$assets_url = plugins_url( '/assets', $this->plugin_file );
@@ -172,12 +172,13 @@ class MC4WP_Ecommerce_Admin {
 				'resume' => __( 'Resume', 'mc4wp-ecommerce' ),
 				'confirmation' => __( 'Are you sure you want to do this?', 'mc4wp-ecommerce' ),
 				'process' => __( 'Process', 'mc4wp-ecommerce' ),
+				'reset' => __( 'Clear', 'mc4wp-ecommerce' ),
 				'processing' => __( 'Processing queue, please wait.', 'mc4wp-ecommerce' ),
 			),
 			'product_count' => $product_count,
 			'product_ids' => $product_count->untracked > 0 ? $helper->get_untracked_product_ids() : array(),
 			'order_count' => $order_count,
-			'order_ids' => $order_count->untracked > 0 ? $helper->get_order_ids( true ) : array(),
+			'order_ids' => $order_count->untracked > 0 ? $helper->get_untracked_order_ids() : array(),
 		));
 
 		// get connected list

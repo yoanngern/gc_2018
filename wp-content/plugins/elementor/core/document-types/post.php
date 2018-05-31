@@ -3,18 +3,24 @@ namespace Elementor\Core\DocumentTypes;
 
 use Elementor\Controls_Manager;
 use Elementor\Core\Base\Document;
-use Elementor\Modules\PageTemplates\Module as PageTemplatesModule;
 use Elementor\Group_Control_Background;
 use Elementor\Plugin;
 use Elementor\Settings;
 use Elementor\Core\Settings\Manager as SettingsManager;
-use Elementor\Utils;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
 class Post extends Document {
+
+	public static function get_properties() {
+		$properties = parent::get_properties();
+
+		$properties['support_wp_page_templates'] = true;
+
+		return $properties;
+	}
 
 	/**
 	 * @since 2.0.0
@@ -70,6 +76,9 @@ class Post extends Document {
 
 		$document->start_injection( [
 			'of' => 'post_status',
+			'fallback' => [
+				'of' => 'post_title',
+			],
 		] );
 
 		$document->add_control(
@@ -112,6 +121,14 @@ class Post extends Document {
 			Group_Control_Background::get_type(),
 			[
 				'name'  => 'background',
+				'fields_options' => [
+					'image' => [
+						// Currently isn't supported.
+						'dynamic' => [
+							'active' => false,
+						],
+					],
+				],
 			]
 		);
 
@@ -141,6 +158,9 @@ class Post extends Document {
 	public static function register_post_fields_control( $document ) {
 		$document->start_injection( [
 			'of' => 'post_status',
+			'fallback' => [
+				'of' => 'post_title',
+			],
 		] );
 
 		if ( post_type_supports( $document->post->post_type, 'excerpt' ) ) {
@@ -175,6 +195,8 @@ class Post extends Document {
 	/**
 	 * @since 2.0.0
 	 * @access public
+	 *
+	 * @param array $data
 	 */
 	public function __construct( array $data = [] ) {
 		if ( $data ) {

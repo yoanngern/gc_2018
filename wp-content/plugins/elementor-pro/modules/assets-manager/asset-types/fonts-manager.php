@@ -132,10 +132,9 @@ class Fonts_Manager {
 			4  => __( 'Font updated.', 'elementor-pro' ),
 			/* translators: %s: date and time of the revision */
 			5  => isset( $_GET['revision'] ) ? sprintf( __( 'Font restored to revision from %s', 'elementor-pro' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-			6  => __( 'Font Saved.', 'elementor-pro' ),
-			7  => __( 'Font Saved.', 'elementor-pro' ),
+			6  => __( 'Font saved.', 'elementor-pro' ),
+			7  => __( 'Font saved.', 'elementor-pro' ),
 			8  => __( 'Font submitted.', 'elementor-pro' ),
-			/* translators: Publish box date format, see http://php.net/date */
 			9  => __( 'Font updated.', 'elementor-pro' ),
 			10 => __( 'Font draft updated.', 'elementor-pro' ),
 		];
@@ -181,6 +180,13 @@ class Fonts_Manager {
 			self::CAPABILITY,
 			'edit.php?post_type=' . self::CPT
 		);
+	}
+
+	public function redirect_admin_old_page_to_new() {
+		if ( ! empty( $_GET['page'] ) && 'elementor_custom_fonts' === $_GET['page'] ) {
+			wp_safe_redirect( admin_url( 'edit.php?post_type=' . self::CPT ) );
+			die;
+		}
 	}
 
 	/**
@@ -289,7 +295,7 @@ class Fonts_Manager {
 		return [
 			'cb' => '<input type="checkbox" />',
 			'title' => __( 'Font Family', 'elementor-pro' ),
-			'font_preview' => __( 'Font Preview', 'elementor-pro' ),
+			'font_preview' => __( 'Preview', 'elementor-pro' ),
 		];
 	}
 
@@ -495,13 +501,18 @@ class Fonts_Manager {
 	 */
 	protected function actions() {
 		add_action( 'init', [ $this, 'register_post_type_and_tax' ] );
-		add_action( 'admin_menu', [ $this, 'register_admin_menu' ], 50 );
-		add_action( 'admin_head', [ $this, 'clean_admin_listing_page' ] );
+
+		if ( is_admin() ) {
+			add_action( 'init', [ $this, 'redirect_admin_old_page_to_new' ] );
+			add_action( 'admin_menu', [ $this, 'register_admin_menu' ], 50 );
+			add_action( 'admin_head', [ $this, 'clean_admin_listing_page' ] );
+		}
+
 		add_filter( 'post_row_actions', [ $this, 'post_row_actions' ], 10, 2 );
 		add_filter( 'manage_' . self::CPT . '_posts_columns', [ $this, 'manage_columns' ], 100 );
 		add_action( 'save_post_' . self::CPT, [ $this, 'save_post_meta' ], 10, 3 );
 		add_action( 'save_post_' . self::CPT, [ $this, 'clear_fonts_list' ], 100 );
-		add_action( 'wp_ajax_elementor_pro_assets_manager_panel_action_data', [ $this, 'assets_manager_panel_action_data' ] );
+
 		add_filter( 'elementor/fonts/groups', [ $this, 'register_fonts_groups' ] );
 		add_filter( 'elementor/fonts/additional_fonts', [ $this, 'register_fonts_in_control' ] );
 		add_action( 'elementor/post-css-file/parse', [ $this, 'enqueue_fonts' ] );
@@ -509,6 +520,18 @@ class Fonts_Manager {
 		add_filter( 'post_updated_messages', [ $this, 'post_updated_messages' ] );
 		add_filter( 'enter_title_here', [ $this, 'update_enter_title_here' ], 10, 2 );
 
+		// Ajax.
+		add_action( 'wp_ajax_elementor_pro_assets_manager_panel_action_data', [ $this, 'assets_manager_panel_action_data' ] );
+
+		/**
+		 * Elementor fonts manager loaded.
+		 *
+		 * Fires after the fonts manager was fully loaded and instantiated.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param Fonts_Manager $this An instance of fonts manager.
+		 */
 		do_action( 'elementor_pro/fonts_manager_loaded', $this );
 	}
 

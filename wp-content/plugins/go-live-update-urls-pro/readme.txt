@@ -2,10 +2,11 @@
 Contributors: Mat Lipe
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40lipeimagination%2einfo&lc=US&item_name=Go%20Live%20Update%20Urls&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: Go Live, Urls, Domain Changes 
-Requires at least: 4.7.0
+Requires at least: 4.6.0
 Tested up to: 4.9.5
 Requires PHP: 5.2.4
-Stable tag: 2.2.2
+Stable tag: 2.3.0
+License: Copyright Mat Lipe Dot Com
 
 == Description ==
 Go Live Update URLS Pro works along side the Go Live Update URLS plugin to add additional features and enhancements. If you live Go Live Update URLS, you'll LOVE Go Live Update URLS Pro.
@@ -18,7 +19,11 @@ Install and activate the Go Live Update Urls Plugin
 Install and activate this plugin.
 
 == Changelog ==
-* 2.2.0 =
+= 2.3.0 =
+* Added new languages
+* Support upcoming blogmeta table in WP 5.0.0+
+
+= 2.2.0 =
 * Improved the UI
 * Added support for Site Address (URL) history
 * Added predictive URLs 

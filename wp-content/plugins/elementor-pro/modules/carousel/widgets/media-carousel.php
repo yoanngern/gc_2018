@@ -8,6 +8,7 @@ use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Scheme_Typography;
 use Elementor\Utils;
+use ElementorPro\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -173,7 +174,7 @@ class Media_Carousel extends Base {
 			'image_link_to',
 			[
 				'type' => Controls_Manager::URL,
-				'placeholder' => __( 'http://your-link.com', 'elementor-pro' ),
+				'placeholder' => __( 'https://your-link.com', 'elementor-pro' ),
 				'condition' => [
 					'type' => 'image',
 					'image_link_to_type' => 'custom',
@@ -189,7 +190,7 @@ class Media_Carousel extends Base {
 				'label' => __( 'Video Link', 'elementor-pro' ),
 				'type' => Controls_Manager::URL,
 				'placeholder' => __( 'Enter your video link', 'elementor-pro' ),
-				'description' => __( 'Insert YouTube or Vimeo link', 'elementor-pro' ),
+				'description' => __( 'YouTube or Vimeo link', 'elementor-pro' ),
 				'show_external' => false,
 				'condition' => [
 					'type' => 'video',
@@ -281,10 +282,15 @@ class Media_Carousel extends Base {
 				}
 			} else {
 				$this->add_render_attribute( $element_key . '_link', [
-					'class' => 'elementor-clickable',
 					'data-elementor-lightbox-slideshow' => $this->get_id(),
 					'data-elementor-lightbox-index' => $this->lightbox_slide_index,
 				] );
+
+				if ( Plugin::elementor()->editor->is_edit_mode() ) {
+					$this->add_render_attribute( $element_key . '_link', [
+						'class' => 'elementor-clickable',
+					] );
+				}
 
 				$this->lightbox_slide_index++;
 			}

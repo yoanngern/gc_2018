@@ -42,20 +42,26 @@ function enableNextButtons(e) {
 }
 
 function orderTicker(wizard) {
+    let data = new FormData();
+    data.append("order_id", orderIds[wizard.index]);
+
     m.request({
         method: "POST",
         url: ajaxurl + "?action=mc4wp_ecommerce_synchronize_orders",
-        data: { order_id: orderIds[wizard.index] }
+        data: data,
     }).then(requestSuccessHandler(wizard))
       .catch(requestErrorHandler(wizard));
 }
 
 
 function productTicker(wizard) {
+    let data = new FormData();
+    data.append("product_id", productIds[wizard.index]);
+
     m.request({
         method: "POST",
         url: ajaxurl + "?action=mc4wp_ecommerce_synchronize_products",
-        data: { product_id: productIds[wizard.index] }
+        data: data,
     }).then(requestSuccessHandler(wizard))
       .catch(requestErrorHandler(wizard));
 }

@@ -50,6 +50,15 @@ class Form extends Form_Base {
 			'hidden' => __( 'Hidden', 'elementor-pro' ),
 		];
 
+		/**
+		 * Forms field types.
+		 *
+		 * Filters the list of field types displayed in the form `field_type` control.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $field_types Field types.
+		 */
 		$field_types = apply_filters( 'elementor_pro/forms/field_types', $field_types );
 
 		$repeater->start_controls_tabs( 'form_fields_tabs' );
@@ -194,7 +203,6 @@ class Form extends Form_Base {
 						],
 						[
 							'name' => 'allow_multiple',
-							'operator' => '===',
 							'value' => 'true',
 						],
 					],
@@ -345,12 +353,15 @@ class Form extends Form_Base {
 
 		$repeater->end_controls_tab();
 
-		$repeater->start_controls_tab( 'form_fields_advanced_tab', [
-			'label' => __( 'Advanced', 'elementor-pro' ),
-			'condition' => [
-				'field_type!' => 'html',
-			],
-		] );
+		$repeater->start_controls_tab(
+			'form_fields_advanced_tab',
+			[
+				'label' => __( 'Advanced', 'elementor-pro' ),
+				'condition' => [
+					'field_type!' => 'html',
+				],
+			]
+		);
 
 		$repeater->add_control(
 			'_id',
@@ -397,7 +408,7 @@ class Form extends Form_Base {
 			'form_fields',
 			[
 				'type' => Controls_Manager::REPEATER,
-				'fields' => array_values( $repeater->get_controls() ),
+				'fields' => $repeater->get_controls(),
 				'default' => [
 					[
 						'_id' => 'name',
@@ -463,7 +474,6 @@ class Form extends Form_Base {
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => '',
 				'condition' => [
 					'show_labels!' => '',
@@ -1107,7 +1117,7 @@ class Form extends Form_Base {
 	}
 
 	protected function render() {
-		$instance = $this->get_settings();
+		$instance = $this->get_active_settings();
 
 		$this->add_render_attribute(
 			[
@@ -1173,8 +1183,8 @@ class Form extends Form_Base {
 
 		?>
 		<form class="elementor-form" method="post" <?php echo $this->get_render_attribute_string( 'form' ); ?>>
-			<input type="hidden" name="post_id" value="<?php echo Utils::get_current_post_id() ?>" />
-			<input type="hidden" name="form_id" value="<?php echo $this->get_id() ?>" />
+			<input type="hidden" name="post_id" value="<?php echo Utils::get_current_post_id(); ?>" />
+			<input type="hidden" name="form_id" value="<?php echo $this->get_id(); ?>" />
 
 			<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
 				<?php
@@ -1182,8 +1192,35 @@ class Form extends Form_Base {
 					$item['input_size'] = $instance['input_size'];
 					$this->form_fields_render_attributes( $item_index, $instance, $item );
 
+					$field_type = $item['field_type'];
+
+					/**
+					 * Render form field.
+					 *
+					 * Filters the field rendered by Elementor Forms.
+					 *
+					 * @since 1.0.0
+					 *
+					 * @param array $item       The field value.
+					 * @param int   $item_index The field index.
+					 * @param Form  $this       An instance of the form.
+					 */
 					$item = apply_filters( 'elementor_pro/forms/render/item', $item, $item_index, $this );
-					$item = apply_filters( 'elementor_pro/forms/render/item/' . $item['field_type'], $item, $item_index, $this );
+
+					/**
+					 * Render form field.
+					 *
+					 * Filters the field rendered by Elementor Forms.
+					 *
+					 * The dynamic portion of the hook name, `$field_type`, refers to the field type.
+					 *
+					 * @since 1.0.0
+					 *
+					 * @param array $item       The field value.
+					 * @param int   $item_index The field index.
+					 * @param Form  $this       An instance of the form.
+					 */
+					$item = apply_filters( "elementor_pro/forms/render/item/{$field_type}", $item, $item_index, $this );
 
 					if ( 'hidden' === $item['field_type'] ) {
 						$item['field_label'] = false;
@@ -1222,7 +1259,22 @@ class Form extends Form_Base {
 							echo '<input size="1" ' . $this->get_render_attribute_string( 'input' . $item_index ) . '>';
 							break;
 						default:
-							do_action( 'elementor_pro/forms/render_field/' . $item['field_type'], $item, $item_index, $this );
+							$field_type = $item['field_type'];
+
+							/**
+							 * Elementor form field render.
+							 *
+							 * Fires when a field is rendered.
+							 *
+							 * The dynamic portion of the hook name, `$field_type`, refers to the field type.
+							 *
+							 * @since 1.0.0
+							 *
+							 * @param array $item       The field value.
+							 * @param int   $item_index The field index.
+							 * @param Form  $this       An instance of the form.
+							 */
+							do_action( "elementor_pro/forms/render_field/{$field_type}", $item, $item_index, $this );
 					endswitch;
 					?>
 				</div>

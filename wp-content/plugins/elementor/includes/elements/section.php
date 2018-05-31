@@ -6,9 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Elementor section element class.
+ * Elementor section element.
  *
- * Elementor repeater handler class is responsible for initializing the section
+ * Elementor section handler class is responsible for initializing the section
  * element.
  *
  * @since 1.0.0
@@ -592,7 +592,7 @@ class Element_Section extends Element_Base {
 		$this->add_control(
 			'background_overlay_opacity',
 			[
-				'label' => __( 'Opacity (%)', 'elementor' ),
+				'label' => __( 'Opacity', 'elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => .5,
@@ -632,7 +632,7 @@ class Element_Section extends Element_Base {
 		$this->add_control(
 			'background_overlay_hover_opacity',
 			[
-				'label' => __( 'Opacity (%)', 'elementor' ),
+				'label' => __( 'Opacity', 'elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => .5,
@@ -1301,11 +1301,12 @@ class Element_Section extends Element_Base {
 	 */
 	protected function _content_template() {
 		?>
-		<div class="elementor-background-video-container elementor-hidden-phone">
-			<div class="elementor-background-video-embed"></div>
-			<video class="elementor-background-video-hosted" autoplay loop muted></video>
-		</div>
-		<div class="elementor-background-video-fallback"></div>
+		<# if ( settings.background_video_link ) { #>
+			<div class="elementor-background-video-container elementor-hidden-phone">
+				<div class="elementor-background-video-embed"></div>
+				<video class="elementor-background-video-hosted" autoplay loop muted></video>
+			</div>
+		<# } #>
 		<div class="elementor-background-overlay"></div>
 		<div class="elementor-shape elementor-shape-top"></div>
 		<div class="elementor-shape elementor-shape-bottom"></div>

@@ -164,7 +164,7 @@ class MC4WP_Ecommerce_Object_Transformer {
 		$billing_email = $order->get_billing_email(); 
 
 		// generate item lines data
-		$items = $order->get_items( array( 'line_item' ) );
+		$items = $order->get_items( 'line_item' );
 		$order_lines_data = array();
 		foreach ($items as $item_id => $item) {
 			// product may not exist anymore by now, we validate this outside of this class
@@ -267,7 +267,7 @@ class MC4WP_Ecommerce_Object_Transformer {
 				$product_variation = wc_get_product($product_variation_id);
 
 				// only add variation if it exists
-				if( $product ) {
+				if( $product instanceof WC_Product ) {
 					$variants[] = $this->get_product_variant_data($product_variation);
 				}
 			}
@@ -290,18 +290,18 @@ class MC4WP_Ecommerce_Object_Transformer {
 			'image_url' => function_exists( 'get_the_post_thumbnail_url' ) ? (string) get_the_post_thumbnail_url($product->get_id(), 'shop_single') : '',
 		);
 
-		// add variant images
-		$product_data['images'] = array();
-		foreach( $product_data['variants'] as $variant ) {
-			if( empty( $variant['image_url'] ) ) {
-				continue;
-			}
-			$product_data['images'][] = array(
-				'id' => $variant['id'],
-				'url' => $variant['image_url'],
-				'variant_ids' => array( $variant['id'] )
-			);
-		}
+		// // add variant images
+		// $product_data['images'] = array();
+		// foreach( $product_data['variants'] as $variant ) {
+		// 	if( empty( $variant['image_url'] ) ) {
+		// 		continue;
+		// 	}
+		// 	$product_data['images'][] = array(
+		// 		'id' => $variant['id'],
+		// 		'url' => $variant['image_url'],
+		// 		'variant_ids' => array( $variant['id'] )
+		// 	);
+		// }
 
 		// add product categories, joined together by "|"
 		$category_names = array();
@@ -378,20 +378,19 @@ class MC4WP_Ecommerce_Object_Transformer {
 
 	/**
 	 * @param array $customer
-	 * @param WC_Cart $woocommerce_cart
+	 * @param array $cart_items
 	 *
 	 * @return array
 	 *
 	 * @throws Exception
 	 */
-	public function cart(array $customer, WC_Cart $woocommerce_cart) {
-		$cart_items = $woocommerce_cart->get_cart();
+	public function cart(array $customer, array $cart_items ) {
 		$lines_data = array();
 		$order_total = 0.00;
 
 		// check if cart has lines
 		if (empty($cart_items)) {
-			throw new Exception("Cart has no item lines", 100);
+			throw new Exception("Cart has no item lines", MC4WP_Ecommerce::ERR_NO_ITEMS );
 		}
 
 		// generate data for cart lines
@@ -429,9 +428,9 @@ class MC4WP_Ecommerce_Object_Transformer {
 		 * Filters the cart data that is sent to MailChimp.
 		 *
 		 * @param array $cart_data
-		 * @param WC_Cart $woocommerce_cart
+		 * @param array $cart_items Raw cart items array coming from WooCommerce.
 		 */
-		$cart_data = apply_filters('mc4wp_ecommerce_cart_data', $cart_data, $woocommerce_cart);
+		$cart_data = apply_filters('mc4wp_ecommerce_cart_data', $cart_data, $cart_items);
 
 		return $cart_data;
 	}

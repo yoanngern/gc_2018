@@ -201,7 +201,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'yes',
 				'separator' => 'before',
 			]
@@ -240,7 +239,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'yes',
 			]
 		);
@@ -250,6 +248,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			[
 				'label' => __( 'Excerpt Length', 'elementor-pro' ),
 				'type' => Controls_Manager::NUMBER,
+				/** This filter is documented in wp-includes/formatting.php */
 				'default' => apply_filters( 'excerpt_length', 25 ),
 				'condition' => [
 					$this->get_control_id( 'show_excerpt' ) => 'yes',
@@ -266,7 +265,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Show', 'elementor-pro' ),
 				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'return_value' => 'yes',
 				'default' => 'yes',
 				'separator' => 'before',
 			]
@@ -278,7 +276,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 				'label' => __( 'Read More Text', 'elementor-pro' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'Read More »', 'elementor-pro' ),
-				'placeholder' => __( 'Read More »', 'elementor-pro' ),
 				'condition' => [
 					$this->get_control_id( 'show_read_more' ) => 'yes',
 				],
@@ -720,9 +717,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	public function render() {
 		$this->parent->query_posts();
 
-		$wp_query = $this->parent->get_query();
+		/** @var \WP_Query $query */
+		$query = $this->parent->get_query();
 
-		if ( ! $wp_query->found_posts ) {
+		if ( ! $query->found_posts ) {
 			return;
 		}
 
@@ -731,10 +729,15 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 		$this->render_loop_header();
 
-		while ( $wp_query->have_posts() ) {
-			$wp_query->the_post();
-
+		// It's the global `wp_query` it self. and the loop was started from the theme.
+		if ( $query->in_the_loop ) {
 			$this->render_post();
+		} else {
+			while ( $query->have_posts() ) {
+				$query->the_post();
+
+				$this->render_post();
+			}
 		}
 
 		$this->render_loop_footer();
@@ -751,6 +754,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 	public function filter_excerpt_more( $more ) {
 		return '';
+	}
+
+	public function get_container_class() {
+		return 'elementor-posts--skin-' . $this->get_id();
 	}
 
 	protected function render_thumbnail() {
@@ -844,7 +851,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 				'elementor-posts-container',
 				'elementor-posts',
 				'elementor-grid',
-				'elementor-posts--skin-' . $this->get_id(),
+				$this->get_container_class(),
 			],
 		] );
 		?>
@@ -896,7 +903,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		}
 
 		?>
-		<nav class="elementor-pagination" role="navigation" aria-label="<?php _e( 'Pagination', 'elementor-pro' ); ?>">
+		<nav class="elementor-pagination" role="navigation" aria-label="<?php esc_attr_e( 'Pagination', 'elementor-pro' ); ?>">
 			<?php echo implode( PHP_EOL, $links ); ?>
 		</nav>
 		<?php
@@ -942,7 +949,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	protected function render_date() {
 		?>
 		<span class="elementor-post-date">
-			<?php echo apply_filters( 'the_date', get_the_date(), get_option( 'date_format' ), '', '' ); ?>
+			<?php
+			/** This filter is documented in wp-includes/general-template.php */
+			echo apply_filters( 'the_date', get_the_date(), get_option( 'date_format' ), '', '' );
+			?>
 		</span>
 		<?php
 	}
@@ -973,5 +983,9 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->render_read_more();
 		$this->render_text_footer();
 		$this->render_post_footer();
+	}
+
+	public function render_amp() {
+
 	}
 }

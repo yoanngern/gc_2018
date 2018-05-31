@@ -40,6 +40,11 @@ class MC4WP_Logger {
 		add_action( 'mctb_subscribed', array( $this, 'log_top_bar_request' ), 10, 4 );
 		add_action( 'mc4wp_integration_subscribed', array( $this, 'log_integration_request' ), 10, 5 );
 		add_action( 'mc4wp_form_subscribed', array( $this, 'log_form_request' ), 10, 4 );
+      add_action( 'mc4wp_logging_purge_old_items', array( $this, 'purge_old_items' ) );
+
+      add_filter( 'wp_privacy_personal_data_exporters', array( $this, 'register_exporter' ), 90 );
+      add_filter( 'wp_privacy_personal_data_erasers', array( $this, 'register_eraser' ), 90 );
+
 	}
 
 	/**
@@ -68,7 +73,7 @@ class MC4WP_Logger {
 		} else {
 			// for backwards compatibility with older versions of Top Bar.
 			$data['email_address'] = $email_address;
-            $data['merge_fields'] = $merge_vars;
+         $data['merge_fields'] = $merge_vars;
 		}
 
 		return $this->log_request( $data );
@@ -146,7 +151,7 @@ class MC4WP_Logger {
 		);
 
 		// for BC with v3.x of MailChimp for WordPress
-        $plain_data_map = array_values( $data_map );
+      $plain_data_map = array_values( $data_map );
 		if( empty( $plain_data_map ) || ! $plain_data_map[0] instanceof MC4WP_MailChimp_Subscriber ) {
 			$lists = $form->get_lists();
 			$list_id = array_shift( $lists );
@@ -241,8 +246,8 @@ class MC4WP_Logger {
 
 		// add email to WHERE clause
 		if ( '' !== $args['email'] ) {
-			$where[] = 'email_address LIKE %s';
-			$params[] = '%%' . $this->db->esc_like( $args['email'] ). '%%';
+			$where[] = 'email_address = %s';
+			$params[] = $args['email'];
 		}
 
 		// add type to WHERE clause
@@ -400,36 +405,119 @@ class MC4WP_Logger {
             unset( $data['merge_fields']['OPTIN_IP'] );
         }
 
-        // set URL referrer
-        if( empty( $data['url'] ) ) {
-            $data['url'] = $this->get_url_referer();
-        }
-
-        // set client IP
-        if( empty( $data['ip_signup'] ) ) {
-            $data['ip_signup'] = $this->get_client_ip();
-        }
-
         // make sure merge_fields has an EMAIL key
         if( empty( $data['merge_fields']['EMAIL'] ) ) {
             $data['merge_fields']['EMAIL'] = $data['email_address'];
         }
 
+        if( empty( $data['url'] ) && ! empty( $_SERVER['HTTP_REFERER'] ) ) {
+         $data['url'] = $_SERVER['HTTP_REFERER'];
+        }
+
         return $this->add( $data );
     }
 
-    /**
-     * @return string
-     */
-    private function get_url_referer() {
-        return mc4wp('request')->get_referer();
+    public function purge_old_items() {
+      $options = get_option( 'mc4wp' );
+      if( empty( $options['log_purge_days'] ) ) {
+         return;
+      }
+
+      $days = (int) $options['log_purge_days'];
+      $date_treshold = strtotime( "-{$days} days" );
+      $query = "DELETE FROM {$this->table_name} WHERE UNIX_TIMESTAMP(datetime) < %d";
+      $params = array( $date_treshold );
+      $query = $this->db->prepare( $query, $params );
+      $this->db->query( $query );
     }
 
-    /**
-     * @return string
-     */
-    private function get_client_ip() {
-        return mc4wp('request')->get_client_ip();
+    public function register_exporter( $exporters ) {
+      $exporters['mc4wp-log'] = array(
+         'exporter_friendly_name' => 'MailChimp for WordPress',
+         'callback'               => array( $this, 'gdpr_export' ),
+      );
+      return $exporters;
     }
 
+    public function gdpr_export( $email_address, $page = 1 ) {
+      $log_items = $this->find( array( 'email' => $email_address, 'limit' => 10000 ) );
+      $data_to_export = array();
+
+      if( ! empty( $log_items ) ) {
+         foreach( $log_items as $item ) {
+            $data_to_export[] = array(
+               'group_id'    => 'mc4wp_log_items',
+               'group_label' => __( 'MailChimp sign-up requests', 'mailchimp-for-wp' ),
+               'item_id'     => sprintf( 'mc4wp-log-item-%d', $item->ID ),
+               'data'        => $this->gdpr_export_log_item( $item ),
+            );
+         }
+      }
+      return array(
+         'data' => $data_to_export,
+         'done' => true,
+      );
+    }
+
+    public function gdpr_export_log_item( MC4WP_Log_Item $item ) {
+      $data = array();
+
+      $data[] = array(
+            'name' => 'Date', 
+            'value' => $item->datetime,
+      );
+
+      $data[] = array( 
+         'name' => 'Email address',
+         'value' => $item->email,
+      );
+
+      $data[] = array( 
+         'name' => 'IP address',
+         'value' => $item->ip_signup,
+      );
+
+      if( ! empty( $item->language ) ) {
+         $data[] = array( 
+            'name' => 'Language',
+            'value' => $item->language,
+         );
+      }
+
+      foreach( $item->merge_fields as $field => $value ) {
+         if( $field === 'EMAIL' ) { 
+            continue; 
+         }
+
+          $data[] = array( 
+            'name' => $field,
+            'value' => is_array( $value ) ? join( ', ', $value ) : $value,
+         );
+      }
+
+      return $data;
+    }
+
+    public function register_eraser( $erasers ) {
+      $erasers['mc4wp-log'] = array(
+         'eraser_friendly_name' => 'MailChimp for WordPress',
+         'callback'             => array( $this, 'gdpr_erase' ),
+      );
+      return $erasers;
+    }
+
+    public function gdpr_erase( $email_address, $page = 1 ) {
+      $log_items = $this->find( array( 'email' => $email_address, 'limit' => 10000 ) );
+      foreach( $log_items as $item ) {
+         $this->delete_by_id( $item->ID );
+         $items_removed = true;
+      }
+
+      return array(
+            'items_removed'  => $items_removed,
+            'items_retained' => false,
+            'messages'       => array(),
+            'done'           => true,
+         );
+    }
 }

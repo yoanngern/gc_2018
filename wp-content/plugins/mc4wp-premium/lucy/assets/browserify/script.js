@@ -2,7 +2,6 @@
 
 var Lucy = require('./third-party/lucy.js');
 var config = {
-	siteUrl: 'https://mc4wp.com/',
 	algoliaAppId: 'CGLHJ0181U',
 	algoliaAppKey: '8fa2f724a6314f9a0b840c85b05b943e',
 	algoliaIndexName: 'mc4wp_kb',
@@ -33,7 +32,6 @@ if( window.lucy_config ) {
 }
 
 var lucy = new Lucy(
-	config.siteUrl,
 	config.algoliaAppId,
 	config.algoliaAppKey,
 	config.algoliaIndexName,

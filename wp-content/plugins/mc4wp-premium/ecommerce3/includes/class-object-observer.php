@@ -82,6 +82,10 @@ class MC4WP_Ecommerce_Object_Observer {
 
         $this->add_pending_job( 'add_product', $post_id );
         $this->queue->save();
+
+        // delete product related transients
+        delete_transient( 'mc4wp_ecommerce_untracked_product_count' );
+        delete_transient( 'mc4wp_ecommerce_product_count' );
     }
 
     // hook: save_post_shop_order
@@ -102,6 +106,10 @@ class MC4WP_Ecommerce_Object_Observer {
         // add new job
         $this->add_pending_job( $method, $post_id );
         $this->queue->save();
+
+        // delete order related transients
+        delete_transient( 'mc4wp_ecommerce_untracked_order_count' );
+        delete_transient( 'mc4wp_ecommerce_order_count' );
     }
 
     // hook: delete_post
@@ -119,10 +127,8 @@ class MC4WP_Ecommerce_Object_Observer {
         if( $post->post_type === 'shop_order' ) {
             $this->remove_pending_jobs( 'add_order', $post_id );
             $this->add_pending_job( 'delete_order', $post_id );
-             $this->queue->save();
+            $this->queue->save();
         }
-
-
     }
 
     // hook: profile_update

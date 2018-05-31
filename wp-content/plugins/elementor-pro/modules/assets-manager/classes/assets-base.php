@@ -175,9 +175,7 @@ abstract class Assets_Base {
 				'data-ext' => isset( $field['ext'] ) ? $field['ext'] : '',
 				'data-upload_text' => __( 'Upload', 'elementor-pro' ),
 				'data-remove_text' => __( 'Delete', 'elementor-pro' ),
-				/* translators: %s font file format */
 				'data-box_title' => isset( $field['box_title'] ) ? $field['box_title'] : '',
-				/* translators: %s font file format */
 				'data-box_action' => isset( $field['box_action'] ) ? $field['box_action'] : '',
 			]
 		);
@@ -211,7 +209,7 @@ abstract class Assets_Base {
 		$row_label_html = '<span ' . $this->get_attribute_string( $row_label_html_args ) . '>' . $label . '</span>';
 		ob_start();
 		?>
-		<script type="text/template" id="<?php echo $js_id . '_block'; ?>">
+		<script type="text/template" id="<?php echo esc_attr( $js_id . '_block' ); ?>">
 			<div class="repeater-block block-visible">
 				<?php
 				echo $row_label_html;

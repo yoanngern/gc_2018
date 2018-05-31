@@ -94,7 +94,7 @@ class MC4WP_Ecommerce_Cart_Observer {
 	/**
 	 * @param string $method
 	 *
-	 * @param $object_id
+	 * @param int $object_id
 	 */
 	private function remove_pending_jobs( $method, $object_id ) {
 		$jobs = $this->queue->all();
@@ -143,22 +143,19 @@ class MC4WP_Ecommerce_Cart_Observer {
 			exit;
 		}
 
-		try {
-			$customer_data = $this->ecommerce->transformer->customer( $data );
-			$cart_data = $this->ecommerce->transformer->cart( $customer_data, WC()->cart );
-		} catch( Exception $e ) {
-			// don't schedule anything when cart has no order lines.
-			wp_send_json_error();
-			exit;
-		}
-
-		$cart_id = $cart_data['id'];
+		$wc_cart = WC()->cart;
+		$cart_contents = method_exists( $wc_cart, 'get_cart_contents' ) ? $wc_cart->get_cart_contents() : $wc_cart->cart_contents;
+		$cart_id = $this->ecommerce->transformer->get_cart_id( $data->billing_email );
 
 		// remove other pending updates from queue
 		$this->remove_pending_jobs( 'update_cart', $cart_id );
 
-		// schedule new update with latest data
-		$this->add_pending_job( 'update_cart', array( $cart_id, $cart_data ) );
+		if( ! empty( $cart_contents ) ) {
+			// update remote cart if we have items in cart
+			$this->add_pending_job( 'update_cart', array( $cart_id, $data, $cart_contents ) );
+		} else {
+			$this->add_pending_job( 'delete_cart', array( $cart_id ) );
+		}
 
 		// delete previous cart if email address changed
 		if( ! empty( $data->previous_billing_email )
@@ -166,10 +163,10 @@ class MC4WP_Ecommerce_Cart_Observer {
 			&& $data->previous_billing_email !== $data->billing_email ) {
 
 			// get previous cart ID
-			$cart_id = $this->ecommerce->transformer->get_cart_id( $data->previous_billing_email );
+			$previous_cart_id = $this->ecommerce->transformer->get_cart_id( $data->previous_billing_email );
 
 			// schedule cart deletion
-			$this->add_pending_job( 'delete_cart', array( $cart_id ) );
+			$this->add_pending_job( 'delete_cart', array( $previous_cart_id ) );
 		}
 
 		$this->queue->save();
@@ -220,19 +217,12 @@ class MC4WP_Ecommerce_Cart_Observer {
 			return;
 		}
 
-		try {
-			$customer_data = $this->ecommerce->transformer->customer( $user );
-			$cart_data = $this->ecommerce->transformer->cart( $customer_data, $wc_cart );
-		} catch( Exception $e ) {
-			$this->get_log()->warning( sprintf( 'E-Commerce: Incomplete cart data. %s', $e->getMessage() ) );
-			return;
-		}
-
 		// remove other pending updates from queue
 		$this->remove_pending_jobs( 'update_cart', $cart_id );
 
 		// schedule new update with latest data
-		$this->add_pending_job( 'update_cart', array( $cart_id, $cart_data ) );
+		$cart_contents = method_exists( $wc_cart, 'get_cart_contents' ) ? $wc_cart->get_cart_contents() : $wc_cart->cart_contents;
+		$this->add_pending_job( 'update_cart', array( $cart_id, $user, $cart_contents ) );
 		$this->queue->save();
 	}
 

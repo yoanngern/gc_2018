@@ -103,7 +103,11 @@ function mc4wp_ecommerce_get_order_statuses() {
 function _mc4wp_ecommerce_cron_schedules( $schedules ) {
     $schedules['every5minutes'] = array(
         'interval' => 60 * 5,
-        'display' => __( 'Every 5 Minutes', 'mc4wp-ecommerce' ),
+        'display' => __( 'Every 5 minutes', 'mc4wp-ecommerce' ),
+    );
+    $schedules['every3minutes'] = array(
+        'interval' => 60 * 3,
+        'display' => __( 'Every 3 minutes', 'mc4wp-ecommerce' ),
     );
     return $schedules;
 }
@@ -112,12 +116,21 @@ function _mc4wp_ecommerce_cron_schedules( $schedules ) {
  * Schedule e-commerce events with WP Cron.
  */
 function _mc4wp_ecommerce_schedule_events() {
-    $expected_next = time() + 300;
+    /**
+    * Allows you to disable the WP Cron schedule for processing the queue.
+    *
+    * To be used when you process the queue over WP CLI using `wp mc4wp-ecommerce process-queue`
+    */
+    if( ! apply_filters( 'mc4wp_ecommerce_schedule_process_queue_event', true ) ) {
+        return;
+    }
+
+    $expected_next = time() + ( 60 * 3 );
     $event_name = 'mc4wp_ecommerce_process_queue';
     
     $actual_next = wp_next_scheduled( $event_name );
 
     if( ! $actual_next || $actual_next > $expected_next ) {
-        wp_schedule_event( $expected_next, 'every5minutes', $event_name );
+        wp_schedule_event( $expected_next, 'every3minutes', $event_name );
     }
 }
