@@ -184,13 +184,6 @@
 		"oAP": "\/fonts\/34BBF4_2_0.eot",
 		"oF": 0
 		},
-	"\/fonts\/34BBF4_2_0.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/fonts\/34BBF4_2_0.ttf",
-		"oF": 0
-		},
 	"\/fonts\/34BBF4_2_0.woff": {
 		"cB": 0,
 		"ft": 8192,
@@ -252,13 +245,6 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/functions.php",
-		"oF": 0
-		},
-	"\/header-tv.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/header-tv.php",
 		"oF": 0
 		},
 	"\/header.php": {
@@ -455,17 +441,6 @@
 		"oT": 1,
 		"q": 100
 		},
-	"\/images\/arrow_down.png": {
-		"ft": 32768,
-		"iS": 749,
-		"oA": 0,
-		"oAP": "\/images\/arrow_down.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
 	"\/images\/browserconfig.xml": {
 		"cB": 0,
 		"ft": 8192,
@@ -576,28 +551,6 @@
 		"oO": 0,
 		"oS": 1
 		},
-	"\/images\/map_point.png": {
-		"ft": 32768,
-		"iS": 3294,
-		"oA": 0,
-		"oAP": "\/images\/map_point.png",
-		"oF": 0,
-		"oIPL": 1,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
-	"\/images\/map_point_black.png": {
-		"ft": 32768,
-		"iS": 6624,
-		"oA": 0,
-		"oAP": "\/images\/map_point_black.png",
-		"oF": 0,
-		"oIPL": 1,
-		"opt": 1,
-		"oT": 1,
-		"q": 100
-		},
 	"\/images\/ms-icon-144x144.png": {
 		"ft": 32768,
 		"iS": 7379,
@@ -686,6 +639,17 @@
 		"oT": 1,
 		"q": 100
 		},
+	"\/images\/wp-login.png": {
+		"ft": 32768,
+		"iS": 7571,
+		"oA": 0,
+		"oAP": "\/images\/wp-login.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"\/includes\/acf\/buttons.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -693,32 +657,11 @@
 		"oAP": "\/includes\/acf\/buttons.php",
 		"oF": 0
 		},
-	"\/includes\/acf\/city.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/city.php",
-		"oF": 0
-		},
 	"\/includes\/acf\/date.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/includes\/acf\/date.php",
-		"oF": 0
-		},
-	"\/includes\/acf\/event.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/event.php",
-		"oF": 0
-		},
-	"\/includes\/acf\/event_category.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/event_category.php",
 		"oF": 0
 		},
 	"\/includes\/acf\/gc_settings.php": {
@@ -735,67 +678,11 @@
 		"oAP": "\/includes\/acf\/header.php",
 		"oF": 0
 		},
-	"\/includes\/acf\/homepage.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/homepage.php",
-		"oF": 0
-		},
-	"\/includes\/acf\/location.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/location.php",
-		"oF": 0
-		},
 	"\/includes\/acf\/meta_facebook.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/includes\/acf\/meta_facebook.php",
-		"oF": 0
-		},
-	"\/includes\/acf\/people.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/people.php",
-		"oF": 0
-		},
-	"\/includes\/acf\/recurrence.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/recurrence.php",
-		"oF": 0
-		},
-	"\/includes\/acf\/related_events.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/related_events.php",
-		"oF": 0
-		},
-	"\/includes\/acf\/service.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/service.php",
-		"oF": 0
-		},
-	"\/includes\/acf\/service_type.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/service_type.php",
-		"oF": 0
-		},
-	"\/includes\/acf\/summary.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/summary.php",
 		"oF": 0
 		},
 	"\/includes\/acf\/talk.php": {
@@ -805,27 +692,6 @@
 		"oAP": "\/includes\/acf\/talk.php",
 		"oF": 0
 		},
-	"\/includes\/acf\/team_page.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/team_page.php",
-		"oF": 0
-		},
-	"\/includes\/acf\/tv_page.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/tv_page.php",
-		"oF": 0
-		},
-	"\/includes\/acf\/tv_selection.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/acf\/tv_selection.php",
-		"oF": 0
-		},
 	"\/includes\/acf_fields.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -833,53 +699,11 @@
 		"oAP": "\/includes\/acf_fields.php",
 		"oF": 0
 		},
-	"\/includes\/gc_city.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/gc_city.php",
-		"oF": 0
-		},
 	"\/includes\/gc_date.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/includes\/gc_date.php",
-		"oF": 0
-		},
-	"\/includes\/gc_event.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/gc_event.php",
-		"oF": 0
-		},
-	"\/includes\/gc_location.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/gc_location.php",
-		"oF": 0
-		},
-	"\/includes\/gc_people.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/gc_people.php",
-		"oF": 0
-		},
-	"\/includes\/gc_service.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/gc_service.php",
-		"oF": 0
-		},
-	"\/includes\/gc_talk.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/includes\/gc_talk.php",
 		"oF": 0
 		},
 	"\/index.php": {
@@ -3357,67 +3181,11 @@
 		"sC": 1,
 		"tS": 0
 		},
-	"\/options.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/options.php",
-		"oF": 0
-		},
-	"\/page-calendar.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/page-calendar.php",
-		"oF": 0
-		},
 	"\/page-elementor.php": {
 		"cB": 0,
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/page-elementor.php",
-		"oF": 0
-		},
-	"\/page-home.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/page-home.php",
-		"oF": 0
-		},
-	"\/page-summary.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/page-summary.php",
-		"oF": 0
-		},
-	"\/page-team.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/page-team.php",
-		"oF": 0
-		},
-	"\/page-tv.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/page-tv.php",
-		"oF": 0
-		},
-	"\/page-tv_selection.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/page-tv_selection.php",
-		"oF": 0
-		},
-	"\/page-weekend.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/page-weekend.php",
 		"oF": 0
 		},
 	"\/page.php": {
@@ -3586,6 +3354,153 @@
 		"ft": 8192,
 		"oA": 2,
 		"oAP": "\/scss\/.sass-cache\/5d2ac9a37c980aa2651256cf71ae1a559aee4c9c\/style.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/blog.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/blog.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/calendar.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/calendar.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/category_filter.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/category_filter.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/content.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/content.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/elementor.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/elementor.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/event.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/event.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/events.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/events.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/footer.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/footer.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/header.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/header.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/homepage.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/homepage.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/sub_nav.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/sub_nav.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/summary.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/summary.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/team.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/team.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/tmp_default.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/tmp_default.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/weekend.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/6261f1108373a8ce82c3680e6d1ddcfd121154b3\/weekend.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/656658491d77facfef926338c00f05657a9d5ae1\/base.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/656658491d77facfef926338c00f05657a9d5ae1\/base.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/656658491d77facfef926338c00f05657a9d5ae1\/header.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/656658491d77facfef926338c00f05657a9d5ae1\/header.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/656658491d77facfef926338c00f05657a9d5ae1\/page.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/656658491d77facfef926338c00f05657a9d5ae1\/page.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/656658491d77facfef926338c00f05657a9d5ae1\/talk.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/656658491d77facfef926338c00f05657a9d5ae1\/talk.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/656658491d77facfef926338c00f05657a9d5ae1\/talk_list.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/656658491d77facfef926338c00f05657a9d5ae1\/talk_list.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/656658491d77facfef926338c00f05657a9d5ae1\/tv.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/656658491d77facfef926338c00f05657a9d5ae1\/tv.scssc",
 		"oF": 0
 		},
 	"\/scss\/.sass-cache\/80509735523dc04b22d4df3d925f2e8b029f9950\/_admin.scssc": {
@@ -3770,6 +3685,13 @@
 		"oAP": "\/scss\/.sass-cache\/9b79a7c401b767d340130330b9c09707a7d97346\/style.scssc",
 		"oF": 0
 		},
+	"\/scss\/.sass-cache\/b86c34dac924a1c3f2bb0c602c9fa91d93c86310\/style.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/scss\/.sass-cache\/b86c34dac924a1c3f2bb0c602c9fa91d93c86310\/style.scssc",
+		"oF": 0
+		},
 	"\/scss\/.sass-cache\/be572fa12770979464d0839fc375968a7ffd17c4\/content.scssc": {
 		"cB": 0,
 		"ft": 8192,
@@ -3819,6 +3741,48 @@
 		"oAP": "\/scss\/.sass-cache\/be572fa12770979464d0839fc375968a7ffd17c4\/subnav.scssc",
 		"oF": 0
 		},
+	"\/scss\/.sass-cache\/f357c3846088f4170d50a205a6db0f4d8bdc6e83\/_color.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 1,
+		"oAP": "\/scss\/.sass-cache\/f357c3846088f4170d50a205a6db0f4d8bdc6e83\/_color.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/f357c3846088f4170d50a205a6db0f4d8bdc6e83\/_font.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 1,
+		"oAP": "\/scss\/.sass-cache\/f357c3846088f4170d50a205a6db0f4d8bdc6e83\/_font.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/f357c3846088f4170d50a205a6db0f4d8bdc6e83\/_functions.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 1,
+		"oAP": "\/scss\/.sass-cache\/f357c3846088f4170d50a205a6db0f4d8bdc6e83\/_functions.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/f357c3846088f4170d50a205a6db0f4d8bdc6e83\/_intro.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 1,
+		"oAP": "\/scss\/.sass-cache\/f357c3846088f4170d50a205a6db0f4d8bdc6e83\/_intro.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/f357c3846088f4170d50a205a6db0f4d8bdc6e83\/_reset.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 1,
+		"oAP": "\/scss\/.sass-cache\/f357c3846088f4170d50a205a6db0f4d8bdc6e83\/_reset.scssc",
+		"oF": 0
+		},
+	"\/scss\/.sass-cache\/f357c3846088f4170d50a205a6db0f4d8bdc6e83\/_tools.scssc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 1,
+		"oAP": "\/scss\/.sass-cache\/f357c3846088f4170d50a205a6db0f4d8bdc6e83\/_tools.scssc",
+		"oF": 0
+		},
 	"\/scss\/advanced\/.sass-cache\/be572fa12770979464d0839fc375968a7ffd17c4\/footer.scssc": {
 		"cB": 0,
 		"ft": 8192,
@@ -3842,32 +3806,6 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/scss\/blog.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/scss\/advanced\/calendar.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/calendar.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/scss\/advanced\/category_filter.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/category_filter.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
@@ -3898,32 +3836,6 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/advanced\/event.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/event.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/scss\/advanced\/events.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/events.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
 	"\/scss\/advanced\/footer.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -3950,7 +3862,7 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/advanced\/homepage.scss": {
+	"\/scss\/advanced\/ninja_form.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -3958,7 +3870,7 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "\/scss\/homepage.css",
+		"oAP": "\/scss\/ninja_form.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
@@ -3976,32 +3888,6 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/advanced\/summary.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/summary.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/scss\/advanced\/team.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/team.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
 	"\/scss\/advanced\/tmp_default.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -4011,19 +3897,6 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/scss\/tmp_default.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/scss\/advanced\/weekend.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/weekend.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
@@ -4119,7 +3992,7 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/style_v1_5.scss": {
+	"\/scss\/style-login.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -4127,88 +4000,33 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/style_v1_5.css",
+		"oAP": "\/style-login.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/style.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/style.css",
 		"oF": 2,
-		"oS": 3,
-		"uL": 1
-		},
-	"\/scss\/tv\/base.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/base.css",
-		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/tv\/header.scss": {
-		"aP": 0,
+	"\/style-login.css": {
+		"aP": 1,
 		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
+		"ft": 16,
 		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/header.css",
+		"oA": 0,
+		"oAP": "\/style-login-min.css",
 		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/scss\/tv\/page.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/page.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/scss\/tv\/talk.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/talk.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/scss\/tv\/talk_list.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/talk_list.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/scss\/tv\/tv.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/scss\/tv.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
+		"oS": 3
 		},
 	"\/style.css": {
 		"aP": 1,
@@ -4219,82 +4037,6 @@
 		"oAP": "\/style-min.css",
 		"oF": 0,
 		"oS": 3
-		},
-	"\/style_v1_4.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/style_v1_4-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"\/style_v1_5.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/style_v1_5-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"\/template-parts\/city\/city.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/city\/city.php",
-		"oF": 0
-		},
-	"\/template-parts\/city\/index.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/city\/index.php",
-		"oF": 0
-		},
-	"\/template-parts\/city\/item.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/city\/item.php",
-		"oF": 0
-		},
-	"\/template-parts\/city\/list.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/city\/list.php",
-		"oF": 0
-		},
-	"\/template-parts\/city\/none.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/city\/none.php",
-		"oF": 0
-		},
-	"\/template-parts\/city\/single.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/city\/single.php",
-		"oF": 0
-		},
-	"\/template-parts\/custom\/join.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/custom\/join.php",
-		"oF": 0
-		},
-	"\/template-parts\/custom\/share.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/custom\/share.php",
-		"oF": 0
 		},
 	"\/template-parts\/divers\/facebook_pixel.php": {
 		"cB": 0,
@@ -4316,174 +4058,6 @@
 		"oA": 2,
 		"oAP": "\/template-parts\/divers\/header_nav.php",
 		"oF": 0
-		},
-	"\/template-parts\/event\/event.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/event\/event.php",
-		"oF": 0
-		},
-	"\/template-parts\/event\/index.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/event\/index.php",
-		"oF": 0
-		},
-	"\/template-parts\/event\/item.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/event\/item.php",
-		"oF": 0
-		},
-	"\/template-parts\/event\/list.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/event\/list.php",
-		"oF": 0
-		},
-	"\/template-parts\/event\/list_old.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/event\/list_old.php",
-		"oF": 0
-		},
-	"\/template-parts\/event\/main_events.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/event\/main_events.php",
-		"oF": 0
-		},
-	"\/template-parts\/event\/none.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/event\/none.php",
-		"oF": 0
-		},
-	"\/template-parts\/event\/related_events.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/event\/related_events.php",
-		"oF": 0
-		},
-	"\/template-parts\/event\/single.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/event\/single.php",
-		"oF": 0
-		},
-	"\/template-parts\/people\/index.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/people\/index.php",
-		"oF": 0
-		},
-	"\/template-parts\/people\/item.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/people\/item.php",
-		"oF": 0
-		},
-	"\/template-parts\/people\/list.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/people\/list.php",
-		"oF": 0
-		},
-	"\/template-parts\/people\/none.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/people\/none.php",
-		"oF": 0
-		},
-	"\/template-parts\/people\/single.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/people\/single.php",
-		"oF": 0
-		},
-	"\/template-parts\/people\/speaker.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/people\/speaker.php",
-		"oF": 0
-		},
-	"\/template-parts\/talk\/index.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/talk\/index.php",
-		"oF": 0
-		},
-	"\/template-parts\/talk\/item.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/talk\/item.php",
-		"oF": 0
-		},
-	"\/template-parts\/talk\/list.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/talk\/list.php",
-		"oF": 0
-		},
-	"\/template-parts\/talk\/none.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/talk\/none.php",
-		"oF": 0
-		},
-	"\/template-parts\/talk\/single.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/talk\/single.php",
-		"oF": 0
-		},
-	"\/template-parts\/talk\/talk.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/talk\/talk.php",
-		"oF": 0
-		},
-	"\/template-parts\/talk\/talk_list.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/template-parts\/talk\/talk_list.php",
-		"oF": 0
-		},
-	"\/widgets\/complex-carousel.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/widgets\/complex-carousel.php",
-		"oF": 0
-		},
-	"\/widgets\/count_mailchimp.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/widgets\/count_mailchimp.php",
-		"oF": 0
 		}
 	},
 "hooks": [
@@ -4492,7 +4066,7 @@
 	},
 "projectAttributes": {
 	"creationDate": 508953428,
-	"displayValue": "Gospel Center 2018",
+	"displayValue": "GC 2018",
 	"displayValueWasSetByUser": 1,
 	"iconImageName": "meme-hart",
 	"iconImageWasSetByUser": 0

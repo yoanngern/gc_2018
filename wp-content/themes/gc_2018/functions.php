@@ -4,7 +4,7 @@
  *
  */
 function themeslug_enqueue_style() {
-	wp_enqueue_style( 'core', get_template_directory_uri() . '/style_v1_5.css', false );
+	wp_enqueue_style( 'core', get_template_directory_uri() . '/style.css', false, wp_get_theme()->get( 'Version' ) );
 }
 
 function themeslug_enqueue_script() {
@@ -15,9 +15,60 @@ function themeslug_enqueue_script() {
 add_action( 'wp_enqueue_scripts', 'themeslug_enqueue_style' );
 add_action( 'wp_enqueue_scripts', 'themeslug_enqueue_script' );
 
+add_filter( 'show_admin_bar', '__return_false' );
+
 require_once( __DIR__ . '/includes/gc_date.php' );
 
-require_once( __DIR__ . '/options.php' );
+add_action( 'acf/init', 'gc_acf_init' );
+
+function gc_acf_init() {
+
+	if ( function_exists( 'acf_add_options_page' ) ) {
+
+
+		/**
+		 * Gospel Center - Settings
+		 */
+		acf_add_options_sub_page( array(
+			'page_title'  => __( 'Gospel Center - Settings', 'my_text_domain' ),
+			'menu_title'  => __( 'Gospel Center', 'my_text_domain' ),
+			'parent_slug' => 'options-general.php',
+			'menu_slug'   => 'gc',
+			'capability'  => 'delete_pages',
+			'autoload'    => true,
+
+		) );
+
+	}
+
+}
+
+
+function apply_file_suffix( $path, $suffix = '@2x' ) {
+
+	$pathinfo = pathinfo( $path );
+
+	return $pathinfo['dirname'] . '/' . $pathinfo['filename'] . $suffix . '.' . $pathinfo['extension'];
+
+}
+
+/**
+ * @param $paths
+ *
+ * @return array
+ */
+function wpos3_hipdi_add_hidpi_file_paths( $paths ) {
+
+
+	foreach ( $paths as $path ) {
+
+		$paths[] = apply_file_suffix( $path );
+	}
+
+	return $paths;
+}
+
+add_filter( 'as3cf_attachment_file_paths', 'wpos3_hipdi_add_hidpi_file_paths' );
 
 
 global $blog_id;
@@ -26,34 +77,59 @@ $blog_gc_id = 1;
 $blog_tv_id = 4;
 
 
-if ( $blog_id == $blog_tv_id ) {
-
-	require_once( __DIR__ . '/includes/gc_talk.php' );
-
-	require_once( __DIR__ . '/includes/gc_people.php' );
-
-	require_once( __DIR__ . '/includes/gc_city.php' );
-
-}
-
-
-if ( ( $blog_id != $blog_gc_id ) && ( $blog_id != $blog_tv_id ) ) {
-	require_once( __DIR__ . '/includes/gc_service.php' );
-
-	require_once( __DIR__ . '/includes/gc_event.php' );
-
-	require_once( __DIR__ . '/includes/gc_location.php' );
-}
-
-
 function register_my_menu() {
 	register_nav_menu( 'principal', __( 'Menu principal', 'gc_2018' ) );
 	register_nav_menu( 'top', __( 'Menu header', 'gc_2018' ) );
-	register_nav_menu( 'admin', __( 'Menu admin', 'gc_2018' ) );
-	register_nav_menu( 'footer', __( 'Menu footer', 'gc_2018' ) );
 }
 
 add_action( 'init', 'register_my_menu' );
+
+/**
+ * Register our sidebars and widgetized areas.
+ *
+ */
+function my_widgets_init() {
+
+	register_sidebar( array(
+		'name'          => 'Left sidebar',
+		'id'            => 'left_sidebar',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2>',
+		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => 'Right sidebar',
+		'id'            => 'right_sidebar',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2>',
+		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => 'Right sidebar private',
+		'id'            => 'right_sidebar_private',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2>',
+		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => 'Right sidebar public',
+		'id'            => 'right_sidebar_public',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2>',
+		'after_title'   => '</h2>',
+	) );
+
+
+}
+
+add_action( 'widgets_init', 'my_widgets_init' );
 
 
 //add_action( 'acf/init', 'my_acf_init' );
@@ -208,11 +284,13 @@ function my_wp_nav_menu_objects_sub_menu( $sorted_menu_items, $args ) {
 	}
 }
 
+
 function get_field_or_parent( $field, $post, $taxonomy = 'category' ) {
 
 	if ( is_int( $post ) ) {
 		$post = get_post( $post );
 	}
+
 
 	$field_return = get_field( $field, $post );
 
@@ -222,33 +300,36 @@ function get_field_or_parent( $field, $post, $taxonomy = 'category' ) {
 
 		$categories = get_the_terms( $post->ID, $taxonomy );
 
-		foreach ( $categories as $category ) :
 
-			$field_return = get_field( $field, $category );
+		if ( $categories ) :
+			foreach ( $categories as $category ) :
 
+				$field_return = get_field( $field, $category );
 
-			if ( $field_return ) {
-				break;
-			}
-
-			while ( ! $field_return && $category->parent != null ) {
-
-				$current_cat      = get_term( $category->parent, $taxonomy );
-				$new_field_return = get_field( $field, $current_cat );
-
-				if ( $new_field_return ) {
-					$field_return = $new_field_return;
-				}
 
 				if ( $field_return ) {
 					break;
 				}
 
-				$category = $current_cat;
+				while ( ! $field_return && $category->parent != null ) {
 
-			}
+					$current_cat      = get_term( $category->parent, $taxonomy );
+					$new_field_return = get_field( $field, $current_cat );
 
-		endforeach;
+					if ( $new_field_return ) {
+						$field_return = $new_field_return;
+					}
+
+					if ( $field_return ) {
+						break;
+					}
+
+					$category = $current_cat;
+
+				}
+
+			endforeach;
+		endif;
 
 		return $field_return;
 
@@ -438,7 +519,9 @@ function get_last_talks( $city = null ) {
 		} else {
 
 			$item['image'] = get_field( 'picture', get_field( 'speaker', $talk ) );
+
 		}
+
 
 		$item['title']   = get_field( 'title', $talk );
 		$item['speaker'] = get_field( 'speaker', $talk );
@@ -453,6 +536,7 @@ function get_last_talks( $city = null ) {
 
 	// Switch back to the current blog
 	switch_to_blog( $original_blog_id );
+
 
 	return $items;
 }
@@ -501,84 +585,6 @@ function talks_acf_load_value( $field ) {
 
 // acf/load_value - filter for every field load
 add_filter( 'acf/load_field/name=home_talks', 'talks_acf_load_value', 10, 3 );
-
-function get_iframe_video( $iframe ) {
-
-	if ( $iframe == null ) {
-		return false;
-	}
-
-	// use preg_match to find iframe src
-	preg_match( '/src="(.+?)"/', $iframe, $matches );
-	$src = $matches[1];
-
-	$params = array(
-		'controls'       => 1,
-		'hd'             => 1,
-		'autohide'       => 1,
-		'rel'            => 0,
-		'showinfo'       => 0,
-		'color'          => 'e52639',
-		'title'          => 0,
-		'byline'         => 0,
-		'portrait'       => 0,
-		'data-show-text' => 0
-	);
-
-
-	$new_src = add_query_arg( $params, $src );
-
-	$video = str_replace( $src, $new_src, $iframe );
-
-	$attributes = 'frameborder="0"';
-
-	$iframe = str_replace( '></iframe>', ' ' . $attributes . 'class="video"></iframe>', $video );
-
-	return $iframe;
-
-
-}
-
-function get_iframe_audio( $iframe ) {
-
-	if ( $iframe == null ) {
-		return false;
-	}
-
-	// use preg_match to find iframe src
-	preg_match( '/src="(.+?)"/', $iframe, $matches );
-	$src = $matches[1];
-
-	$params = array(
-		'color'         => 'e52639',
-		'auto_play'     => false,
-		'hide_related'  => true,
-		'show_comments' => false,
-		'show_user'     => false,
-		'show_reposts'  => false,
-		'show_teaser'   => false,
-		'visual'        => true,
-	);
-
-	$height = '360px';
-	$width  = '640px';
-
-
-	$new_src = add_query_arg( $params, $src );
-
-	$audio = str_replace( $src, $new_src, $iframe );
-
-	$attributes = 'frameborder="no" scrolling="no"';
-
-	$iframe = str_replace( '></iframe>', ' ' . $attributes . 'class="audio" width="640px" height="360px"></iframe>', $audio );
-
-	$iframe = preg_replace( '/height="(.*?)"/i', 'height="' . $height . '"', $iframe );
-	$iframe = preg_replace( '/width="(.*?)"/i', 'width="' . $width . '"', $iframe );
-
-	return $iframe;
-
-
-}
 
 
 /**
@@ -633,7 +639,7 @@ function gc_team_load_value( $field ) {
 
 	$speakers = get_posts(
 		array(
-			'post_type' => 'gc_people',
+			'post_type'   => 'gc_people',
 			'numberposts' => 300,
 		)
 	);
@@ -659,3 +665,18 @@ function gc_team_load_value( $field ) {
 
 // acf/load_value - filter for every field load
 add_filter( 'acf/load_field/name=team_members', 'gc_team_load_value', 10, 3 );
+
+
+function my_login_logo() {
+
+	wp_enqueue_style( 'nublue-login',
+		get_template_directory_uri() . '/style-login.css',
+		false,
+		null,
+		'all' );
+	if ( ! has_action( 'login_enqueue_scripts', 'wp_print_styles' ) ) {
+		add_action( 'login_enqueue_scripts', 'wp_print_styles', 11 );
+	}
+}
+
+add_action( 'login_enqueue_scripts', 'my_login_logo' );

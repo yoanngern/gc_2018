@@ -303,6 +303,35 @@ body > header {
                 }
             }
         }
+
+        div.right-sidebar-private,
+        div.right-sidebar-public {
+            display: block;
+            margin-top: 0;
+
+            h2 {
+                display: none;
+            }
+
+            div {
+                margin-top: 0;
+            }
+
+            .textwidget {
+                padding-left: 30px;
+
+                a {
+                    color: $gray;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+
+        }
     }
 
     &.open_nav {

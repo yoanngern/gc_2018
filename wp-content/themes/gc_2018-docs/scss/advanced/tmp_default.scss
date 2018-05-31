@@ -1,0 +1,120 @@
+#gc_docs {
+
+    #content article.title {
+        padding-bottom: 300px;
+
+        .image {
+            filter: brightness(110%) saturate(1.2) contrast(95%);
+            background-position: center 25%;
+
+            /*
+            &::before {
+                @include gradient(rgba(lighten($red, 10), 0.75), rgba(lighten($red, 15), 0.75), rgba(darken($red, 15), 0.75));
+                filter: brightness(100%) saturate(1) contrast(100%);
+                content: " ";
+                display: block;
+                height: 100%;
+                position: absolute;
+                width: 100%;
+            }
+            */
+        }
+    }
+
+    #content div.platter {
+        margin: 0 auto;
+        top: inherit;
+        background: transparent;
+        display: flex;
+        max-width: 1300px;
+        padding: 80px 15px 40px;
+
+        #left-sidebar,
+        #right-sidebar {
+            width: 14%;
+            display: inline-block;
+            vertical-align: top;
+            padding: 30px 1.333%;
+
+            h4 {
+                font-family: $radikal-bold;
+                padding-bottom: 14px;
+
+                a {
+                    color: $black;
+                    text-decoration: none;
+                }
+            }
+
+            ul {
+                li {
+                    display: block;
+
+                    a {
+                        color: $gray-dark;
+                        text-decoration: none;
+                        margin: 5px 0;
+                        display: inline-block;
+                        line-height: 1.3em;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+
+                    }
+
+                    &.current-cat {
+                        & > a {
+                            font-family: $radikal-bold;
+                            color: $red
+                        }
+
+                        ul {
+                            display: block;
+                        }
+
+                        &.current-cat-parent {
+                            & > a {
+                                color: $black;
+                            }
+                        }
+                    }
+
+                    ul {
+                        margin-left: 8px;
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        article.content-page {
+            padding: 0 2.333%;
+            width: 62%;
+            vertical-align: top;
+            max-width: inherit;
+            margin: 0;
+            display: inline-block;
+
+            & > .content {
+                time {
+                    color: $gray;
+                    letter-spacing: 0.1em;
+                    font-family: $radikal-light;
+                }
+
+            }
+
+            h1 {
+                margin: 30px auto;
+            }
+
+        }
+    }
+
+    @media only screen and (max-width: 960px) {
+        #content article.title {
+            padding-bottom: 200px;
+        }
+    }
+}

@@ -1,0 +1,58 @@
+body#gc_docs {
+    div.docs {
+
+
+        .table {
+            display: table;
+            width: 100%;
+        }
+
+        .doc {
+            width: 30%;
+            display: inline-block;
+            margin: 0 3% 30px 0;
+            vertical-align: top;
+
+            .image {
+                display: block;
+                width: 100%;
+                height: 0;
+                padding-bottom: 56.2%;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-color: $red;
+            }
+
+            h2,
+            p {
+                margin: 0;
+            }
+
+            h2 {
+                font-size: 0.9em;
+                font-family: $radikal;
+                padding: 5px 0;
+                color: $gray;
+            }
+
+            p {
+
+            }
+
+            a {
+                display: inline-block;
+                position: relative;
+                height: auto;
+                width: 100%;
+
+            }
+        }
+    }
+
+    #right-sidebar {
+        #resources {
+            margin-top: 34px;
+        }
+    }
+}

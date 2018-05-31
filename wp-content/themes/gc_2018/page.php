@@ -61,9 +61,6 @@
     </div>
 
 
-    <?php require_once( __DIR__ . '/template-parts/event/related_events.php' ); ?>
-
-
 </section>
 
 

@@ -1,0 +1,42 @@
+#gc_docs {
+    & > header {
+        background-color: darken($gray-dark, 10);
+        top: 0;
+        left: inherit;
+        right: inherit;
+        bottom: inherit;
+        height: auto;
+        width: 100%;
+        padding: 0;
+
+        #simple_logo {
+            display: none;
+        }
+
+        #logo_mini,
+        div.top-nav {
+            position: relative;
+            display: inline-block;
+            margin: 0;
+            vertical-align: top;
+        }
+
+        #logo_mini {
+            margin: 10px 20px;
+
+            span {
+                padding: 5px 0 0 8px;
+            }
+        }
+
+        div.top-nav {
+            float: right;
+            margin-right: 80px;
+            margin-top: 5px;
+        }
+
+        #burger {
+            margin: 12px 20px 0 0;
+        }
+    }
+}

@@ -260,6 +260,14 @@
                 margin: 20px 0 30px;
                 color: $gray2;
                 text-align: justify;
+
+                strong {
+                    font-family: $corbel-bold;
+                }
+
+                em {
+                    font-family: $corbel-i;
+                }
             }
 
             a {
@@ -477,11 +485,11 @@
 
                 font-family: $radikal-bold;
                 font-size: 1em;
-                line-height: 2.5em;
+                line-height: 1.5em;
                 color: $black;
                 text-transform: uppercase;
                 letter-spacing: 0.13em;
-                margin: 20px 0 0;
+                margin: 35px 0 0;
 
             }
 

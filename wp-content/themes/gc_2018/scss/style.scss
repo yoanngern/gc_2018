@@ -1,0 +1,64 @@
+@import 'base/intro';
+@import "base/reset";
+@import "base/font";
+@import "base/color";
+@import "base/functions";
+@import "base/tools";
+@import "advanced/header";
+@import "advanced/footer";
+@import "advanced/content";
+@import "advanced/elementor";
+@import "advanced/tmp_default";
+@import "advanced/blog";
+@import "advanced/sub_nav";
+@import "advanced/ninja_form";
+
+body {
+    font-family: $radikal;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+    color: $black;
+    background-color: $white;
+
+    &.black {
+        background-color: $black;
+    }
+
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

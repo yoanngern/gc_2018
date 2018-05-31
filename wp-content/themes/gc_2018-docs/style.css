@@ -1,0 +1,205 @@
+/*
+Theme Name:     GC Docs 2018
+Theme URI:      http://gospel-center.org
+Author:         Yoann Gern
+Author URI:     http://gerny-media.ch
+Description:    Template for GC Docs 2018
+Template:       gc_2018
+Version:        0.1
+License:        GNU General Public License v2 or later
+License URI:    http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:    gc_2018-docs
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+@font-face {
+  font-family: 'Radikal-Light';
+  src: url("fonts/2B5662_0_0.eot");
+  src: url("fonts/2B5662_0_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_0_0.woff") format("woff"), url("fonts/2B5662_0_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Radikal-Black';
+  src: url("fonts/2B5662_1_0.eot");
+  src: url("fonts/2B5662_1_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_1_0.woff") format("woff"), url("fonts/2B5662_1_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Radikal-Bold';
+  src: url("fonts/2B5662_2_0.eot");
+  src: url("fonts/2B5662_2_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_2_0.woff") format("woff"), url("fonts/2B5662_2_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Radikal';
+  src: url("fonts/2B5662_3_0.eot");
+  src: url("fonts/2B5662_3_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_3_0.woff") format("woff"), url("fonts/2B5662_3_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Radikal-UltraThin';
+  src: url("fonts/2B5662_4_0.eot");
+  src: url("fonts/2B5662_4_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_4_0.woff") format("woff"), url("fonts/2B5662_4_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Corbel-BoldItalic';
+  src: url("fonts/34BBF4_0_0.eot");
+  src: url("fonts/34BBF4_0_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_0_0.woff2") format("woff2"), url("fonts/34BBF4_0_0.woff") format("woff"), url("fonts/34BBF4_0_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Corbel';
+  src: url("fonts/34BBF4_1_0.eot");
+  src: url("fonts/34BBF4_1_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_1_0.woff2") format("woff2"), url("fonts/34BBF4_1_0.woff") format("woff"), url("fonts/34BBF4_1_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Corbel-Bold';
+  src: url("fonts/34BBF4_2_0.eot");
+  src: url("fonts/34BBF4_2_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_2_0.woff2") format("woff2"), url("fonts/34BBF4_2_0.woff") format("woff"), url("fonts/34BBF4_2_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Corbel-Italic';
+  src: url("fonts/34BBF4_3_0.eot");
+  src: url("fonts/34BBF4_3_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_3_0.woff2") format("woff2"), url("fonts/34BBF4_3_0.woff") format("woff"), url("fonts/34BBF4_3_0.ttf") format("truetype"); }
+
+#gc_docs > header {
+  background-color: #3b3a3a;
+  top: 0;
+  left: inherit;
+  right: inherit;
+  bottom: inherit;
+  height: auto;
+  width: 100%;
+  padding: 0; }
+  #gc_docs > header #simple_logo {
+    display: none; }
+  #gc_docs > header #logo_mini,
+  #gc_docs > header div.top-nav {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    vertical-align: top; }
+  #gc_docs > header #logo_mini {
+    margin: 10px 20px; }
+    #gc_docs > header #logo_mini span {
+      padding: 5px 0 0 8px; }
+  #gc_docs > header div.top-nav {
+    float: right;
+    margin-right: 80px;
+    margin-top: 5px; }
+  #gc_docs > header #burger {
+    margin: 12px 20px 0 0; }
+
+#gc_docs #content article.title {
+  padding-bottom: 300px; }
+  #gc_docs #content article.title .image {
+    filter: brightness(110%) saturate(1.2) contrast(95%);
+    background-position: center 25%;
+    /*
+            &::before {
+                @include gradient(rgba(lighten($red, 10), 0.75), rgba(lighten($red, 15), 0.75), rgba(darken($red, 15), 0.75));
+                filter: brightness(100%) saturate(1) contrast(100%);
+                content: " ";
+                display: block;
+                height: 100%;
+                position: absolute;
+                width: 100%;
+            }
+            */ }
+
+#gc_docs #content div.platter {
+  margin: 0 auto;
+  top: inherit;
+  background: transparent;
+  display: flex;
+  max-width: 1300px;
+  padding: 80px 15px 40px; }
+  #gc_docs #content div.platter #left-sidebar,
+  #gc_docs #content div.platter #right-sidebar {
+    width: 14%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 30px 1.333%; }
+    #gc_docs #content div.platter #left-sidebar h4,
+    #gc_docs #content div.platter #right-sidebar h4 {
+      font-family: "Radikal-Bold", "Radikal", sans-serif;
+      padding-bottom: 14px; }
+      #gc_docs #content div.platter #left-sidebar h4 a,
+      #gc_docs #content div.platter #right-sidebar h4 a {
+        color: #333333;
+        text-decoration: none; }
+    #gc_docs #content div.platter #left-sidebar ul li,
+    #gc_docs #content div.platter #right-sidebar ul li {
+      display: block; }
+      #gc_docs #content div.platter #left-sidebar ul li a,
+      #gc_docs #content div.platter #right-sidebar ul li a {
+        color: #545454;
+        text-decoration: none;
+        margin: 5px 0;
+        display: inline-block;
+        line-height: 1.3em; }
+        #gc_docs #content div.platter #left-sidebar ul li a:hover,
+        #gc_docs #content div.platter #right-sidebar ul li a:hover {
+          text-decoration: underline; }
+      #gc_docs #content div.platter #left-sidebar ul li.current-cat > a,
+      #gc_docs #content div.platter #right-sidebar ul li.current-cat > a {
+        font-family: "Radikal-Bold", "Radikal", sans-serif;
+        color: #E52639; }
+      #gc_docs #content div.platter #left-sidebar ul li.current-cat ul,
+      #gc_docs #content div.platter #right-sidebar ul li.current-cat ul {
+        display: block; }
+      #gc_docs #content div.platter #left-sidebar ul li.current-cat.current-cat-parent > a,
+      #gc_docs #content div.platter #right-sidebar ul li.current-cat.current-cat-parent > a {
+        color: #333333; }
+      #gc_docs #content div.platter #left-sidebar ul li ul,
+      #gc_docs #content div.platter #right-sidebar ul li ul {
+        margin-left: 8px;
+        display: none; }
+  #gc_docs #content div.platter article.content-page {
+    padding: 0 2.333%;
+    width: 62%;
+    vertical-align: top;
+    max-width: inherit;
+    margin: 0;
+    display: inline-block; }
+    #gc_docs #content div.platter article.content-page > .content time {
+      color: #777777;
+      letter-spacing: 0.1em;
+      font-family: "Radikal-Light", "Radikal", sans-serif; }
+    #gc_docs #content div.platter article.content-page h1 {
+      margin: 30px auto; }
+
+@media only screen and (max-width: 960px) {
+  #gc_docs #content article.title {
+    padding-bottom: 200px; } }
+
+body#gc_docs div.docs .table {
+  display: table;
+  width: 100%; }
+
+body#gc_docs div.docs .doc {
+  width: 30%;
+  display: inline-block;
+  margin: 0 3% 30px 0;
+  vertical-align: top; }
+  body#gc_docs div.docs .doc .image {
+    display: block;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.2%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #E52639; }
+  body#gc_docs div.docs .doc h2,
+  body#gc_docs div.docs .doc p {
+    margin: 0; }
+  body#gc_docs div.docs .doc h2 {
+    font-size: 0.9em;
+    font-family: "Radikal", sans-serif;
+    padding: 5px 0;
+    color: #777777; }
+  body#gc_docs div.docs .doc a {
+    display: inline-block;
+    position: relative;
+    height: auto;
+    width: 100%; }
+
+body#gc_docs #right-sidebar #resources {
+  margin-top: 34px; }

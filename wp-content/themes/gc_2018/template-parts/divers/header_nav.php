@@ -1,20 +1,7 @@
 <header>
 
     <div>
-		<?php
 
-		if ( is_user_logged_in() ) : ?>
-
-            <div class="private-nav">
-
-				<?php
-				wp_nav_menu( array(
-					'theme_location' => 'admin'
-				) );
-				?>
-
-            </div>
-		<?php endif; ?>
 
 
 		<?php if ( get_field( 'logo_white', 'option' ) != null ): ?>
@@ -82,6 +69,26 @@
 			) );
 
 			?>
+
+	        <?php if ( is_active_sidebar( 'right_sidebar' ) ) : ?>
+                <div id="right-sidebar" class="right-sidebar widget-area">
+			        <?php dynamic_sidebar( 'right_sidebar' ); ?>
+                </div>
+	        <?php endif; ?>
+
+	        <?php if ( is_user_logged_in() && is_active_sidebar( 'right_sidebar_private' ) ) : ?>
+                <div id="right-sidebar-private" class="right-sidebar-private widget-area">
+			        <?php dynamic_sidebar( 'right_sidebar_private' ); ?>
+                </div>
+	        <?php endif; ?>
+
+	        <?php if ( !is_user_logged_in() && is_active_sidebar( 'right_sidebar_public' ) ) : ?>
+                <div id="right-sidebar-public" class="right-sidebar-public widget-area">
+			        <?php dynamic_sidebar( 'right_sidebar_public' ); ?>
+                </div>
+	        <?php endif; ?>
+
+
         </div>
     </div>
 

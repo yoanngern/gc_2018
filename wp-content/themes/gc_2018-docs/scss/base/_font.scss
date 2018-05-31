@@ -1,0 +1,86 @@
+@font-face {
+    font-family: 'Radikal-Light';
+    src: url('fonts/2B5662_0_0.eot');
+    src: url('fonts/2B5662_0_0.eot?#iefix') format('embedded-opentype'),
+    url('fonts/2B5662_0_0.woff') format('woff'),
+    url('fonts/2B5662_0_0.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Radikal-Black';
+    src: url('fonts/2B5662_1_0.eot');
+    src: url('fonts/2B5662_1_0.eot?#iefix') format('embedded-opentype'),
+    url('fonts/2B5662_1_0.woff') format('woff'),
+    url('fonts/2B5662_1_0.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Radikal-Bold';
+    src: url('fonts/2B5662_2_0.eot');
+    src: url('fonts/2B5662_2_0.eot?#iefix') format('embedded-opentype'),
+    url('fonts/2B5662_2_0.woff') format('woff'),
+    url('fonts/2B5662_2_0.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Radikal';
+    src: url('fonts/2B5662_3_0.eot');
+    src: url('fonts/2B5662_3_0.eot?#iefix') format('embedded-opentype'),
+    url('fonts/2B5662_3_0.woff') format('woff'),
+    url('fonts/2B5662_3_0.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Radikal-UltraThin';
+    src: url('fonts/2B5662_4_0.eot');
+    src: url('fonts/2B5662_4_0.eot?#iefix') format('embedded-opentype'),
+    url('fonts/2B5662_4_0.woff') format('woff'),
+    url('fonts/2B5662_4_0.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Corbel-BoldItalic';
+    src: url('fonts/34BBF4_0_0.eot');
+    src: url('fonts/34BBF4_0_0.eot?#iefix') format('embedded-opentype'),
+    url('fonts/34BBF4_0_0.woff2') format('woff2'),
+    url('fonts/34BBF4_0_0.woff') format('woff'),
+    url('fonts/34BBF4_0_0.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Corbel';
+    src: url('fonts/34BBF4_1_0.eot');
+    src: url('fonts/34BBF4_1_0.eot?#iefix') format('embedded-opentype'),
+    url('fonts/34BBF4_1_0.woff2') format('woff2'),
+    url('fonts/34BBF4_1_0.woff') format('woff'),
+    url('fonts/34BBF4_1_0.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Corbel-Bold';
+    src: url('fonts/34BBF4_2_0.eot');
+    src: url('fonts/34BBF4_2_0.eot?#iefix') format('embedded-opentype'),
+    url('fonts/34BBF4_2_0.woff2') format('woff2'),
+    url('fonts/34BBF4_2_0.woff') format('woff'),
+    url('fonts/34BBF4_2_0.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Corbel-Italic';
+    src: url('fonts/34BBF4_3_0.eot');
+    src: url('fonts/34BBF4_3_0.eot?#iefix') format('embedded-opentype'),
+    url('fonts/34BBF4_3_0.woff2') format('woff2'),
+    url('fonts/34BBF4_3_0.woff') format('woff'),
+    url('fonts/34BBF4_3_0.ttf') format('truetype');
+}
+
+$radikal: 'Radikal', sans-serif;
+$radikal-light: 'Radikal-Light', $radikal;
+$radikal-thin: 'Radikal-UltraThin', $radikal-light;
+$radikal-bold: 'Radikal-Bold', $radikal;
+$radikal-black: 'Radikal-Black', $radikal-bold;
+
+$corbel: 'Corbel', sans-serif;
+$corbel-i: 'Corbel-Italic', $corbel;
+$corbel-bold: 'Corbel-Bold', $corbel;
+$corbel-bold-i: 'Corbel-BoldItalic', $corbel-bold;
