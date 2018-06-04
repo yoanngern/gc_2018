@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  *
  */
@@ -48,7 +49,14 @@ function apply_file_suffix( $path, $suffix = '@2x' ) {
 
 	$pathinfo = pathinfo( $path );
 
-	return $pathinfo['dirname'] . '/' . $pathinfo['filename'] . $suffix . '.' . $pathinfo['extension'];
+	$new_path = $pathinfo['dirname'] . '/' . $pathinfo['filename'] . $suffix . '.' . $pathinfo['extension'];
+
+	if ( ! file_exists( $new_path ) ) {
+
+		return null;
+	}
+
+	return $new_path;
 
 }
 
@@ -62,7 +70,13 @@ function wpos3_hipdi_add_hidpi_file_paths( $paths ) {
 
 	foreach ( $paths as $path ) {
 
-		$paths[] = apply_file_suffix( $path );
+		$new_path = apply_file_suffix( $path );
+
+		if ( $new_path != null ) {
+			$paths[] = $new_path;
+        }
+
+
 	}
 
 	return $paths;
