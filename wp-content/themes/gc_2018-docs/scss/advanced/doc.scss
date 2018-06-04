@@ -1,7 +1,6 @@
 body#gc_docs {
     div.docs {
 
-
         .table {
             display: table;
             width: 100%;
@@ -53,6 +52,121 @@ body#gc_docs {
     #right-sidebar {
         #resources {
             margin-top: 34px;
+            overflow: hidden;
+
+            ul li {
+                display: flex !important;
+                margin: 8px 0 12px;
+
+
+                &:before {
+                    content: "";
+                    display: inline-block;
+                    height: 20px;
+                    width: 20px;
+                    margin-right: 5px;
+                    vertical-align: top;
+
+                    background-image: url("images/file_default.png");
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center;
+
+                }
+
+                &.jpg:before,
+                &.jpeg:before,
+                &.png:before,
+                &.gif:before,
+                &.ico:before,
+                &.psd:before,
+                &.bmp:before,
+                &.tif:before,
+                &.tiff:before {
+                    background-image: url("images/file_image.png");
+                }
+
+                &.mp4:before,
+                &.m4v:before,
+                &.mov:before,
+                &.wmv:before,
+                &.avi:before,
+                &.mpg:before,
+                &.ogv:before,
+                &.asf:before,
+                &.asx:before,
+                &.wm:before,
+                &.wmx:before,
+                &.divx:before,
+                &.flv:before,
+                &.qt:before,
+                &.mpe:before,
+                &.webm:before,
+                &.mkv:before {
+                    background-image: url("images/file_video.png");
+                }
+
+                &.mp3:before,
+                &.m4a:before,
+                &.ogg:before,
+                &.wav:before,
+                &.m4b:before,
+                &.ra:before,
+                &.ram:before,
+                &.mid:before,
+                &.midi:before,
+                &.wax:before,
+                &.mka:before {
+                    background-image: url("images/file_audio.png");
+                }
+
+                &.doc:before,
+                &.docx:before,
+                &.odt:before,
+                &.pages:before {
+                    background-image: url("images/file_doc.png");
+                }
+
+                &.txt:before,
+                &.asc:before,
+                &.c:before,
+                &.cc:before,
+                &.h:before {
+                    background-image: url("images/file_txt.png");
+                }
+
+                &.csv:before {
+                    background-image: url("images/file_csv.png");
+                }
+
+                &.tar:before,
+                &.zip:before,
+                &.gz:before,
+                &.gzip:before,
+                &.rar:before {
+                    background-image: url("images/file_zip.png");
+                }
+
+                &.xls:before,
+                &.xlsx:before,
+                &.ods:before,
+                &.numbers:before {
+                    background-image: url("images/file_xls.png");
+                }
+
+                &.pdf:before {
+                    background-image: url("images/file_pdf.png");
+                }
+
+                &.link:before {
+                    background-image: url("images/link.png");
+                }
+
+                a {
+                    width: 90%;
+                    vertical-align: top;
+                }
+            }
         }
     }
 }

@@ -23,6 +23,138 @@
 		"oAP": "\/header.php",
 		"oF": 0
 		},
+	"\/images\/file_audio.png": {
+		"ft": 32768,
+		"iS": 630,
+		"oA": 0,
+		"oAP": "\/images\/file_audio.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/file_code.png": {
+		"ft": 32768,
+		"iS": 646,
+		"oA": 0,
+		"oAP": "\/images\/file_code.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/file_csv.png": {
+		"ft": 32768,
+		"iS": 865,
+		"oA": 0,
+		"oAP": "\/images\/file_csv.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/file_default.png": {
+		"ft": 32768,
+		"iS": 366,
+		"oA": 0,
+		"oAP": "\/images\/file_default.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/file_doc.png": {
+		"ft": 32768,
+		"iS": 845,
+		"oA": 0,
+		"oAP": "\/images\/file_doc.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/file_image.png": {
+		"ft": 32768,
+		"iS": 752,
+		"oA": 0,
+		"oAP": "\/images\/file_image.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/file_pdf.png": {
+		"ft": 32768,
+		"iS": 709,
+		"oA": 0,
+		"oAP": "\/images\/file_pdf.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/file_txt.png": {
+		"ft": 32768,
+		"iS": 650,
+		"oA": 0,
+		"oAP": "\/images\/file_txt.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/file_video.png": {
+		"ft": 32768,
+		"iS": 665,
+		"oA": 0,
+		"oAP": "\/images\/file_video.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/file_xls.png": {
+		"ft": 32768,
+		"iS": 801,
+		"oA": 0,
+		"oAP": "\/images\/file_xls.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/file_zip.png": {
+		"ft": 32768,
+		"iS": 572,
+		"oA": 0,
+		"oAP": "\/images\/file_zip.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/link.png": {
+		"ft": 32768,
+		"iS": 494,
+		"oA": 0,
+		"oAP": "\/images\/link.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
 	"\/includes\/acf\/doc.php": {
 		"cB": 0,
 		"ft": 8192,
