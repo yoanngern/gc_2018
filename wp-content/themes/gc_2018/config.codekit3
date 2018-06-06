@@ -3141,6 +3141,16 @@
 		"sC": 1,
 		"tS": 0
 		},
+	"\/js\/vendor\/jquery.slides.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "\/js\/vendor\/jquery.slides.min.js",
+		"oF": 0,
+		"sC": 1,
+		"tS": 0
+		},
 	"\/js\/vendor\/jquery.slides.min.js": {
 		"ft": 64,
 		"ma": 0,

@@ -77,6 +77,9 @@
 
 	}
 
+	$slideshow = get_field( 'slideshow' );
+
+
 	?>
 
 
@@ -114,6 +117,9 @@
                             <time class="time"><?php echo $times; ?></time>
                         </div>
 						<?php echo $description; ?>
+
+	                   <?php print_buttons('link', $post); ?>
+
                     </div>
                     <div class="video">
 
@@ -135,6 +141,8 @@
                                href="https://twitter.com/intent/tweet?url=<?php echo urlencode( get_permalink() ) ?>&text=<?php echo $title . ' // ' . $dates ?>&original_referer=<?php echo urlencode( get_permalink() ) ?>">Twitter</a>
                         </div>
                     </div>
+
+
                 </main>
 
                 <aside>
@@ -170,7 +178,36 @@
                 </aside>
 
             </div>
+			<?php if ( $slideshow ): ?>
+                <section class="slideshow">
+                    <div id="slides_js" class="slidesjs">
+						<?php
 
+						foreach ( $slideshow as $slide ):
+
+							$image = $slide['sizes']['full_hd'];
+
+							echo "<img src='$image'>";
+
+						endforeach; ?>
+                    </div>
+                    <script>
+                        $(function () {
+                            $('#slides_js').slidesjs({
+                                width: 1280,
+                                height: 720,
+                                play: {
+                                    active: true,
+                                    auto: true,
+                                    interval: 4000,
+                                    swap: true,
+                                    pauseOnHover: true,
+                                }
+                            });
+                        });
+                    </script>
+                </section>
+			<?php endif; ?>
 
         </article>
 
@@ -182,7 +219,7 @@
 
 		$today = date( 'Y-m-d H:i:s' );
 
-		foreach ( get_the_terms( $_POST, 'gc_eventcategory' ) as $cat ) {
+		foreach ( get_the_terms( $post, 'gc_eventcategory' ) as $cat ) {
 			$categories[] = $cat->slug;
 		}
 

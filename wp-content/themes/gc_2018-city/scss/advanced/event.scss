@@ -49,6 +49,10 @@ body.single-gc_event {
                     max-width: 600px;
                 }
 
+                div.buttons a:first-of-type {
+                    margin-left: 0;
+                }
+
                 div.video {
                     width: 100%;
                     overflow: auto;
@@ -115,13 +119,90 @@ body.single-gc_event {
                 }
 
                 a.button {
-                    margin: 35px 0 40px;
+                    margin: 30px 0 40px;
                 }
 
                 a.direction {
                     margin: 20px 0;
                 }
 
+            }
+
+            section.slideshow {
+                margin: 50px 0 0;
+
+                div.slidesjs {
+                    position: relative;
+
+                    .slidesjs-navigation,
+                    .slidesjs-pagination {
+                        position: absolute;
+                        z-index: 100;
+                        bottom: 0;
+                        color: $white;
+                        margin: 0;
+
+                        a {
+                            color: $white;
+                        }
+
+                        &.slidesjs-previous {
+                            left: 0;
+                        }
+
+                        &.slidesjs-next {
+                          right: 0;
+                        }
+
+                        &.slidesjs-previous,
+                        &.slidesjs-next {
+                            text-indent: -9999px;
+                            height: 100%;
+                            width: 15%;
+                        }
+
+                        &.slidesjs-pagination {
+                            width: 100%;
+                            left: 0;
+                            text-align: center;
+                            z-index: 90;
+                            margin: 0 0 10px;
+
+
+                            li {
+                                display: inline-block;
+                                position: relative;
+                                width: 12px;
+                                height: 12px;
+                                padding: 3px 5px 0;
+
+
+                                &:before {
+                                    display: none;
+                                }
+
+                                a {
+                                    text-indent: -9999px;
+                                    position: absolute;
+                                    border: 1px solid $white;
+                                    width: 10px;
+                                    height: 10px;
+                                    @include border-radius(10px);
+                                    display: block;
+
+                                    &.active {
+                                        background-color: $white;
+                                    }
+                                }
+                            }
+                        }
+
+                        &.slidesjs-play,
+                        &.slidesjs-stop {
+                            display: none !important;
+                        }
+                    }
+                }
             }
         }
 
