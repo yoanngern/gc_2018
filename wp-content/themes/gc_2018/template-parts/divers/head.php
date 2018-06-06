@@ -113,19 +113,10 @@
         <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<?php endif; ?>
 
-
-    <script>
-
-    </script>
 	<?php wp_head(); ?>
 
 	<?php echo get_field( 'script', 'option' ) ?>
 
-
-    <script>
-
-
-    </script>
 
 	<?php get_template_part( 'template-parts/divers/facebook_pixel' ); ?>
 
