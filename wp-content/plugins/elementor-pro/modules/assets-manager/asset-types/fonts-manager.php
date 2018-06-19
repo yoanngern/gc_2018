@@ -361,14 +361,11 @@ class Fonts_Manager {
 	 * @return array
 	 */
 	private function generate_fonts_list() {
-		add_filter( 'posts_fields', [ $this, 'posts_fields' ] );
 
 		$fonts = new \WP_Query([
 			'post_type' => self::CPT,
 			'posts_per_page' => -1,
 		]);
-
-		remove_filter( 'posts_fields', [ $this, 'posts_fields' ] );
 
 		$new_fonts = [];
 		$font_types = [];
@@ -454,17 +451,6 @@ class Fonts_Manager {
 		$fonts = get_option( self::FONTS_OPTION_NAME, false );
 
 		return $fonts;
-	}
-
-	/**
-	 * Filter posts fields to return just ID and title
-	 * @param $sql
-	 *
-	 * @return string
-	 */
-	public function posts_fields( $sql ) {
-		global $wpdb;
-		return $wpdb->posts . '.ID, ' . $wpdb->posts . '.post_title';
 	}
 
 	/**

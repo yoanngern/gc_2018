@@ -323,7 +323,18 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
 
             // call job method with args
             try {
-                WP_CLI::line( sprintf( 'Processing job: %s %s', $job->data['method'], join(' ', $job->data['args'] ) ) );
+
+                // create string representation of job args
+                $job_method_args = '';
+                foreach( $job->data['args'] as $arg ) {
+                    if( is_scalar( $arg ) ) {
+                        $job_method_args = $job_method_args . $arg . ' ';
+                    } else if ( is_object( $arg ) && ! empty( $arg->ID ) ) {
+                        $job_method_args = $job_method_args . $arg->ID . ' ';
+                    }
+                }
+
+                WP_CLI::line( sprintf( 'Processing job: %s %s', $job->data['method'], $job_method_args ) );
                 $success = call_user_func_array( array( $worker, $job->data['method'] ), $job->data['args'] );
             } catch( Error $e ) {
                 $message = sprintf( 'Failed processing job. %s in %s:%d', $e->getMessage(), $e->getFile(), $e->getLine() );

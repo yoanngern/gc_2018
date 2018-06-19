@@ -51,6 +51,6 @@ class Archive_Title extends Widget_Heading {
 	}
 
 	protected function get_html_wrapper_class() {
-		return parent::get_html_wrapper_class() . ' elementor-widget-' . parent::get_name();
+		return parent::get_html_wrapper_class() . ' elementor-page-title elementor-widget-' . parent::get_name();
 	}
 }

@@ -776,7 +776,7 @@ class Post_Info extends Base {
 	protected function render_item_text( $item_data, $repeater_index ) {
 		$repeater_setting_key = $this->get_repeater_setting_key( 'text', 'icon_list', $repeater_index );
 
-		$this->add_render_attribute( $repeater_setting_key, 'class', ['elementor-icon-list-text', 'elementor-post-info__item', 'elementor-post-info__item--type-' . $item_data['type']] );
+		$this->add_render_attribute( $repeater_setting_key, 'class', [ 'elementor-icon-list-text', 'elementor-post-info__item', 'elementor-post-info__item--type-' . $item_data['type'] ] );
 		if ( ! empty( $item['terms_list'] ) ) {
 			$this->add_render_attribute( $repeater_setting_key, 'class', 'elementor-terms-list' );
 		}
@@ -786,19 +786,23 @@ class Post_Info extends Base {
 			<?php if ( ! empty( $item_data['text_prefix'] ) ) : ?>
 				<span class="elementor-post-info__item-prefix"><?php echo esc_html( $item_data['text_prefix'] ); ?></span>
 			<?php endif; ?>
-			<?php if ( ! empty( $item_data['terms_list'] ) ) : ?>
+			<?php
+			if ( ! empty( $item_data['terms_list'] ) ) :
+				$terms_list = [];
+				$item_class = 'elementor-post-info__terms-list-item';
+				?>
 				<span class="elementor-post-info__terms-list">
-				<?php foreach ( $item_data['terms_list'] as $term ) : ?>
-					<?php if ( ! empty( $term['url'] ) ) : ?>
-						<a href="<?php echo esc_attr( $term['url'] ); ?>" class="elementor-post-info__terms-list-item">
-							<?php echo esc_html( $term['text'] ); ?>
-						</a>
-					<?php else : ?>
-						<span class="elementor-post-info__terms-list-item">
-							<?php echo esc_html( $term['text'] ); ?>
-						</span>
-					<?php endif; ?>
-				<?php endforeach; ?>
+				<?php
+				foreach ( $item_data['terms_list'] as $term ) :
+					if ( ! empty( $term['url'] ) ) :
+						$terms_list[] = '<a href="' . esc_attr( $term['url'] ) . '" class="' . $item_class . '">' . esc_html( $term['text'] ) . '</a>';
+					else :
+						$terms_list[] = '<span class="' . $item_class . '">' . esc_html( $term['text'] ) . '</span>';
+					endif;
+				endforeach;
+
+				echo implode( ', ', $terms_list );
+				?>
 				</span>
 			<?php else : ?>
 				<?php echo esc_html( $item_data['text'] ); ?>

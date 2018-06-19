@@ -3,7 +3,7 @@
 Plugin Name: MailChimp for WordPress - Premium
 Plugin URI: https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp-pro&utm_campaign=plugins-page
 Description: Premium functionality to MailChimp for WordPress.
-Version: 4.4.1
+Version: 4.4.2
 Author: ibericode
 Author URI: https://ibericode.com/
 License: GPL v3
@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 defined( 'ABSPATH' ) or exit;
 
 // Define some useful constants
-define( 'MC4WP_PREMIUM_VERSION', '4.4.1' );
+define( 'MC4WP_PREMIUM_VERSION', '4.4.2' );
 define( 'MC4WP_PREMIUM_PLUGIN_FILE', __FILE__ );
 /**
  * Loads the various premium add-on plugins

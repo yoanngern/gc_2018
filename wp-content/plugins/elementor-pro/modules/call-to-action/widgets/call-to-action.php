@@ -554,30 +554,6 @@ class Call_To_Action extends Base_Widget {
 			]
 		);
 
-		$this->add_control(
-			'graphic_image_opacity',
-			[
-				'label' => __( 'Opacity', 'elementor-pro' ),
-				'type' => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 1,
-				],
-				'range' => [
-					'px' => [
-						'max' => 1,
-						'min' => 0.10,
-						'step' => 0.01,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-cta__image' => 'opacity: {{SIZE}};',
-				],
-				'condition' => [
-					'graphic_element' => 'image',
-				],
-			]
-		);
-
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
@@ -586,7 +562,6 @@ class Call_To_Action extends Base_Widget {
 				'condition' => [
 					'graphic_element' => 'image',
 				],
-				'separator' => 'before',
 			]
 		);
 

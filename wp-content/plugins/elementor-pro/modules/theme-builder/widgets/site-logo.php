@@ -67,6 +67,8 @@ class Site_Logo extends Widget_Image {
 				'recursive' => true,
 			]
 		);
+
+		$this->remove_control( 'caption' );
 	}
 
 	protected function get_html_wrapper_class() {

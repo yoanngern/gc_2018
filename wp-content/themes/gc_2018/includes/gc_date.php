@@ -271,8 +271,10 @@ function time_trans( $date ) {
  */
 function get_dates( $start, $end, $event_cat = array(), $service_cat = array(), $weekend = false ) {
 
+	$_event_cat   = $event_cat;
+	$_service_cat = $service_cat;
 
-	if ( $event_cat === false ) {
+	if ( $_event_cat === false ) {
 
 		$terms = get_terms( array(
 			'taxonomy' => 'gc_eventcategory',
@@ -280,13 +282,15 @@ function get_dates( $start, $end, $event_cat = array(), $service_cat = array(), 
 
 		foreach ( $terms as $term ) {
 
-			$event_cat[] = $term->slug;
+			$_event_cat[] = $term->slug;
 		}
 
 	}
 
 
-	if ( $service_cat === false) {
+	$special_query = '';
+
+	if ( $_service_cat === false ) {
 
 		$terms = get_terms( array(
 			'taxonomy' => 'gc_servicecategory',
@@ -294,11 +298,29 @@ function get_dates( $start, $end, $event_cat = array(), $service_cat = array(), 
 
 		foreach ( $terms as $term ) {
 
-			$service_cat[] = $term->slug;
+			$_service_cat[] = $term->slug;
+		}
+	} else {
+		$special_query = array(
+			'relation' => 'OR',
+			array(
+				'key'     => 'service_type',
+				'compare' => 'EXISTS',
+			)
+		);
+
+		foreach ( $service_cat as $cat ) {
+			$special_query[] = array(
+				'key'     => 'event_service_type',
+				'compare' => '=',
+				'value'   => get_term_by( 'slug', $cat, 'gc_servicecategory' )->term_id,
+			);
 		}
 	}
 
 	if ( $weekend ) {
+
+
 		$weekend_query = array(
 			'relation' => 'OR',
 			array(
@@ -315,7 +337,6 @@ function get_dates( $start, $end, $event_cat = array(), $service_cat = array(), 
 		$weekend_query = '';
 	}
 
-
 	$args = array(
 		'posts_per_page' => 50,
 		'orderby'        => 'meta_value',
@@ -326,13 +347,14 @@ function get_dates( $start, $end, $event_cat = array(), $service_cat = array(), 
 			array(
 				'taxonomy' => 'gc_eventcategory',
 				'field'    => 'slug',
-				'terms'    => $event_cat,
+				'terms'    => $_event_cat,
 			),
 			array(
 				'taxonomy' => 'gc_servicecategory',
 				'field'    => 'slug',
-				'terms'    => $service_cat,
+				'terms'    => $_service_cat,
 			),
+
 		),
 		'meta_query'     => array(
 			'relation' => 'AND',
@@ -341,6 +363,7 @@ function get_dates( $start, $end, $event_cat = array(), $service_cat = array(), 
 				'compare' => '>=',
 				'value'   => $start,
 			),
+			$special_query,
 			array(
 				'key'     => 'start',
 				'compare' => '<=',
@@ -351,7 +374,6 @@ function get_dates( $start, $end, $event_cat = array(), $service_cat = array(), 
 		),
 
 	);
-
 
 	// The Query
 	$query = new WP_Query( $args );

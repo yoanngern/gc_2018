@@ -192,7 +192,13 @@ section.weekend {
             width: 25%;
             display: inline-block;
             vertical-align: top;
-            cursor: pointer;
+
+
+            &.service {
+                cursor: pointer;
+            }
+
+
 
             &.current {
                 div.container {
@@ -233,6 +239,19 @@ section.weekend {
                 overflow: hidden;
                 color: $gray-dark;
                 border: 1px solid $gray6;
+                transition: all 170ms ease-in-out;
+
+                &:hover {
+                    box-shadow: rgba($gray5, 0.9) 2px 2px 5px 3px ;
+                    border-color: $gray5;
+                    transition: all 170ms ease-in-out;
+
+                    div.text p a {
+                        color: lighten($red, 17);
+                        text-decoration: none;
+
+                    }
+                }
 
                 div.header {
                     padding-bottom: 70%;
@@ -300,6 +319,19 @@ section.weekend {
                         margin: 20px 0 0;
                         font-size: 0.9em;
                         color: $gray2;
+
+                        a {
+                            color: $gray2;
+                            text-decoration: none;
+                            transition: all 130ms ease;
+
+
+                            &:hover {
+                                color: $red;
+                            }
+                        }
+
+
                     }
                 }
 

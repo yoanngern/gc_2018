@@ -214,6 +214,8 @@ class MC4WP_Ecommerce {
 
 		// remove meta on success
 		delete_post_meta( $order_id, self::META_KEY );
+		delete_transient('mc4wp_ecommerce_untracked_order_count');
+		delete_transient('mc4wp_ecommerce_order_count');
 
 		$this->touch();
 
@@ -254,6 +256,8 @@ class MC4WP_Ecommerce {
 			throw $e;
 		}
 
+		delete_transient('mc4wp_ecommerce_untracked_order_count');
+		delete_transient('mc4wp_ecommerce_order_count');
 		$this->touch( $order_id );
 		return true;
 	}
@@ -447,6 +451,8 @@ class MC4WP_Ecommerce {
 		delete_post_meta( $product_id, self::META_KEY );
 
 		$this->touch();
+		delete_transient('mc4wp_ecommerce_untracked_product_count');
+		delete_transient('mc4wp_ecommerce_product_count');
 
 		return $success;
 	}
@@ -479,6 +485,10 @@ class MC4WP_Ecommerce {
 		// get product id (with backwards compat for WooCommerce < 3.x)
 		$product_id = method_exists( $product, 'get_id' ) ? $product->get_id() : $product->id;
 		$this->touch( $product_id );
+
+		delete_transient('mc4wp_ecommerce_untracked_product_count');
+		delete_transient('mc4wp_ecommerce_product_count');
+		
 		return true;
 	}
 

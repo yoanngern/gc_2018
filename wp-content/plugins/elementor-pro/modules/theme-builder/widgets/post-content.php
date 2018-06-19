@@ -102,6 +102,11 @@ class Post_Content extends Widget_Base {
 
 		$post = get_post();
 
+		if ( post_password_required( $post->ID ) ) {
+			echo get_the_password_form( $post->ID );
+			return;
+		}
+
 		// Avoid recursion
 		if ( isset( $did_posts[ $post->ID ] ) ) {
 			return;

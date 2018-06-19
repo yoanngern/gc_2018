@@ -140,12 +140,18 @@ class MC4WP_Ecommerce_Worker {
 
     /**
      * @param string $cart_id
-     * @param WP_User|object $customer
+     * @param WP_User|object|int $customer
      * @param array $cart_contents
      *
      * @return bool
      */
     public function update_cart( $cart_id, $customer, $cart_contents = array() ) {
+
+        // turn $user_id into WP_User object
+        if( is_numeric( $customer ) ) {
+            $customer = get_userdata( $customer );
+        }
+
         try {
             $this->ecommerce->update_cart( $cart_id, $customer, $cart_contents );
         } catch( Exception $e ) {

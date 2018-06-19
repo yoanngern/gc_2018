@@ -2,6 +2,8 @@
 
 namespace MC4WP\Premium\AFTP;
 
+use Exception;
+
 class Plugin {
 
 	private $settings;
@@ -61,6 +63,14 @@ class Plugin {
 		foreach( $this->settings['append_to_posts'] as $form_id => $category ) {
 			// "0" corresponds to the "all categories" option
 			if( $category === "0" || has_category( $category ) ) {
+
+				// get form to make sure it still exists
+				try{
+					$form = mc4wp_get_form( $form_id );
+				} catch( Exception $e ) {
+					continue; // form was deleted
+				}
+
 				// add form shortcode to this post
 				$content .= "\n" . sprintf( ' [mc4wp_form id="%d"]', $form_id );
 

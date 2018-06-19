@@ -831,7 +831,7 @@ class Blockquote extends Widget_Base {
 						<cite <?php echo $this->get_render_attribute_string( 'author_name' ); ?>><?php echo $settings['author_name']; ?></cite>
 					<?php endif ?>
 					<?php if ( 'yes' === $settings['tweet_button'] ) : ?>
-						<a href="<?php echo $share_link; ?>" class="elementor-blockquote__tweet-button" target="_blank">
+						<a href="<?php echo esc_attr( $share_link ); ?>" class="elementor-blockquote__tweet-button" target="_blank">
 							<?php if ( 'text' !== $tweet_button_view ) : ?>
 								<i class="fa fa-twitter"></i>
 							<?php endif; ?>

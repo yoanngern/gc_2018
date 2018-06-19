@@ -4,6 +4,7 @@ namespace ElementorPro\Modules\DynamicTags\Tags;
 use Elementor\Controls_Manager;
 use Elementor\Core\DynamicTags\Tag;
 use ElementorPro\Modules\DynamicTags\Module;
+use ElementorPro\Classes\Utils;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -46,7 +47,7 @@ class Post_Terms extends Tag {
 		 */
 		$taxonomy_filter_args = apply_filters( 'elementor_pro/dynamic_tags/post_terms/taxonomy_args', $taxonomy_filter_args );
 
-		$taxonomies = get_taxonomies( $taxonomy_filter_args, 'objects' );
+		$taxonomies = Utils::get_taxonomies( $taxonomy_filter_args, 'objects' );
 
 		$options = [];
 

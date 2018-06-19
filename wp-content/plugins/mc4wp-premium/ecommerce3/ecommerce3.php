@@ -62,7 +62,7 @@ if ($settings['enable_object_tracking']) {
 
 	// setup cart observer (adds jobs to queue)
 	if ($settings['enable_cart_tracking']) {
-		$cart_observer = new MC4WP_Ecommerce_Cart_Observer(__FILE__, $mc4wp['ecommerce'], $mc4wp['ecommerce.queue']);
+		$cart_observer = new MC4WP_Ecommerce_Cart_Observer(__FILE__, $mc4wp['ecommerce'], $mc4wp['ecommerce.queue'], $mc4wp['ecommerce.transformer'] );
 		$cart_observer->hook();
 	}
 }

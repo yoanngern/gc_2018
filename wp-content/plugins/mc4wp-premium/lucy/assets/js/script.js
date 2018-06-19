@@ -1,4 +1,4 @@
-(function () { var require = undefined; var define = undefined; (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+(function () { var require = undefined; var define = undefined; (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
 var Lucy = require('./third-party/lucy.js');
@@ -208,14 +208,7 @@ Lucy.prototype.search = function (query) {
 
 module.exports = Lucy;
 
-},{"algoliasearch/lite":6,"mithril":29}],3:[function(require,module,exports){
-var toString = {}.toString;
-
-module.exports = Array.isArray || function (arr) {
-  return toString.call(arr) == '[object Array]';
-};
-
-},{}],4:[function(require,module,exports){
+},{"algoliasearch/lite":5,"mithril":30}],3:[function(require,module,exports){
 (function (process){
 module.exports = AlgoliaSearchCore;
 
@@ -241,8 +234,9 @@ var RESET_APP_DATA_TIMER =
  * @param {Object} [opts]
  * @param {number} [opts.timeout=2000] - The request timeout set in milliseconds,
  * another request will be issued after this timeout
- * @param {string} [opts.protocol='https:'] - The protocol used to query Algolia Search API.
- *                                        Set to 'http:' to force using http.
+ * @param {string} [opts.protocol='http:'] - The protocol used to query Algolia Search API.
+ *                                        Set to 'https:' to force using https.
+ *                                        Default to document.location.protocol in browsers
  * @param {Object|Array} [opts.hosts={
  *           read: [this.applicationID + '-dsn.algolia.net'].concat([
  *             this.applicationID + '-1.algolianet.com',
@@ -283,6 +277,7 @@ function AlgoliaSearchCore(applicationID, apiKey, opts) {
 
   opts = opts || {};
 
+  var protocol = opts.protocol || 'https:';
   this._timeouts = opts.timeouts || {
     connect: 1 * 1000, // 500ms connect is GPRS latency
     read: 2 * 1000,
@@ -294,14 +289,13 @@ function AlgoliaSearchCore(applicationID, apiKey, opts) {
     this._timeouts.connect = this._timeouts.read = this._timeouts.write = opts.timeout;
   }
 
-  var protocol = opts.protocol || 'https:';
   // while we advocate for colon-at-the-end values: 'http:' for `opts.protocol`
   // we also accept `http` and `https`. It's a common error.
   if (!/:$/.test(protocol)) {
     protocol = protocol + ':';
   }
 
-  if (protocol !== 'http:' && protocol !== 'https:') {
+  if (opts.protocol !== 'http:' && opts.protocol !== 'https:') {
     throw new errors.AlgoliaSearchError('protocol must be `http:` or `https:` (was `' + opts.protocol + '`)');
   }
 
@@ -313,8 +307,7 @@ function AlgoliaSearchCore(applicationID, apiKey, opts) {
     });
 
     // no hosts given, compute defaults
-    var mainSuffix = (opts.dsn === false ? '' : '-dsn') + '.algolia.net';
-    this.hosts.read = [this.applicationID + mainSuffix].concat(defaultHosts);
+    this.hosts.read = [this.applicationID + '-dsn.algolia.net'].concat(defaultHosts);
     this.hosts.write = [this.applicationID + '.algolia.net'].concat(defaultHosts);
   } else if (isArray(opts.hosts)) {
     // when passing custom hosts, we need to have a different host index if the number
@@ -829,70 +822,6 @@ AlgoliaSearchCore.prototype.search = function(queries, opts, callback) {
 };
 
 /**
-* Search for facet values
-* https://www.algolia.com/doc/rest-api/search#search-for-facet-values
-* This is the top-level API for SFFV.
-*
-* @param {object[]} queries An array of queries to run.
-* @param {string} queries[].indexName Index name, name of the index to search.
-* @param {object} queries[].params Query parameters.
-* @param {string} queries[].params.facetName Facet name, name of the attribute to search for values in.
-* Must be declared as a facet
-* @param {string} queries[].params.facetQuery Query for the facet search
-* @param {string} [queries[].params.*] Any search parameter of Algolia,
-* see https://www.algolia.com/doc/api-client/javascript/search#search-parameters
-* Pagination is not supported. The page and hitsPerPage parameters will be ignored.
-*/
-AlgoliaSearchCore.prototype.searchForFacetValues = function(queries) {
-  var isArray = require('isarray');
-  var map = require('./map.js');
-
-  var usage = 'Usage: client.searchForFacetValues([{indexName, params: {facetName, facetQuery, ...params}}, ...queries])'; // eslint-disable-line max-len
-
-  if (!isArray(queries)) {
-    throw new Error(usage);
-  }
-
-  var client = this;
-
-  return Promise.all(map(queries, function performQuery(query) {
-    if (
-      !query ||
-      query.indexName === undefined ||
-      query.params.facetName === undefined ||
-      query.params.facetQuery === undefined
-    ) {
-      throw new Error(usage);
-    }
-
-    var clone = require('./clone.js');
-    var omit = require('./omit.js');
-
-    var indexName = query.indexName;
-    var params = query.params;
-
-    var facetName = params.facetName;
-    var filteredParams = omit(clone(params), function(keyName) {
-      return keyName === 'facetName';
-    });
-    var searchParameters = client._getSearchParams(filteredParams, '');
-
-    return client._jsonRequest({
-      cache: client.cache,
-      method: 'POST',
-      url:
-        '/1/indexes/' +
-        encodeURIComponent(indexName) +
-        '/facets/' +
-        encodeURIComponent(facetName) +
-        '/query',
-      hostType: 'read',
-      body: {params: searchParameters}
-    });
-  }));
-};
-
-/**
  * Set the extra security tagFilters header
  * @param {string|array} tags The list of tags defining the current security filters
  */
@@ -1112,7 +1041,7 @@ function removeCredentials(headers) {
 }
 
 }).call(this,require('_process'))
-},{"./IndexCore.js":5,"./clone":11,"./clone.js":11,"./errors":14,"./exitPromise.js":15,"./map.js":16,"./omit.js":18,"./store.js":20,"_process":22,"debug":23,"foreach":26,"isarray":3}],5:[function(require,module,exports){
+},{"./IndexCore.js":4,"./clone":11,"./clone.js":11,"./errors":14,"./exitPromise.js":15,"./map.js":16,"./store.js":20,"_process":22,"debug":23,"foreach":26,"isarray":29}],4:[function(require,module,exports){
 var buildSearchMethod = require('./buildSearchMethod.js');
 var deprecate = require('./deprecate.js');
 var deprecatedMessage = require('./deprecatedMessage.js');
@@ -1497,7 +1426,7 @@ IndexCore.prototype.indexName = null;
 IndexCore.prototype.typeAheadArgs = null;
 IndexCore.prototype.typeAheadValueOption = null;
 
-},{"./buildSearchMethod.js":10,"./clone.js":11,"./deprecate.js":12,"./deprecatedMessage.js":13,"./map.js":16,"./merge.js":17,"./omit.js":18,"isarray":3}],6:[function(require,module,exports){
+},{"./buildSearchMethod.js":10,"./clone.js":11,"./deprecate.js":12,"./deprecatedMessage.js":13,"./map.js":16,"./merge.js":17,"./omit.js":18,"isarray":29}],5:[function(require,module,exports){
 'use strict';
 
 var AlgoliaSearchCore = require('../../AlgoliaSearchCore.js');
@@ -1505,7 +1434,7 @@ var createAlgoliasearch = require('../createAlgoliasearch.js');
 
 module.exports = createAlgoliasearch(AlgoliaSearchCore, '(lite) ');
 
-},{"../../AlgoliaSearchCore.js":4,"../createAlgoliasearch.js":7}],7:[function(require,module,exports){
+},{"../../AlgoliaSearchCore.js":3,"../createAlgoliasearch.js":6}],6:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1530,7 +1459,13 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
   function algoliasearch(applicationID, apiKey, opts) {
     var cloneDeep = require('../clone.js');
 
+    var getDocumentProtocol = require('./get-document-protocol');
+
     opts = cloneDeep(opts || {});
+
+    if (opts.protocol === undefined) {
+      opts.protocol = getDocumentProtocol();
+    }
 
     opts._ua = opts._ua || algoliasearch.ua;
 
@@ -1722,7 +1657,23 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
 };
 
 }).call(this,require('_process'))
-},{"../clone.js":11,"../errors":14,"../places.js":19,"../version.js":21,"./inline-headers":8,"./jsonp-request":9,"_process":22,"debug":23,"es6-promise":25,"global":27,"inherits":28}],8:[function(require,module,exports){
+},{"../clone.js":11,"../errors":14,"../places.js":19,"../version.js":21,"./get-document-protocol":7,"./inline-headers":8,"./jsonp-request":9,"_process":22,"debug":23,"es6-promise":25,"global":27,"inherits":28}],7:[function(require,module,exports){
+'use strict';
+
+module.exports = getDocumentProtocol;
+
+function getDocumentProtocol() {
+  var protocol = window.document.location.protocol;
+
+  // when in `file:` mode (local html file), default to `http:`
+  if (protocol !== 'http:' && protocol !== 'https:') {
+    protocol = 'http:';
+  }
+
+  return protocol;
+}
+
+},{}],8:[function(require,module,exports){
 'use strict';
 
 module.exports = inlineHeaders;
@@ -1739,7 +1690,7 @@ function inlineHeaders(url, headers) {
   return url + encode(headers);
 }
 
-},{"querystring-es3/encode":33}],9:[function(require,module,exports){
+},{"querystring-es3/encode":34}],9:[function(require,module,exports){
 'use strict';
 
 module.exports = jsonpRequest;
@@ -2103,7 +2054,7 @@ module.exports = function omit(obj, test) {
   return filtered;
 };
 
-},{"foreach":26,"object-keys":31}],19:[function(require,module,exports){
+},{"foreach":26,"object-keys":32}],19:[function(require,module,exports){
 module.exports = createPlacesClient;
 
 var buildSearchMethod = require('./buildSearchMethod.js');
@@ -2235,7 +2186,7 @@ function cleanup() {
 },{"debug":23}],21:[function(require,module,exports){
 'use strict';
 
-module.exports = '3.27.0';
+module.exports = '3.24.9';
 
 },{}],22:[function(require,module,exports){
 // shim for using process in browser
@@ -2816,7 +2767,7 @@ function coerce(val) {
   return val;
 }
 
-},{"ms":30}],25:[function(require,module,exports){
+},{"ms":31}],25:[function(require,module,exports){
 (function (process,global){
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
@@ -4066,6 +4017,13 @@ if (typeof Object.create === 'function') {
 }
 
 },{}],29:[function(require,module,exports){
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
+},{}],30:[function(require,module,exports){
 (function (global){
 ;(function() {
 "use strict"
@@ -5325,7 +5283,7 @@ if (typeof module !== "undefined") module["exports"] = m
 else window.m = m
 }());
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 /**
  * Helpers.
  */
@@ -5479,7 +5437,7 @@ function plural(ms, n, name) {
   return Math.ceil(ms / n) + ' ' + name + 's';
 }
 
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 // modified from https://github.com/es-shims/es5-shim
@@ -5621,7 +5579,7 @@ keysShim.shim = function shimObjectKeys() {
 
 module.exports = keysShim;
 
-},{"./isArguments":32}],32:[function(require,module,exports){
+},{"./isArguments":33}],33:[function(require,module,exports){
 'use strict';
 
 var toStr = Object.prototype.toString;
@@ -5640,7 +5598,7 @@ module.exports = function isArguments(value) {
 	return isArgs;
 };
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a

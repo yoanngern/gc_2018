@@ -232,7 +232,19 @@ class Conditions_Manager {
 		return $this->cache->regenerate();
 	}
 
+	/**
+	 * @deprecated 2.0.10
+	 *
+	 * @param $location
+	 *
+	 * @return array
+	 */
 	public function get_theme_templates_by_location( $location ) {
+		// TODO: _deprecated_function( __FUNCTION__, '2.0.10', 'get_location_templates' );
+		return $this->get_location_templates( $location );
+	}
+
+	public function get_location_templates( $location ) {
 		$conditions_priority = [];
 
 		$conditions_groups = $this->cache->get_by_location( $location );
@@ -244,6 +256,8 @@ class Conditions_Manager {
 		$excludes = [];
 
 		foreach ( $conditions_groups as $theme_template_id => $conditions ) {
+			$theme_template_id = apply_filters( 'elementor/theme/get_location_templates/template_id', $theme_template_id );
+
 			$post_status = get_post_status( $theme_template_id );
 
 			if ( 'publish' !== $post_status ) {
@@ -322,7 +336,7 @@ class Conditions_Manager {
 			];
 		}
 
-		$templates = $this->get_theme_templates_by_location( $location );
+		$templates = $this->get_location_templates( $location );
 
 		return $templates;
 	}

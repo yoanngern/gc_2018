@@ -238,6 +238,8 @@ class Module extends Module_Base {
 
 		if ( 'by_id' === $post_type ) {
 			$query_args['post_type'] = 'any';
+			$query_args['posts_per_page'] = -1;
+
 			$query_args['post__in']  = $settings[ $control_id . '_posts_ids' ];
 
 			if ( empty( $query_args['post__in'] ) ) {

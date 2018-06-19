@@ -218,8 +218,13 @@ class MC4WP_Ecommerce_Admin {
 			return;
 		}
 
-        $this->settings['store_id'] = '';
-        update_option( 'mc4wp_ecommerce', $this->settings );
+		delete_transient( 'mc4wp_ecommerce_untracked_order_count' );
+		delete_transient( 'mc4wp_ecommerce_order_count' );
+		delete_transient( 'mc4wp_ecommerce_untracked_product_count' );
+		delete_transient( 'mc4wp_ecommerce_product_count' );
+
+      $this->settings['store_id'] = '';
+      update_option( 'mc4wp_ecommerce', $this->settings );
 	}
 
 	/**

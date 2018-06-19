@@ -508,6 +508,8 @@ class MC4WP_Logger {
 
     public function gdpr_erase( $email_address, $page = 1 ) {
       $log_items = $this->find( array( 'email' => $email_address, 'limit' => 10000 ) );
+      $items_removed = false;
+      
       foreach( $log_items as $item ) {
          $this->delete_by_id( $item->ID );
          $items_removed = true;

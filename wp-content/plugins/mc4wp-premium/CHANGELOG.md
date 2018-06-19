@@ -1,6 +1,21 @@
 Changelog
 ==========
 
+#### 4.4.2 - June 11, 2018
+
+**Fixes**
+
+- E-commerce: WP CLI command error because user object can not be represented as string.
+- Append form: Catch exceptions in append form to posts feature.
+
+**Improvements**
+
+- E-commerce: Reset transient cache when resetting store.
+- E-commerce: Reset transient cache after adding/updating/deleting products and orders.
+- E-commerce: Failsafe against invalid session data for abandoned carts.
+- Email notifications: Format date in local format
+
+
 #### 4.4.1 - May 21, 2018
 
 **Fixes**

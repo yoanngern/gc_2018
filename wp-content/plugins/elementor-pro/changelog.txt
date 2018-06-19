@@ -1,5 +1,34 @@
 # Elementor Pro - by Elementor.com
 
+#### 2.0.11 - 2018-06-12
+* Fix: Theme Builder `author` archive condition ([#4593](https://github.com/pojome/elementor/issues/4593))
+* Fix: Respect password protected posts in Post Content widget
+* Fix: Custom Fonts redirect to post edit screen in edge cases.
+
+#### 2.0.10 - 2018-06-05
+* Tweak: Added `elementor/theme/get_location_templates/template_id` filter hook for multi-language plugins
+* Fix: Dynamic Post Terms missing taxonomies if the taxonomy is registered to more then one post types (#4386)
+* Fix: Fields shortcode missing after removing a field in Form widget
+* Deprecated: `get_theme_templates_by_location` is replaced by `get_location_templates`
+
+#### 2.0.9 - 2018-05-28
+* Fix: Compatibility for PHP version 5.4
+
+#### 2.0.8 - 2018-05-28
+* Tweak: Added Active state for Nav Menu dropdown
+* Tweak: Added style for "Nothing Found" Message for Archive Posts widget
+* Tweak: Removed caption control in Site Logo widget
+* Tweak: Added option to position currency symbol before/after In Price Table widget
+* Fix: Query control manual selection does not show more than 10 items ([#4479](https://github.com/pojome/elementor/issues/4479))
+* Fix: Styling glitch with terms list in Post Info widget ([#4342](https://github.com/pojome/elementor/issues/4342))
+* Fix: Sub terms missing in Query control in edge cases ([#4527](https://github.com/pojome/elementor/issues/4527))
+* Fix: Avoid rendering a template if it's not published
+* Fix: 404 Page style not working
+* Fix: Price Table button with hover animation not working in editor
+* Fix: Styling conflict in Call to Action widget
+* Fix: Global Widget tab translation
+* Fix: Adding parent wrapper class to Site Title widget
+
 #### 2.0.7 - 2018-05-16
 * Fix: Content not found on section when single is set to "All Singular"
 * Fix: Open 404 template library for 404 page
@@ -23,7 +52,7 @@
 * Fix: Creating a CPT with name like document-type breaks the editor ([#4203](https://github.com/pojome/elementor/issues/4203))
 * Fix: Added support for new version of reCAPTCHA
 * Fix: Added fallback for controls after `post_status`
-* Fix required field in forms widget
+* Fix: Required field in forms widget
 * Fix: Media Carousel in the Coverflow skin
 * Fix: 404 Page show wrong template in edge cases
 * Fix: Save the default menu in the Nav Menu widget

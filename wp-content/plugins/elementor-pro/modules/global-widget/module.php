@@ -136,14 +136,6 @@ class Module extends Module_Base {
 		return $default_value && ! $this->is_widget_template( $template_id );
 	}
 
-	public function get_template_label_by_type( $template_label, $template_type ) {
-		if ( 'widget' === $template_type ) {
-			$template_label = 'Global Widget';
-		}
-
-		return $template_label;
-	}
-
 	/**
 	 * Remove user edit capabilities.
 	 *
@@ -250,6 +242,5 @@ class Module extends Module_Base {
 		add_filter( 'user_has_cap', [ $this, 'remove_user_edit_cap' ], 10, 3 );
 
 		add_filter( 'elementor/template_library/is_template_supports_export', [ $this, 'is_template_supports_export' ], 10, 2 );
-		add_filter( 'elementor/template-library/get_template_label_by_type', [ $this, 'get_template_label_by_type' ], 10, 2 );
 	}
 }

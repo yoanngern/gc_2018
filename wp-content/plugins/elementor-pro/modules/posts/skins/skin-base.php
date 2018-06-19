@@ -345,7 +345,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .elementor-post' => 'padding-right: calc( {{SIZE}}{{UNIT}}/2 ); padding-left: calc( {{SIZE}}{{UNIT}}/2 );',
+					'{{WRAPPER}} .elementor-post,{{WRAPPER}} .elementor-posts-nothing-found' => 'padding-right: calc( {{SIZE}}{{UNIT}}/2 ); padding-left: calc( {{SIZE}}{{UNIT}}/2 );',
 					'{{WRAPPER}} .elementor-posts-container' => 'margin-left: calc( -{{SIZE}}{{UNIT}}/2 ); margin-right: calc( -{{SIZE}}{{UNIT}}/2 );',
 				],
 			]
@@ -724,9 +724,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			return;
 		}
 
-		add_filter( 'excerpt_more', [ $this, 'filter_excerpt_more' ], 20 );
-		add_filter( 'excerpt_length', [ $this, 'filter_excerpt_length' ], 20 );
-
 		$this->render_loop_header();
 
 		// It's the global `wp_query` it self. and the loop was started from the theme.
@@ -743,9 +740,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->render_loop_footer();
 
 		wp_reset_postdata();
-
-		remove_filter( 'excerpt_length', [ $this, 'filter_excerpt_length' ], 20 );
-		remove_filter( 'excerpt_more', [ $this, 'filter_excerpt_more' ], 20 );
 	}
 
 	public function filter_excerpt_length() {
@@ -803,11 +797,18 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		if ( ! $this->get_instance_value( 'show_excerpt' ) ) {
 			return;
 		}
+
+		add_filter( 'excerpt_more', [ $this, 'filter_excerpt_more' ], 20 );
+		add_filter( 'excerpt_length', [ $this, 'filter_excerpt_length' ], 20 );
+
 		?>
 		<div class="elementor-post__excerpt">
 			<?php the_excerpt(); ?>
 		</div>
 		<?php
+
+		remove_filter( 'excerpt_length', [ $this, 'filter_excerpt_length' ], 20 );
+		remove_filter( 'excerpt_more', [ $this, 'filter_excerpt_more' ], 20 );
 	}
 
 	protected function render_read_more() {

@@ -159,7 +159,7 @@ class MC4WP_Ecommerce_Object_Transformer {
 	 * @return array
 	 */
 	public function order(WC_Order $order) {
-	    $order_id = $order->get_id();
+	   $order_id = $order->get_id();
 		$order_number = $order->get_order_number();
 		$billing_email = $order->get_billing_email(); 
 

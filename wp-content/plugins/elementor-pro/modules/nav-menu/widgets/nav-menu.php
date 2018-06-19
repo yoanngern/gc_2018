@@ -715,7 +715,9 @@ class Nav_Menu extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .elementor-nav-menu--dropdown a:hover, {{WRAPPER}} .elementor-menu-toggle:hover' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .elementor-nav-menu--dropdown a:hover,
+					{{WRAPPER}} .elementor-nav-menu--dropdown a.elementor-item-active,
+					{{WRAPPER}} .elementor-menu-toggle:hover' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -728,7 +730,42 @@ class Nav_Menu extends Widget_Base {
 				'default' => '',
 				'selectors' => [
 					'{{WRAPPER}} .elementor-nav-menu--dropdown a:hover,
+					{{WRAPPER}} .elementor-nav-menu--dropdown a.elementor-item-active,
 					{{WRAPPER}} .elementor-nav-menu--dropdown a.highlighted' => 'background-color: {{VALUE}}',
+				],
+				'separator' => 'none',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tab_dropdown_item_active',
+			[
+				'label' => __( 'Active', 'elementor-pro' ),
+			]
+		);
+
+		$this->add_control(
+			'color_dropdown_item_active',
+			[
+				'label' => __( 'Text Color', 'elementor-pro' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .elementor-nav-menu--dropdown a.elementor-item-active' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'background_color_dropdown_item_active',
+			[
+				'label' => __( 'Background Color', 'elementor-pro' ),
+				'type' => Controls_Manager::COLOR,
+				'default' => '',
+				'selectors' => [
+					'{{WRAPPER}} .elementor-nav-menu--dropdown a.elementor-item-active' => 'background-color: {{VALUE}}',
 				],
 				'separator' => 'none',
 			]

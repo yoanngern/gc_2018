@@ -18,16 +18,22 @@ class MC4WP_Ecommerce_Cart_Observer {
 	private $ecommerce;
 
 	/**
+	* @var MC4WP_Transformer
+	*/
+	private $transformer;
+
+	/**
 	 * MC4WP_Ecommerce_Tracker constructor.
 	 *
 	 * @param string $plugin_file
 	 * @var MC4WP_Ecommerce $ecommerce
 	 * @param MC4WP_Queue $queue
 	 */
-	public function __construct( $plugin_file, MC4WP_Ecommerce $ecommerce, MC4WP_Queue $queue ) {
+	public function __construct( $plugin_file, MC4WP_Ecommerce $ecommerce, MC4WP_Queue $queue, MC4WP_Ecommerce_Object_Transformer $transformer ) {
 		$this->plugin_file = $plugin_file;
 		$this->ecommerce = $ecommerce;
 		$this->queue = $queue;
+		$this->transformer = $transformer;
 	}
 
 	/**
@@ -143,9 +149,14 @@ class MC4WP_Ecommerce_Cart_Observer {
 			exit;
 		}
 
+		// get cart, safely.
 		$wc_cart = WC()->cart;
+		if(!  $wc_cart instanceof WC_Cart ) {
+			return;
+		}
+
 		$cart_contents = method_exists( $wc_cart, 'get_cart_contents' ) ? $wc_cart->get_cart_contents() : $wc_cart->cart_contents;
-		$cart_id = $this->ecommerce->transformer->get_cart_id( $data->billing_email );
+		$cart_id = $this->transformer->get_cart_id( $data->billing_email );
 
 		// remove other pending updates from queue
 		$this->remove_pending_jobs( 'update_cart', $cart_id );
@@ -163,7 +174,7 @@ class MC4WP_Ecommerce_Cart_Observer {
 			&& $data->previous_billing_email !== $data->billing_email ) {
 
 			// get previous cart ID
-			$previous_cart_id = $this->ecommerce->transformer->get_cart_id( $data->previous_billing_email );
+			$previous_cart_id = $this->transformer->get_cart_id( $data->previous_billing_email );
 
 			// schedule cart deletion
 			$this->add_pending_job( 'delete_cart', array( $previous_cart_id ) );
@@ -178,7 +189,7 @@ class MC4WP_Ecommerce_Cart_Observer {
 	public function on_order_processed( $order_id ) {
 		$order = wc_get_order( $order_id );
 		$billing_email = method_exists( $order, 'get_billing_email' ) ? $order->get_billing_email() : $order->billing_email;
-		$cart_id = $this->ecommerce->transformer->get_cart_id( $billing_email );
+		$cart_id = $this->transformer->get_cart_id( $billing_email );
 
 		// remove updates from queue
 		$this->remove_pending_jobs( 'update_cart', $cart_id );
@@ -203,8 +214,13 @@ class MC4WP_Ecommerce_Cart_Observer {
 			return;
 		}
 
-		$cart_id = $this->ecommerce->transformer->get_cart_id( $email_address );
+		$cart_id = $this->transformer->get_cart_id( $email_address );
+
+		// sanity check, sometimes this returns null apparently?
 		$wc_cart = WC()->cart;
+		if(!  $wc_cart instanceof WC_Cart ) {
+			return;
+		}
 
 		// delete cart from MailChimp if it is now empty
 		if( $wc_cart->is_empty() ) {
@@ -222,7 +238,8 @@ class MC4WP_Ecommerce_Cart_Observer {
 
 		// schedule new update with latest data
 		$cart_contents = method_exists( $wc_cart, 'get_cart_contents' ) ? $wc_cart->get_cart_contents() : $wc_cart->cart_contents;
-		$this->add_pending_job( 'update_cart', array( $cart_id, $user, $cart_contents ) );
+
+		$this->add_pending_job( 'update_cart', array( $cart_id, $user->ID, $cart_contents ) );
 		$this->queue->save();
 	}
 

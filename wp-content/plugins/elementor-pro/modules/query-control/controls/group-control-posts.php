@@ -129,7 +129,10 @@ class Group_Control_Posts extends Group_Control_Base {
 			} else {
 				$taxonomy_args['type'] = Controls_Manager::SELECT2;
 
-				$terms = get_terms( $taxonomy );
+				$terms = get_terms( [
+					'taxonomy' => $taxonomy,
+					'hide_empty' => false,
+				] );
 
 				foreach ( $terms as $term ) {
 					$options[ $term->term_id ] = $term->name;

@@ -225,6 +225,8 @@ function post_save_cat_event( $term_id, $taxonomy ) {
 			update_field( 'events_show', get_field( 'events_page', $id ), $event->ID );
 		}
 
+		update_field( 'event_service_type', get_field( 'event_service_type', $id ), $event->ID );
+
 		//var_dump( $event );
 	}
 

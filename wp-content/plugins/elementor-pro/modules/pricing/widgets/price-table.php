@@ -495,6 +495,26 @@ class Price_Table extends Base_Widget {
 		);
 
 		$this->add_control(
+			'currency_position',
+			[
+				'label' => __( 'Position', 'elementor-pro' ),
+				'type' => Controls_Manager::CHOOSE,
+				'label_block' => false,
+				'default' => 'before',
+				'options' => [
+					'before' => [
+						'title' => __( 'Before', 'elementor-pro' ),
+						'icon' => 'eicon-h-align-left',
+					],
+					'after' => [
+						'title' => __( 'After', 'elementor-pro' ),
+						'icon' => 'eicon-h-align-right',
+					],
+				],
+			]
+		);
+
+		$this->add_control(
 			'currency_vertical_position',
 			[
 				'label' => __( 'Vertical Position', 'elementor-pro' ),
@@ -717,8 +737,8 @@ class Price_Table extends Base_Widget {
 				'type' => Controls_Manager::SELECT,
 				'label_block' => false,
 				'options' => [
-					'below' => 'Below',
-					'beside' => 'Beside',
+					'below' => __( 'Below', 'elementor-pro' ),
+					'beside' => __( 'Beside', 'elementor-pro' ),
 				],
 				'default' => 'below',
 				'condition' => [
@@ -1321,6 +1341,14 @@ class Price_Table extends Base_Widget {
 		$this->end_controls_section();
 	}
 
+	private function render_currency_symbol( $symbol, $location ) {
+		$currency_position = $this->get_settings( 'currency_position' );
+		$location_setting = ! empty( $currency_position ) ? $currency_position : 'before';
+		if ( ! empty( $symbol ) && $location === $location_setting ) {
+			echo '<span class="elementor-price-table__currency elementor-currency--' . $location . '">' . $symbol . '</span>';
+		}
+	}
+
 	private function get_currency_symbol( $symbol_name ) {
 		$symbols = [
 			'dollar' => '&#36;',
@@ -1415,9 +1443,7 @@ class Price_Table extends Base_Widget {
 				<?php if ( 'yes' === $settings['sale'] && ! empty( $settings['original_price'] ) ) : ?>
 					<div class="elementor-price-table__original-price elementor-typo-excluded"><?php echo $symbol . $settings['original_price']; ?></div>
 				<?php endif; ?>
-				<?php if ( ! empty( $symbol ) ) : ?>
-					<span class="elementor-price-table__currency"><?php echo $symbol; ?></span>
-				<?php endif; ?>
+				<?php $this->render_currency_symbol( $symbol, 'before' ); ?>
 				<?php if ( ! empty( $intpart ) || 0 <= $intpart ) : ?>
 					<span class="elementor-price-table__integer-part"><?php echo $intpart; ?></span>
 				<?php endif; ?>
@@ -1425,11 +1451,14 @@ class Price_Table extends Base_Widget {
 				<?php if ( '' !== $fraction || ( ! empty( $settings['period'] ) && 'beside' === $period_position ) ) : ?>
 					<div class="elementor-price-table__after-price">
 						<span class="elementor-price-table__fractional-part"><?php echo $fraction; ?></span>
+
 						<?php if ( ! empty( $settings['period'] ) && 'beside' === $period_position ) : ?>
 							<?php echo $period_element; ?>
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>
+
+				<?php $this->render_currency_symbol( $symbol, 'after' ); ?>
 
 				<?php if ( ! empty( $settings['period'] ) && 'below' === $period_position ) : ?>
 					<?php echo $period_element; ?>
@@ -1521,11 +1550,11 @@ class Price_Table extends Base_Widget {
 				}
 			}
 
+			var buttonClasses = 'elementor-price-table__button elementor-button elementor-size-' + settings.button_size;
+
 			if ( settings.button_hover_animation ) {
 				buttonClasses += ' elementor-animation-' + settings.button_hover_animation;
 			}
-
-		var buttonClasses = 'elementor-price-table__button elementor-button elementor-size-' + settings.button_size;
 
 		view.addRenderAttribute( 'heading', 'class', 'elementor-price-table__heading' );
 		view.addRenderAttribute( 'sub_heading', 'class', 'elementor-price-table__subheading' );
@@ -1567,8 +1596,8 @@ class Price_Table extends Base_Widget {
 					<div class="elementor-price-table__original-price elementor-typo-excluded">{{{ symbol + settings.original_price }}}</div>
 				<# } #>
 
-				<# if ( ! _.isEmpty( symbol ) ) { #>
-					<span class="elementor-price-table__currency">{{{ symbol }}}</span>
+				<# if ( ! _.isEmpty( symbol ) && ( 'before' == settings.currency_position || _.isEmpty( settings.currency_position ) ) ) { #>
+					<span class="elementor-price-table__currency elementor-currency--before">{{{ symbol }}}</span>
 				<# } #>
 				<# if ( intpart ) { #>
 					<span class="elementor-price-table__integer-part">{{{ intpart }}}</span>
@@ -1581,6 +1610,10 @@ class Price_Table extends Base_Widget {
 						{{{ periodElement }}}
 					<# } #>
 				</div>
+
+				<# if ( ! _.isEmpty( symbol ) && 'after' == settings.currency_position ) { #>
+				<span class="elementor-price-table__currency elementor-currency--after">{{{ symbol }}}</span>
+				<# } #>
 
 				<# if ( settings.period && 'below' === settings.period_position ) { #>
 					{{{ periodElement }}}

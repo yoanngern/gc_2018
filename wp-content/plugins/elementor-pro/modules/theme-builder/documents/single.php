@@ -72,13 +72,18 @@ class Single extends Theme_Page_Document {
 	protected function _register_controls() {
 		parent::_register_controls();
 
-		$latest_posts = get_posts( 'posts_per_page=1' );
+		$post_type = $this->get_main_meta( self::SUB_TYPE_META_KEY );
+
+		$latest_posts = get_posts( [
+			'posts_per_page' => 1,
+			'post_type' => $post_type,
+		] );
 
 		if ( ! empty( $latest_posts ) ) {
 			$this->update_control(
 				'preview_type',
 				[
-					'default' => 'single/post',
+					'default' => 'single/' . $post_type,
 				]
 			);
 

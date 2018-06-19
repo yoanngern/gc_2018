@@ -298,7 +298,9 @@
 
 		$end = date( "Y-m-d", strtotime( "+1 year", strtotime( 'today' ) ) ) . ' 23:59:59';
 
-		$services = get_dates( $start, $end, array(), array( $curr_cat ), false );
+		$dates = get_dates( $start, $end, false, array( $curr_cat ), true );
+
+		//var_dump($services);
 
 		global $wp;
 		$curr_url = home_url( $wp->request );
@@ -393,23 +395,50 @@
                 </ul>
             </div>
             <div class="content ">
-				<?php foreach ( $services as $service ):
+				<?php foreach ( $dates as $item ):
 
-
-					$title = get_field( 'title', $service );
+					$date = date_i18n( 'j M. Y', strtotime( get_field( 'start', $item ) ) );
+					$time = complex_time( get_field( 'start', $item ), get_field( 'end', $item ) );
+					$title = get_field( 'title', $item );
 
 					if ( ! $title ) {
-						$title = $service->post_title;
+						$title = $item->post_title;
 					}
 
+					if ( $item->post_type == 'gc_event' ) {
+						$class = 'event';
+						$url          = esc_url( get_permalink( $item ) );
+						$image        = get_field_or_parent( 'event_picture', $item, 'gc_eventcategory' );
+						$txt          = "<a target='_blank' href='$url'>En savoir plus</a>";
+						$location_obj = get_field_or_parent( 'location', $item, 'gc_eventcategory' );
+						$speakers = null;
 
-					$date     = date_i18n( 'j M. Y', strtotime( get_field( 'start', $service ) ) );
-					$time     = complex_time( get_field( 'start', $service ), get_field( 'end', $service ) );
-					$speakers = get_field( 'service_speaker', $service );
 
-					$txt = get_field_or_parent( 'description', $service, 'gc_servicecategory' );
+					} else {
+						$class = 'service';
+						$url          = '#service-' . $item->ID;
+						$location_obj = get_field_or_parent( 'location', $item, 'gc_servicecategory' );
+						$image        = get_field( 'service_picture', $item );
+						$txt          = get_field_or_parent( 'description', $item, 'gc_servicecategory' );
+						$location_obj = get_field_or_parent( 'location', $item, 'gc_servicecategory' );
+						$speakers     = get_field( 'service_speaker', $item );
 
-					$image = get_field( 'service_picture', $service );
+						$cat = get_the_terms( $item, 'gc_servicecategory' )[0];
+
+						if ( $curr_cat == $cat->slug ) {
+
+							$url = '#service-' . $date->ID;
+
+						} else {
+
+							$url = add_query_arg( array(
+								'category' => $cat->slug,
+								'service'  => $item->ID,
+							), $curr_url );
+
+						}
+
+					}
 
 
 					if ( ! $image ) {
@@ -418,15 +447,11 @@
 							$image = get_people( $speakers[0]['value'] )['picture'];
 						}
 
-
 						if ( ! $image ) {
-							$image = get_field_or_parent( 'service_picture', $service, 'gc_servicecategory' );
+							$image = get_field_or_parent( 'service_picture', $item, 'gc_servicecategory' );
 						}
 
 					}
-
-
-					$location_obj = get_field_or_parent( 'location', $service, 'gc_servicecategory' );
 
 					if ( $location_obj != null ) {
 						$location = get_the_title( $location_obj ) . "<br/>" . get_field( 'address', $location_obj ) . "<br/>" . get_field( 'zip_code', $location_obj ) . " " . get_field( 'city', $location_obj ) . "<br/>" . get_field( 'country', $location_obj );
@@ -436,7 +461,7 @@
 
 
 					?>
-                    <article class="service" id="service-<?php echo $service->ID; ?>">
+                    <article class="<?php echo $class; ?>" id="service-<?php echo $item->ID; ?>">
 
                         <div class="container">
                             <div class="header">

@@ -186,4 +186,46 @@ class Utils {
 			$authordata = get_userdata( $post->post_author );
 		}
 	}
+
+	/**
+	 * Used to overcome core bug when taxonomy is in more then one post type
+	 *
+	 * @see https://core.trac.wordpress.org/ticket/27918
+	 *
+	 * @global array $wp_taxonomies The registered taxonomies.
+	 *
+	 *
+	 * @param array $args
+	 * @param string $output
+	 * @param string $operator
+	 *
+	 * @return array
+	 */
+	public static function get_taxonomies( $args = [], $output = 'names', $operator = 'and' ) {
+		global $wp_taxonomies;
+
+		$field = ( 'names' === $output ) ? 'name' : false;
+
+		// Handle 'object_type' separately.
+		if ( isset( $args['object_type'] ) ) {
+			$object_type = (array) $args['object_type'];
+			unset( $args['object_type'] );
+		}
+
+		$taxonomies = wp_filter_object_list( $wp_taxonomies, $args, $operator );
+
+		if ( isset( $object_type ) ) {
+			foreach ( $taxonomies as $tax => $tax_data ) {
+				if ( ! array_intersect( $object_type, $tax_data->object_type ) ) {
+					unset( $taxonomies[ $tax ] );
+				}
+			}
+		}
+
+		if ( $field ) {
+			$taxonomies = wp_list_pluck( $taxonomies, $field );
+		}
+
+		return $taxonomies;
+	}
 }
