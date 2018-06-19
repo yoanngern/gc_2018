@@ -406,16 +406,16 @@
 					}
 
 					if ( $item->post_type == 'gc_event' ) {
-						$class = 'event';
+						$class        = 'event';
 						$url          = esc_url( get_permalink( $item ) );
 						$image        = get_field_or_parent( 'event_picture', $item, 'gc_eventcategory' );
-						$txt          = "<a target='_blank' href='$url'>En savoir plus</a>";
+						$txt          = "<a href='$url'>En savoir plus</a>";
 						$location_obj = get_field_or_parent( 'location', $item, 'gc_eventcategory' );
-						$speakers = null;
+						$speakers     = null;
 
 
 					} else {
-						$class = 'service';
+						$class        = 'service';
 						$url          = '#service-' . $item->ID;
 						$location_obj = get_field_or_parent( 'location', $item, 'gc_servicecategory' );
 						$image        = get_field( 'service_picture', $item );
@@ -481,7 +481,9 @@
                                 <time class="time"><?php echo $time; ?></time>
                                 <p><?php echo $txt; ?></p>
                             </div>
-                            <div class="location"><?php echo $location ?></div>
+							<?php if ( $location != null ): ?>
+                                <div class="location"><?php echo $location ?></div>
+							<?php endif; ?>
                         </div>
                     </article>
 				<?php endforeach; ?>
