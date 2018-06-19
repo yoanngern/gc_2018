@@ -291,6 +291,7 @@ section.weekend {
 
                 div.text {
                     padding: 20px 15px 0;
+                    margin-bottom: 20px;
 
                     h1 {
                         font-family: $radikal-bold;
@@ -330,17 +331,15 @@ section.weekend {
                                 color: $red;
                             }
                         }
-
-
                     }
                 }
 
                 div.location {
                     position: relative;
-                    padding-top: 31px;
+                    padding-top: 25px;
                     font-size: 0.8em;
                     color: $gray2;
-                    margin: 0 0 15px;
+                    margin: -15px 0 15px;
 
                     &::after {
 

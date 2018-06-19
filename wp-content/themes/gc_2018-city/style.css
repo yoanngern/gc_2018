@@ -899,7 +899,8 @@ section.weekend {
             z-index: 0;
             background-color: #979797; }
         #content section.program div.content article div.container div.text {
-          padding: 20px 15px 0; }
+          padding: 20px 15px 0;
+          margin-bottom: 20px; }
           #content section.program div.content article div.container div.text h1 {
             font-family: "Radikal-Bold", "Radikal", sans-serif;
             font-size: 1.2em;
@@ -927,10 +928,10 @@ section.weekend {
                 color: #E52639; }
         #content section.program div.content article div.container div.location {
           position: relative;
-          padding-top: 31px;
+          padding-top: 25px;
           font-size: 0.8em;
           color: #6E6E6E;
-          margin: 0 0 15px; }
+          margin: -15px 0 15px; }
           #content section.program div.content article div.container div.location::after {
             height: 1px;
             background-color: #d7d7d7;
