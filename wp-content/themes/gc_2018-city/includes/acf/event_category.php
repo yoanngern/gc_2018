@@ -110,7 +110,7 @@ if( function_exists('acf_add_local_field_group') ):
 				),
 				'taxonomy' => array(
 				),
-				'allow_null' => 0,
+				'allow_null' => 1,
 				'multiple' => 0,
 				'return_format' => 'object',
 				'ui' => 1,
@@ -191,7 +191,7 @@ if( function_exists('acf_add_local_field_group') ):
 				),
 				'taxonomy' => 'gc_servicecategory',
 				'field_type' => 'select',
-				'allow_null' => 0,
+				'allow_null' => 1,
 				'add_term' => 0,
 				'save_terms' => 0,
 				'load_terms' => 0,
