@@ -9,7 +9,6 @@ body > header {
         z-index: 1000;
         bottom: 0;
 
-
         #simple_logo {
             width: 160px;
             height: 70px;
@@ -397,7 +396,49 @@ body > header {
 
         }
 
+        @media only screen and (max-width: 670px) {
+            background-color: $white;
+            width: 100%;
+            height: 36px;
+            position: fixed;
+            bottom: inherit;
+            box-shadow: 1px 2px 4px rgba($black, 0.5);
+
+            & > div {
+                margin: 0 auto;
+            }
+
+            #burger {
+                display: inline-block;
+                position: relative;
+                top: inherit;
+                float: right;
+                margin: 9px 13px;
+                height: 18px;
+                width: 24px;
+
+                span {
+                    background-color: $black;
+
+                    &:nth-child(1) {
+                        top: 0;
+                    }
+
+                    &:nth-child(2),
+                    &:nth-child(3) {
+                        top: 8px;
+                    }
+
+                    &:nth-child(4) {
+                        top: 16px;
+
+                    }
+                }
+            }
+        }
+
         @media only screen and (max-width: 480px) {
+            /*
             #logo_mini {
                 margin: 13px 0 0 15px;
             }
@@ -405,11 +446,65 @@ body > header {
             #burger {
                 margin: 15px 15px 0 0;
             }
+            */
         }
 
-        @media only screen and (max-width: 400px) {
+        @media only screen and (max-width: 420px) {
             div.principal-nav {
                 max-width: inherit;
+
+                div > ul {
+                    padding: 5px 10px 20px;
+
+                    li {
+                        text-align: center;
+
+                        &.current-menu-item {
+                            & > a {
+                                padding: 2px;
+                                border-bottom: 3px solid $red;
+                                border-left: inherit;
+                            }
+                        }
+
+                        ul {
+                            li {
+                                padding: 5px 0;
+
+                                a {
+                                    padding: 2px;
+                                }
+
+                                &.current-menu-item {
+                                    & > a {
+                                        padding: 2px;
+                                        border-bottom: 3px solid $red;
+                                        border-left: inherit;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    & > li {
+
+                        &.current-menu-item {
+                            & > a {
+                                padding: 2px;
+                                border-bottom: 3px solid $red;
+                                border-left: inherit;
+                            }
+                        }
+
+                        &.current-menu-item.current-menu-ancestor {
+                            & > a {
+                                padding: 2px;
+                                border-bottom: inherit;
+                                border-left: inherit;
+                            }
+                        }
+                    }
+                }
             }
         }
 

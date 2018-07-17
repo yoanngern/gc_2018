@@ -349,14 +349,70 @@ body > header div.local {
       display: none; }
     body > header div.local #simple_logo {
       display: none; } }
+  @media only screen and (max-width: 670px) {
+    body > header div.local {
+      background-color: #FFFFFF;
+      width: 100%;
+      height: 36px;
+      position: fixed;
+      bottom: inherit;
+      box-shadow: 1px 2px 4px rgba(51, 51, 51, 0.5); }
+      body > header div.local > div {
+        margin: 0 auto; }
+      body > header div.local #burger {
+        display: inline-block;
+        position: relative;
+        top: inherit;
+        float: right;
+        margin: 9px 13px;
+        height: 18px;
+        width: 24px; }
+        body > header div.local #burger span {
+          background-color: #333333; }
+          body > header div.local #burger span:nth-child(1) {
+            top: 0; }
+          body > header div.local #burger span:nth-child(2), body > header div.local #burger span:nth-child(3) {
+            top: 8px; }
+          body > header div.local #burger span:nth-child(4) {
+            top: 16px; } }
   @media only screen and (max-width: 480px) {
-    body > header div.local #logo_mini {
-      margin: 13px 0 0 15px; }
-    body > header div.local #burger {
-      margin: 15px 15px 0 0; } }
-  @media only screen and (max-width: 400px) {
+    body > header div.local {
+      /*
+            #logo_mini {
+                margin: 13px 0 0 15px;
+            }
+
+            #burger {
+                margin: 15px 15px 0 0;
+            }
+            */ } }
+  @media only screen and (max-width: 420px) {
     body > header div.local div.principal-nav {
-      max-width: inherit; } }
+      max-width: inherit; }
+      body > header div.local div.principal-nav div > ul {
+        padding: 5px 10px 20px; }
+        body > header div.local div.principal-nav div > ul li {
+          text-align: center; }
+          body > header div.local div.principal-nav div > ul li.current-menu-item > a {
+            padding: 2px;
+            border-bottom: 3px solid #E52639;
+            border-left: inherit; }
+          body > header div.local div.principal-nav div > ul li ul li {
+            padding: 5px 0; }
+            body > header div.local div.principal-nav div > ul li ul li a {
+              padding: 2px; }
+            body > header div.local div.principal-nav div > ul li ul li.current-menu-item > a {
+              padding: 2px;
+              border-bottom: 3px solid #E52639;
+              border-left: inherit; }
+        body > header div.local div.principal-nav div > ul > li.current-menu-item > a {
+          padding: 2px;
+          border-bottom: 3px solid #E52639;
+          border-left: inherit; }
+        body > header div.local div.principal-nav div > ul > li.current-menu-item.current-menu-ancestor > a {
+          padding: 2px;
+          border-bottom: inherit;
+          border-left: inherit; } }
 
 body.tax-gc_eventcategory > header div.principal-nav div > ul li.menu-item-object-gc_event > a,
 body.single-gc_event > header div.principal-nav div > ul li.menu-item-object-gc_event > a {
@@ -437,6 +493,14 @@ body > header div.global {
     @media only screen and (max-width: 800px) {
       body > header div.global #global-tab {
         margin-left: -2px; } }
+    @media only screen and (max-width: 670px) {
+      body > header div.global #global-tab {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        background-color: transparent;
+        padding: 7px 13px; }
+        body > header div.global #global-tab:before {
+          box-shadow: none; } }
   body > header div.global div.global-nav {
     background-color: #FFFFFF;
     width: 100%;
@@ -489,7 +553,10 @@ body > header div.global {
               letter-spacing: 0.05em;
               line-height: 1.2em;
               padding-bottom: 8px;
-              display: block; }
+              display: block;
+              transition: all 100ms ease-in-out; }
+              body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li a:hover {
+                color: #E52639; }
             body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li ul {
               margin-left: 47px;
               break-inside: avoid-column;
@@ -558,7 +625,7 @@ body > header div.global {
             margin: 0; }
           body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li > a {
             display: inline-block;
-            padding-right: 20px; } }
+            padding-right: 47px; } }
   body > header div.global.open {
     transform: translate(0, 0); }
     body > header div.global.open .global-nav:before {

@@ -5,7 +5,7 @@ function gc_tv_theme_enqueue_styles() {
 
 	wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style_v2.css', false, wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style( 'gc_2018-tv-style',
-		get_stylesheet_directory_uri() . '/style.css',
+		get_stylesheet_directory_uri() . '/style_v2.css',
 		array( $parent_style ),
 		wp_get_theme()->get('Version')
 	);

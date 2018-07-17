@@ -21,7 +21,7 @@ body > header {
             left: 0;
             right: 0;
             z-index: -100;
-            box-shadow: 1px 3px 3px  rgba($black, 0.4);
+            box-shadow: 1px 3px 3px rgba($black, 0.4);
             transition: all 100ms ease-in-out 0s;
 
         }
@@ -40,7 +40,6 @@ body > header {
             text-decoration: none;
             position: absolute;
             z-index: 9999;
-
 
             &:before {
                 content: "";
@@ -93,6 +92,18 @@ body > header {
 
             @media only screen and (max-width: 800px) {
                 margin-left: -2px;
+            }
+
+            @media only screen and (max-width: 670px) {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                background-color: transparent;
+                padding: 7px 13px;
+
+                &:before {
+                    box-shadow: none;
+
+                }
             }
         }
 
@@ -166,6 +177,11 @@ body > header {
                                 line-height: 1.2em;
                                 padding-bottom: 8px;
                                 display: block;
+                                transition: all 100ms ease-in-out;
+
+                                &:hover {
+                                    color: $red;
+                                }
                             }
 
                             ul {
@@ -179,6 +195,7 @@ body > header {
                                     font-family: $radikal;
                                     font-size: 1em;
                                     padding-bottom: 10px;
+
                                 }
                             }
 
@@ -286,7 +303,7 @@ body > header {
 
                                 & > a {
                                     display: inline-block;
-                                    padding-right: 20px;
+                                    padding-right: 47px;
 
                                 }
                             }
