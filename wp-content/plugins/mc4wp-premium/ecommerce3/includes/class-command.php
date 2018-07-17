@@ -115,18 +115,18 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
         $delay = empty( $assoc_args['delay'] ) ? 0 : (int) $assoc_args['delay'] * 1000;
 
 		$helper = new MC4WP_Ecommerce_Helper();
-		$ids = $helper->get_untracked_order_ids();
+        $ids = array_diff( $helper->get_order_ids(), $helper->get_tracked_order_ids() );
         $ids = array_slice( $ids, $offset, $limit );
 		$count = count( $ids );
 
-		WP_CLI::line( sprintf( "%d orders found.", $count ) );
+		WP_CLI::log( sprintf( "%d orders found.", $count ) );
 
         foreach( $ids as $id ) {
             $this->add_order( array( $id ) );
             usleep( $delay );
         }
 
-        WP_CLI::line( 'Done!' );
+        WP_CLI::success( 'Done!' );
 	}
 
     /**
@@ -145,13 +145,13 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
         $helper = new MC4WP_Ecommerce_Helper();
         $ids = $helper->get_tracked_order_ids();
 
-        WP_CLI::line( sprintf( '%d orders found.', count( $ids ) ) );
+        WP_CLI::log( sprintf( '%d orders found.', count( $ids ) ) );
 
         foreach( $ids as $order_id ) {
             $this->delete_order( array( $order_id ) );
         }
 
-        WP_CLI::line( 'Done!' );
+        WP_CLI::log( 'Done!' );
     }
 
     /**
@@ -185,17 +185,17 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
         $delay = empty( $assoc_args['delay'] ) ? 0 : (int) $assoc_args['delay'] * 1000;
 
         $helper = new MC4WP_Ecommerce_Helper();
-        $ids = $helper->get_untracked_product_ids();
+        $ids = array_diff( $helper->get_product_ids(), $helper->get_tracked_product_ids() );
         $ids = array_slice( $ids, $offset, $limit );
 
-        WP_CLI::line( sprintf( '%d products found.', count( $ids ) ) );
+        WP_CLI::log( sprintf( '%d products found.', count( $ids ) ) );
 
         foreach( $ids as $product_id ) {
             $this->add_product( array( $product_id ) );
             usleep( $delay );
         }
 
-        WP_CLI::line( 'Done!' );
+        WP_CLI::log( 'Done!' );
 	}
 
 	/**
@@ -214,13 +214,13 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
 		$helper = new MC4WP_Ecommerce_Helper();
 		$ids = $helper->get_tracked_product_ids();
 
-        WP_CLI::line( sprintf( '%d products found.', count( $ids ) ) );
+        WP_CLI::log( sprintf( '%d products found.', count( $ids ) ) );
 
 		foreach( $ids as $product_id ) {
             $this->delete_product( array( $product_id ) );
 		}
 
-        WP_CLI::line( 'Done!' );
+        WP_CLI::log( 'Done!' );
 	}
 
     /**
@@ -311,7 +311,7 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
         $queue = mc4wp('ecommerce.queue');
         $worker = mc4wp('ecommerce.worker');
         $count = count( $queue->all() );
-        WP_CLI::line( sprintf( '%d pending jobs in queue.', $count ) );
+        WP_CLI::log( sprintf( '%d pending jobs in queue.', $count ) );
 
         while( ( $job = $queue->get() ) ) {
 
@@ -334,7 +334,7 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
                     }
                 }
 
-                WP_CLI::line( sprintf( 'Processing job: %s %s', $job->data['method'], $job_method_args ) );
+                WP_CLI::log( sprintf( 'Processing job: %s %s', $job->data['method'], $job_method_args ) );
                 $success = call_user_func_array( array( $worker, $job->data['method'] ), $job->data['args'] );
             } catch( Error $e ) {
                 $message = sprintf( 'Failed processing job. %s in %s:%d', $e->getMessage(), $e->getFile(), $e->getLine() );
@@ -349,6 +349,45 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
             usleep( $delay );
         }
 
+
+        WP_CLI::success( 'Done!' );
+    }
+
+    /**
+     * Synchronises all coupons with MailChimp.
+     * @param $args
+     * @param $assoc_args
+     *
+     * ## EXAMPLES
+     *
+     *     wp mc4wp-ecommerce sync-coupons
+     *
+     * @subcommand sync-coupons
+     */
+    public function sync_coupons( $args, $assoc_args = array() ) {
+        $coupons = get_posts( array( 
+            'post_type' => 'shop_coupon', 
+            'post_status' => 'any',
+            'numberposts' => -1 
+        ) );
+
+        $count = count( $coupons );
+        WP_CLI::log( sprintf( 'Found %d coupons', $count ) );
+
+        foreach( $coupons as $c ) {
+
+            try{
+                if( $c->post_status == 'publish' ) {
+                    WP_CLI::log( sprintf( 'Adding or updating coupon "%s" #%d', $c->post_title, $c->ID ) );
+                    $this->ecommerce->update_promo( $c->ID );
+                } else {
+                    WP_CLI::log( sprintf( 'Deleting coupon "%s" #%d', $c->post_title, $c->ID ) );
+                    $this->ecommerce->delete_promo( $c->ID );
+                }
+            } catch( MC4WP_API_Exception $e ) {
+                WP_CLI::error( sprintf( 'API Error: %s', $e ) );
+            }
+        }
 
         WP_CLI::success( 'Done!' );
     }
@@ -369,7 +408,7 @@ class MC4WP_Ecommerce_Command extends WP_CLI_Command  {
         /** @var MC4WP_Queue $queue */
         $queue = mc4wp('ecommerce.queue');
         $count = count( $queue->all() );
-        WP_CLI::line( sprintf( 'Deleting %d pending jobs in queue.', $count ) );
+        WP_CLI::log( sprintf( 'Deleting %d pending jobs in queue.', $count ) );
         $queue->reset();
         $queue->save();        
         WP_CLI::success( 'Done!' );

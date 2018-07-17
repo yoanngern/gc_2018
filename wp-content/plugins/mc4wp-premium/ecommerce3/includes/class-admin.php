@@ -45,6 +45,18 @@ class MC4WP_Ecommerce_Admin {
 		add_action( 'mc4wp_admin_save_ecommerce_settings', array( $this, 'save_settings' ) );
 		add_action( 'mc4wp_admin_ecommerce_reset', array( $this, 'reset_data' ) );
 		add_action( 'mc4wp_admin_ecommerce_rollback_to_v2', array( $this, 'rollback_to_v2' ) );
+
+
+		// if connected to a list, add bulk actions for products, orders & coupons
+		if( ! empty( $this->settings['store']['list_id'] ) && $this->settings['enable_object_tracking'] ) {
+			$post_types = array( 'shop_order', 'product', 'shop_coupon' );
+			foreach( $post_types as $post_type ) {
+				add_filter( 'bulk_actions-edit-' . $post_type, array( $this, 'bulk_action_add') );
+				add_filter( 'handle_bulk_actions-edit-' . $post_type, array( $this, 'bulk_action_handle' ), 10, 3 );
+			}
+			add_action( 'admin_notices', array( $this, 'bulk_action_admin_notice' ) );
+		}
+		
 	}
 
 	/**
@@ -126,7 +138,7 @@ class MC4WP_Ecommerce_Admin {
 	* @return array
 	*/
 	public function menu_items( $items ) {
-		$items[ 'ecommerce' ] = array(
+		$items[] = array(
 			'title' => __( 'E-Commerce', 'mc4wp-ecommerce' ),
 			'text' => __( 'E-Commerce', 'mc4wp-ecommerce' ),
 			'slug' => 'ecommerce',
@@ -158,8 +170,18 @@ class MC4WP_Ecommerce_Admin {
 		$connected_list = null;
 
 		$helper = new MC4WP_Ecommerce_Helper();
-		$product_count = new MC4WP_Ecommerce_Object_Count( $helper->get_product_count(), $helper->get_untracked_product_count() );
-		$order_count = new MC4WP_Ecommerce_Object_Count( $helper->get_order_count(), $helper->get_untracked_order_count() );
+
+		$product_ids = $helper->get_product_ids();
+		$tracked_product_ids = $helper->get_tracked_product_ids();
+		$order_ids = $helper->get_order_ids();
+		$tracked_order_ids = $helper->get_tracked_order_ids();
+
+		// we need to reset array index here because array_diff preserves it
+		$untracked_product_ids = array_values( array_diff( $product_ids, $tracked_product_ids ) );
+		$untracked_order_ids = array_values( array_diff( $order_ids, $tracked_order_ids ) );
+
+		$product_count = new MC4WP_Ecommerce_Object_Count( count( $product_ids ), count( $untracked_product_ids ) );
+		$order_count = new MC4WP_Ecommerce_Object_Count( count( $order_ids ), count( $untracked_order_ids ) );
 
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		$assets_url = plugins_url( '/assets', $this->plugin_file );
@@ -176,9 +198,9 @@ class MC4WP_Ecommerce_Admin {
 				'processing' => __( 'Processing queue, please wait.', 'mc4wp-ecommerce' ),
 			),
 			'product_count' => $product_count,
-			'product_ids' => $product_count->untracked > 0 ? $helper->get_untracked_product_ids() : array(),
+			'product_ids' => $untracked_product_ids,
 			'order_count' => $order_count,
-			'order_ids' => $order_count->untracked > 0 ? $helper->get_untracked_order_ids() : array(),
+			'order_ids' => (array) $untracked_order_ids,
 		));
 
 		// get connected list
@@ -218,14 +240,42 @@ class MC4WP_Ecommerce_Admin {
 			return;
 		}
 
-		delete_transient( 'mc4wp_ecommerce_untracked_order_count' );
-		delete_transient( 'mc4wp_ecommerce_order_count' );
-		delete_transient( 'mc4wp_ecommerce_untracked_product_count' );
-		delete_transient( 'mc4wp_ecommerce_product_count' );
-
       $this->settings['store_id'] = '';
       update_option( 'mc4wp_ecommerce', $this->settings );
 	}
+
+	public function bulk_action_add( $bulk_actions ) {
+		$bulk_actions['mc4wp_ecommerce_bulk_sync_objects'] = __( 'Synchronise with MailChimp', 'mc4wp-premium');
+  		return $bulk_actions;
+	}
+
+	public function bulk_action_handle( $redirect_to, $doaction, $post_ids ) {
+		if ( $doaction !== 'mc4wp_ecommerce_bulk_sync_objects' || empty( $post_ids )) {
+    		return $redirect_to;
+  		}
+
+  		// trigger save_post_${post_type} so object observer can queue a new job
+  		$post_type = get_post_type( $post_ids[0] );
+  		foreach( $post_ids as $post_id ) {
+  			do_action( 'save_post_' . $post_type, $post_id );
+  		}
+
+  		 $redirect_to = add_query_arg( 'mc4wp_ecommerce_bulk_synced_objects', count( $post_ids ), $redirect_to );
+  		return $redirect_to;
+	}
+
+	public function bulk_action_admin_notice() {
+	   if ( empty( $_REQUEST['mc4wp_ecommerce_bulk_synced_objects'] ) ) {
+			return;
+	   }
+	   
+	   $count = intval( $_REQUEST['mc4wp_ecommerce_bulk_synced_objects'] );
+	   $next_run = wp_next_scheduled( 'mc4wp_ecommerce_process_queue' );
+
+	   echo '<div id="message" class="updated fade">';
+	   echo '<p>' . sprintf( __( 'Added <strong>%d</strong> synchronisation job to MC4WP\'s  background queue. Currently <a href="%s">pending background jobs</a> will be processed on <strong>%s</strong> at <strong>%s</strong>.', 'mc4wp-premium' ), $count, admin_url( 'admin.php?page=mailchimp-for-wp-ecommerce' ), date( get_option( 'date_format' ), $next_run ), date( get_option( 'time_format' ), $next_run ) ) . '</p>';
+	   echo '</div>';
+	  }
 
 	/**
 	 * @return MC4WP_Debug_Log

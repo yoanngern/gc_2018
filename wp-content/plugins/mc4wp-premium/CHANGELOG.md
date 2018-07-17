@@ -1,6 +1,43 @@
 Changelog
 ==========
 
+#### 4.5 - July 11, 2018
+
+**Improvements**
+
+- E-commerce: Database query performance improvements on settings page.
+- E-commerce: Show when next run is scheduled to run for processing pending background jobs.
+- E-commerce: Send billing company field to MailChimp when updating customer.
+
+**Additions**
+
+- E-commerce: Add bulk action to (re-)synchronise orders, products or coupons with MailChimp.
+- E-commerce: Added support for promo codes (coupons).
+- E-commerce: New WP-CLI command wp mc4wp-ecommerce sync-coupons
+- E-commerce: New filter hook mc4wp_ecommerce_promo_rule_data
+- E-commerce: New filter hook mc4wp_ecommerce_promo_code_data
+
+
+#### 4.4.4 - June 27, 2018
+
+**Fixes**
+
+- Method parameter error when using WooCommerce 2.x.
+- Abandoned cart data error when using WooCommerce 2.x.
+
+**Improvements**
+
+- Sanity check on orders for lines that have a quantity of 0.
+
+
+
+#### 4.4.3 - June 25, 2018
+
+**Improvements**
+
+- Email notifications: Accept a broader range of date inputs (year first, leading zeroes for day's and month's)
+
+
 #### 4.4.2 - June 11, 2018
 
 **Fixes**

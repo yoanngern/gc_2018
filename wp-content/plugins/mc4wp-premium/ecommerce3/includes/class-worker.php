@@ -210,6 +210,30 @@ class MC4WP_Ecommerce_Worker {
         return true;
     }
 
+    public function update_promo( $post_id ) {
+        try {
+            $this->ecommerce->update_promo( $post_id );
+        } catch( Exception $e ) {
+            $this->get_log()->error( sprintf( "E-Commerce: Error updating promo #%d. %s", $post_id, $e ) );
+            return false;
+        }
+
+        $this->get_log()->info( sprintf( "E-Commerce: Successfully updated promo #%d.", $post_id) );
+        return true;
+    }
+
+    public function delete_promo( $post_id ) {
+        try {
+            $this->ecommerce->delete_promo( $post_id );
+        } catch( Exception $e ) {
+            $this->get_log()->error( sprintf( "E-Commerce: Error deleting promo #%d. %s", $post_id, $e ) );
+            return false;
+        }
+
+        $this->get_log()->info( sprintf( "E-Commerce: Successfully deleted promo  #%d.", $post_id) );
+        return true;
+    }
+
     /**
      * @return MC4WP_Debug_Log
      */

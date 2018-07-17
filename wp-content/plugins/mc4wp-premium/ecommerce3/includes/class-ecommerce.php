@@ -30,7 +30,7 @@ class MC4WP_Ecommerce {
 	* @param string $store_id
 	* @param MC4WP_Ecommerce_Object_Transformer $transformer
 	*/
-	public function __construct( $store_id, $transformer ) {
+	public function __construct( $store_id, MC4WP_Ecommerce_Object_Transformer $transformer ) {
 		$this->store_id = $store_id;
 		$this->transformer = $transformer;
 	}
@@ -214,8 +214,6 @@ class MC4WP_Ecommerce {
 
 		// remove meta on success
 		delete_post_meta( $order_id, self::META_KEY );
-		delete_transient('mc4wp_ecommerce_untracked_order_count');
-		delete_transient('mc4wp_ecommerce_order_count');
 
 		$this->touch();
 
@@ -256,8 +254,6 @@ class MC4WP_Ecommerce {
 			throw $e;
 		}
 
-		delete_transient('mc4wp_ecommerce_untracked_order_count');
-		delete_transient('mc4wp_ecommerce_order_count');
 		$this->touch( $order_id );
 		return true;
 	}
@@ -451,8 +447,6 @@ class MC4WP_Ecommerce {
 		delete_post_meta( $product_id, self::META_KEY );
 
 		$this->touch();
-		delete_transient('mc4wp_ecommerce_untracked_product_count');
-		delete_transient('mc4wp_ecommerce_product_count');
 
 		return $success;
 	}
@@ -485,9 +479,6 @@ class MC4WP_Ecommerce {
 		// get product id (with backwards compat for WooCommerce < 3.x)
 		$product_id = method_exists( $product, 'get_id' ) ? $product->get_id() : $product->id;
 		$this->touch( $product_id );
-
-		delete_transient('mc4wp_ecommerce_untracked_product_count');
-		delete_transient('mc4wp_ecommerce_product_count');
 		
 		return true;
 	}
@@ -582,5 +573,133 @@ class MC4WP_Ecommerce {
 
 		// set flag to short-circuit this function next time it runs
 		$exists = true;
+	}
+
+
+	/**********************
+	* 		Promo codes 	 *
+	**********************/
+
+	/**
+	* Deletes the associated promo from the connected store.
+	* @param int $coupon_id
+	*/
+	public function delete_promo( $coupon_id ) {
+		$store_id = $this->store_id;
+		$api = $this->get_api();
+
+		// fail silently if API class does not have method. This means user should update their MailChimp for WordPress version.
+		if( ! method_exists( $api, 'delete_ecommerce_store_promo_rule' ) ) {
+			return;
+		}
+
+		try {
+			// TODO: Check if we need to delete children of the promo rule?
+			//$api->delete_ecommerce_store_promo_rule_promo_code( $store_id, $coupon_id, $coupon_id );
+			$api->delete_ecommerce_store_promo_rule( $store_id, $coupon_id );
+		} catch( MC4WP_API_Resource_Not_Found_Exception $e ) {
+			// good. promo was not there to begin with.
+		}
+
+		$this->touch();
+	}
+
+	/**
+	* Adds or updates the associated promo in the connected store.
+	* @param int $coupon_id
+	*/
+	public function update_promo( $coupon_id ) {
+		$store_id = $this->store_id;
+		$api = $this->get_api();
+
+		// fail silently if API class does not have method. This means user should update their MailChimp for WordPress version.
+		if( ! method_exists( $api, 'delete_ecommerce_store_promo_rule' ) ) {
+			return;
+		}
+
+		$wc_coupon = new WC_Coupon( $coupon_id );
+		
+		// create promo rule
+		$promo_rule_data = array(
+			'id' => (string) $coupon_id,
+			'title' => (string) $wc_coupon->get_code(),
+			'description' => (string) $wc_coupon->get_description(),
+			'enabled' => true,
+			'amount' => (float) $wc_coupon->get_amount( 'edit' ),
+		);
+
+		if( empty( $promo_rule_data['description'] ) ) {
+			$promo_rule_data['description'] = (string) $wc_coupon->get_code();
+		}
+
+		// determine whether rule is enabled
+		$expires = $wc_coupon->get_date_expires();
+		if( $expires ) { 
+			$promo_rule_data['ends_at'] = (string) $expires;
+
+			if( current_time('timestamp', true) >= $expires->getTimestamp() ) {
+				$promo_rule_data['enabled'] = false;
+			}
+		}
+
+		switch( $wc_coupon->get_discount_type() ) {
+			case 'fixed_product':
+				$promo_rule_data['type'] = 'fixed';
+				$promo_rule_data['target'] = 'per_item';
+			break;
+
+			case 'fixed_cart':
+				$promo_rule_data['type'] = 'fixed';
+				$promo_rule_data['target'] = 'total';
+			break;
+
+			case 'percent':
+				$promo_rule_data['type'] = 'percentage';
+				$promo_rule_data['target'] = 'total';
+				$promo_rule_data['amount'] = (float) $wc_coupon->get_amount( 'edit' ) / 100;
+			break;
+		}
+
+		/**
+		* Filters the promo rule data before it is sent to MailChimp
+		*
+		* @param array $promo_rule_data
+		*/
+		$promo_rule_data = apply_filters( 'mc4wp_ecommerce_promo_rule_data', $promo_rule_data );
+
+		try {
+			$api->update_ecommerce_store_promo_rule( $store_id, $promo_rule_data['id'], $promo_rule_data );
+		} catch( MC4WP_API_Resource_Not_Found_Exception $e ) {
+			$api->add_ecommerce_store_promo_rule( $store_id, $promo_rule_data );
+		}
+
+		// create promo code (child of promo rule)
+		$redemption_url = add_query_arg( array( 
+			'coupon_code' => urlencode( $wc_coupon->get_code() ),
+		), get_home_url() );
+
+		$promo_code_data = array(
+			'id' => (string) $coupon_id,
+			'code' => (string) $wc_coupon->get_code(),
+			'redemption_url' => (string) $redemption_url,
+			'usage_count' => (int) $wc_coupon->get_usage_count(),
+			'enabled' => $promo_rule_data['enabled'],
+		);
+
+		/**
+		* Filters the promo code data before it is sent to MailChimp
+		*
+		* @param array $promo_code_data
+		*/
+		$promo_code_data = apply_filters( 'mc4wp_ecommerce_promo_code_data', $promo_code_data );
+
+		try {
+			$api->update_ecommerce_store_promo_rule_promo_code( $store_id, $promo_rule_data['id'], $promo_code_data['id'], $promo_code_data );
+		} catch( MC4WP_API_Resource_Not_Found_Exception $e ) {
+			$api->add_ecommerce_store_promo_rule_promo_code( $store_id, $promo_rule_data['id'], $promo_code_data );
+		}
+
+		// update stats on when we last updated
+		$this->touch();
 	}
 }

@@ -15,111 +15,24 @@ class MC4WP_Ecommerce_Helper {
 		$this->db = $GLOBALS['wpdb'];
 	}
 
-	public function get_order_ids( $untracked_only = false ) {
-		$query = $this->get_order_query( 'DISTINCT(p.id)', $untracked_only );
+	public function get_order_ids() {
+		$query = $this->get_order_query( 'p.id', false );
 		return $this->db->get_col( $query );
 	}
 
 	public function get_tracked_order_ids() {
-		$tracked_ids = $this->get_order_ids();
-		$untracked_ids = $this->get_untracked_order_ids();
-		return array_diff( $tracked_ids, $untracked_ids );
-	}
-
-	public function get_untracked_order_ids() {
-		$query = $this->get_order_query( 'DISTINCT(p.id)', true );
+		$query = $this->get_order_query( 'p.id', true );
 		return $this->db->get_col( $query );
 	}
 
-	/**
-	* @return int
-	*/
-	public function get_untracked_order_count() {
-		$transient_name = 'mc4wp_ecommerce_untracked_order_count';
-		$cached = get_transient( $transient_name );
-		if( is_numeric( $cached ) ) {
-			return (int) $cached;
-		}
-
-		$untracked_only = true;
-		$count = $this->count_orders( $untracked_only );
-		set_transient( $transient_name, $count, 60 * 60 );
-		return $count;
-	}
-
-	/**
-	* @return int
-	*/
-	public function get_order_count() {
-		$transient_name = 'mc4wp_ecommerce_order_count';
-		$cached = get_transient( $transient_name );
-		if( is_numeric( $cached ) ) {
-			return (int) $cached;
-		}
-
-		$count = $this->count_orders( false );
-		set_transient( $transient_name, $count, 60 * 60 );
-		return $count;
-	}
-
-	private function count_orders( $untracked_only = false ) {		
-		$query = $this->get_order_query( 'COUNT(DISTINCT(p.id))', $untracked_only );
-		return $this->db->get_var( $query );
-	}
-
 	public function get_product_ids() {
-		$query = $this->get_product_query( 'DISTINCT(p.id)' );
+		$query = $this->get_product_query( 'p.id' );
 		return $this->db->get_col( $query );
 	}
 
 	public function get_tracked_product_ids() {
-		$tracked_ids = $this->get_product_ids();
-		$untracked_ids = $this->get_untracked_product_ids();
-		return array_diff( $tracked_ids, $untracked_ids );
-	}
-
-	public function get_untracked_product_ids() {
-		$query = $this->get_product_query( 'DISTINCT(p.id)', true );
+		$query = $this->get_product_query( 'p.id', true );
 		return $this->db->get_col( $query );
-	}
-
-	/**
-	* @return int
-	*/
-	public function get_product_count() {
-		$transient_name = 'mc4wp_ecommerce_product_count';
-		$cached = get_transient( $transient_name );
-		if( is_numeric( $cached ) ) {
-			return (int) $cached;
-		}
-
-		$count = $this->count_products( false );
-		set_transient( $transient_name, $count, 60 * 60 );
-		return $count;
-	}
-
-	/**
-	* @return int
-	*/
-	public function get_untracked_product_count() {
-		$transient_name = 'mc4wp_ecommerce_untracked_product_count';
-		$cached = get_transient( $transient_name );
-		if( is_numeric( $cached ) ) {
-			return (int) $cached;
-		}
-
-		$untracked_only = true;
-		$count = $this->count_products( $untracked_only );
-		set_transient( $transient_name, $count, 60 * 60 );
-		return $count;
-	}
-
-	/**
-	* @return int
-	*/
-	private function count_products( $untracked_only = false ) {
-		$query = $this->get_product_query( 'COUNT(DISTINCT(p.id))', $untracked_only );
-		return (int) $this->db->get_var( $query );
 	}
 
 	/**
@@ -128,7 +41,7 @@ class MC4WP_Ecommerce_Helper {
 	*
 	* @return string
 	*/
-	private function get_product_query( $select = 'p.*', $untracked_only = false ) {
+	private function get_product_query( $select = 'p.*' , $tracked_only = false) {
 		$query = "SELECT %s
 		FROM {$this->db->posts}	p
 		WHERE p.post_type = 'product'
@@ -136,8 +49,8 @@ class MC4WP_Ecommerce_Helper {
 
 		$query = sprintf( $query, $select ) . ' ';
 
-		if( $untracked_only ) {
-			$query .= $this->get_where_clause_for_untracked_objects_only();
+		if( $tracked_only ) {
+			$query .= sprintf( " AND p.id IN ( SELECT post_id FROM {$this->db->postmeta} WHERE p.id = post_id AND meta_key = '%s' )", MC4WP_Ecommerce::META_KEY );
 		}
 
 		// order by descending product ID so we start with newest orders first
@@ -150,18 +63,17 @@ class MC4WP_Ecommerce_Helper {
 
 	/**
 	* @param string $select
-	* @param bool $untracked_only
+	* @param bool $tracked_only
 	*
 	* @return string
 	*/
-	private function get_order_query( $select = 'p.*', $untracked_only = false ) {
+	private function get_order_query( $select = 'p.*', $tracked_only = false ) {
 		$query = "
 		SELECT %s
 		FROM {$this->db->posts}	p
-		LEFT JOIN {$this->db->postmeta} pm ON pm.post_id = p.id AND ( pm.meta_key = '_billing_email' OR pm.meta_key = 'billing_email' OR pm.meta_key = '_customer_user' )
 		WHERE p.post_type = 'shop_order'
 		AND p.post_status IN( %s )
-		AND pm.meta_value != ''";
+		AND p.id IN ( SELECT pm.post_id FROM {$this->db->postmeta} pm WHERE pm.post_id = p.id AND ( pm.meta_key = '_billing_email' OR pm.meta_key = 'billing_email' OR pm.meta_key = '_customer_user' ) AND pm.meta_value != '' )";
 
 		// IMPORTANT: not all orders have a _billing_email meta value.
 
@@ -169,11 +81,11 @@ class MC4WP_Ecommerce_Helper {
 		$order_statuses = mc4wp_ecommerce_get_order_statuses();
 		$query = sprintf( $query, $select . ' ',  "'" . join( "', '", $this->db->_escape( $order_statuses ) ) . "'" );
 
-		if( $untracked_only ) {
-			$query .= $this->get_where_clause_for_untracked_objects_only();
+		if( $tracked_only ) {
+			$query .= sprintf( " AND p.id IN ( SELECT post_id FROM {$this->db->postmeta} WHERE meta_key = '%s' )", MC4WP_Ecommerce::META_KEY );
 		}
 
-		// order by descending product ID so we start with newest orders first
+		// order by descending order ID so we start with newest orders first
 		if( strpos( $select, 'COUNT' ) === false ) {
 			$query .= " ORDER BY p.id DESC";
 		}
@@ -245,20 +157,6 @@ class MC4WP_Ecommerce_Helper {
 		return intval( $result );
 	}
 
-	/**
-	* @return string
-	*/
-	private function get_where_clause_for_untracked_objects_only() {
-		$query = " AND NOT EXISTS(
-			SELECT meta_key
-			FROM {$this->db->postmeta} pm2
-			WHERE pm2.meta_key = %s
-			AND pm2.post_id = p.id
-			)";
-
-			$query = $this->db->prepare( $query, MC4WP_Ecommerce::META_KEY );
-			return $query;
-		}
 
 
-	}
+}

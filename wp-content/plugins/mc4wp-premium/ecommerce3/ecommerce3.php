@@ -15,6 +15,7 @@ require_once __DIR__ . '/includes/class-worker.php';
 require_once __DIR__ . '/includes/class-object-observer.php';
 require_once __DIR__ . '/includes/class-cart-observer.php';
 
+
 // load settings
 $settings = mc4wp_ecommerce_get_settings();
 
@@ -26,13 +27,15 @@ $mc4wp['ecommerce.tracker'] = function () use ($settings) {
 	return new MC4WP_Ecommerce_Tracker(__FILE__, $settings);
 };
 $mc4wp['ecommerce.transformer'] = function () use ($mc4wp, $settings) {
+	require_once __DIR__ . '/includes/interface-transformer.php';
+
 	if (!defined('WOOCOMMERCE_VERSION') || version_compare(WOOCOMMERCE_VERSION, '3.0', '<')) {
-		require_once __DIR__ . '/includes/class-transformer-legacy.php';
-		return new MC4WP_Ecommerce_Object_Transformer_Legacy($settings, $mc4wp['ecommerce.tracker']);
+		require_once __DIR__ . '/includes/class-transformer-wc2.php';
+		return new MC4WP_Ecommerce_Object_Transformer_WC2($settings, $mc4wp['ecommerce.tracker']);
 	}
 
-	require_once __DIR__ . '/includes/class-transformer.php';
-	return new MC4WP_Ecommerce_Object_Transformer($settings, $mc4wp['ecommerce.tracker']);
+	require_once __DIR__ . '/includes/class-transformer-wc3.php';
+	return new MC4WP_Ecommerce_Object_Transformer_WC3($settings, $mc4wp['ecommerce.tracker']);
 };
 $mc4wp['ecommerce'] = function () use ($mc4wp, $settings) {
 	return new MC4WP_Ecommerce( $settings['store_id'], $mc4wp['ecommerce.transformer']);
@@ -87,3 +90,5 @@ if (defined('WP_CLI') && WP_CLI) {
 	require_once __DIR__ . '/includes/class-command.php';
 	WP_CLI::add_command('mc4wp-ecommerce', 'MC4WP_Ecommerce_Command');
 }
+
+

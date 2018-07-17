@@ -213,7 +213,7 @@ class MC4WP_Email_Notification {
         }
 
         // Format as date if value looks like a date
-        if(strlen($value) === 10 && preg_match( '/\d{4}-\d{2}-\d{2}/', $value ) > 0 && ( $timestamp = strtotime($value) ) && $timestamp != false ) {
+        if( is_string( $value ) && strlen($value) >= 8 && strlen($value) <= 10 && preg_match( '/\d{4}[-\/]\d{1,2}[-\/]\d{1,2}|\d{1,2}[-\/]\d{1,2}[-\/]\d{4}/', $value ) > 0 && ( $timestamp = strtotime($value) ) && $timestamp != false ) {
             $value = date( get_option( 'date_format' ), $timestamp );
         }
 

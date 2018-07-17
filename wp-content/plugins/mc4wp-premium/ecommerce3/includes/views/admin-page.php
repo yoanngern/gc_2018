@@ -95,10 +95,19 @@ if( ! empty( $settings['last_updated'] ) ) {
 }
 
 if( $queue ) {
+	$next_run = wp_next_scheduled( 'mc4wp_ecommerce_process_queue' );
 	$count = count( $queue->all() );
 	echo '<div class="well margin">';
 	echo '<h3>' . __( 'Queued background jobs', 'mc4wp-ecommerce' ) . '</h3>';
-	echo '<p>' . sprintf( __( '<strong>%d</strong> background jobs waiting to be processed.', 'mc4wp-ecommerce' ), $count ) . '</p>';
+	echo '<p>';
+
+	echo sprintf( __( '<strong>%d</strong> background jobs waiting to be processed.', 'mc4wp-ecommerce' ), $count );
+
+	if( $count > 0 ) {
+		echo ' ' . sprintf( __( 'Pending jobs will be processed on <strong>%s</strong> at <strong>%s</strong>.'), date( get_option( 'date_format' ), $next_run ), date( get_option( 'time_format' ), $next_run ) );
+	}
+
+	echo '</p>';
 
 	if( $count > 0 ) {
 		echo '<div id="queue-processor"></div>';

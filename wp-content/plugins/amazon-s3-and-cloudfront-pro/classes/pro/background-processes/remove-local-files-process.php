@@ -36,7 +36,7 @@ class Remove_Local_Files_Process extends Background_Tool_Process {
 
 		$keys = $this->get_s3_keys( $attachments );
 
-		foreach( $attachments as $attachment_id ) {
+		foreach ( $attachments as $attachment_id ) {
 			$this->delete_local_attachment( $attachment_id, $keys );
 		}
 	}
@@ -63,7 +63,7 @@ class Remove_Local_Files_Process extends Background_Tool_Process {
 	/**
 	 * Delete local attachment files.
 	 *
-	 * @param int $attachment_id
+	 * @param int   $attachment_id
 	 * @param array $keys
 	 */
 	protected function delete_local_attachment( $attachment_id, $keys ) {
@@ -72,7 +72,25 @@ class Remove_Local_Files_Process extends Background_Tool_Process {
 
 		foreach ( $paths as $path ) {
 			if ( file_exists( $path ) && $this->file_exists_on_s3( $path, $keys ) ) {
-				wp_delete_file( $path );
+				$files_to_remove[] = $path;
+			}
+		}
+
+		// Delete the files and record original file's size before removal.
+		if ( ! empty( $files_to_remove ) ) {
+			// Get original file's size if still on disk.
+			$filesize = file_exists( $paths[0] ) ? filesize( $paths[0] ) : 0;
+
+			$this->as3cf->remove_local_files( $files_to_remove, $attachment_id );
+
+			// Store filesize in the attachment meta data for use by WP
+			if ( 0 < $filesize && ( $data = wp_get_attachment_metadata( $attachment_id ) ) ) {
+				if ( empty( $data['filesize'] ) ) {
+					$data['filesize'] = $filesize;
+
+					// Update metadata with filesize
+					update_post_meta( $attachment_id, '_wp_attachment_metadata', $data );
+				}
 			}
 		}
 	}

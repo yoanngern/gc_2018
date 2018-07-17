@@ -17,8 +17,8 @@
 	function renderMediaUploader( row ) {
 
 		// Find the correct file name and url inputs
-		fileNameInput = row.find( 'td.file_name input' );
-		fileUrlInput = row.find( 'td.file_url input' );
+		fileNameInput = row.find( 'td.file_name input.input_text' );
+		fileUrlInput = row.find( 'td.file_url input.input_text' );
 
 		// Use existing file frame instance or create one
 		if ( undefined !== fileFrame ) {

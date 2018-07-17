@@ -1,8 +1,8 @@
 <?php
 
-use DeliciousBrains\WP_Offload_S3\Amazon_Web_Services;
 use DeliciousBrains\WP_Offload_S3\Pro\Integration_Manager;
 use DeliciousBrains\WP_Offload_S3\Pro\Integrations\Advanced_Custom_Fields;
+use DeliciousBrains\WP_Offload_S3\Pro\Integrations\Divi;
 use DeliciousBrains\WP_Offload_S3\Pro\Integrations\Easy_Digital_Downloads;
 use DeliciousBrains\WP_Offload_S3\Pro\Integrations\Enable_Media_Replace;
 use DeliciousBrains\WP_Offload_S3\Pro\Integrations\Meta_Slider;
@@ -15,6 +15,7 @@ use DeliciousBrains\WP_Offload_S3\Pro\Tools\Downloader;
 use DeliciousBrains\WP_Offload_S3\Pro\Tools\Remove_Local_Files;
 use DeliciousBrains\WP_Offload_S3\Pro\Tools\Uploader;
 use DeliciousBrains\WP_Offload_S3\Pro\Upgrades\Disable_Compatibility_Plugins;
+use DeliciousBrains\WP_Offload_S3\Providers\Provider;
 
 class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 
@@ -49,14 +50,15 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	private $_user_can_use_media_actions;
 
 	/**
-	 * @param string                   $plugin_file_path
-	 * @param Amazon_Web_Services|null $aws
+	 * @param string $plugin_file_path
+	 *
+	 * @throws Exception
 	 */
-	public function __construct( $plugin_file_path, $aws = null ) {
+	public function __construct( $plugin_file_path ) {
 		$this->integrations = Integration_Manager::get_instance();
 		$this->sidebar      = Sidebar_Presenter::get_instance( $this );
 
-		parent::__construct( $plugin_file_path, $aws, $this->plugin_slug );
+		parent::__construct( $plugin_file_path, $this->plugin_slug );
 	}
 
 	/**
@@ -134,6 +136,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	protected function enable_integrations() {
 		$integrations = apply_filters( 'as3cf_integrations', array(
 			'acf'  => new Advanced_Custom_Fields( $this ),
+			'divi' => new Divi( $this ),
 			'edd'  => new Easy_Digital_Downloads( $this ),
 			'emr'  => new Enable_Media_Replace( $this ),
 			'msl'  => new Meta_Slider( $this ),
@@ -206,8 +209,8 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 				),
 				'nonces'   => $nonces,
 				'settings' => array(
-					'default_acl' => self::DEFAULT_ACL,
-					'private_acl' => self::PRIVATE_ACL,
+					'default_acl' => $this->get_aws()->get_default_acl(),
+					'private_acl' => $this->get_aws()->get_private_acl(),
 				),
 			) );
 	}
@@ -238,8 +241,8 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 				'nonces'   => $nonces,
 				'settings' => array(
 					'post_id'     => get_the_ID(),
-					'default_acl' => self::DEFAULT_ACL,
-					'private_acl' => self::PRIVATE_ACL,
+					'default_acl' => $this->get_aws()->get_default_acl(),
+					'private_acl' => $this->get_aws()->get_private_acl(),
 				),
 			) );
 	}
@@ -440,8 +443,8 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 			wp_send_json_error();
 		}
 
-		if ( self::PRIVATE_ACL !== $acl ) {
-			$acl   = self::DEFAULT_ACL;
+		if ( $this->get_aws()->get_private_acl() !== $acl ) {
+			$acl   = $this->get_aws()->get_default_acl();
 			$title = $this->get_media_action_strings( 'change_to_private' );
 		}
 
@@ -494,7 +497,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 		$expires = null;
 
 		// Force use of secured url when ACL has been set to private
-		if ( isset( $attachment['acl'] ) && self::PRIVATE_ACL === $attachment['acl'] ) {
+		if ( isset( $attachment['acl'] ) && $this->get_aws()->get_private_acl() === $attachment['acl'] ) {
 			$expires = self::DEFAULT_EXPIRES;
 		}
 
@@ -1033,7 +1036,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	 *                                   been uploaded to S3 and does not exist locally before
 	 *                                   trying to download it
 	 *
-	 * @return bool
+	 * @return array
 	 */
 	function maybe_download_attachments_from_s3( $post_ids, $doing_bulk_action = false ) {
 		$error_count    = 0;
@@ -1130,13 +1133,16 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 			return $this->_throw_error( 'download_attachment', $error_msg, $errors );
 		}
 
+		// Looks like we downloaded everything ok, do a little cleanup.
+		$data = $this->maybe_cleanup_filesize_metadata( $post_id, wp_get_attachment_metadata( $post_id ) );
+
 		return true;
 	}
 
 	/**
 	 * Download an object from S3
 	 *
-	 * @param Aws\S3\S3Client $s3client
+	 * @param Provider $s3client
 	 * @param array $object
 	 *
 	 * @return bool|WP_Error
@@ -1148,7 +1154,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 		}
 
 		try {
-			$s3client->getObject( $object );
+			$s3client->get_object( $object );
 		} catch ( Exception $e ) {
 			$error_msg = 'Error downloading ' . $object['Key'] . ' from S3: ' . $e->getMessage();
 			AS3CF_Error::log( $error_msg, 'PRO' );

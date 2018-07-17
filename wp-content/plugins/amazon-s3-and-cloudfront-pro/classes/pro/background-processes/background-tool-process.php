@@ -6,6 +6,7 @@ use AS3CF_Background_Process;
 use AS3CF_Error;
 use AS3CF_Utils;
 use DeliciousBrains\WP_Offload_S3\Pro\Tool;
+use DeliciousBrains\WP_Offload_S3\Providers\Provider;
 
 abstract class Background_Tool_Process extends AS3CF_Background_Process {
 
@@ -253,66 +254,13 @@ abstract class Background_Tool_Process extends AS3CF_Background_Process {
 				$regions[ $region ]['s3client'] = $this->as3cf->get_s3client( $region, true );
 			}
 
-			$regions[ $region ]['commands'][ $attachment_id ] = $regions[ $region ]['s3client']->getCommand( 'ListObjects', array(
+			$regions[ $region ]['locations'][ $attachment_id ] = array(
 				'Bucket' => $s3info['bucket'],
 				'Prefix' => AS3CF_Utils::strip_image_edit_suffix_and_extension( $s3info['key'] ),
-			) );
+			);
 		}
 
-		return $this->get_keys_from_regions( $regions );
-	}
-
-	/**
-	 * Get object keys from region results.
-	 *
-	 * @param array $regions
-	 *
-	 * @return array
-	 */
-	protected function get_keys_from_regions( $regions ) {
-		$keys = array();
-
-		foreach ( $regions as $region ) {
-			try {
-				/* @var \Guzzle\Service\Command\CommandInterface $region['s3client'] */
-				$region['s3client']->execute( $region['commands'] );
-			} catch ( \Exception $e ) {
-				AS3CF_Error::log( get_class( $e ) . ' exception caught when executing ListObjects: ' . $e->getMessage() );
-				continue;
-			}
-
-			foreach ( $region['commands'] as $attachment_id => $command ) {
-				$found_keys = $command->getResult()->getPath( 'Contents/*/Key' );
-
-				if ( ! empty( $found_keys ) ) {
-					$keys[ $attachment_id ] = $this->validate_attachment_keys( $attachment_id, $found_keys );
-				}
-			}
-		}
-
-		return $keys;
-	}
-
-	/**
-	 * Ensure returned keys are for correct attachment.
-	 *
-	 * @param array $keys
-	 *
-	 * @return array
-	 */
-	protected function validate_attachment_keys( $attachment_id, $keys ) {
-		$paths     = AS3CF_Utils::get_attachment_file_paths( $attachment_id, false );
-		$filenames = array_map( 'wp_basename', $paths );
-
-		foreach ( $keys as $key => $value ) {
-			$filename = wp_basename( $value );
-
-			if ( ! in_array( $filename, $filenames ) ) {
-				unset( $keys[ $key ] );
-			}
-		}
-
-		return $keys;
+		return Provider::get_keys_from_regions( $regions );
 	}
 
 	/**

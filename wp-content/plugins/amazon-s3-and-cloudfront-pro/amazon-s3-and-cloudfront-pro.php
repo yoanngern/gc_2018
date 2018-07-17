@@ -4,7 +4,7 @@ Plugin Name: WP Offload S3
 Plugin URI:  https://deliciousbrains.com/wp-offload-s3/
 Description: Speed up your WordPress site by offloading your media and assets to Amazon S3 & CloudFront.
 Author: Delicious Brains
-Version: 1.6.2
+Version: 1.7.1
 Author URI: https://deliciousbrains.com/
 Network: True
 Text Domain: amazon-s3-and-cloudfront
@@ -33,6 +33,9 @@ add_action( 'activated_plugin', array( 'AS3CF_Compatibility_Check', 'deactivate_
 global $as3cfpro_compat_check;
 $as3cfpro_compat_check = new AS3CF_Pro_Installer( __FILE__ );
 
+/**
+ * @throws Exception
+ */
 function as3cf_pro_init() {
 	if ( class_exists( 'Amazon_S3_And_CloudFront_Pro' ) ) {
 		return;
@@ -53,8 +56,7 @@ function as3cf_pro_init() {
 	global $as3cf, $as3cfpro;
 	$abspath = dirname( __FILE__ );
 
-	// Autoloaders
-	require_once $abspath . '/vendor/Aws2/vendor/autoload.php';
+	// Autoloader.
 	require_once $abspath . '/wp-offload-s3-autoloader.php';
 
 	// Lite files
@@ -65,7 +67,6 @@ function as3cf_pro_init() {
 	require_once $abspath . '/classes/filters/as3cf-local-to-s3.php';
 	require_once $abspath . '/classes/filters/as3cf-s3-to-local.php';
 	require_once $abspath . '/classes/as3cf-notices.php';
-	require_once $abspath . '/classes/as3cf-stream-wrapper.php';
 	require_once $abspath . '/classes/as3cf-plugin-base.php';
 	require_once $abspath . '/classes/as3cf-plugin-compatibility.php';
 	require_once $abspath . '/classes/amazon-s3-and-cloudfront.php';

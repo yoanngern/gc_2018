@@ -38,6 +38,9 @@ class MC4WP_Ecommerce_Object_Observer {
 
         // updating users
         add_action( 'profile_update', array( $this, 'on_user_update' ) );
+
+        // update promo code
+        add_action( 'save_post_shop_coupon', array( $this, 'on_coupon_update' ) );
     }
 
     /**
@@ -82,10 +85,6 @@ class MC4WP_Ecommerce_Object_Observer {
 
         $this->add_pending_job( 'add_product', $post_id );
         $this->queue->save();
-
-        // delete product related transients
-        delete_transient( 'mc4wp_ecommerce_untracked_product_count' );
-        delete_transient( 'mc4wp_ecommerce_product_count' );
     }
 
     // hook: save_post_shop_order
@@ -106,10 +105,6 @@ class MC4WP_Ecommerce_Object_Observer {
         // add new job
         $this->add_pending_job( $method, $post_id );
         $this->queue->save();
-
-        // delete order related transients
-        delete_transient( 'mc4wp_ecommerce_untracked_order_count' );
-        delete_transient( 'mc4wp_ecommerce_order_count' );
     }
 
     // hook: delete_post
@@ -129,17 +124,61 @@ class MC4WP_Ecommerce_Object_Observer {
             $this->add_pending_job( 'delete_order', $post_id );
             $this->queue->save();
         }
+
+        // coupons / promo codes
+        if( $post->post_type === 'shop_coupon' ) {
+            $this->on_coupon_delete( $post_id );
+        }
     }
 
     // hook: profile_update
     public function on_user_update( $user_id ) {
         $user = get_userdata( $user_id );
 
-        // was updated user a customer with an email address?
-        if( in_array( 'customer', $user->roles ) && ( ! empty( $user->billing_email ) || ! empty( $user->user_email ) ) ) {
-            $this->add_pending_job( 'update_customer', $user_id );
-            $this->queue->save();
+        // do nothing if user is not a WC Customer
+        if( ! $user || ! in_array( 'customer', $user->roles ) ) {
+            return;
         }
+
+        // don't update if user has no known email address
+        $has_email_address = ! empty( $user->billing_email ) || ! empty( $user->user_email );
+        if( ! $has_email_address ) {
+            return;
+        }
+        
+        $this->add_pending_job( 'update_customer', $user_id );
+        $this->queue->save();
+    }
+
+
+    public function on_coupon_update( $post_id ) {
+        // skip auto saves
+        if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+            return;
+        }
+
+        $post_status = get_post_status( $post_id );
+        switch( $post_status ) {
+            // only published promos should be sent to MailChimp
+            case 'publish':
+                $this->remove_pending_jobs( 'delete_promo', $post_id );
+                $this->add_pending_job( 'update_promo', $post_id );
+                $this->queue->save();
+            break;
+
+            default:
+                $this->remove_pending_jobs( 'update_promo', $post_id );
+                $this->add_pending_job( 'delete_promo', $post_id );
+                $this->queue->save();
+            break;
+        }
+        
+    }
+
+    public function on_coupon_delete( $post_id ) {
+        $this->remove_pending_jobs( 'update_promo', $post_id );
+        $this->add_pending_job( 'delete_promo', $post_id );
+        $this->queue->save();
     }
 
 }

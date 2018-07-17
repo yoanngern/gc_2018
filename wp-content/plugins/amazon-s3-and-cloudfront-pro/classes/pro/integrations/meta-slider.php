@@ -235,17 +235,18 @@ class Meta_Slider extends Integration {
 	private function upload_attachment_backup_sizes( $object_id, $s3object, $data ) {
 		$region = '';
 		$prefix = trailingslashit( dirname( $s3object['key'] ) );
-		$acl    = Amazon_S3_And_CloudFront::DEFAULT_ACL;
 
 		if ( isset( $s3object['region'] ) ) {
 			$region = $s3object['region'];
 		}
 
+		$s3client = $this->as3cf->get_s3client( $region, true );
+
+		$acl = $this->as3cf->get_aws()->get_default_acl();
+
 		if ( isset( $s3object['acl'] ) ) {
 			$acl = $s3object['acl'];
 		}
-
-		$s3client = $this->as3cf->get_s3client( $region, true );
 
 		foreach ( $data as $file ) {
 			if ( ! isset( $file['path'] ) ) {
@@ -268,7 +269,7 @@ class Meta_Slider extends Integration {
 			$args = apply_filters( 'as3cf_object_meta', $args, $object_id, $size, false );
 
 			try {
-				$s3client->putObject( $args );
+				$s3client->upload_object( $args );
 			} catch ( Exception $e ) {
 				AS3CF_Error::log( 'Error uploading ' . $args['SourceFile'] . ' to S3: ' . $e->getMessage(), 'META_SLIDER' );
 			}

@@ -47,10 +47,6 @@ class MC4WP_Ecommerce_Admin_Ajax {
             );
         }
 
-        // delete product related transients
-        delete_transient( 'mc4wp_ecommerce_untracked_product_count' );
-        delete_transient( 'mc4wp_ecommerce_product_count' );
-
         wp_send_json_success(
             array(
                 'message' => sprintf( 'Success! Added product %d to MailChimp.', $product_id )
@@ -105,10 +101,6 @@ class MC4WP_Ecommerce_Admin_Ajax {
             );
             exit;
         }
-
-        // delete order related transients
-        delete_transient( 'mc4wp_ecommerce_untracked_order_count' );
-        delete_transient( 'mc4wp_ecommerce_order_count' );
 
         wp_send_json_success(
             array(

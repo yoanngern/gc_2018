@@ -28,6 +28,7 @@ class MC4WP_Ecommerce_Cart_Observer {
 	 * @param string $plugin_file
 	 * @var MC4WP_Ecommerce $ecommerce
 	 * @param MC4WP_Queue $queue
+	 * @param MC4WP_Ecommerce_Object_Transformer $transformer
 	 */
 	public function __construct( $plugin_file, MC4WP_Ecommerce $ecommerce, MC4WP_Queue $queue, MC4WP_Ecommerce_Object_Transformer $transformer ) {
 		$this->plugin_file = $plugin_file;

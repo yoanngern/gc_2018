@@ -31,7 +31,7 @@ class MC4WP_Multiple_Forms_Admin {
 	}
 
 	public function remove_form_action_redirect( $items ) {
-	    $items['forms']['text'] = __( 'Forms', 'mailchimp-for-wp' );
+	   $items['forms']['text'] = __( 'Forms', 'mailchimp-for-wp' );
 		unset( $items['forms']['load_callback'] );
 		return $items;
 	}

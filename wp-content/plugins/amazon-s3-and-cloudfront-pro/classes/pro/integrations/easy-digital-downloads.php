@@ -86,7 +86,7 @@ class Easy_Digital_Downloads extends Integration {
 		if ( ( '/' !== $file_name[0] && false === isset( $url['scheme'] ) ) || false !== ( strpos( $file_name, 'AWSAccessKeyId' ) ) ) {
 			$bucket     = ( isset( $edd_options['edd_amazon_s3_bucket'] ) ) ? trim( $edd_options['edd_amazon_s3_bucket'] ) : $this->as3cf->get_setting( 'bucket' );
 			$expires    = time() + $expires;
-			$secure_url = $this->as3cf->get_s3client()->getObjectUrl( $bucket, $file_name, $expires, $headers );
+			$secure_url = $this->as3cf->get_s3client()->get_object_url( $bucket, $file_name, $expires, $headers );
 
 			return $secure_url;
 		}
@@ -120,7 +120,7 @@ class Easy_Digital_Downloads extends Integration {
 				}
 
 				if ( $this->as3cf->is_pro_plugin_setup( true ) ) {
-					$s3object = $this->as3cf->set_attachment_acl_on_s3( $file['attachment_id'], $s3object, Amazon_S3_And_CloudFront::PRIVATE_ACL );
+					$s3object = $this->as3cf->set_attachment_acl_on_s3( $file['attachment_id'], $s3object, $this->as3cf->get_aws()->get_private_acl() );
 					if ( $s3object && ! is_wp_error( $s3object ) ) {
 						$this->as3cf->make_acl_admin_notice( $s3object );
 					}
@@ -167,7 +167,7 @@ class Easy_Digital_Downloads extends Integration {
 			}
 
 			// set acl to public
-			$s3object = $this->as3cf->set_attachment_acl_on_s3( $id, $s3object, Amazon_S3_And_CloudFront::DEFAULT_ACL );
+			$s3object = $this->as3cf->set_attachment_acl_on_s3( $id, $s3object, $this->as3cf->get_aws()->get_default_acl() );
 			if ( $s3object && ! is_wp_error( $s3object ) ) {
 				$this->as3cf->make_acl_admin_notice( $s3object );
 			}

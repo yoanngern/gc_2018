@@ -117,8 +117,7 @@ class MC4WP_Logging_Admin {
 	 * @return array
 	 */
 	public function menu_items( $items ) {
-
-		$items[ 'reports' ] = array(
+		$items[] = array(
 			'title' => __( 'Reports', 'mailchimp-for-wp' ),
 			'text' => __( 'Reports', 'mailchimp-for-wp' ),
 			'slug' => 'reports',

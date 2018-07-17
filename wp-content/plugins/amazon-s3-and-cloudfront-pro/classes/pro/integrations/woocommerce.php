@@ -2,7 +2,6 @@
 
 namespace DeliciousBrains\WP_Offload_S3\Pro\Integrations;
 
-use Amazon_S3_And_CloudFront;
 use Exception;
 
 class Woocommerce extends Integration {
@@ -68,11 +67,16 @@ class Woocommerce extends Integration {
 	 * Ajax get s3 info.
 	 */
 	public function ajax_is_amazon_s3_attachment() {
-		$this->as3cf->verify_ajax_request();
-
 		$return = false;
 
-		if ( $this->as3cf->get_attachment_s3_info( intval( $_POST['attachment_id'] ) ) ) {
+		/**
+		 * Filter to allow changing the user capability required for adding an offloaded item to a WooCommerce product.
+		 *
+		 * @param string $capability Registered capability identifier
+		 */
+		$capability = apply_filters( 'as3cfpro_woo_use_attachment_capability', null );
+
+		if ( $this->as3cf->verify_ajax_request( $capability, true ) && $this->as3cf->get_attachment_s3_info( intval( $_POST['attachment_id'] ) ) ) {
 			$return = true;
 		}
 
@@ -82,8 +86,8 @@ class Woocommerce extends Integration {
 	/**
 	 * Make file private on Amazon S3.
 	 *
-	 * @param int $post_id
-	 * @param int $deprecated
+	 * @param int   $post_id
+	 * @param int   $deprecated
 	 * @param array $files
 	 *
 	 * @return array
@@ -108,7 +112,7 @@ class Woocommerce extends Integration {
 
 			if ( $this->as3cf->is_pro_plugin_setup( true ) ) {
 				// Only set new files as private if the Pro plugin is setup
-				$s3object = $this->as3cf->set_attachment_acl_on_s3( $attachment_id, $s3object, Amazon_S3_And_CloudFront::PRIVATE_ACL );
+				$s3object = $this->as3cf->set_attachment_acl_on_s3( $attachment_id, $s3object, $this->as3cf->get_aws()->get_private_acl() );
 				if ( $s3object && ! is_wp_error( $s3object ) ) {
 					$this->as3cf->make_acl_admin_notice( $s3object );
 				}
@@ -176,7 +180,7 @@ class Woocommerce extends Integration {
 	/**
 	 * Remove private ACL from S3 if no longer used by WooCommerce.
 	 *
-	 * @param int $post_id
+	 * @param int   $post_id
 	 * @param array $new_attachments
 	 *
 	 * @return void
@@ -195,7 +199,7 @@ class Woocommerce extends Integration {
 			}
 		}
 
-		$removed_attachments = array_diff( $old_attachments , $new_attachments );
+		$removed_attachments = array_diff( $old_attachments, $new_attachments );
 
 		if ( empty( $removed_attachments ) ) {
 			return;
@@ -223,7 +227,7 @@ class Woocommerce extends Integration {
 
 			$results = $wpdb->get_results( $sql, ARRAY_A );
 
-			foreach( $results as $result ) {
+			foreach ( $results as $result ) {
 				// WP Offload S3
 				if ( preg_match( '@\[amazon_s3\sid=[\'\"]*' . $attachment_id . '[\'\"]*\]@', $result['meta_value'] ) ) {
 					continue 2;
@@ -239,7 +243,7 @@ class Woocommerce extends Integration {
 			}
 
 			// Set ACL to public
-			$s3object = $this->as3cf->set_attachment_acl_on_s3( $attachment_id, $s3object, Amazon_S3_And_CloudFront::DEFAULT_ACL );
+			$s3object = $this->as3cf->set_attachment_acl_on_s3( $attachment_id, $s3object, $this->as3cf->get_aws()->get_default_acl() );
 			if ( $s3object && ! is_wp_error( $s3object ) ) {
 				$this->as3cf->make_acl_admin_notice( $s3object );
 			}
@@ -295,7 +299,7 @@ class Woocommerce extends Integration {
 				try {
 					$expires    = time() + $expires;
 					$headers    = apply_filters( 'as3cf_woocommerce_download_headers', array( 'ResponseContentDisposition' => 'attachment' ), $file_data );
-					$secure_url = $this->as3cf->get_s3client( $region, true )->getObjectUrl( $atts['bucket'], $atts['object'], $expires, $headers );
+					$secure_url = $this->as3cf->get_s3client( $region, true )->get_object_url( $atts['bucket'], $atts['object'], $expires, $headers );
 				} catch ( Exception $e ) {
 					return;
 				}
@@ -321,8 +325,8 @@ class Woocommerce extends Integration {
 		}
 
 		$file_data['attachment_id'] = $attachment_id;
-		$headers    = apply_filters( 'as3cf_woocommerce_download_headers', array( 'ResponseContentDisposition' => 'attachment' ), $file_data );
-		$secure_url = $this->as3cf->get_secure_attachment_url( $attachment_id, $expires, null, $headers, true );
+		$headers                    = apply_filters( 'as3cf_woocommerce_download_headers', array( 'ResponseContentDisposition' => 'attachment' ), $file_data );
+		$secure_url                 = $this->as3cf->get_secure_attachment_url( $attachment_id, $expires, null, $headers, true );
 
 		header( 'Location: ' . $secure_url );
 		exit;
