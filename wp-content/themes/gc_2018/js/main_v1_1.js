@@ -70,11 +70,14 @@ $(document).ready(function () {
 
     $('#burger').click(function () {
 
-        $('body > header').toggleClass('open_nav');
+        $('body > header > .local').toggleClass('open_nav');
     });
 
+    $('#global-tab, #close-global-nav').click(function (e) {
+        e.preventDefault();
 
-
+        $('body > header > .global').toggleClass('open');
+    });
 
 
     $("iframe.video, iframe.audio").each(function () {

@@ -58,33 +58,54 @@ Use it to make something cool, have fun, and share what you've learned with othe
   src: url("fonts/34BBF4_3_0.eot");
   src: url("fonts/34BBF4_3_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_3_0.woff2") format("woff2"), url("fonts/34BBF4_3_0.woff") format("woff"), url("fonts/34BBF4_3_0.ttf") format("truetype"); }
 
-#gc_docs > header {
+#gc_docs > header div.global {
+  transform: translate(0, -100%); }
+  #gc_docs > header div.global.open {
+    transform: translate(0, 0); }
+  #gc_docs > header div.global #global-tab {
+    padding: 12px 17px; }
+
+#gc_docs > header div.local {
   background-color: #3b3a3a;
-  top: 0;
-  left: inherit;
-  right: inherit;
-  bottom: inherit;
-  height: auto;
   width: 100%;
-  padding: 0; }
-  #gc_docs > header #simple_logo {
-    display: none; }
-  #gc_docs > header #logo_mini,
-  #gc_docs > header div.top-nav {
-    position: relative;
+  height: 36px;
+  position: fixed;
+  bottom: inherit;
+  box-shadow: 1px 2px 4px rgba(51, 51, 51, 0.5); }
+  #gc_docs > header div.local > div {
+    margin: 0 auto; }
+  #gc_docs > header div.local #simple_logo {
+    display: none;
+    margin: 0 auto; }
+  #gc_docs > header div.local div.top-nav,
+  #gc_docs > header div.local #burger {
     display: inline-block;
-    margin: 0;
-    vertical-align: top; }
-  #gc_docs > header #logo_mini {
-    margin: 10px 20px; }
-    #gc_docs > header #logo_mini span {
-      padding: 5px 0 0 8px; }
-  #gc_docs > header div.top-nav {
+    position: relative;
+    top: inherit;
+    margin: 0; }
+  #gc_docs > header div.local #burger {
     float: right;
-    margin-right: 80px;
-    margin-top: 5px; }
-  #gc_docs > header #burger {
-    margin: 12px 20px 0 0; }
+    margin: 9px 20px;
+    height: 18px;
+    width: 24px; }
+    #gc_docs > header div.local #burger span {
+      background-color: #FFFFFF; }
+      #gc_docs > header div.local #burger span:nth-child(1) {
+        top: 0; }
+      #gc_docs > header div.local #burger span:nth-child(2), #gc_docs > header div.local #burger span:nth-child(3) {
+        top: 8px; }
+      #gc_docs > header div.local #burger span:nth-child(4) {
+        top: 16px; }
+  #gc_docs > header div.local div.top-nav {
+    float: right;
+    margin: 1px 10px 0 0; }
+    #gc_docs > header div.local div.top-nav ul li a {
+      color: #FFFFFF;
+      font-size: 0.9em; }
+      #gc_docs > header div.local div.top-nav ul li a::before, #gc_docs > header div.local div.top-nav ul li a::after {
+        background-color: #FFFFFF; }
+  #gc_docs > header div.local.open_nav #burger span {
+    background-color: #333333; }
 
 #gc_docs #content article.title {
   padding-bottom: 300px; }

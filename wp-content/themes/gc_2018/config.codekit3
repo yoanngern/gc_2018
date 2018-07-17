@@ -664,6 +664,13 @@
 		"oAP": "\/includes\/acf\/date.php",
 		"oF": 0
 		},
+	"\/includes\/acf\/gc_nav.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/includes\/acf\/gc_nav.php",
+		"oF": 0
+		},
 	"\/includes\/acf\/gc_settings.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -3848,6 +3855,19 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/scss\/footer.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/scss\/advanced\/header-global.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/scss\/header-global.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1

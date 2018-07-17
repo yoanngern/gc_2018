@@ -84,7 +84,7 @@ article, aside, footer, header, hgroup, nav, section, figure, figcaption {
   src: url("fonts/34BBF4_3_0.eot");
   src: url("fonts/34BBF4_3_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_3_0.woff2") format("woff2"), url("fonts/34BBF4_3_0.woff") format("woff"), url("fonts/34BBF4_3_0.ttf") format("truetype"); }
 
-body > header {
+body > header div.local {
   top: 0;
   right: 0;
   left: 0;
@@ -92,8 +92,7 @@ body > header {
   width: 100%;
   z-index: 1000;
   bottom: 0; }
-  body > header #simple_logo {
-    display: inline-block;
+  body > header div.local #simple_logo {
     width: 160px;
     height: 70px;
     background-repeat: no-repeat;
@@ -105,10 +104,11 @@ body > header {
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 300; }
-    body > header #simple_logo:hover {
+    z-index: 300;
+    display: none; }
+    body > header div.local #simple_logo:hover {
       opacity: 1; }
-  body > header #logo_mini {
+  body > header div.local #logo_mini {
     display: none;
     margin: 37px 0 0 40px;
     opacity: 0.92;
@@ -118,12 +118,12 @@ body > header {
     z-index: 300;
     fill: #FFFFFF;
     transition: all 300ms ease-in-out 0s; }
-    body > header #logo_mini svg {
+    body > header div.local #logo_mini svg {
       width: 28px;
       height: 27px;
       display: inline-block;
       float: left; }
-    body > header #logo_mini span {
+    body > header div.local #logo_mini span {
       display: inline-block;
       float: left;
       color: #FFFFFF;
@@ -133,9 +133,9 @@ body > header {
       letter-spacing: 0.1em;
       line-height: 20px;
       padding: 6px 0 0 8px; }
-  body > header #language {
+  body > header div.local #language {
     display: none; }
-  body > header #burger {
+  body > header div.local #burger {
     margin: 39px 55px 0 0;
     width: 28px;
     height: 22px;
@@ -153,7 +153,7 @@ body > header {
     position: absolute;
     right: 0;
     top: 0; }
-    body > header #burger span {
+    body > header div.local #burger span {
       display: block;
       position: absolute;
       height: 2px;
@@ -170,13 +170,13 @@ body > header {
       -moz-transition: .25s ease-in-out;
       -o-transition: .25s ease-in-out;
       transition: .25s ease-in-out; }
-      body > header #burger span:nth-child(1) {
+      body > header div.local #burger span:nth-child(1) {
         top: 0px; }
-      body > header #burger span:nth-child(2), body > header #burger span:nth-child(3) {
+      body > header div.local #burger span:nth-child(2), body > header div.local #burger span:nth-child(3) {
         top: 10px; }
-      body > header #burger span:nth-child(4) {
+      body > header div.local #burger span:nth-child(4) {
         top: 20px; }
-  body > header div.top-nav {
+  body > header div.local div.top-nav {
     display: block;
     right: 0;
     top: 0;
@@ -187,10 +187,10 @@ body > header {
     -webkit-transition: all 250ms ease;
     -moz-transition: all 250ms ease;
     -o-transition: all 250ms ease; }
-    body > header div.top-nav ul li {
+    body > header div.local div.top-nav ul li {
       display: inline-block;
       padding: 5px 10px; }
-      body > header div.top-nav ul li a {
+      body > header div.local div.top-nav ul li a {
         color: #FFFFFF;
         text-decoration: none;
         font-size: 1em;
@@ -201,13 +201,13 @@ body > header {
         letter-spacing: 0.08em;
         text-transform: uppercase;
         position: relative; }
-        body > header div.top-nav ul li a:hover::before {
+        body > header div.local div.top-nav ul li a:hover::before {
           width: 100%;
           transition: all 0ms ease-in-out 150ms; }
-        body > header div.top-nav ul li a:hover::after {
+        body > header div.local div.top-nav ul li a:hover::after {
           width: 100%;
           transition: all 150ms ease-in-out 0s; }
-        body > header div.top-nav ul li a::after, body > header div.top-nav ul li a::before {
+        body > header div.local div.top-nav ul li a::after, body > header div.local div.top-nav ul li a::before {
           position: absolute;
           content: "";
           height: 2px;
@@ -215,15 +215,15 @@ body > header {
           display: block;
           bottom: 0;
           width: 0; }
-        body > header div.top-nav ul li a::before {
+        body > header div.local div.top-nav ul li a::before {
           right: 0;
           transition: all 150ms ease-in-out 150ms; }
-        body > header div.top-nav ul li a::after {
+        body > header div.local div.top-nav ul li a::after {
           left: 0;
           transition: all 0ms ease-in-out 0s; }
-      body > header div.top-nav ul li ul {
+      body > header div.local div.top-nav ul li ul {
         display: none; }
-  body > header div.principal-nav {
+  body > header div.local div.principal-nav {
     opacity: 0;
     max-width: 300px;
     width: 100%;
@@ -243,9 +243,9 @@ body > header {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch; }
-    body > header div.principal-nav div {
+    body > header div.local div.principal-nav div {
       margin-top: 70px; }
-    body > header div.principal-nav div > ul {
+    body > header div.local div.principal-nav div > ul {
       padding: 5px 10px 20px 20px;
       overflow: scroll;
       scroll-behavior: smooth;
@@ -253,20 +253,20 @@ body > header {
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
       overflow-scrolling: touch; }
-      body > header div.principal-nav div > ul li {
+      body > header div.local div.principal-nav div > ul li {
         display: block; }
-        body > header div.principal-nav div > ul li a {
+        body > header div.local div.principal-nav div > ul li a {
           color: #333333;
           text-decoration: none;
           transition: all 200ms ease; }
-        body > header div.principal-nav div > ul li ul {
+        body > header div.local div.principal-nav div > ul li ul {
           margin: 3px 0 8px 5px; }
-          body > header div.principal-nav div > ul li ul li {
+          body > header div.local div.principal-nav div > ul li ul li {
             padding: 5px 0 3px 6px; }
-            body > header div.principal-nav div > ul li ul li.current-menu-item > a {
+            body > header div.local div.principal-nav div > ul li ul li.current-menu-item > a {
               padding: 2px 0 0 3px;
               border-left: 3px solid #E52639; }
-            body > header div.principal-nav div > ul li ul li a {
+            body > header div.local div.principal-nav div > ul li ul li a {
               font-family: "Radikal", sans-serif;
               text-transform: uppercase;
               font-size: 0.9em;
@@ -274,17 +274,17 @@ body > header {
               -moz-transition: all 100ms ease;
               -o-transition: all 100ms ease;
               padding: 2px 0 0 6px; }
-              body > header div.principal-nav div > ul li ul li a:hover {
+              body > header div.local div.principal-nav div > ul li ul li a:hover {
                 color: #E52639; }
-      body > header div.principal-nav div > ul > li {
+      body > header div.local div.principal-nav div > ul > li {
         padding: 3px; }
-        body > header div.principal-nav div > ul > li.current-menu-item > a {
+        body > header div.local div.principal-nav div > ul > li.current-menu-item > a {
           padding: 0 0 0 3px;
           border-left: 3px solid #E52639; }
-        body > header div.principal-nav div > ul > li.current-menu-item.current-menu-ancestor > a {
+        body > header div.local div.principal-nav div > ul > li.current-menu-item.current-menu-ancestor > a {
           padding: 2px 0 0 6px;
           border-left: inherit; }
-        body > header div.principal-nav div > ul > li > a {
+        body > header div.local div.principal-nav div > ul > li > a {
           font-size: 1.1em;
           line-height: 1.6em;
           padding: 0 0 0 6px;
@@ -295,75 +295,330 @@ body > header {
           -webkit-transition: all 100ms ease;
           -moz-transition: all 100ms ease;
           -o-transition: all 100ms ease; }
-          body > header div.principal-nav div > ul > li > a:hover {
+          body > header div.local div.principal-nav div > ul > li > a:hover {
             color: #E52639; }
-    body > header div.principal-nav div.right-sidebar-private,
-    body > header div.principal-nav div.right-sidebar-public {
+    body > header div.local div.principal-nav div.right-sidebar-private,
+    body > header div.local div.principal-nav div.right-sidebar-public {
       display: block;
       margin-top: 0; }
-      body > header div.principal-nav div.right-sidebar-private h2,
-      body > header div.principal-nav div.right-sidebar-public h2 {
+      body > header div.local div.principal-nav div.right-sidebar-private h2,
+      body > header div.local div.principal-nav div.right-sidebar-public h2 {
         display: none; }
-      body > header div.principal-nav div.right-sidebar-private div,
-      body > header div.principal-nav div.right-sidebar-public div {
+      body > header div.local div.principal-nav div.right-sidebar-private div,
+      body > header div.local div.principal-nav div.right-sidebar-public div {
         margin-top: 0; }
-      body > header div.principal-nav div.right-sidebar-private .textwidget,
-      body > header div.principal-nav div.right-sidebar-public .textwidget {
+      body > header div.local div.principal-nav div.right-sidebar-private .textwidget,
+      body > header div.local div.principal-nav div.right-sidebar-public .textwidget {
         padding-left: 30px; }
-        body > header div.principal-nav div.right-sidebar-private .textwidget a,
-        body > header div.principal-nav div.right-sidebar-public .textwidget a {
+        body > header div.local div.principal-nav div.right-sidebar-private .textwidget a,
+        body > header div.local div.principal-nav div.right-sidebar-public .textwidget a {
           color: #777777;
           text-decoration: none; }
-          body > header div.principal-nav div.right-sidebar-private .textwidget a:hover,
-          body > header div.principal-nav div.right-sidebar-public .textwidget a:hover {
+          body > header div.local div.principal-nav div.right-sidebar-private .textwidget a:hover,
+          body > header div.local div.principal-nav div.right-sidebar-public .textwidget a:hover {
             text-decoration: underline; }
-  body > header.open_nav #burger {
+  body > header div.local.open_nav #burger {
     position: fixed; }
-    body > header.open_nav #burger span {
+    body > header div.local.open_nav #burger span {
       background-color: #333333; }
-      body > header.open_nav #burger span:nth-child(1) {
+      body > header div.local.open_nav #burger span:nth-child(1) {
         top: 10.5px;
         width: 0%;
         left: 50%; }
-      body > header.open_nav #burger span:nth-child(2) {
+      body > header div.local.open_nav #burger span:nth-child(2) {
         -webkit-transform: rotate(45deg);
         -moz-transform: rotate(45deg);
         -o-transform: rotate(45deg);
         transform: rotate(45deg); }
-      body > header.open_nav #burger span:nth-child(3) {
+      body > header div.local.open_nav #burger span:nth-child(3) {
         -webkit-transform: rotate(-45deg);
         -moz-transform: rotate(-45deg);
         -o-transform: rotate(-45deg);
         transform: rotate(-45deg); }
-      body > header.open_nav #burger span:nth-child(4) {
+      body > header div.local.open_nav #burger span:nth-child(4) {
         top: 10.5px;
         width: 0%;
         left: 50%; }
-  body > header.open_nav div.top-nav {
+  body > header div.local.open_nav div.top-nav {
     opacity: 0; }
-  body > header.open_nav div.principal-nav {
+  body > header div.local.open_nav div.principal-nav {
     opacity: 1;
     right: 0; }
   @media only screen and (max-width: 800px) {
-    body > header div.top-nav {
+    body > header div.local div.top-nav {
       display: none; }
-    body > header #simple_logo {
-      display: none; }
-    body > header #logo_mini {
-      display: inline-block; } }
+    body > header div.local #simple_logo {
+      display: none; } }
   @media only screen and (max-width: 480px) {
-    body > header #logo_mini {
+    body > header div.local #logo_mini {
       margin: 13px 0 0 15px; }
-    body > header #burger {
+    body > header div.local #burger {
       margin: 15px 15px 0 0; } }
   @media only screen and (max-width: 400px) {
-    body > header div.principal-nav {
+    body > header div.local div.principal-nav {
       max-width: inherit; } }
 
 body.tax-gc_eventcategory > header div.principal-nav div > ul li.menu-item-object-gc_event > a,
 body.single-gc_event > header div.principal-nav div > ul li.menu-item-object-gc_event > a {
   padding: 2px 0 0 3px;
   border-left: 3px solid #E52639; }
+
+body > header div.global {
+  -webkit-transition: all 400ms ease;
+  -moz-transition: all 400ms ease;
+  -o-transition: all 400ms ease;
+  left: 0;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  transition: all 350ms ease-in-out 0s;
+  z-index: 9999;
+  transform: translate(0, -100%); }
+  body > header div.global #global-tab:before,
+  body > header div.global .global-nav:before {
+    background: transparent;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -100;
+    box-shadow: 1px 3px 3px rgba(51, 51, 51, 0.4);
+    transition: all 100ms ease-in-out 0s; }
+  body > header div.global #global-tab {
+    background-color: #FFFFFF;
+    display: inline-block;
+    margin: 0 0 0 37px;
+    padding: 8px 13px 7px;
+    height: 22px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    left: 0;
+    fill: #333333;
+    transition: all 300ms ease-in-out 0s;
+    text-decoration: none;
+    position: absolute;
+    z-index: 9999; }
+    body > header div.global #global-tab:before {
+      content: ""; }
+    body > header div.global #global-tab div.svg-box {
+      width: 22px;
+      height: 21px; }
+    body > header div.global #global-tab span.txt {
+      display: inline-block;
+      color: #333333;
+      font-family: "Radikal", sans-serif;
+      font-size: 1.1em;
+      vertical-align: top;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 20px;
+      padding: 2px 0 0 6px; }
+    body > header div.global #global-tab div.arrow {
+      display: inline-block;
+      vertical-align: top;
+      width: 13px;
+      height: 15px;
+      position: relative;
+      margin: 1px 0 0 8px; }
+      body > header div.global #global-tab div.arrow span {
+        height: 2px;
+        background-color: #333333;
+        display: block;
+        position: absolute;
+        width: 8px;
+        top: 50%; }
+        body > header div.global #global-tab div.arrow span:first-of-type {
+          transform: rotate(45deg);
+          left: 0; }
+        body > header div.global #global-tab div.arrow span:last-of-type {
+          transform: rotate(-45deg);
+          right: 0; }
+    @media only screen and (max-width: 800px) {
+      body > header div.global #global-tab {
+        margin-left: -2px; } }
+  body > header div.global div.global-nav {
+    background-color: #FFFFFF;
+    width: 100%;
+    position: relative;
+    z-index: 9999; }
+    body > header div.global div.global-nav div.container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 40px 20px; }
+    body > header div.global div.global-nav div.content {
+      display: table;
+      width: 100%; }
+      body > header div.global div.global-nav div.content .left {
+        display: inline-block;
+        width: 21%;
+        vertical-align: top;
+        margin: 0 2%; }
+        body > header div.global div.global-nav div.content .left #logo {
+          display: block;
+          margin-bottom: 35px; }
+          body > header div.global div.global-nav div.content .left #logo div.svg-box {
+            width: 200px;
+            height: 80px; }
+        body > header div.global div.global-nav div.content .left p {
+          font-size: 0.86em;
+          line-height: 1.4;
+          letter-spacing: 0.05em; }
+      body > header div.global div.global-nav div.content .menu-global-nav-container {
+        width: 74%;
+        display: inline-block;
+        vertical-align: top; }
+        body > header div.global div.global-nav div.content .menu-global-nav-container > ul {
+          -webkit-column-count: 3;
+          -moz-column-count: 3;
+          column-count: 3;
+          vertical-align: top; }
+          body > header div.global div.global-nav div.content .menu-global-nav-container > ul li {
+            list-style: none;
+            break-inside: avoid-column;
+            page-break-inside: avoid;
+            -webkit-column-break-inside: avoid; }
+          body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li {
+            padding-bottom: 25px;
+            margin: 0 5%; }
+            body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li a {
+              color: #333333;
+              font-family: "Radikal-Bold", "Radikal", sans-serif;
+              font-size: 1.3em;
+              text-decoration: none;
+              letter-spacing: 0.05em;
+              line-height: 1.2em;
+              padding-bottom: 8px;
+              display: block; }
+            body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li ul {
+              margin-left: 47px;
+              break-inside: avoid-column;
+              page-break-inside: avoid;
+              -webkit-column-break-inside: avoid; }
+              body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li ul a {
+                color: #777777;
+                font-family: "Radikal", sans-serif;
+                font-size: 1em;
+                padding-bottom: 10px; }
+            body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li > a span.title {
+              display: inline-block;
+              vertical-align: top;
+              padding-top: 12px; }
+            body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li > a span.icon {
+              display: inline-block;
+              width: 40px;
+              height: 40px;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: contain;
+              float: left;
+              margin-right: 7px;
+              vertical-align: top; }
+            body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li.menu-item-has-children {
+              break-inside: avoid-column;
+              page-break-inside: avoid;
+              -webkit-column-break-inside: avoid; }
+    @media only screen and (max-width: 1270px) {
+      body > header div.global div.global-nav div.content .left {
+        width: 30%;
+        margin: 0 1.5%; }
+      body > header div.global div.global-nav div.content .menu-global-nav-container {
+        width: 66%; }
+        body > header div.global div.global-nav div.content .menu-global-nav-container > ul {
+          -webkit-column-count: 2;
+          -moz-column-count: 2;
+          column-count: 2; } }
+    @media only screen and (max-width: 900px) {
+      body > header div.global div.global-nav div.container {
+        padding: 20px; }
+      body > header div.global div.global-nav div.content .left {
+        width: 96%;
+        margin: 0 2%;
+        display: block; }
+        body > header div.global div.global-nav div.content .left p {
+          display: none; }
+      body > header div.global div.global-nav div.content .menu-global-nav-container {
+        display: block;
+        width: 100%;
+        margin: 0; }
+        body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li {
+          margin: 0 3%; } }
+    @media only screen and (max-width: 630px) {
+      body > header div.global div.global-nav div.content .left #logo {
+        text-align: center; }
+      body > header div.global div.global-nav div.content .menu-global-nav-container > ul {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
+        text-align: center; }
+        body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li {
+          margin: 0;
+          padding-bottom: 15px; }
+          body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li ul {
+            margin: 0; }
+          body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li > a {
+            display: inline-block;
+            padding-right: 20px; } }
+  body > header div.global.open {
+    transform: translate(0, 0); }
+    body > header div.global.open .global-nav:before {
+      content: "";
+      transition: all 100ms ease-in-out 300ms; }
+    body > header div.global.open #global-tab div.arrow span:first-of-type {
+      transform: rotate(-45deg);
+      left: 0; }
+    body > header div.global.open #global-tab div.arrow span:last-of-type {
+      transform: rotate(45deg);
+      right: 0; }
+    @media only screen and (max-width: 740px) {
+      body > header div.global.open .global-nav {
+        height: 100vh;
+        overflow: auto;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch; }
+        body > header div.global.open .global-nav .left {
+          padding-top: 40px; }
+        body > header div.global.open .global-nav .menu-global-nav-container {
+          padding-bottom: 60px; }
+      body > header div.global.open #global-tab {
+        display: none; }
+      body > header div.global.open .global-nav:before {
+        content: none; }
+      body > header div.global.open .close-nav {
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: top;
+        width: 25px;
+        height: 20px;
+        position: fixed;
+        margin: 15px 0 0 15px;
+        z-index: 10000; }
+        body > header div.global.open .close-nav span {
+          height: 2px;
+          background-color: #333333;
+          display: block;
+          position: absolute;
+          width: 15px;
+          top: 50%; }
+          body > header div.global.open .close-nav span:first-of-type {
+            transform: rotate(-45deg);
+            left: 0; }
+          body > header div.global.open .close-nav span:last-of-type {
+            transform: rotate(45deg);
+            right: 0; } }
+
+body > header div.svg-box {
+  position: relative;
+  display: inline-block;
+  vertical-align: top; }
+  body > header div.svg-box svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
 
 footer {
   width: 100%;

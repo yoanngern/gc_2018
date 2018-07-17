@@ -1,42 +1,91 @@
 #gc_docs {
-    & > header {
+
+    & > header div.global {
+
+        transform: translate(0, -100%);
+
+        &.open {
+            transform: translate(0, 0);
+        }
+
+        #global-tab {
+            padding: 12px 17px;
+        }
+    }
+
+    & > header div.local {
         background-color: darken($gray-dark, 10);
-        top: 0;
-        left: inherit;
-        right: inherit;
-        bottom: inherit;
-        height: auto;
         width: 100%;
-        padding: 0;
+        height: 36px;
+        position: fixed;
+        bottom: inherit;
+        box-shadow: 1px 2px 4px rgba($black, 0.5);
+
+        & > div {
+            margin: 0 auto;
+        }
 
         #simple_logo {
             display: none;
+            margin: 0 auto;
         }
 
-        #logo_mini,
-        div.top-nav {
-            position: relative;
+        div.top-nav,
+        #burger {
             display: inline-block;
+            position: relative;
+            top: inherit;
             margin: 0;
-            vertical-align: top;
         }
 
-        #logo_mini {
-            margin: 10px 20px;
+        #burger {
+            float: right;
+            margin: 9px 20px;
+            height: 18px;
+            width: 24px;
 
             span {
-                padding: 5px 0 0 8px;
+                background-color: $white;
+
+                &:nth-child(1) {
+                    top: 0;
+                }
+
+                &:nth-child(2),
+                &:nth-child(3) {
+                    top: 8px;
+                }
+
+                &:nth-child(4) {
+                    top: 16px;
+
+                }
             }
         }
 
         div.top-nav {
             float: right;
-            margin-right: 80px;
-            margin-top: 5px;
+            margin: 1px 10px 0 0;
+
+            ul li a {
+                color: $white;
+                font-size: 0.9em;
+
+                &::before,
+                &::after {
+                    background-color: $white;
+                }
+            }
         }
 
-        #burger {
-            margin: 12px 20px 0 0;
+        &.open_nav {
+
+            #burger {
+
+                span {
+                    background-color: $black;
+                }
+            }
         }
     }
 }

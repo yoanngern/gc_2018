@@ -20,6 +20,20 @@ add_filter( 'show_admin_bar', '__return_false' );
 
 require_once( __DIR__ . '/includes/gc_date.php' );
 
+
+function get_blog_id() {
+	global $blog_id;
+    return $blog_id;
+}
+
+function get_blog_gc_id() {
+    return 1;
+}
+
+function get_blog_tv_id() {
+	return 4;
+}
+
 add_action( 'acf/init', 'gc_acf_init' );
 
 function gc_acf_init() {
@@ -40,7 +54,52 @@ function gc_acf_init() {
 
 		) );
 
+		if(get_blog_id() == get_blog_gc_id()) {
+
+			/**
+			 * Gospel Center - Global Nav
+			 */
+			acf_add_options_sub_page( array(
+				'page_title'  => __( 'Gospel Center - Global Nav', 'my_text_domain' ),
+				'menu_title'  => __( 'Global Nav', 'my_text_domain' ),
+				'parent_slug' => 'options-general.php',
+				'menu_slug'   => 'gc_nav',
+				'capability'  => 'delete_pages',
+				'autoload'    => true,
+
+			) );
+
+        }
+
 	}
+}
+
+
+add_filter('wp_nav_menu_objects', 'my_wp_nav_menu_objects', 10, 2);
+
+function my_wp_nav_menu_objects( $items, $args ) {
+
+	// loop
+	foreach( $items as &$item ) {
+
+		// vars
+		$icon = get_field('icon', $item)['sizes']['thumbnail'];
+
+
+		// append icon
+		if( $icon ) {
+
+		    $title_txt = $item->title;
+
+			$item->title = '<span class="title">'.$title_txt.'</span> <span class="icon" style="background-image: url(\' '.$icon.' \')"></span>';
+
+		}
+
+	}
+
+
+	// return
+	return $items;
 
 }
 
@@ -85,15 +144,17 @@ function wpos3_hipdi_add_hidpi_file_paths( $paths ) {
 add_filter( 'as3cf_attachment_file_paths', 'wpos3_hipdi_add_hidpi_file_paths' );
 
 
-global $blog_id;
 
-$blog_gc_id = 1;
-$blog_tv_id = 4;
 
 
 function register_my_menu() {
 	register_nav_menu( 'principal', __( 'Menu principal', 'gc_2018' ) );
 	register_nav_menu( 'top', __( 'Menu header', 'gc_2018' ) );
+
+	if(get_blog_id() == get_blog_gc_id()) {
+
+		register_nav_menu( 'global_nav', __( 'Global Nav', 'gc_2018' ) );
+    }
 }
 
 add_action( 'init', 'register_my_menu' );
@@ -649,7 +710,7 @@ function gc_team_load_value( $field ) {
 
 
 	// GC TV
-	switch_to_blog( 4 );
+	switch_to_blog( get_blog_tv_id() );
 
 	$speakers = get_posts(
 		array(
