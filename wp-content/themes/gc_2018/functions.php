@@ -5,7 +5,7 @@
  *
  */
 function gc_theme_enqueue_style() {
-	wp_enqueue_style( 'gc_2018-style', get_template_directory_uri() . '/style.css', false, wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'gc_2018-style', get_template_directory_uri() . '/style_v2.css', false, wp_get_theme()->get( 'Version' ) );
 }
 
 function gc_theme_enqueue_script() {

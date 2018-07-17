@@ -3,7 +3,7 @@ function gc_city_theme_enqueue_styles() {
 
 	$parent_style = 'gc_2018-style';
 
-	wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css', false, wp_get_theme()->get('Version') );
+	wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style_v2.css', false, wp_get_theme()->get('Version') );
 	wp_enqueue_style( 'gc_2018-city-style',
 		get_stylesheet_directory_uri() . '/style.css',
 		array( $parent_style ),

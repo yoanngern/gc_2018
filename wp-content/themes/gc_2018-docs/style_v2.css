@@ -1,0 +1,321 @@
+/*
+Theme Name:     GC Docs 2018
+Theme URI:      http://gospel-center.org
+Author:         Yoann Gern
+Author URI:     http://gerny-media.ch
+Description:    Template for GC Docs 2018
+Template:       gc_2018
+Version:        0.2
+License:        GNU General Public License v2 or later
+License URI:    http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:    gc_2018-docs
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+@font-face {
+  font-family: 'Radikal-Light';
+  src: url("fonts/2B5662_0_0.eot");
+  src: url("fonts/2B5662_0_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_0_0.woff") format("woff"), url("fonts/2B5662_0_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Radikal-Black';
+  src: url("fonts/2B5662_1_0.eot");
+  src: url("fonts/2B5662_1_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_1_0.woff") format("woff"), url("fonts/2B5662_1_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Radikal-Bold';
+  src: url("fonts/2B5662_2_0.eot");
+  src: url("fonts/2B5662_2_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_2_0.woff") format("woff"), url("fonts/2B5662_2_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Radikal';
+  src: url("fonts/2B5662_3_0.eot");
+  src: url("fonts/2B5662_3_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_3_0.woff") format("woff"), url("fonts/2B5662_3_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Radikal-UltraThin';
+  src: url("fonts/2B5662_4_0.eot");
+  src: url("fonts/2B5662_4_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_4_0.woff") format("woff"), url("fonts/2B5662_4_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Corbel-BoldItalic';
+  src: url("fonts/34BBF4_0_0.eot");
+  src: url("fonts/34BBF4_0_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_0_0.woff2") format("woff2"), url("fonts/34BBF4_0_0.woff") format("woff"), url("fonts/34BBF4_0_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Corbel';
+  src: url("fonts/34BBF4_1_0.eot");
+  src: url("fonts/34BBF4_1_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_1_0.woff2") format("woff2"), url("fonts/34BBF4_1_0.woff") format("woff"), url("fonts/34BBF4_1_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Corbel-Bold';
+  src: url("fonts/34BBF4_2_0.eot");
+  src: url("fonts/34BBF4_2_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_2_0.woff2") format("woff2"), url("fonts/34BBF4_2_0.woff") format("woff"), url("fonts/34BBF4_2_0.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Corbel-Italic';
+  src: url("fonts/34BBF4_3_0.eot");
+  src: url("fonts/34BBF4_3_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_3_0.woff2") format("woff2"), url("fonts/34BBF4_3_0.woff") format("woff"), url("fonts/34BBF4_3_0.ttf") format("truetype"); }
+
+#gc_docs > header div.global {
+  transform: translate(0, -100%); }
+  #gc_docs > header div.global.open {
+    transform: translate(0, 0); }
+  #gc_docs > header div.global #global-tab {
+    padding: 12px 17px; }
+
+#gc_docs > header div.local {
+  background-color: #3b3a3a;
+  width: 100%;
+  height: 36px;
+  position: fixed;
+  bottom: inherit;
+  box-shadow: 1px 2px 4px rgba(51, 51, 51, 0.5); }
+  #gc_docs > header div.local > div {
+    margin: 0 auto; }
+  #gc_docs > header div.local #simple_logo {
+    display: none;
+    margin: 0 auto; }
+  #gc_docs > header div.local div.top-nav,
+  #gc_docs > header div.local #burger {
+    display: inline-block;
+    position: relative;
+    top: inherit;
+    margin: 0; }
+  #gc_docs > header div.local #burger {
+    float: right;
+    margin: 9px 20px;
+    height: 18px;
+    width: 24px; }
+    #gc_docs > header div.local #burger span {
+      background-color: #FFFFFF; }
+      #gc_docs > header div.local #burger span:nth-child(1) {
+        top: 0; }
+      #gc_docs > header div.local #burger span:nth-child(2), #gc_docs > header div.local #burger span:nth-child(3) {
+        top: 8px; }
+      #gc_docs > header div.local #burger span:nth-child(4) {
+        top: 16px; }
+  #gc_docs > header div.local div.top-nav {
+    float: right;
+    margin: 1px 10px 0 0; }
+    #gc_docs > header div.local div.top-nav ul li a {
+      color: #FFFFFF;
+      font-size: 0.9em; }
+      #gc_docs > header div.local div.top-nav ul li a::before, #gc_docs > header div.local div.top-nav ul li a::after {
+        background-color: #FFFFFF; }
+  #gc_docs > header div.local.open_nav #burger span {
+    background-color: #333333; }
+
+#gc_docs #content article.title {
+  padding-bottom: 300px; }
+  #gc_docs #content article.title .image {
+    filter: brightness(110%) saturate(1.2) contrast(95%);
+    background-position: center 25%;
+    /*
+            &::before {
+                @include gradient(rgba(lighten($red, 10), 0.75), rgba(lighten($red, 15), 0.75), rgba(darken($red, 15), 0.75));
+                filter: brightness(100%) saturate(1) contrast(100%);
+                content: " ";
+                display: block;
+                height: 100%;
+                position: absolute;
+                width: 100%;
+            }
+            */ }
+
+#gc_docs #content div.platter {
+  margin: 0 auto;
+  top: inherit;
+  background: transparent;
+  display: flex;
+  max-width: 1350px;
+  padding: 80px 15px 40px; }
+  #gc_docs #content div.platter #left-sidebar,
+  #gc_docs #content div.platter #right-sidebar {
+    width: 14%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 30px 1.333%; }
+    #gc_docs #content div.platter #left-sidebar h4,
+    #gc_docs #content div.platter #right-sidebar h4 {
+      font-family: "Radikal-Bold", "Radikal", sans-serif;
+      padding-bottom: 14px; }
+      #gc_docs #content div.platter #left-sidebar h4 a,
+      #gc_docs #content div.platter #right-sidebar h4 a {
+        color: #333333;
+        text-decoration: none; }
+    #gc_docs #content div.platter #left-sidebar ul li,
+    #gc_docs #content div.platter #right-sidebar ul li {
+      display: block;
+      margin: 8px 0; }
+      #gc_docs #content div.platter #left-sidebar ul li a,
+      #gc_docs #content div.platter #right-sidebar ul li a {
+        color: #545454;
+        text-decoration: none;
+        margin: 0;
+        display: inline-block;
+        line-height: 1.3em; }
+        #gc_docs #content div.platter #left-sidebar ul li a:hover,
+        #gc_docs #content div.platter #right-sidebar ul li a:hover {
+          text-decoration: underline; }
+      #gc_docs #content div.platter #left-sidebar ul li.current-cat > a,
+      #gc_docs #content div.platter #right-sidebar ul li.current-cat > a {
+        font-family: "Radikal-Bold", "Radikal", sans-serif;
+        color: #E52639; }
+      #gc_docs #content div.platter #left-sidebar ul li.current-cat ul,
+      #gc_docs #content div.platter #right-sidebar ul li.current-cat ul {
+        display: block; }
+      #gc_docs #content div.platter #left-sidebar ul li.current-cat.current-cat-parent > a,
+      #gc_docs #content div.platter #right-sidebar ul li.current-cat.current-cat-parent > a {
+        color: #333333; }
+      #gc_docs #content div.platter #left-sidebar ul li ul,
+      #gc_docs #content div.platter #right-sidebar ul li ul {
+        margin-left: 8px;
+        display: none; }
+  #gc_docs #content div.platter article.content-page {
+    padding: 0 2.333%;
+    width: 62%;
+    vertical-align: top;
+    max-width: inherit;
+    margin: 0;
+    display: inline-block; }
+    #gc_docs #content div.platter article.content-page > .content time {
+      color: #777777;
+      letter-spacing: 0.1em;
+      font-family: "Radikal-Light", "Radikal", sans-serif; }
+    #gc_docs #content div.platter article.content-page h1 {
+      margin: 30px auto; }
+
+@media only screen and (max-width: 1300px) {
+  #gc_docs #content div.platter article.content-page {
+    width: 58%; }
+  #gc_docs #content div.platter #left-sidebar,
+  #gc_docs #content div.platter #right-sidebar {
+    width: 16%; } }
+
+@media only screen and (max-width: 1200px) {
+  #gc_docs #content div.platter article.content-page {
+    width: 56%; }
+  #gc_docs #content div.platter #left-sidebar,
+  #gc_docs #content div.platter #right-sidebar {
+    width: 17%; } }
+
+@media only screen and (max-width: 1100px) {
+  #gc_docs #content div.platter {
+    display: block; }
+    #gc_docs #content div.platter article.content-page {
+      width: 700px;
+      padding: 0 20px; }
+    #gc_docs #content div.platter #left-sidebar {
+      width: 150px;
+      padding: 30px 10px; }
+    #gc_docs #content div.platter #right-sidebar {
+      margin-left: 170px;
+      padding: 0 20px;
+      width: 350px; } }
+
+@media only screen and (max-width: 960px) {
+  #gc_docs #content article.title {
+    padding-bottom: 200px; } }
+
+@media only screen and (max-width: 945px) {
+  #gc_docs #content div.platter article.content-page {
+    width: 640px; } }
+
+@media only screen and (max-width: 890px) {
+  #gc_docs #content div.platter article.content-page {
+    width: 600px; } }
+
+@media only screen and (max-width: 850px) {
+  #gc_docs #content div.platter article.content-page {
+    width: 550px; } }
+
+@media only screen and (max-width: 800px) {
+  #gc_docs #content div.platter article.content-page {
+    width: 500px; } }
+
+@media only screen and (max-width: 750px) {
+  #gc_docs #content div.platter article.content-page {
+    width: 450px; } }
+
+@media only screen and (max-width: 700px) {
+  #gc_docs #content div.platter article.content-page,
+  #gc_docs #content div.platter #left-sidebar,
+  #gc_docs #content div.platter #right-sidebar {
+    width: 94%;
+    padding: 0 3%;
+    margin-left: 0; } }
+
+body#gc_docs div.docs .table {
+  display: table;
+  width: 100%; }
+
+body#gc_docs div.docs .doc {
+  width: 30%;
+  display: inline-block;
+  margin: 0 3% 30px 0;
+  vertical-align: top; }
+  body#gc_docs div.docs .doc .image {
+    display: block;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.2%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #E52639; }
+  body#gc_docs div.docs .doc h2,
+  body#gc_docs div.docs .doc p {
+    margin: 0; }
+  body#gc_docs div.docs .doc h2 {
+    font-size: 0.9em;
+    font-family: "Radikal", sans-serif;
+    padding: 5px 0;
+    color: #777777; }
+  body#gc_docs div.docs .doc a {
+    display: inline-block;
+    position: relative;
+    height: auto;
+    width: 100%; }
+
+body#gc_docs #right-sidebar #resources {
+  margin-top: 34px;
+  overflow: hidden; }
+  body#gc_docs #right-sidebar #resources ul li {
+    display: flex !important;
+    margin: 8px 0 12px; }
+    body#gc_docs #right-sidebar #resources ul li:before {
+      content: "";
+      display: inline-block;
+      height: 20px;
+      width: 20px;
+      margin-right: 5px;
+      vertical-align: top;
+      background-image: url("images/file_default.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center; }
+    body#gc_docs #right-sidebar #resources ul li.jpg:before, body#gc_docs #right-sidebar #resources ul li.jpeg:before, body#gc_docs #right-sidebar #resources ul li.png:before, body#gc_docs #right-sidebar #resources ul li.gif:before, body#gc_docs #right-sidebar #resources ul li.ico:before, body#gc_docs #right-sidebar #resources ul li.psd:before, body#gc_docs #right-sidebar #resources ul li.bmp:before, body#gc_docs #right-sidebar #resources ul li.tif:before, body#gc_docs #right-sidebar #resources ul li.tiff:before {
+      background-image: url("images/file_image.png"); }
+    body#gc_docs #right-sidebar #resources ul li.mp4:before, body#gc_docs #right-sidebar #resources ul li.m4v:before, body#gc_docs #right-sidebar #resources ul li.mov:before, body#gc_docs #right-sidebar #resources ul li.wmv:before, body#gc_docs #right-sidebar #resources ul li.avi:before, body#gc_docs #right-sidebar #resources ul li.mpg:before, body#gc_docs #right-sidebar #resources ul li.ogv:before, body#gc_docs #right-sidebar #resources ul li.asf:before, body#gc_docs #right-sidebar #resources ul li.asx:before, body#gc_docs #right-sidebar #resources ul li.wm:before, body#gc_docs #right-sidebar #resources ul li.wmx:before, body#gc_docs #right-sidebar #resources ul li.divx:before, body#gc_docs #right-sidebar #resources ul li.flv:before, body#gc_docs #right-sidebar #resources ul li.qt:before, body#gc_docs #right-sidebar #resources ul li.mpe:before, body#gc_docs #right-sidebar #resources ul li.webm:before, body#gc_docs #right-sidebar #resources ul li.mkv:before {
+      background-image: url("images/file_video.png"); }
+    body#gc_docs #right-sidebar #resources ul li.mp3:before, body#gc_docs #right-sidebar #resources ul li.m4a:before, body#gc_docs #right-sidebar #resources ul li.ogg:before, body#gc_docs #right-sidebar #resources ul li.wav:before, body#gc_docs #right-sidebar #resources ul li.m4b:before, body#gc_docs #right-sidebar #resources ul li.ra:before, body#gc_docs #right-sidebar #resources ul li.ram:before, body#gc_docs #right-sidebar #resources ul li.mid:before, body#gc_docs #right-sidebar #resources ul li.midi:before, body#gc_docs #right-sidebar #resources ul li.wax:before, body#gc_docs #right-sidebar #resources ul li.mka:before {
+      background-image: url("images/file_audio.png"); }
+    body#gc_docs #right-sidebar #resources ul li.doc:before, body#gc_docs #right-sidebar #resources ul li.docx:before, body#gc_docs #right-sidebar #resources ul li.odt:before, body#gc_docs #right-sidebar #resources ul li.pages:before {
+      background-image: url("images/file_doc.png"); }
+    body#gc_docs #right-sidebar #resources ul li.txt:before, body#gc_docs #right-sidebar #resources ul li.asc:before, body#gc_docs #right-sidebar #resources ul li.c:before, body#gc_docs #right-sidebar #resources ul li.cc:before, body#gc_docs #right-sidebar #resources ul li.h:before {
+      background-image: url("images/file_txt.png"); }
+    body#gc_docs #right-sidebar #resources ul li.csv:before {
+      background-image: url("images/file_csv.png"); }
+    body#gc_docs #right-sidebar #resources ul li.tar:before, body#gc_docs #right-sidebar #resources ul li.zip:before, body#gc_docs #right-sidebar #resources ul li.gz:before, body#gc_docs #right-sidebar #resources ul li.gzip:before, body#gc_docs #right-sidebar #resources ul li.rar:before {
+      background-image: url("images/file_zip.png"); }
+    body#gc_docs #right-sidebar #resources ul li.xls:before, body#gc_docs #right-sidebar #resources ul li.xlsx:before, body#gc_docs #right-sidebar #resources ul li.ods:before, body#gc_docs #right-sidebar #resources ul li.numbers:before {
+      background-image: url("images/file_xls.png"); }
+    body#gc_docs #right-sidebar #resources ul li.pdf:before {
+      background-image: url("images/file_pdf.png"); }
+    body#gc_docs #right-sidebar #resources ul li.link:before {
+      background-image: url("images/link.png"); }
+    body#gc_docs #right-sidebar #resources ul li a {
+      width: 90%;
+      vertical-align: top; }
