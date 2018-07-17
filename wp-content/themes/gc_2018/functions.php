@@ -9,7 +9,7 @@ function gc_theme_enqueue_style() {
 }
 
 function gc_theme_enqueue_script() {
-	wp_enqueue_script( 'gc_2018-js', get_template_directory_uri() . '/js/main_v1_1.min.js', false );
+	wp_enqueue_script( 'gc_2018-js', get_template_directory_uri() . '/js/main_v1_2.min.js', false );
 }
 
 
