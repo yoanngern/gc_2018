@@ -6,7 +6,7 @@ $category = get_field( 'related_events' );
 $today = date( 'Y-m-d H:i:s' );
 
 $events = wp_get_recent_posts( array(
-	'numberposts'      => 3,
+	'numberposts'      => 6,
 	'offset'           => 0,
 	'tax_query'        => array(
 		array(
@@ -34,7 +34,7 @@ if ( $events != null ) : ?>
 
     <div class="related_events">
 
-        <section id="listOfEvents" class="small" data-nb="3">
+        <section id="listOfEvents" class="small" data-nb="6">
             <h1>des événements à ne pas manquer</h1>
             <article class="content-page events_table">
 
