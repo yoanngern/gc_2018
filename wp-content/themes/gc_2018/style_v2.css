@@ -1802,6 +1802,11 @@ nav.sub-nav {
 .nf-form-cont .nf-error-msg {
   font-size: 0.8em; }
 
+.nf-form-cont .nf-help {
+  background-size: contain;
+  width: 10px;
+  height: 10px; }
+
 .nf-multi-cell div.nf-cell {
   padding: 0 2% 0 0; }
 

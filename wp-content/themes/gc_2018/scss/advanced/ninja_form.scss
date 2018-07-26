@@ -42,6 +42,12 @@
     .nf-error-msg {
         font-size: 0.8em;
     }
+
+    .nf-help {
+        background-size: contain;
+        width: 10px;
+        height: 10px;
+    }
 }
 
 .nf-multi-cell {
@@ -154,7 +160,6 @@
                 margin-right: 15px !important;
                 font-size: 14px;
                 letter-spacing: normal;
-
 
                 &:before {
                     content: none;
