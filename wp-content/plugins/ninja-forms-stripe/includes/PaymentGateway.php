@@ -818,6 +818,14 @@ class NF_Stripe_PaymentGateway extends NF_Abstracts_PaymentGateway
 	        }
             if( $this->_slug != $action->get_setting( 'payment_gateways' ) ) continue;
 
+	        /*
+	         * There was an issue where inactive stripe action were still
+	         * being passed to the front-end and being process based on the
+	         * order they came in in the array. This line removes 'inactive'
+	         * Stripe actions from being passed to the front end
+	         */
+	        if( 1 != $action->get_setting( 'active' ) ) continue;
+
             $this->has_active_stripe_action = true;
 
             $button_label = $action->get_setting( 'stripe_checkout_modal_button_txt', '' );

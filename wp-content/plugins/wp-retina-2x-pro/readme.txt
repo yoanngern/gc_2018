@@ -2,16 +2,23 @@
 Contributors: TigrouMeow
 Tags: retina, images, image, responsive, lazysizes, lazy, attachment, media, files, iphone, ipad, high-dpi
 Requires at least: 3.5
-Tested up to: 4.9
-Stable tag: 5.2.8
+Tested up to: 4.9.7
+Stable tag: 5.4.0
 
 Make your website look beautiful and crisp on modern displays by creating and displaying retina images.
 
 == Description ==
 
-Make your website look beautiful and crisp on modern displays by creating and displaying retina images. More information and tutorial available one https://meowapps.com/wp-retina-2x/.
+Make your website look beautiful and crisp on modern displays by creating and displaying retina images. More information and tutorial available one https://meowapps.com/plugin/wp-retina-2x/.
 
 == Changelog ==
+
+= 5.4.0 =
+* Add: Direct upload of Retina for Full-Size.
+
+= 5.2.9 =
+* Add: New option to Regenerate Thumbnails.
+* Fix: Tiny CSS fix, and update fix.
 
 = 5.2.8 =
 * Fix: Security update.

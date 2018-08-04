@@ -1,5 +1,38 @@
 # Elementor Pro - by Elementor.com
 
+#### 2.0.18 - 2018-07-27
+* Fix: Global widget error on saving page
+
+#### 2.0.17 - 2018-07-26
+* Fix: Sub menu indicator direction in Nav Menu widget
+* Fix: Change the title and icon for Global Widget when is moving
+* Fix: CSS wrapper selector for Page Document
+
+#### 2.0.16 - 2018-07-16
+* Tweak: CSS Filter Control module is now included in Elementor
+* Fix: Border gap in Portfolio widget when item gap set as `0` ([#5077](https://github.com/pojome/elementor/issues/5077))
+* Fix: Restore current query after get Global Widget data
+* Fix: Add action item in History on unlink Global widget
+
+#### 2.0.15 - 2018-07-10
+* Fix: Dropdown menu items collapsing when activated ([#4996](https://github.com/pojome/elementor/issues/4996))
+* Fix: GMT offset in Countdown widget ([#4997](https://github.com/pojome/elementor/issues/4997))
+
+#### 2.0.14 - 2018-07-08
+* Tweak: Added set method to form record for developers ([#4983](https://github.com/pojome/elementor/issues/4983))
+* Fix: Autoplay option for Carousels
+* Fix: Close mobile menu on item click in the Nav Menu widget
+
+#### 2.0.13 - 2018-07-03
+* Tweak: Added compatibility for Elementor v2.1
+
+#### 2.0.12 - 2018-07-02
+* Fix: Global widget PHP notices
+* Fix: Slides widget active slide lost focus when clicking Editor tabs
+* Fix: Form select field send all selected values on multiple selection
+* Fix: Validate time field only if it's not empty
+* Fix: ConvertKit API not saving name field
+
 #### 2.0.11 - 2018-06-12
 * Fix: Theme Builder `author` archive condition ([#4593](https://github.com/pojome/elementor/issues/4593))
 * Fix: Respect password protected posts in Post Content widget

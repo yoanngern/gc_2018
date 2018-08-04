@@ -89,7 +89,7 @@ class PLL_Xdata_Domain extends PLL_Xdata_Base {
 		);
 
 		$url = $this->ajax_url( $this->options['default_lang'], $args );
-		printf( '<script type="text/javascript" src="%s"></script>', esc_url( $url ) );
+		printf( '<script async type="text/javascript" src="%s"></script>', esc_url( $url ) );
 	}
 
 	/**

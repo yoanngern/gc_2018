@@ -12,6 +12,7 @@ class Meow_WR2X_Ajax {
 		add_action( 'wp_ajax_wr2x_list_all', array( $this, 'wp_ajax_wr2x_list_all' ) );
 		add_action( 'wp_ajax_wr2x_replace', array( $this, 'wp_ajax_wr2x_replace' ) );
 		add_action( 'wp_ajax_wr2x_upload', array( $this, 'wp_ajax_wr2x_upload' ) );
+		add_action( 'wp_ajax_wr2x_retina_upload', array( $this, 'wp_ajax_wr2x_retina_upload' ) );
 		add_action( 'wp_ajax_wr2x_retina_details', array( $this, 'wp_ajax_wr2x_retina_details' ) );
 	}
 
@@ -227,9 +228,12 @@ class Meow_WR2X_Ajax {
 		$this->core->delete_attachment( $attachmentId, false );
 
 		// Regenerate the Thumbnails
-		//$file = get_attached_file( $attachmentId );
-		//$meta = wp_generate_attachment_metadata( $attachmentId, $file );
-		//wp_update_attachment_metadata( $attachmentId, $meta );
+		$regenerate = get_option( 'wr2x_regenerate_thumbnails', false );
+		if ( $regenerate ) {
+			$file = get_attached_file( $attachmentId );
+			$meta = wp_generate_attachment_metadata( $attachmentId, $file );
+			wp_update_attachment_metadata( $attachmentId, $meta );
+		}
 
 		// Regenerate Retina
 		$meta = wp_get_attachment_metadata( $attachmentId );
@@ -280,8 +284,8 @@ class Meow_WR2X_Ajax {
 		return $tmpfname;
 	}
 
-	function wp_ajax_wr2x_upload() {
-		$this->check_nonce( 'wr2x_upload' );
+	function wp_ajax_wr2x_upload( $checksNonce = true ) {
+		if ( $checksNonce ) $this->check_nonce( 'wr2x_upload' );
 
 		try {
 			$tmpfname = $this->check_get_ajax_uploaded_file();
@@ -325,9 +329,67 @@ class Meow_WR2X_Ajax {
 		echo json_encode( array(
 			'success' => true,
 			'results' => $results,
-			'message' => __( "Uploaded successfully.", 'wp-retina-2x' )
+			'message' => __( "Uploaded successfully.", 'wp-retina-2x' ),
+			'media' => array(
+				'id' => $attachmentId,
+				'src' => wp_get_attachment_image_src( $attachmentId, 'thumbnail' ),
+				'edit_url' => get_edit_post_link( $attachmentId, 'attribute' )
+			)
 		));
 		die();
+	}
+
+	function wp_ajax_wr2x_retina_upload() {
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+		$this->check_nonce( 'wr2x_retina_upload' );
+		$this->check_capability();
+
+		try {
+			$tmpf = $this->check_get_ajax_uploaded_file();
+			$image = wp_get_image_editor( $tmpf );
+			$size = $image->get_size();
+
+			// Halve the size of the uploaded image
+			if ( $size['width'] >= $size['height'] ) $image->resize( round($size['width'] * .5), null );
+			else $image->resize( null, round($size['height'] * .5) );
+			$image->set_quality( get_option('wr2x_quality', 90) );
+			$halved = $image->save( $tmpf . 'H' );
+			if ( !$halved ) throw new Exception( "Failed to halve the uploaded image" );
+			if ( is_wp_error($halved) ) throw new Exception( $halved->get_error_message() );
+
+			// Upload the halved image
+			$content = file_get_contents( $halved['path'] );
+			if ( $content === false ) throw new Exception( "Couldn't read the uploaded file: {$halved['file']}" );
+			$uploaded = wp_upload_bits( $_POST['filename'], null, $content );
+			if ( isset($uploaded['error']) && $uploaded['error'] ) throw new Exception( $uploaded['error'] );
+
+			// Register the file as a new attachment
+			$attachTo = 0; // TODO Support specifying which post the media attach to
+			$ftype = wp_check_filetype( $uploaded['file'] );
+			$attachment = array (
+				'post_mime_type' => $ftype['type'],
+				'post_parent' => $attachTo,
+				'post_title' => preg_replace( '/\.[^.]+$/', '', $_POST['filename'] ),
+				'post_content' => '',
+				'post_status' => 'inherit'
+			);
+			$attachmentId = wp_insert_attachment( $attachment, $uploaded['file'], $attachTo );
+			if ( !$attachmentId ) throw new Exception( "Couldn't add an attachment file: {$uploaded['file']}" );
+			if ( is_wp_error($attachmentId) ) throw new Exception( $attachmentId->get_error_message() );
+			$meta = wp_generate_attachment_metadata( $attachmentId, $uploaded['file'] );
+			wp_update_attachment_metadata( $attachmentId, $meta );
+
+		} catch ( Exception $e ) {
+			echo json_encode( array (
+				'success' => false,
+				'results' => null,
+				'message' => __( "Error: " . $e->getMessage(), 'wp-retina-2x' )
+			));
+			die();
+		}
+		// Redirect to 'wr2x_upload'
+		$_POST['attachmentId'] = $attachmentId;
+		$this->wp_ajax_wr2x_upload( false );
 	}
 
 	function wp_ajax_wr2x_replace() {

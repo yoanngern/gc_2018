@@ -104,7 +104,9 @@ abstract class PLL_REST_Translated_Object {
 	 * @return bool
 	 */
 	public function set_language( $lang, $object ) {
-		$this->model->{$this->type}->set_language( $object->{$this->id}, $lang );
+		if ( isset( $object->{$this->id} ) ) { // Test to avoid a warning with WooCommerce
+			$this->model->{$this->type}->set_language( $object->{$this->id}, $lang );
+		}
 		return true;
 	}
 
@@ -130,7 +132,9 @@ abstract class PLL_REST_Translated_Object {
 	 * @return bool
 	 */
 	public function save_translations( $translations, $object ) {
-		$this->model->{$this->type}->save_translations( $object->{$this->id}, $translations );
+		if ( isset( $object->{$this->id} ) ) { // Test to avoid a warning with WooCommerce
+			$this->model->{$this->type}->save_translations( $object->{$this->id}, $translations );
+		}
 		return true;
 	}
 }

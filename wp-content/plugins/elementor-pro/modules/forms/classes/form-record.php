@@ -125,6 +125,10 @@ class Form_Record {
 		return null;
 	}
 
+	public function set( $property, $value ) {
+		$this->{$property} = $value;
+	}
+
 	public function get_form_settings( $setting ) {
 		if ( isset( $this->form_settings[ $setting ] ) ) {
 			return $this->form_settings[ $setting ];

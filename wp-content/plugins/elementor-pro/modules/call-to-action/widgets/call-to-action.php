@@ -4,13 +4,13 @@ namespace ElementorPro\Modules\CallToAction\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Css_Filter;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Color;
 use Elementor\Scheme_Typography;
 use Elementor\Utils;
 use ElementorPro\Base\Base_Widget;
-use ElementorPro\Modules\CssFilterControl\Controls\Group_Control_Css_Filter;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -1329,6 +1329,7 @@ class Call_To_Action extends Base_Widget {
 				'prefix_class' => '',
 				'condition' => [
 					'content_animation!' => '',
+
 				],
 			]
 		);
@@ -1383,6 +1384,14 @@ class Call_To_Action extends Base_Widget {
 			]
 		);
 
+		$this->add_group_control(
+			Group_Control_Css_Filter::get_type(),
+			[
+				'name' => 'bg_filters',
+				'selector' => '{{WRAPPER}} .elementor-cta__bg',
+			]
+		);
+
 		$this->add_control(
 			'overlay_blend_mode',
 			[
@@ -1404,14 +1413,6 @@ class Call_To_Action extends Base_Widget {
 					'{{WRAPPER}} .elementor-cta__bg-overlay' => 'mix-blend-mode: {{VALUE}}',
 				],
 				'separator' => 'none',
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Css_Filter::get_type(),
-			[
-				'name' => 'bg_filters',
-				'selector' => '{{WRAPPER}} .elementor-cta__bg',
 			]
 		);
 
@@ -1442,14 +1443,10 @@ class Call_To_Action extends Base_Widget {
 			]
 		);
 
-		$this->end_controls_tab();
-
-		$this->end_controls_tabs();
-
 		$this->add_control(
 			'effect_duration',
 			[
-				'label' => __( 'Effect Duration', 'elementor-pro' ),
+				'label' => __( 'Transition Duration', 'elementor-pro' ),
 				'type' => Controls_Manager::SLIDER,
 				'render_type' => 'template',
 				'default' => [
@@ -1467,6 +1464,10 @@ class Call_To_Action extends Base_Widget {
 				'separator' => 'before',
 			]
 		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 	}

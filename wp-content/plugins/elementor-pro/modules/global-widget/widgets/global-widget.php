@@ -122,7 +122,7 @@ class Global_Widget extends Base_Widget {
 	}
 
 	public function render_plain_content() {
-		$this->_original_element_instance->render_plain_content();
+		$this->get_original_element_instance()->render_plain_content();
 	}
 
 	protected function _add_render_attributes() {

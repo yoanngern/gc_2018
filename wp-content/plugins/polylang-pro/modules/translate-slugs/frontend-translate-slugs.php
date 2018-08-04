@@ -6,7 +6,6 @@
  * @since 1.9
  */
 class PLL_Frontend_Translate_Slugs extends PLL_Translate_Slugs {
-	public $curlang;
 
 	/**
 	 * Constructor
@@ -17,16 +16,15 @@ class PLL_Frontend_Translate_Slugs extends PLL_Translate_Slugs {
 	 * @param object $curlang     Current language
 	 */
 	public function __construct( &$slugs_model, &$curlang ) {
-		parent::__construct( $slugs_model );
+		parent::__construct( $slugs_model, $curlang );
 
 		$this->model = &$slugs_model->model;
 		$this->links_model = &$slugs_model->links_model;
-		$this->curlang = &$curlang;
 
 		// Translates slugs in archive link
 		if ( $this->links_model->using_permalinks ) {
-			foreach ( array( 'author_link', 'post_type_archive_link', 'search_link', 'get_pagenum_link', 'attachment_link' ) as $filter ) {
-				add_filter( $filter, array( $this, 'translate_slug' ), 20, 'post_type_archive_link' == $filter ? 2 : 1 );
+			foreach ( array( 'author_link', 'search_link', 'get_pagenum_link', 'attachment_link' ) as $filter ) {
+				add_filter( $filter, array( $this, 'translate_slug' ), 20 );
 			}
 		}
 
@@ -36,35 +34,6 @@ class PLL_Frontend_Translate_Slugs extends PLL_Translate_Slugs {
 
 		add_filter( 'pll_remove_paged_from_link', array( $this, 'remove_paged_from_link' ), 10, 2 );
 		add_filter( 'pll_add_paged_to_link', array( $this, 'add_paged_to_link' ), 10, 3 );
-	}
-
-	/**
-	 * Translate the slugs
-	 *
-	 * @since 1.9
-	 *
-	 * @param string $link
-	 * @param string $post_type Optional
-	 * @return string Modified link
-	 */
-	public function translate_slug( $link, $post_type = '' ) {
-		if ( empty( $this->curlang ) ) {
-			return $link;
-		}
-
-		$types = array(
-			'post_type_archive_link' => 'archive_' . $post_type,
-			'get_pagenum_link'       => 'paged',
-			'author_link'            => 'author',
-			'attachment_link'        => 'attachment',
-			'search_link'            => 'search',
-		);
-		$link = $this->slugs_model->translate_slug( $link, $this->curlang, $types[ current_filter() ] );
-
-		if ( ! empty( $GLOBALS['wp_rewrite'] ) ) {
-			$link = $this->slugs_model->translate_slug( $link, $this->curlang, 'front' );
-		}
-		return $link;
 	}
 
 	/**
@@ -120,8 +89,7 @@ class PLL_Frontend_Translate_Slugs extends PLL_Translate_Slugs {
 
 		if ( is_post_type_archive() ) {
 			$obj = $wp_query->get_queried_object();
-			$slug = true == $obj->has_archive ? $obj->rewrite['slug'] : $obj->has_archive;
-			$slugs[] = 'archive_' . $slug;
+			$slugs[] = 'archive_' . $obj->name;
 		}
 
 		elseif ( is_single() || is_page() ) {

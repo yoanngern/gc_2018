@@ -81,6 +81,14 @@ class PLL_Duplicate extends PLL_Metabox_Button {
 		if ( $this->active && 'post-new.php' === $GLOBALS['pagenow'] && isset( $_GET['from_post'], $_GET['new_lang'] ) ) {
 			// Capability check already done in post-new.php
 			$this->copy_content( get_post( (int) $_GET['from_post'] ), $post, $_GET['new_lang'] );
+
+			// Maybe duplicates the featured image
+			if ( $this->options['media_support'] ) {
+				add_filter( 'pll_translate_post_meta', array( $this, 'duplicate_thumbnail' ), 10, 3 );
+			}
+
+			// Maybe duplicate terms
+			add_filter( 'pll_maybe_translate_term', array( $this, 'duplicate_term' ), 10, 3 );
 		}
 	}
 
@@ -272,5 +280,69 @@ class PLL_Duplicate extends PLL_Metabox_Button {
 		}
 
 		return implode( $attributes );
+	}
+
+	/**
+	 * Duplicates the feature image if the translation does not exist yet
+	 *
+	 * @since 2.3
+	 *
+	 * @param int    $id   Thumbnail id
+	 * @param string $key  Meta key
+	 * @param string $lang Language code
+	 * @return int
+	 */
+	public function duplicate_thumbnail( $id, $key, $lang ) {
+		if ( '_thumbnail_id' === $key && ! $tr_id = $this->model->post->get( $id, $lang ) ) {
+			$tr_id = $this->filters_media->create_media_translation( $id, $lang );
+		}
+		return empty( $tr_id ) ? $id : $tr_id;
+	}
+
+	/**
+	 * Duplicates a term if the translation does not exist yet
+	 *
+	 * @since 2.3
+	 *
+	 * @param int    $tr_term Translated term id
+	 * @param int    $term    Source term id
+	 * @param string $lang    Language slug
+	 * @return int
+	 */
+	public function duplicate_term( $tr_term, $term, $lang ) {
+		if ( empty( $tr_term ) ) {
+			$term = get_term( $term );
+			$args = array(
+				'description' => $term->description,
+				'parent' => $this->model->term->get_translation( $term->parent, $lang ),
+			);
+
+			// Share slugs
+			if ( $this->options['force_lang'] ) {
+				$args['slug'] = $term->slug . '___' . $lang;
+			}
+
+			$t = wp_insert_term( $term->name, $term->taxonomy, $args );
+
+			if ( is_array( $t ) && isset( $t['term_id'] ) ) {
+				$tr_term = $t['term_id'];
+				$this->model->term->set_language( $tr_term, $lang );
+				$translations = $this->model->term->get_translations( $term->term_id );
+				$translations[ $lang ] = $tr_term;
+				$this->model->term->save_translations( $term->term_id, $translations );
+
+				/**
+				 * Fires after a term translation is automatically created when duplicating a post
+				 *
+				 * @since 2.3.8
+				 *
+				 * @param int    $from Term id of the source term
+				 * @param int    $to   Term id of the new term translation
+				 * @param string $lang Language code of the new translation
+				 */
+				do_action( 'pll_duplicate_term', $term->term_id, $tr_term, $lang );
+			}
+		}
+		return $tr_term;
 	}
 }

@@ -21,7 +21,7 @@ class PLL_Translate_Slugs_Model {
 
 		add_action( 'switch_blog', array( $this, 'switch_blog' ), 20, 2 );
 
-		add_action( 'wp_loaded', array( $this, 'init_translated_slugs' ) );
+		add_action( 'wp_loaded', array( $this, 'init_translated_slugs' ), 1 );
 
 		// Make sure to prepare rewrite rules when flushing
 		add_action( 'pre_option_rewrite_rules', array( $this, 'prepare_rewrite_rules' ), 20 ); // after Polylang
@@ -347,12 +347,14 @@ class PLL_Translate_Slugs_Model {
 	 */
 	protected function translate_post_type_archive_rule( $rules ) {
 		$cpts = array_intersect( $this->model->get_translated_post_types(), get_post_types( array( '_builtin' => false ) ) );
-		$cpts = $cpts ? '#post_type=(' . implode( '|', $cpts ) . ')#' : '';
 
 		foreach ( $rules as $key => $rule ) {
-			if ( $cpts && preg_match( $cpts, $rule, $matches ) && ! strpos( $rule, 'name=' ) && ( $post_type = $matches[1] ) && isset( $this->translated_slugs[ 'archive_' . $post_type ] ) ) {
-				$new_slug = $this->get_translated_slugs_pattern( 'archive_' . $post_type );
-				$newrules[ str_replace( $this->translated_slugs[ 'archive_' . $post_type ]['slug'] . '/', $new_slug, $key ) ] = $rule;
+			$query = parse_url( $rule, PHP_URL_QUERY );
+			parse_str( $query, $qv );
+
+			if ( ! empty( $cpts ) && ! empty( $qv['post_type'] ) && in_array( $qv['post_type'], $cpts ) && ! strpos( $rule, 'name=' ) && isset( $this->translated_slugs[ 'archive_' . $qv['post_type'] ] ) ) {
+				$new_slug = $this->get_translated_slugs_pattern( 'archive_' . $qv['post_type'] );
+				$newrules[ str_replace( $this->translated_slugs[ 'archive_' . $qv['post_type'] ]['slug'] . '/', $new_slug, $key ) ] = $rule;
 			} else {
 				$newrules[ $key ] = $rule;
 			}

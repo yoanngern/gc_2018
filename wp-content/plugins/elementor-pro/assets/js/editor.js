@@ -1,4 +1,4 @@
-/*! elementor-pro - v2.0.11 - 12-06-2018 */
+/*! elementor-pro - v2.0.18 - 27-07-2018 */
 (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 var EditorModule = function() {
 	var self = this;
@@ -1591,12 +1591,15 @@ module.exports =  EditorModule.extend( {
 	},
 
 	setWidgetContextMenuSaveAction: function() {
-		elementor.hooks.addFilter( 'elements/widget/contextMenuActions', function( actions, widget ) {
-			var saveAction = _.findWhere( actions, { name: 'save' } );
+		elementor.hooks.addFilter( 'elements/widget/contextMenuGroups', function( groups, widget ) {
+			var saveGroup = _.findWhere( groups, { name: 'save' } ),
+				saveAction = _.findWhere( saveGroup.actions, { name: 'save' } );
 
 			saveAction.callback = widget.save.bind( widget );
 
-			return actions;
+			delete saveAction.shortcut;
+
+			return groups;
 		} );
 	},
 
@@ -1779,15 +1782,10 @@ module.exports = elementor.modules.elements.models.Element.extend( {
 		elementorFrontend.config.elements.data[ this.cid ].on( 'change', this.onSettingsChange.bind( this ) );
 	},
 
-	onSettingsChange: function( model ) {
-		if ( ! model.changed.elements ) {
-			this.set( 'previewSettings', model.toJSON( { removeDefault: true } ), { silent: true } );
-		}
-	},
-
 	initSettings: function() {
-		var templateID = this.get( 'templateID' ),
-			globalModel = elementorPro.modules.globalWidget.getGlobalModels( templateID );
+		var globalModel = this.getGlobalModel();
+
+		this.set( 'settings', new elementor.modules.elements.models.BaseSettings( {}, {} ) );
 
 		elementorFrontend.config.elements.data[ this.cid ] = globalModel.get( 'settings' );
 
@@ -1795,6 +1793,26 @@ module.exports = elementor.modules.elements.models.Element.extend( {
 	},
 
 	initEditSettings: function() {},
+
+	getGlobalModel: function() {
+		var templateID = this.get( 'templateID' );
+
+		return elementorPro.modules.globalWidget.getGlobalModels( templateID );
+	},
+
+	getTitle: function() {
+		return this.getGlobalModel().getTitle() + ' (' + elementorPro.translate( 'global' ) + ')';
+	},
+
+	getIcon: function() {
+		return this.getGlobalModel().getIcon();
+	},
+
+	onSettingsChange: function( model ) {
+		if ( ! model.changed.elements ) {
+			this.set( 'previewSettings', model.toJSON( { removeDefault: true } ), { silent: true } );
+		}
+	},
 
 	onDestroy: function() {
 		var panel = elementor.getPanelView(),
@@ -1887,6 +1905,13 @@ GlobalWidgetView = WidgetView.extend( {
 	unlink: function() {
 		var globalModel = this.getGlobalModel();
 
+		if ( elementor.history ) {
+			elementor.history.history.startItem( {
+				title: globalModel.getTitle(),
+				type: elementorPro.translate( 'unlink_widget' )
+			} );
+		}
+
 		var newModel = new elementor.modules.elements.models.Element( {
 			elType: 'widget',
 			widgetType: globalModel.get( 'widgetType' ),
@@ -1901,7 +1926,19 @@ GlobalWidgetView = WidgetView.extend( {
 
 		this.model.destroy();
 
-		newWidget.edit();
+		if ( elementor.history ) {
+			elementor.history.history.endItem();
+		}
+
+		if ( newWidget.edit ) {
+			newWidget.edit();
+		}
+
+		newModel.trigger( 'request:edit' );
+	},
+
+	onEditRequest: function() {
+		elementor.getPanelView().setPage( 'globalWidget', 'Global Editing', { editedView: this } );
 	}
 } );
 

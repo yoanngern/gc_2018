@@ -6,7 +6,7 @@
  * @since 2.1
  */
 class PLL_Sync_Post {
-	public $model, $sync, $duplicate, $filters_post, $buttons;
+	public $options, $model, $sync, $duplicate, $filters_post, $buttons;
 	protected $temp_synchronized;
 
 	/**
@@ -17,6 +17,7 @@ class PLL_Sync_Post {
 	 * @param object $polylang
 	 */
 	public function __construct( &$polylang ) {
+		$this->options = &$polylang->options;
 		$this->model = &$polylang->model;
 		$this->sync = &$polylang->sync;
 		$this->duplicate = &$polylang->duplicate;
@@ -121,6 +122,16 @@ class PLL_Sync_Post {
 			// Temporarily sync group, even if false === $save_group as we need synchronized posts to copy *all* taxonomies and post metas
 			$this->temp_synchronized[ $post_id ][ $tr_id ] = true;
 
+			// Maybe duplicates the featured image
+			if ( $this->options['media_support'] ) {
+				add_filter( 'pll_translate_post_meta', array( $this->duplicate, 'duplicate_thumbnail' ), 10, 3 );
+			}
+
+			add_filter( 'pll_maybe_translate_term', array( $this->duplicate, 'duplicate_term' ), 10, 3 );
+
+			$this->sync->taxonomies->copy( $post_id, $tr_id, $lang );
+			$this->sync->post_metas->copy( $post_id, $tr_id, $lang );
+
 			$_POST['post_tr_lang'][ $lang ] = $tr_id; // Hack to avoid creating multiple posts if the original post is saved several times (ex WooCommerce 2.7+)
 
 			/** This action is documented in admin/admin-filters-post.php */
@@ -159,7 +170,19 @@ class PLL_Sync_Post {
 			$columns[] = 'post_status';
 		}
 
-		$tr_post = array_intersect_key( (array) $tr_post, array_flip( $columns ) );
+		/**
+		 * Filters the post fields to synchronize when synchronizing posts
+		 *
+		 * @since 2.3
+		 *
+		 * @param array  $fields     WP_Post fields to synchronize
+		 * @param int    $post_id    Post id of the source post
+		 * @param string $lang       Target language
+		 * @param bool   $save_group True to update the synchronization group, false otherwise
+		 */
+		$columns = apply_filters( 'pll_sync_post_fields', array_combine( $columns, $columns ), $post_id, $lang, $save_group );
+
+		$tr_post = array_intersect_key( (array) $tr_post, $columns );
 		$wpdb->update( $wpdb->posts, $tr_post, array( 'ID' => $tr_id ) ); // Don't use wp_update_post to avoid conflict (reverse sync)
 		clean_post_cache( $tr_id );
 

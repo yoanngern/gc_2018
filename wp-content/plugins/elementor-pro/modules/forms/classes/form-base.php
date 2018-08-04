@@ -67,7 +67,7 @@ abstract class Form_Base extends Base_Widget {
 					],
 				],
 				'select' . $i => [
-					'name' => $this->get_attribute_name( $item ),
+					'name' => $this->get_attribute_name( $item ) . ( ! empty( $item['allow_multiple'] ) ? '[]' : '' ),
 					'id' => $this->get_attribute_id( $item ),
 					'class' => [
 						'elementor-field-textual',

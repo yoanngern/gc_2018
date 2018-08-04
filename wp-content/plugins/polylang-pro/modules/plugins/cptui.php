@@ -14,10 +14,6 @@ class PLL_CPTUI {
 	 * @since 2.1
 	 */
 	public function init() {
-		if ( ! defined( 'CPTUI_VERSION' ) ) {
-			return;
-		}
-
 		add_filter( 'cptui_pre_register_post_type', array( $this, 'translate_strings' ) );
 		add_filter( 'cptui_pre_register_taxonomy', array( $this, 'translate_strings' ) );
 

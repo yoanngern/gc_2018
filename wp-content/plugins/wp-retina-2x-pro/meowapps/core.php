@@ -20,6 +20,8 @@ class MeowAppsPro_WR2X_Core {
     add_filter( 'wr2x_plugin_title', array( $this, 'plugin_title' ), 10, 1 );
     // add_action( 'wpmc_list_uploaded_files', array( $this, 'list_uploaded_files' ), 10, 2 );
     // add_filter( 'wpmc_check_file', array( $this, 'check_file' ), 10, 2 );
+    include __DIR__ . '/uploader.php';
+		new Meow_WR2X_Uploader( $this );
   }
 
   function plugin_title( $string ) {

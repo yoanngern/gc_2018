@@ -12,6 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 abstract class Theme_Page_Document extends Theme_Document {
 
+	public function get_css_wrapper_selector() {
+		return 'body.elementor-page-' . $this->get_main_id();
+	}
+
 	protected function _register_controls() {
 		parent::_register_controls();
 

@@ -168,6 +168,10 @@ class Module extends Module_Base {
 
 		$post = get_post( $post_id );
 
+		if ( ! $post ) {
+			return $allcaps;
+		}
+
 		if ( Source_Local::CPT !== $post->post_type ) {
 			return $allcaps;
 		}
@@ -198,6 +202,10 @@ class Module extends Module_Base {
 
 		foreach ( $global_widget_ids as $widget_id ) {
 			$included_posts = get_post_meta( $widget_id, self::INCLUDED_POSTS_LIST_META_KEY, true );
+
+			if ( ! is_array( $included_posts ) ) {
+				$included_posts = [];
+			}
 
 			$included_posts[ $post_id ] = true;
 

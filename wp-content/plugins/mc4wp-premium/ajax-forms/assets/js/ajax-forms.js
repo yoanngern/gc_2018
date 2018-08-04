@@ -90,13 +90,12 @@ module.exports = Loader;
 var ConfigStore = require('./_config.js');
 var Loader = require('./_form-loader.js');
 
-var forms = window.mc4wp.forms;
 var busy = false;
 var config = new ConfigStore('mc4wp_ajax_vars');
 
 // failsafe against including script twice
 if (!config.get('ready')) {
-	forms.on('submit', function (form, event) {
+	window.mc4wp.forms.on('submit', function (form, event) {
 		// does this form have AJAX enabled?
 		if (form.element.getAttribute('class').indexOf('mc4wp-ajax') < 0) {
 			return;
@@ -204,8 +203,8 @@ function submit(form) {
 	}
 
 	function trigger(event, form, data) {
-		forms.trigger(event, [form, data]);
-		forms.trigger(form.id + "." + event, [form, data]);
+		window.mc4wp.forms.trigger(event, [form, data]);
+		window.mc4wp.forms.trigger(form.id + "." + event, [form, data]);
 	}
 
 	function clean() {

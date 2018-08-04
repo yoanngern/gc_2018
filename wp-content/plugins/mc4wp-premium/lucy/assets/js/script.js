@@ -208,7 +208,14 @@ Lucy.prototype.search = function (query) {
 
 module.exports = Lucy;
 
-},{"algoliasearch/lite":5,"mithril":29}],3:[function(require,module,exports){
+},{"algoliasearch/lite":6,"mithril":29}],3:[function(require,module,exports){
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
+},{}],4:[function(require,module,exports){
 (function (process){
 module.exports = AlgoliaSearchCore;
 
@@ -330,7 +337,6 @@ function AlgoliaSearchCore(applicationID, apiKey, opts) {
 
   this._ua = opts._ua;
   this._useCache = opts._useCache === undefined || opts._cache ? true : opts._useCache;
-  this._useRequestCache = this._useCache && opts._useRequestCache;
   this._useFallback = opts.useFallback === undefined ? true : opts.useFallback;
 
   this._setTimeout = opts._setTimeout;
@@ -396,9 +402,7 @@ AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
 
   var requestDebug = require('debug')('algoliasearch:' + initialOpts.url);
 
-
   var body;
-  var cacheID;
   var additionalUA = initialOpts.additionalUA || '';
   var cache = initialOpts.cache;
   var client = this;
@@ -433,33 +437,26 @@ AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
   requestDebug('request start');
   var debugData = [];
 
-
   function doRequest(requester, reqOpts) {
     client._checkAppIdData();
 
     var startTime = new Date();
+    var cacheID;
 
-    if (client._useCache && !client._useRequestCache) {
+    if (client._useCache) {
       cacheID = initialOpts.url;
     }
 
     // as we sometime use POST requests to pass parameters (like query='aa'),
     // the cacheID must also include the body to be different between calls
-    if (client._useCache && !client._useRequestCache && body) {
+    if (client._useCache && body) {
       cacheID += '_body_' + reqOpts.body;
     }
 
     // handle cache existence
-    if (isCacheValidWithCurrentID(!client._useRequestCache, cache, cacheID)) {
+    if (client._useCache && cache && cache[cacheID] !== undefined) {
       requestDebug('serving response from cache');
-
-      var responseText = cache[cacheID];
-
-      // Cache response must match the type of the original one
-      return client._promise.resolve({
-        body: JSON.parse(responseText),
-        responseText: responseText
-      });
+      return client._promise.resolve(JSON.parse(cache[cacheID]));
     }
 
     // if we reached max tries
@@ -507,8 +504,7 @@ AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
       method: reqOpts.method,
       headers: headers,
       timeouts: reqOpts.timeouts,
-      debug: requestDebug,
-      forceAuthHeaders: reqOpts.forceAuthHeaders
+      debug: requestDebug
     };
 
     requestDebug('method: %s, url: %s, headers: %j, timeouts: %d',
@@ -564,14 +560,11 @@ AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
       });
 
       if (httpResponseOk) {
-        if (client._useCache && !client._useRequestCache && cache) {
+        if (client._useCache && cache) {
           cache[cacheID] = httpResponse.responseText;
         }
 
-        return {
-          responseText: httpResponse.responseText,
-          body: httpResponse.body
-        };
+        return httpResponse.body;
       }
 
       var shouldRetry = Math.floor(status / 100) !== 4;
@@ -664,90 +657,31 @@ AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
     }
   }
 
-  function isCacheValidWithCurrentID(
-    useRequestCache,
-    currentCache,
-    currentCacheID
-  ) {
-    return (
-      client._useCache &&
-      useRequestCache &&
-      currentCache &&
-      currentCache[currentCacheID] !== undefined
-    );
-  }
-
-
-  function interopCallbackReturn(request, callback) {
-    if (isCacheValidWithCurrentID(client._useRequestCache, cache, cacheID)) {
-      request.catch(function() {
-        // Release the cache on error
-        delete cache[cacheID];
-      });
-    }
-
-    if (typeof initialOpts.callback === 'function') {
-      // either we have a callback
-      request.then(function okCb(content) {
-        exitPromise(function() {
-          initialOpts.callback(null, callback(content));
-        }, client._setTimeout || setTimeout);
-      }, function nookCb(err) {
-        exitPromise(function() {
-          initialOpts.callback(err);
-        }, client._setTimeout || setTimeout);
-      });
-    } else {
-      // either we are using promises
-      return request.then(callback);
-    }
-  }
-
-  if (client._useCache && client._useRequestCache) {
-    cacheID = initialOpts.url;
-  }
-
-  // as we sometime use POST requests to pass parameters (like query='aa'),
-  // the cacheID must also include the body to be different between calls
-  if (client._useCache && client._useRequestCache && body) {
-    cacheID += '_body_' + body;
-  }
-
-  if (isCacheValidWithCurrentID(client._useRequestCache, cache, cacheID)) {
-    requestDebug('serving request from cache');
-
-    var maybePromiseForCache = cache[cacheID];
-
-    // In case the cache is warmup with value that is not a promise
-    var promiseForCache = typeof maybePromiseForCache.then !== 'function'
-      ? client._promise.resolve({responseText: maybePromiseForCache})
-      : maybePromiseForCache;
-
-    return interopCallbackReturn(promiseForCache, function(content) {
-      // In case of the cache request, return the original value
-      return JSON.parse(content.responseText);
-    });
-  }
-
-  var request = doRequest(
+  var promise = doRequest(
     client._request, {
       url: initialOpts.url,
       method: initialOpts.method,
       body: body,
       jsonBody: initialOpts.body,
-      timeouts: client._getTimeoutsForRequest(initialOpts.hostType),
-      forceAuthHeaders: initialOpts.forceAuthHeaders
+      timeouts: client._getTimeoutsForRequest(initialOpts.hostType)
     }
   );
 
-  if (client._useCache && client._useRequestCache && cache) {
-    cache[cacheID] = request;
+  // either we have a callback
+  // either we are using promises
+  if (typeof initialOpts.callback === 'function') {
+    promise.then(function okCb(content) {
+      exitPromise(function() {
+        initialOpts.callback(null, content);
+      }, client._setTimeout || setTimeout);
+    }, function nookCb(err) {
+      exitPromise(function() {
+        initialOpts.callback(err);
+      }, client._setTimeout || setTimeout);
+    });
+  } else {
+    return promise;
   }
-
-  return interopCallbackReturn(request, function(content) {
-    // In case of the first request, return the JSON value
-    return content.body;
-  });
 };
 
 /*
@@ -921,7 +855,7 @@ AlgoliaSearchCore.prototype.searchForFacetValues = function(queries) {
 
   var client = this;
 
-  return client._promise.all(map(queries, function performQuery(query) {
+  return Promise.all(map(queries, function performQuery(query) {
     if (
       !query ||
       query.indexName === undefined ||
@@ -1178,7 +1112,7 @@ function removeCredentials(headers) {
 }
 
 }).call(this,require('_process'))
-},{"./IndexCore.js":4,"./clone":10,"./clone.js":10,"./errors":13,"./exitPromise.js":14,"./map.js":15,"./omit.js":17,"./store.js":19,"_process":21,"debug":22,"foreach":25,"isarray":28}],4:[function(require,module,exports){
+},{"./IndexCore.js":5,"./clone":11,"./clone.js":11,"./errors":14,"./exitPromise.js":15,"./map.js":16,"./omit.js":18,"./store.js":20,"_process":22,"debug":23,"foreach":26,"isarray":3}],5:[function(require,module,exports){
 var buildSearchMethod = require('./buildSearchMethod.js');
 var deprecate = require('./deprecate.js');
 var deprecatedMessage = require('./deprecatedMessage.js');
@@ -1563,7 +1497,7 @@ IndexCore.prototype.indexName = null;
 IndexCore.prototype.typeAheadArgs = null;
 IndexCore.prototype.typeAheadValueOption = null;
 
-},{"./buildSearchMethod.js":9,"./clone.js":10,"./deprecate.js":11,"./deprecatedMessage.js":12,"./map.js":15,"./merge.js":16,"./omit.js":17,"isarray":28}],5:[function(require,module,exports){
+},{"./buildSearchMethod.js":10,"./clone.js":11,"./deprecate.js":12,"./deprecatedMessage.js":13,"./map.js":16,"./merge.js":17,"./omit.js":18,"isarray":3}],6:[function(require,module,exports){
 'use strict';
 
 var AlgoliaSearchCore = require('../../AlgoliaSearchCore.js');
@@ -1571,7 +1505,7 @@ var createAlgoliasearch = require('../createAlgoliasearch.js');
 
 module.exports = createAlgoliasearch(AlgoliaSearchCore, '(lite) ');
 
-},{"../../AlgoliaSearchCore.js":3,"../createAlgoliasearch.js":6}],6:[function(require,module,exports){
+},{"../../AlgoliaSearchCore.js":4,"../createAlgoliasearch.js":7}],7:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1662,19 +1596,6 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
       // breaks it and set it to false by default
       if (req instanceof XMLHttpRequest) {
         req.open(opts.method, url, true);
-
-        // The Analytics API never accepts Auth headers as query string
-        // this option exists specifically for them.
-        if (opts.forceAuthHeaders) {
-          req.setRequestHeader(
-            'x-algolia-application-id',
-            opts.headers['x-algolia-application-id']
-          );
-          req.setRequestHeader(
-            'x-algolia-api-key',
-            opts.headers['x-algolia-api-key']
-          );
-        }
       } else {
         req.open(opts.method, url);
       }
@@ -1692,11 +1613,7 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
         req.setRequestHeader('accept', 'application/json');
       }
 
-      if (body) {
-        req.send(body);
-      } else {
-        req.send();
-      }
+      req.send(body);
 
       // event object not received in IE8, at least
       // but we do not use it, still important to note
@@ -1798,9 +1715,6 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
       return new Promise(function resolveOnTimeout(resolve/* , reject*/) {
         setTimeout(resolve, ms);
       });
-    },
-    all: function all(promises) {
-      return Promise.all(promises);
     }
   };
 
@@ -1808,7 +1722,7 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
 };
 
 }).call(this,require('_process'))
-},{"../clone.js":10,"../errors":13,"../places.js":18,"../version.js":20,"./inline-headers":7,"./jsonp-request":8,"_process":21,"debug":22,"es6-promise":24,"global":26,"inherits":27}],7:[function(require,module,exports){
+},{"../clone.js":11,"../errors":14,"../places.js":19,"../version.js":21,"./inline-headers":8,"./jsonp-request":9,"_process":22,"debug":23,"es6-promise":25,"global":27,"inherits":28}],8:[function(require,module,exports){
 'use strict';
 
 module.exports = inlineHeaders;
@@ -1825,7 +1739,7 @@ function inlineHeaders(url, headers) {
   return url + encode(headers);
 }
 
-},{"querystring-es3/encode":33}],8:[function(require,module,exports){
+},{"querystring-es3/encode":33}],9:[function(require,module,exports){
 'use strict';
 
 module.exports = jsonpRequest;
@@ -1864,8 +1778,7 @@ function jsonpRequest(url, opts, cb) {
     clean();
 
     cb(null, {
-      body: data,
-      responseText: JSON.stringify(data)/* ,
+      body: data/* ,
       // We do not send the statusCode, there's no statusCode in JSONP, it will be
       // computed using data.status && data.message like with XDR
       statusCode*/
@@ -1953,7 +1866,7 @@ function jsonpRequest(url, opts, cb) {
   }
 }
 
-},{"../errors":13}],9:[function(require,module,exports){
+},{"../errors":14}],10:[function(require,module,exports){
 module.exports = buildSearchMethod;
 
 var errors = require('./errors.js');
@@ -2022,12 +1935,12 @@ function buildSearchMethod(queryParam, url) {
   };
 }
 
-},{"./errors.js":13}],10:[function(require,module,exports){
+},{"./errors.js":14}],11:[function(require,module,exports){
 module.exports = function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
 };
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports = function deprecate(fn, message) {
   var warned = false;
 
@@ -2044,7 +1957,7 @@ module.exports = function deprecate(fn, message) {
   return deprecated;
 };
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports = function deprecatedMessage(previousUsage, newUsage) {
   var githubAnchorLink = previousUsage.toLowerCase()
     .replace(/[\.\(\)]/g, '');
@@ -2053,7 +1966,7 @@ module.exports = function deprecatedMessage(previousUsage, newUsage) {
     '`. Please see https://github.com/algolia/algoliasearch-client-javascript/wiki/Deprecated#' + githubAnchorLink;
 };
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 // This file hosts our error definitions
@@ -2133,7 +2046,7 @@ module.exports = {
   )
 };
 
-},{"foreach":25,"inherits":27}],14:[function(require,module,exports){
+},{"foreach":26,"inherits":28}],15:[function(require,module,exports){
 // Parse cloud does not supports setTimeout
 // We do not store a setTimeout reference in the client everytime
 // We only fallback to a fake setTimeout when not available
@@ -2142,7 +2055,7 @@ module.exports = function exitPromise(fn, _setTimeout) {
   _setTimeout(fn, 0);
 };
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var foreach = require('foreach');
 
 module.exports = function map(arr, fn) {
@@ -2153,7 +2066,7 @@ module.exports = function map(arr, fn) {
   return newArr;
 };
 
-},{"foreach":25}],16:[function(require,module,exports){
+},{"foreach":26}],17:[function(require,module,exports){
 var foreach = require('foreach');
 
 module.exports = function merge(destination/* , sources */) {
@@ -2174,7 +2087,7 @@ module.exports = function merge(destination/* , sources */) {
   return destination;
 };
 
-},{"foreach":25}],17:[function(require,module,exports){
+},{"foreach":26}],18:[function(require,module,exports){
 module.exports = function omit(obj, test) {
   var keys = require('object-keys');
   var foreach = require('foreach');
@@ -2190,7 +2103,7 @@ module.exports = function omit(obj, test) {
   return filtered;
 };
 
-},{"foreach":25,"object-keys":31}],18:[function(require,module,exports){
+},{"foreach":26,"object-keys":31}],19:[function(require,module,exports){
 module.exports = createPlacesClient;
 
 var buildSearchMethod = require('./buildSearchMethod.js');
@@ -2229,7 +2142,7 @@ function createPlacesClient(algoliasearch) {
   };
 }
 
-},{"./buildSearchMethod.js":9,"./clone.js":10}],19:[function(require,module,exports){
+},{"./buildSearchMethod.js":10,"./clone.js":11}],20:[function(require,module,exports){
 (function (global){
 var debug = require('debug')('algoliasearch:src/hostIndexState.js');
 var localStorageNamespace = 'algoliasearch-client-js';
@@ -2319,12 +2232,12 @@ function cleanup() {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"debug":22}],20:[function(require,module,exports){
+},{"debug":23}],21:[function(require,module,exports){
 'use strict';
 
-module.exports = '3.29.0';
+module.exports = '3.27.0';
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2510,7 +2423,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 (function (process){
 /**
  * This is the web browser implementation of `debug()`.
@@ -2699,7 +2612,7 @@ function localstorage() {
 }
 
 }).call(this,require('_process'))
-},{"./debug":23,"_process":21}],23:[function(require,module,exports){
+},{"./debug":24,"_process":22}],24:[function(require,module,exports){
 
 /**
  * This is the common logic for both the Node.js and web browser
@@ -2903,7 +2816,7 @@ function coerce(val) {
   return val;
 }
 
-},{"ms":30}],24:[function(require,module,exports){
+},{"ms":30}],25:[function(require,module,exports){
 (function (process,global){
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
@@ -4086,7 +3999,7 @@ return Promise$1;
 
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":21}],25:[function(require,module,exports){
+},{"_process":22}],26:[function(require,module,exports){
 
 var hasOwn = Object.prototype.hasOwnProperty;
 var toString = Object.prototype.toString;
@@ -4110,7 +4023,7 @@ module.exports = function forEach (obj, fn, ctx) {
 };
 
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 (function (global){
 var win;
 
@@ -4127,7 +4040,7 @@ if (typeof window !== "undefined") {
 module.exports = win;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -4152,15 +4065,8 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],28:[function(require,module,exports){
-var toString = {}.toString;
-
-module.exports = Array.isArray || function (arr) {
-  return toString.call(arr) == '[object Array]';
-};
-
 },{}],29:[function(require,module,exports){
-(function (global,setImmediate){
+(function (global){
 ;(function() {
 "use strict"
 function Vnode(tag, key, attrs0, children, text, dom) {
@@ -5418,8 +5324,8 @@ m.vnode = Vnode
 if (typeof module !== "undefined") module["exports"] = m
 else window.m = m
 }());
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("timers").setImmediate)
-},{"timers":34}],30:[function(require,module,exports){
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],30:[function(require,module,exports){
 /**
  * Helpers.
  */
@@ -5598,7 +5504,6 @@ var equalsConstructorPrototype = function (o) {
 	return ctor && ctor.prototype === o;
 };
 var excludedKeys = {
-	$applicationCache: true,
 	$console: true,
 	$external: true,
 	$frame: true,
@@ -5700,7 +5605,7 @@ keysShim.shim = function shimObjectKeys() {
 		}(1, 2));
 		if (!keysWorksWithArguments) {
 			var originalKeys = Object.keys;
-			Object.keys = function keys(object) { // eslint-disable-line func-name-matching
+			Object.keys = function keys(object) {
 				if (isArgs(object)) {
 					return originalKeys(slice.call(object));
 				} else {
@@ -5822,86 +5727,5 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],34:[function(require,module,exports){
-(function (setImmediate,clearImmediate){
-var nextTick = require('process/browser.js').nextTick;
-var apply = Function.prototype.apply;
-var slice = Array.prototype.slice;
-var immediateIds = {};
-var nextImmediateId = 0;
-
-// DOM APIs, for completeness
-
-exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
-};
-exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
-};
-exports.clearTimeout =
-exports.clearInterval = function(timeout) { timeout.close(); };
-
-function Timeout(id, clearFn) {
-  this._id = id;
-  this._clearFn = clearFn;
-}
-Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-Timeout.prototype.close = function() {
-  this._clearFn.call(window, this._id);
-};
-
-// Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = msecs;
-};
-
-exports.unenroll = function(item) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = -1;
-};
-
-exports._unrefActive = exports.active = function(item) {
-  clearTimeout(item._idleTimeoutId);
-
-  var msecs = item._idleTimeout;
-  if (msecs >= 0) {
-    item._idleTimeoutId = setTimeout(function onTimeout() {
-      if (item._onTimeout)
-        item._onTimeout();
-    }, msecs);
-  }
-};
-
-// That's not how node.js implements it but the exposed api is the same.
-exports.setImmediate = typeof setImmediate === "function" ? setImmediate : function(fn) {
-  var id = nextImmediateId++;
-  var args = arguments.length < 2 ? false : slice.call(arguments, 1);
-
-  immediateIds[id] = true;
-
-  nextTick(function onNextTick() {
-    if (immediateIds[id]) {
-      // fn.call() is faster so we optimize for the common use-case
-      // @see http://jsperf.com/call-apply-segu
-      if (args) {
-        fn.apply(null, args);
-      } else {
-        fn.call(null);
-      }
-      // Prevent ids from leaking
-      exports.clearImmediate(id);
-    }
-  });
-
-  return id;
-};
-
-exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
-  delete immediateIds[id];
-};
-}).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":35,"timers":34}],35:[function(require,module,exports){
-arguments[4][21][0].apply(exports,arguments)
-},{"dup":21}]},{},[1]);
+},{}]},{},[1]);
  })();

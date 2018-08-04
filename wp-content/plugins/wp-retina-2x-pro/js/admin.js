@@ -317,4 +317,181 @@ jQuery(document).ready(function () {
 			jQuery('#meow-modal-info-backdrop').css('display', 'none');
 		}
 	});
+
+	/**
+	 * Retina Uploader
+	 */
+	(function ($) {
+		/**
+		 * @constructor
+		 */
+		function Upload(File) {
+			if (!this.validate(File)) return; // Invalid file
+			this.file = File;
+			this.loaded = 0;
+			this.total = 0;
+			this.doms = {
+				wrap: null,
+				filename: null,
+				progress: null,
+				percent: null,
+				bar: null
+			};
+			this.request();
+		}
+		Upload.prototype.getProgress = function (Mul = 1) {
+			if (!this.total) return 0;
+			var r = (this.loaded / this.total) * Mul;
+			return Math.round(r * 10) / 10;
+		}
+		Upload.prototype.validate = function (File) {
+			var err;
+			if (!'type' in File || !File.type)
+				err = 'Unknown File Type';
+			else if (!File.type.match(/^image\//)) // Not image
+				err = 'Unsupported File Type';
+
+			if (err) {
+				console.error(err);
+				alert(err);
+				return false;
+			}
+			return true;
+		}
+		Upload.prototype.request = function () {
+			var self = this;
+			var action = 'wr2x_retina_upload';
+			var data = new FormData();
+			data.append('action', action);
+			data.append('isAjax', true);
+			data.append('nonce', wr2x_admin_server.nonce[action]);
+			data.append('file', this.file);
+			data.append('filename', this.file.name);
+
+			this.show();
+
+			$.ajax({
+				type: 'POST',
+				url: ajaxurl,
+				contentType: false,
+				processData: false,
+				data: data,
+				// Custom XHR
+				xhr: function () {
+					var xhr = new XMLHttpRequest();
+					// Watch upload progress
+					xhr.upload.addEventListener('progress', function (ev) {
+						if (!ev.lengthComputable) return xhr;
+						self.loaded = ev.loaded;
+						self.total = ev.total;
+						self.update();
+					}, false);
+					return xhr;
+				}
+
+			}).done(function (response) {
+				try {
+					response = $.parseJSON(response);
+				} catch (e) { // Malformed Response
+					self.abort();
+					console.error(e);
+					alert('Invalid Response');
+					return;
+				}
+				if (!response.success) { // App Error
+					self.abort();
+					var msg = 'message' in response ?
+						response.message : 'Error';
+					console.error(msg);
+					alert(msg);
+					return;
+				}
+				// Remove the progress indicator
+				self.doms.progress.remove();
+
+				// Edit Link
+				$('<a class="edit-attachment">')
+					.attr('href', response.media.edit_url)
+					.attr('target', '_blank')
+					.text('Edit')
+					.prependTo(self.doms.wrap);
+
+				// Show the thumbnail
+				$('<img class="pinkynail">')
+					.attr('src', response.media.src[0])
+					.prependTo(self.doms.wrap);
+
+				// Just mocking the built-in behavior
+				self.doms.filename
+					.removeClass('original')
+					.addClass('new');
+
+			}).fail(function (e) { // HTTP Error
+				self.abort();
+				var msg = e.status + ' ' + e.statusText;
+				console.error(msg);
+				alert(msg + '\n' + 'An error occurred on the server-side. Please check your PHP error logs.');
+			});
+		}
+		Upload.prototype.show = function () {
+			// Ideal HTML:
+			// <div class="media-item child-of-0" id="media-item">
+			//   <div class="progress">
+			//     <div class="percent">100%</div>
+			//     <div class="bar" style="width: 200px;"></div>
+			//   </div>
+			//   <div class="filename original">image.jpg</div>
+			// </div>
+			this.doms.wrap = $('<div class="media-item wr2x-retina-uploaded">');
+			this.doms.filename = $('<div class="filename original">')
+				.text(this.file.name)
+				.appendTo(this.doms.wrap);
+
+			this.doms.wrap.appendTo('#media-items'); // First Appearance
+		}
+		Upload.prototype.update = function () {
+			if (!this.doms.progress) { // Initialize the progress bar
+				this.doms.progress = $('<div class="progress">').prependTo(this.doms.wrap);
+				this.doms.percent = $('<div class="percent">').appendTo(this.doms.progress);
+				this.doms.bar = $('<div class="bar">').appendTo(this.doms.progress);
+			}
+			this.doms.percent.text(this.getProgress(100) + '%');
+			this.doms.bar.css('width', this.getProgress(200) + 'px');
+		}
+		Upload.prototype.abort = function () {
+			this.doms.wrap.remove();
+		}
+
+		/** Initialize DOMs **/
+
+		// Drag & Drop Area
+		var dnd = $('#wr2x_drag-drop-area')
+		dnd.on('dragenter dragover', function (ev) {
+			wr2x_stop_propagation(ev);
+			$(this).addClass('wr2x-hover-drop');
+
+		}).on('dragleave dragexit', function (ev) {
+			wr2x_stop_propagation(ev);
+			$(this).removeClass('wr2x-hover-drop');
+
+		}).on('drop', function (ev) {
+			wr2x_stop_propagation(ev);
+			$(this).removeClass('wr2x-hover-drop');
+			var _ev = ev.originalEvent;
+			var files = _ev.dataTransfer.files;
+			for (var i = 0; i < files.length; i++) new Upload(files[i]);
+		});
+
+		// File Selector
+		var selector = $('#wr2x_file-selector');
+		selector.on('change', function (ev) {
+			var files = ev.target.files;
+			for (var i = 0; i < files.length; i++) new Upload(files[i]);
+		});
+		var btn = $('#wr2x_file-select-button');
+		btn.on('click', function (ev) {
+			selector.trigger('click');
+		});
+
+	})(jQuery);
 });

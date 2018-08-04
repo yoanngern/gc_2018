@@ -427,7 +427,8 @@ class Countdown extends Base_Widget {
 		$string    = $this->get_strftime( $instance );
 
 		// Handle timezone ( we need to set GMT time )
-		$due_date = strtotime( $due_date ) - ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS );
+		$gmt = get_gmt_from_date( $due_date . ':00' );
+		$due_date = strtotime( $gmt );
 		?>
 		<div class="elementor-countdown-wrapper" data-date="<?php echo $due_date; ?>">
 			<?php echo $string; ?>

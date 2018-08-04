@@ -14,7 +14,6 @@ final class Manager {
 	public function __construct() {
 		$modules = [
 			'query-control',
-			'css-filter-control', /* todo: remove from pro */
 			'custom-css',
 			// role-manager Must be before Global Widget
 			'role-manager',

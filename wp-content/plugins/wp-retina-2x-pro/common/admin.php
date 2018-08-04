@@ -5,7 +5,7 @@ if ( !class_exists( 'MeowApps_Admin' ) ) {
 	class MeowApps_Admin {
 
 		public static $loaded = false;
-		public static $admin_version = "1.4";
+		public static $admin_version = "1.6";
 
 		public $prefix; 		// prefix used for actions, filters (mfrh)
 		public $mainfile; 	// plugin main file (media-file-renamer.php)
@@ -154,8 +154,6 @@ if ( !class_exists( 'MeowApps_Admin' ) ) {
 			if ( !empty( $this->prefix ) )
 				$title = apply_filters( $this->prefix . '_plugin_title', $title );
 			if ( $this->display_ads() ) {
-				echo '<a class="meow-header-ad" target="_blank" href="http://www.shareasale.com/r.cfm?b=906810&u=767054&m=41388&urllink=&afftrack="">
-				<img src="' . $this->common_url( 'img/wpengine.png' ) . '" height="60" border="0" /></a>';
 			}
 			?>
 			<h1 style="line-height: 16px;">

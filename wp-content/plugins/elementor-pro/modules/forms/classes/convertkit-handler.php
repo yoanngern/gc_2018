@@ -6,7 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Convertkit_Handler {
-
+	/*
+	 * @var Rest_Client
+	 */
 	private $rest_client = null;
 	private $api_key = '';
 
@@ -112,14 +114,15 @@ class Convertkit_Handler {
 	}
 
 	/**
-	 * create contact at GetResponse via api
+	 * create contact at ConvertKit via api
 	 * @param array $subscriber_data
 	 *
 	 * @return array|mixed
 	 * @throws \Exception
 	 */
 	public function create_subscriber( $form_id, $subscriber_data = [] ) {
-		$endpoint =  sprintf( 'forms/' . $form_id . '/subscribe?api_key=%s&email=%s', $this->api_key, $subscriber_data['email'] );
+		$endpoint =  sprintf( 'forms/' . $form_id . '/subscribe?api_key=%s', $this->api_key );
+		$this->rest_client->add_headers( 'Content-Type', 'application/json' );
 		return $this->rest_client->post( $endpoint, $subscriber_data );
 	}
 }

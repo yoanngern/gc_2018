@@ -4,7 +4,7 @@ Donate link: http://ninjaforms.com
 Tags: form, forms
 Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 3.0.18
+Stable tag: 3.0.19
 
 License: GPLv2 or later
 
@@ -25,6 +25,13 @@ This section describes how to install the plugin and get it working.
 For help and video tutorials, please visit our website: [NinjaForms.com](http://ninjaforms.com)
 
 == Changelog ==
+
+= 3.0.19 (5 July 2018) =
+
+*Bugs:*
+
+* Resolved an issue that sometimes caused inactive Stripe actions to still be processed on submit.
+* Using Conditional Logic to select which Stripe action to fire should now work properly.
 
 = 3.0.18 (1 May 2018) =
 

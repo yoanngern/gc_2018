@@ -75,11 +75,11 @@ var nfStripeController = Marionette.Object.extend({
                 var stripeToken = nfRadio.channel( 'form-' + formModel.get( 'id' ) ).request( 'get:extra', 'stripe_token' );
                 if ( 'undefined' == typeof stripeToken ) {
                     nfRadio.channel( 'forms' ).trigger( 'submit:failed', formModel );
-                    nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:failed', formModel );                   
+                    nfRadio.channel( 'form-' + formModel.get( 'id' ) ).trigger( 'submit:failed', formModel );
                 }
-              } 
+              }
             } );
-            
+
             /*
              * Create our total object.
              */
@@ -195,11 +195,22 @@ var nfStripeController = Marionette.Object.extend({
 	                });
                 }
             }
-            
+            // total needs to use the current active actions's total
+            this.total = activeAction.total;
+
+            // Record if total is a calc
+	        this.totalIsCalc = false;
+	        if ( -1 != this.total.indexOf('{calc:') ) this.totalIsCalc = true;
+	        // Record if it's a field
+	        this.totalIsField = false;
+	        if ( -1 != this.total.indexOf('{field:') ) this.totalIsField = true;
+
             // Set the amount value.
             if ( this.totalIsCalc ) {
+	            this.total = this.total.replace( '{calc:', '' ).replace( '}', '' );
                 var total = nfRadio.channel( 'form-' + formModel.get( 'id' ) ).request( 'get:calc', this.total ).get( 'value' ) * 100;
             } else if ( this.totalIsField ) {
+	            this.total = this.total.replace( '{field:', '' ).replace( '}', '' );
                 var total = nfRadio.channel( 'form-' + formModel.get( 'id' ) ).request( 'get:fieldByKey', this.total ).get( 'value' ) * 100;
             } else {
                 var total = this.total * 100;
