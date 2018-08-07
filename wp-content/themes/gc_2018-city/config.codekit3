@@ -431,13 +431,6 @@
 		"oAP": "\/template-parts\/event\/list.php",
 		"oF": 0
 		},
-	"\/template-parts\/event\/list_old.php": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 0,
-		"oAP": "\/template-parts\/event\/list_old.php",
-		"oF": 0
-		},
 	"\/template-parts\/event\/main_events.php": {
 		"cB": 0,
 		"ft": 8192,
