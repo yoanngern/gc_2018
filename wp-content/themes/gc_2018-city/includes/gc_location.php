@@ -7,10 +7,12 @@ function create_location() {
 	register_post_type( 'gc_location',
 		array(
 			'labels'              => array(
-				'name'          => __( 'Locations' ),
-				'singular_name' => __( 'Location' ),
-				'add_new'       => 'Add a location',
-				'all_items'     => 'All locations',
+				'name'          => __( 'Locations', 'gc_2018' ),
+				'singular_name' => __( 'Location', 'gc_2018' ),
+				'add_new'       => __( 'Add a location', 'gc_2018' ),
+				'all_items'     => __( 'All locations', 'gc_2018' ),
+				'add_new_item'  => __( 'Add New Location', 'gc_2018' ),
+				'edit_item'     => __( 'Edit the location', 'gc_2018' ),
 			),
 			'public'              => true,
 			'can_export'          => true,
@@ -48,7 +50,7 @@ function update_location( $post_id ) {
 	$my_post = array(
 		'ID'         => $post_id,
 		'post_title' => get_field( 'name', $post_id ),
-		'post_name' => $post_id
+		'post_name'  => $post_id
 	);
 
 
@@ -79,9 +81,9 @@ function gc_location_column( $columns ) {
 	$columns = array(
 		'cb'       => '<input type="checkbox" />',
 		//'title'           => 'Title',
-		'name_col' => 'Name',
-		'city'     => 'City',
-		'country'  => 'Country',
+		'name_col' => __( 'Name', 'gc_2018' ),
+		'city'     => __( 'City', 'gc_2018' ),
+		'country'  => __( 'Country', 'gc_2018' ),
 
 	);
 

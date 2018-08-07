@@ -19,7 +19,7 @@ if ( have_rows( 'resources' ) ): ?>
 
     <div id="right-sidebar" class="right-sidebar">
         <div id="resources">
-            <h4>Resources</h4>
+            <h4><?php _e('Resources', 'gc_2018') ?></h4>
             <ul class="resources">
 				<?php while ( have_rows( 'resources' ) ): the_row();
 

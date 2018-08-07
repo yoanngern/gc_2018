@@ -255,7 +255,7 @@
 			<?php else: ?>
 
                 <div class="empty">
-                    <h1>There is no event this weekend</h1>
+                    <h1><?php _e('There is no event this weekend', 'gc_2018') ?></h1>
                 </div>
 
 

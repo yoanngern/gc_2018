@@ -69,7 +69,7 @@
 
             <article id="events" class="home-default">
                 <section id="listOfEvents" class="small" data-nb="3">
-                    <h1 class="title"><span><?php pll_e( 'Événements' ) ?></span></h1>
+                    <h1 class="title"><span><?php _e( 'Events', 'gc_2018' ) ?></span></h1>
                     <article class="content-page events_table">
 
 						<?php foreach ( $events as $event ) :
@@ -86,8 +86,7 @@
                 </section>
 
 
-                    <a class="dynamic" href="<?php echo get_post_type_archive_link( 'gc_event' ); ?>"><?php pll_e( 'Plus
-                        d\'événements' ) ?></a>
+                    <a class="dynamic" href="<?php echo get_post_type_archive_link( 'gc_event' ); ?>"><?php _e( 'More events', 'gc_2018' ) ?></a>
 
 	                <?php print_buttons('event_buttons', $_POST) ?>
 

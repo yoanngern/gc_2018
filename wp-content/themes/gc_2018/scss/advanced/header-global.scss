@@ -77,6 +77,10 @@ body > header {
                     position: absolute;
                     width: 8px;
                     top: 50%;
+                    -webkit-transition: 100ms ease-in-out;
+                    -moz-transition: 100ms ease-in-out;
+                    -o-transition: 100ms ease-in-out;
+                    transition: 100ms ease-in-out;
 
                     &:first-of-type {
                         transform: rotate(45deg);

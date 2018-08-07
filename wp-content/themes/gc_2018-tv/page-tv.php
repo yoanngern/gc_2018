@@ -83,7 +83,6 @@
 
 				$talks = get_talks( 12, $city, $speaker, $category );
 
-
 				$section_title = get_sub_field( 'title' );
 
 				set_query_var( 'talks', $talks );

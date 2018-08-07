@@ -9,6 +9,7 @@ Version:        0.2
 License:        GNU General Public License v2 or later
 License URI:    http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:    gc_2018-docs
+Domain Path:    /languages
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
@@ -64,6 +65,14 @@ Use it to make something cool, have fun, and share what you've learned with othe
     transform: translate(0, 0); }
   #gc_docs > header div.global #global-tab {
     padding: 12px 17px; }
+  @media only screen and (max-width: 670px) {
+    #gc_docs > header div.global #global-tab {
+      padding: 7px 13px;
+      fill: #FFFFFF; }
+      #gc_docs > header div.global #global-tab span.txt {
+        color: #FFFFFF; }
+      #gc_docs > header div.global #global-tab div.arrow span {
+        background-color: #FFFFFF; } }
 
 #gc_docs > header div.local {
   background-color: #3b3a3a;

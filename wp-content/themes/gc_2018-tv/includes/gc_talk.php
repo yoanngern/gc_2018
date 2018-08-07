@@ -7,12 +7,12 @@ function create_talks() {
 	register_post_type( 'gc_talk',
 		array(
 			'labels'              => array(
-				'name'          => __( 'Talks' ),
-				'singular_name' => __( 'Talk' ),
-				'add_new'       => 'Add a talk',
-				'all_items'     => 'All talks',
-				'add_new_item'  => 'Add New Talk',
-				'edit_item'     => 'Edit Talk',
+				'name'          => __( 'Talks', 'gc_2018' ),
+				'singular_name' => __( 'Talk', 'gc_2018' ),
+				'add_new'       => __( 'Add a talk', 'gc_2018' ),
+				'all_items'     => __( 'All talks', 'gc_2018' ),
+				'add_new_item'  => __( 'Add New Talk', 'gc_2018' ),
+				'edit_item'     => __( 'Edit Talk', 'gc_2018' ),
 			),
 			'public'              => true,
 			'can_export'          => true,
@@ -45,20 +45,20 @@ add_action( 'init', 'create_talks' );
 function create_talkcategory_taxonomy() {
 
 	$labels = array(
-		'name'                       => _x( 'Categories', 'taxonomy general name' ),
-		'singular_name'              => _x( 'Category', 'taxonomy singular name' ),
-		'search_items'               => __( 'Search Category' ),
-		'popular_items'              => __( 'Popular Categories' ),
-		'all_items'                  => __( 'All Categories' ),
+		'name'                       => _x( 'Categories', 'taxonomy general name', 'gc_2018' ),
+		'singular_name'              => _x( 'Category', 'taxonomy singular name', 'gc_2018' ),
+		'search_items'               => __( 'Search Category', 'gc_2018' ),
+		'popular_items'              => __( 'Popular Categories', 'gc_2018' ),
+		'all_items'                  => __( 'All Categories', 'gc_2018' ),
 		'parent_item'                => null,
 		'parent_item_colon'          => null,
-		'edit_item'                  => __( 'Edit Category' ),
-		'update_item'                => __( 'Update Category' ),
-		'add_new_item'               => __( 'Add New Category' ),
-		'new_item_name'              => __( 'New Category' ),
-		'separate_items_with_commas' => __( 'Separate categories with commas' ),
-		'add_or_remove_items'        => __( 'Add or remove categories' ),
-		'choose_from_most_used'      => __( 'Choose from the most used categories' ),
+		'edit_item'                  => __( 'Edit Category', 'gc_2018' ),
+		'update_item'                => __( 'Update Category', 'gc_2018' ),
+		'add_new_item'               => __( 'Add New Category', 'gc_2018' ),
+		'new_item_name'              => __( 'New Category', 'gc_2018' ),
+		'separate_items_with_commas' => __( 'Separate categories with commas', 'gc_2018' ),
+		'add_or_remove_items'        => __( 'Add or remove categories', 'gc_2018' ),
+		'choose_from_most_used'      => __( 'Choose from the most used categories', 'gc_2018' ),
 	);
 
 	register_taxonomy( 'gc_talkcategory', 'gc_talk', array(
@@ -86,9 +86,9 @@ function gc_talk_column( $columns ) {
 	$columns = array(
 		'cb'            => '<input type="checkbox" />',
 		//'title'           => 'Date',
-		'talk_date_col' => 'Date',
-		'talk_city_col' => 'City',
-		'talk_speaker'  => 'Speaker',
+		'talk_date_col' => __( 'Date', 'gc_2018' ),
+		'talk_city_col' => __( 'City', 'gc_2018' ),
+		'talk_speaker'  => __( 'Speaker', 'gc_2018' ),
 
 	);
 
@@ -180,7 +180,11 @@ function gc_order_talk( $query ) {
 		$query->set( 'orderby', 'meta_value' );
 		$query->set( 'meta_key', 'date' );
 		$query->set( 'order', 'desc' );
-		$query->set( 'posts_per_page', 36 );
+
+
+		if ( $query->is_main_query() ) {
+			$query->set( 'posts_per_page', 24 );
+		}
 
 
 		if ( is_archive() ) {
@@ -261,7 +265,7 @@ function update_talk( $post_id ) {
 	$my_post = array(
 		'ID'         => $post_id,
 		'post_title' => date_i18n( get_option( 'date_format' ), strtotime( get_field( 'date', $post_id ) ) ),
-		'post_name' => $post_id
+		'post_name'  => $post_id
 	);
 
 
@@ -422,9 +426,12 @@ function videoType( $url ) {
 
 
 /**
+ * @param int $nb
  * @param null $city
  * @param null $speaker
  * @param null $category
+ *
+ * @param null $exclude
  *
  * @return array
  */
@@ -477,7 +484,7 @@ function get_talks( $nb = 12, $city = null, $speaker = null, $category = null, $
 		'order'          => 'desc',
 		'post_type'      => 'gc_talk',
 		'tax_query'      => $tax_query,
-		'meta_query'     => $meta_query
+		'meta_query'     => $meta_query,
 
 	);
 

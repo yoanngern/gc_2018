@@ -8,12 +8,12 @@ function create_people() {
 	register_post_type( 'gc_people',
 		array(
 			'labels'                => array(
-				'name'          => __( 'People' ),
-				'singular_name' => __( 'Person' ),
-				'add_new'       => 'Add a person',
-				'all_items'     => 'All people',
-				'add_new_item'  => 'Add New Person',
-				'edit_item'     => 'Edit Person',
+				'name'          => __( 'People', 'gc_2018' ),
+				'singular_name' => __( 'Person', 'gc_2018' ),
+				'add_new'       => __( 'Add a person', 'gc_2018' ),
+				'all_items'     => __( 'All people', 'gc_2018' ),
+				'add_new_item'  => __( 'Add New Person', 'gc_2018' ),
+				'edit_item'     => __( 'Edit Person', 'gc_2018' ),
 			),
 			'public'                => true,
 			'can_export'            => true,
@@ -54,7 +54,7 @@ function update_people( $post_id ) {
 	$my_post = array(
 		'ID'         => $post_id,
 		'post_title' => get_field( 'firstname', $post_id ) . " " . get_field( 'lastname', $post_id ),
-		'post_name' => $post_id
+		'post_name'  => $post_id
 	);
 
 
@@ -89,7 +89,7 @@ function gc_order_people( $query ) {
 		$query->set( 'orderby', 'meta_value' );
 		$query->set( 'meta_key', 'lastname' );
 		$query->set( 'order', 'asc' );
-		$query->set( 'posts_per_page', 36 );
+		$query->set( 'posts_per_page', 24 );
 
 
 		$query->set( 'meta_query', array() );

@@ -121,29 +121,6 @@
         </a>
 
 
-		<?php if ( is_user_logged_in() ) : ?>
-            <div id="language">
-                <a id="open_lang" href="#"><?php echo pll_current_language( 'name' ) ?></a>
-                <select name="lang_switch" id="lang_switch">
-					<?php
-					$languages = pll_the_languages( array( 'raw' => 1 ) );
-
-					foreach ( $languages as $lang ) : ?>
-
-                        <option <?php
-						if ( $lang['current_lang'] ) {
-							echo 'selected="selected"';
-						}
-
-						?> id="<?php echo $lang['slug'] ?>"
-                           value="<?php echo $lang['url'] ?>"><?php echo $lang['name'] ?></option>
-
-					<?php endforeach;
-
-					?>
-                </select>
-            </div>
-		<?php endif; ?>
 
         <div id="burger">
             <span></span>
@@ -160,6 +137,47 @@
 			) );
 
 			?>
+
+	        <?php
+	        $languages = pll_the_languages( array(
+		        'raw'           => 1,
+                //'hide_if_empty' => 0,
+	        ) );
+
+	        if ( sizeof( $languages ) > 1 ) :?>
+                <div id="language">
+
+                    <a id="open_lang" href="<?php echo pll_home_url() ?>">
+                        <span><?php echo pll_current_language( 'slug' ) ?></span>
+                        <div class="arrow">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
+                    <ul id="lang_switch">
+				        <?php
+
+				        foreach ( $languages as $lang ) :
+
+					        $class = '';
+
+					        if ( $lang['current_lang'] ) {
+						        $class .= ' selected';
+					        }
+
+					        $slug = $lang['slug'];
+					        $url  = $lang['url'];
+					        $name  = $lang['name'];
+
+					        echo "<li class='$class'><a id='$slug' href='$url'>$name</a></li>";
+
+
+				        endforeach;
+
+				        ?>
+                    </ul>
+                </div>
+	        <?php endif; ?>
         </div>
 
         <div class="principal-nav">

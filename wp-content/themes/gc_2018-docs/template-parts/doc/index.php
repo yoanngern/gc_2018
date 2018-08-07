@@ -37,7 +37,7 @@
         <div class="platter">
 
             <div id="left-sidebar" class="left-sidebar">
-                <h4><a href="<?php echo get_post_type_archive_link( 'gc_doc' ); ?>">Categories</a></h4>
+                <h4><a href="<?php echo get_post_type_archive_link( 'gc_doc' ); ?>"><?php _e('Categories', 'gc_2018') ?></a></h4>
                 <ul class="doc_categories category_filter">
 					<?php
 
@@ -82,8 +82,11 @@
 
 					}
 
-					foreach ( $curr_parents as $curr_parent ) {
-						$curr_cats[] = $curr_parent;
+					if($curr_parents != null) {
+
+						foreach ( $curr_parents as $curr_parent ) {
+							$curr_cats[] = $curr_parent;
+						}
 					}
 
 

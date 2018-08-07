@@ -26,14 +26,14 @@
 
 		$bg_image = get_field( 'bg_image', $default_cat );
 
-		$title = "Événements";
+		$title = __('Events');
 
 
 	else:
 
 		$bg_image = get_field_or_parent( 'bg_image', $_POST, 'gc_eventcategory' );
 
-		$title = "Événements";
+		$title = __('Events');
 
 	endif;
 
@@ -91,7 +91,7 @@
 
             <div class="title">
 
-                <h4>Événement spécial</h4>
+                <h4><?php _e('Special event', 'gc_2018') ?></h4>
                 <h1 class="page-title">
 
                     <span class="txt"><?php echo $title; ?></span>
@@ -100,7 +100,7 @@
 
                 </h1>
                 <h3><?php echo $date; ?></h3>
-                <a href="<?php echo $link; ?>" class="button"><span>En savoir plus</span></a>
+                <a href="<?php echo $link; ?>" class="button"><span><?php _e('Learn more', 'gc_2018') ?></span></a>
 
 
             </div>
@@ -135,7 +135,7 @@
 
             <section id="events_header">
 
-                <h1>Prochains événements</h1>
+                <h1><?php _e('Next events', 'gc_2018') ?></h1>
 
                 <div class="content">
 
@@ -198,7 +198,7 @@
 
 						/*
 						wp_list_categories( array(
-							'show_option_all' => pll__( 'Filter events' ),
+							'show_option_all' => __( 'Filter events', 'gc_2018' ),
 							'value_field'     => 'slug',
 							'hide_if_empty'   => false,
 							'title_li'        => "",
@@ -321,8 +321,8 @@
 
 
             <nav class="nav">
-                <div class="previous"><?php previous_posts_link( pll__( 'Previous' ) ); ?></div>
-                <div class="next"><?php next_posts_link( pll__( 'Next' ) ); ?></div>
+                <div class="previous"><?php previous_posts_link( __( 'Previous', 'gc_2018' ) ); ?></div>
+                <div class="next"><?php next_posts_link( __( 'Next', 'gc_2018' ) ); ?></div>
             </nav>
 
 		<?php

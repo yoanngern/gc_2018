@@ -102,7 +102,7 @@
 
         <div class="nav">
             <div class="back">
-                <a href="<?php echo get_post_type_archive_link( 'gc_event' ); ?>"><?php pll_e( 'Back' ) ?></a>
+                <a href="<?php echo get_post_type_archive_link( 'gc_event' ); ?>"><?php _e( 'Back', 'gc_2018' ) ?></a>
             </div>
         </div>
 
@@ -131,7 +131,7 @@
 
 						<?php if ( $pres_page != null ): ?>
                             <a class="dynamic"
-                               href="<?php echo get_permalink( $pres_page->ID ); ?>"><?php pll_e( 'découvrir' ) ?><?php echo " " . $pres_page->post_title; ?></a>
+                               href="<?php echo get_permalink( $pres_page->ID ); ?>"><?php _e( 'descover', 'gc_2018' ) ?><?php echo " " . $pres_page->post_title; ?></a>
 						<?php endif; ?>
 
                         <div class="social">
@@ -152,11 +152,11 @@
 
 						<?php if ( $location_obj != null ): ?>
                             <div class="location">
-                                <h3><?php pll_e( 'Lieu' ) ?></h3>
+                                <h3><?php _e( 'Location', 'gc_2018' ) ?></h3>
                                 <p class="address"><?php echo $location; ?></p>
 
                                 <a target="_blank" class="direction"
-                                   href="https://www.google.com/maps/search/?api=1&query=<?php echo urlencode( $location ) ?>"><?php pll_e( 'Itinéraire' ) ?></a>
+                                   href="https://www.google.com/maps/search/?api=1&query=<?php echo urlencode( $location ) ?>"><?php _e( 'get directions', 'gc_2018' ) ?></a>
 
                             </div>
 						<?php endif; ?>
@@ -170,7 +170,7 @@
 
 						<?php //if ( $location_obj != null ): ?>
 						<?php if ( false ): ?>
-                            <a target="_blank" class="small" href=""><?php pll_e( 'ajouter au calendrier' ) ?></a>
+                            <a target="_blank" class="small" href=""><?php _e( 'add to calendar', 'gc_2018' ) ?></a>
 						<?php endif; ?>
 
 
@@ -259,7 +259,7 @@
 
 		<?php if ( $events != null ): ?>
             <section class="content-default" id="related_events">
-                <h1><?php pll_e( 'prochaines dates à venir' ) ?></h1>
+                <h1><?php _e( 'next dates to come', 'gc_2018' ) ?></h1>
 
                 <ul class="dynamic">
 					<?php foreach ( $events as $event ):

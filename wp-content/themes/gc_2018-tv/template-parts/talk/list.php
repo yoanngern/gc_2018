@@ -5,7 +5,7 @@ $city     = null;
 $category = null;
 
 $nb_filter = 0;
-$title     = pll__( 'All talks' );
+$title     = __( 'All talks', 'gc_2018' );
 
 if ( isset( $_GET['speaker'] ) ) {
 
@@ -71,7 +71,7 @@ if ( isset( $_GET['category'] ) ) {
 
 					<?php if ( $nb_filter > 1 ): ?>
 
-                        <h1><?php pll_e( 'Talks selection' ) ?></h1>
+                        <h1><?php _e( 'Talks selection', 'gc_2018' ) ?></h1>
 
                         <ul>
 							<?php
@@ -79,15 +79,15 @@ if ( isset( $_GET['category'] ) ) {
 							if ( $city ) {
 
 
-								echo "<li>" . pll__( 'City' ) . ": " . $city->post_title . "</li>";
+								echo "<li>" . __( 'City', 'gc_2018' ) . ": " . $city->post_title . "</li>";
 							}
 
 							if ( $speaker ) {
-								echo "<li>" . pll__( 'Speaker' ) . ": " . $speaker->post_title . "</li>";
+								echo "<li>" . __( 'Speaker', 'gc_2018' ) . ": " . $speaker->post_title . "</li>";
 							}
 
 							if ( $category ) {
-								echo "<li>" . pll__( 'Category' ) . ": " . $category->name . "</li>";
+								echo "<li>" . __( 'Category', 'gc_2018' ) . ": " . $category->name . "</li>";
 							}
 
 							?>
@@ -133,8 +133,8 @@ if ( isset( $_GET['category'] ) ) {
             </article>
 
             <nav class="nav">
-                <div class="previous"><?php previous_posts_link( pll__( 'Previous' ) ); ?></div>
-                <div class="next"><?php next_posts_link( pll__( 'Next' ) ); ?></div>
+                <div class="previous"><?php previous_posts_link( __( 'Previous', 'gc_2018' ) ); ?></div>
+                <div class="next"><?php next_posts_link( __( 'Next', 'gc_2018' ) ); ?></div>
             </nav>
         </div>
 

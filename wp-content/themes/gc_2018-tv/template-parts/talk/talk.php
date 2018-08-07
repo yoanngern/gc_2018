@@ -41,8 +41,8 @@
 
                 <div class="talk_desc">
 					<?php if ( $audio & $video ): ?>
-                        <a href="#switch_player" class="dynamic audio"><span class="audio">Message en audio</span><span
-                                    class="video">Message en vidéo</span></a>
+                        <a href="#switch_player" class="dynamic audio"><span class="audio"><?php _e('Talk in audio', 'gc_2018') ?></span><span
+                                    class="video"><?php _e('Talk in video', 'gc_2018') ?></span></a>
 					<?php endif; ?>
                     <h1><?php echo $title; ?></h1>
 

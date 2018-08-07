@@ -42,7 +42,6 @@
 		while ( have_posts() ) : the_post(); ?> <!--Because the_content() works only inside a WP Loop -->
             <article class="content-page">
 
-
 				<?php
 				echo '<div class="content">';
 				the_content();

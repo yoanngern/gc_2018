@@ -154,6 +154,27 @@
 		"oAP": "\/index.php",
 		"oF": 0
 		},
+	"\/languages\/fr_FR.mo": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/languages\/fr_FR.mo",
+		"oF": 0
+		},
+	"\/languages\/fr_FR.po": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/languages\/fr_FR.po",
+		"oF": 0
+		},
+	"\/languages\/gc_2018-city.pot": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "\/languages\/gc_2018-city.pot",
+		"oF": 0
+		},
 	"\/options.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -359,7 +380,7 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/scss\/style_v2.scss": {
+	"\/scss\/style.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -367,7 +388,7 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "\/style_v2.css",
+		"oAP": "\/style.css",
 		"oF": 2,
 		"oS": 0,
 		"uL": 1
@@ -379,16 +400,6 @@
 		"ma": 0,
 		"oA": 0,
 		"oAP": "\/style-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"\/style_v2.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "\/style_v2-min.css",
 		"oF": 0,
 		"oS": 3
 		},

@@ -1,5 +1,5 @@
 <article class="content-page default">
 
-    <h1><?php pll_e( 'There is no people' ) ?></h1>
+    <h1><?php _e( 'There is no people', 'gc_2018' ) ?></h1>
 
 </article>

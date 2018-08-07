@@ -10,6 +10,7 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags:
 Text Domain: gc_2018
+Domain Path: /languages
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
@@ -133,8 +134,6 @@ body > header div.local {
       letter-spacing: 0.1em;
       line-height: 20px;
       padding: 6px 0 0 8px; }
-  body > header div.local #language {
-    display: none; }
   body > header div.local #burger {
     margin: 39px 55px 0 0;
     width: 28px;
@@ -182,11 +181,14 @@ body > header div.local {
     top: 0;
     z-index: 100;
     position: absolute;
-    margin: 32px 120px 0 0;
+    margin: 32px 90px 0 0;
     transition: all 250ms ease;
     -webkit-transition: all 250ms ease;
     -moz-transition: all 250ms ease;
     -o-transition: all 250ms ease; }
+    body > header div.local div.top-nav > div {
+      display: inline-block;
+      margin: 0 25px 0 0; }
     body > header div.local div.top-nav ul li {
       display: inline-block;
       padding: 5px 10px; }
@@ -223,6 +225,97 @@ body > header div.local {
           transition: all 0ms ease-in-out 0s; }
       body > header div.local div.top-nav ul li ul {
         display: none; }
+    body > header div.local div.top-nav #language {
+      display: inline-block;
+      z-index: 1100;
+      padding: 5px 10px;
+      text-align: center;
+      position: relative; }
+      body > header div.local div.top-nav #language a {
+        color: #FFFFFF;
+        text-decoration: none;
+        text-transform: uppercase;
+        line-height: 2em;
+        padding: 2px 2px 0;
+        letter-spacing: 0.08em; }
+      body > header div.local div.top-nav #language:hover ul {
+        display: block; }
+      body > header div.local div.top-nav #language div.arrow {
+        display: inline-block;
+        vertical-align: top;
+        width: 8px;
+        height: 10px;
+        position: relative;
+        margin: 7px 0 0 2px; }
+        body > header div.local div.top-nav #language div.arrow span {
+          height: 1px;
+          background-color: #FFFFFF;
+          display: block;
+          position: absolute;
+          width: 5px;
+          top: 50%;
+          -webkit-transition: 100ms ease-in-out;
+          -moz-transition: 100ms ease-in-out;
+          -o-transition: 100ms ease-in-out;
+          transition: 100ms ease-in-out; }
+          body > header div.local div.top-nav #language div.arrow span:first-of-type {
+            transform: rotate(45deg);
+            left: 0; }
+          body > header div.local div.top-nav #language div.arrow span:last-of-type {
+            transform: rotate(-45deg);
+            right: 0; }
+      body > header div.local div.top-nav #language ul {
+        display: block;
+        position: absolute;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+        padding: 2px 0 0;
+        -webkit-transition: 100ms ease-in-out;
+        -moz-transition: 100ms ease-in-out;
+        -o-transition: 100ms ease-in-out;
+        transition: 100ms ease-in-out;
+        opacity: 0; }
+        body > header div.local div.top-nav #language ul::before {
+          content: '';
+          width: 100%;
+          height: 2px;
+          background-color: rgba(255, 255, 255, 0.8);
+          position: absolute;
+          top: 0;
+          left: 0; }
+        body > header div.local div.top-nav #language ul:hover li a {
+          color: rgba(255, 255, 255, 0.7); }
+        body > header div.local div.top-nav #language ul li {
+          list-style: none;
+          text-align: center;
+          padding: 0 4px;
+          display: block; }
+          body > header div.local div.top-nav #language ul li:hover a {
+            color: white; }
+          body > header div.local div.top-nav #language ul li:first-of-type {
+            padding-top: 5px; }
+          body > header div.local div.top-nav #language ul li a {
+            display: block;
+            padding: 1px;
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.8);
+            -webkit-transition: 150ms ease-in-out;
+            -moz-transition: 150ms ease-in-out;
+            -o-transition: 150ms ease-in-out;
+            transition: 150ms ease-in-out; }
+            body > header div.local div.top-nav #language ul li a::before, body > header div.local div.top-nav #language ul li a::after {
+              content: none; }
+      body > header div.local div.top-nav #language.open div.arrow span:first-of-type {
+        transform: rotate(-45deg);
+        left: 0; }
+      body > header div.local div.top-nav #language.open div.arrow span:last-of-type {
+        transform: rotate(45deg);
+        right: 0; }
+      body > header div.local div.top-nav #language.open ul {
+        display: block;
+        opacity: 1; }
   body > header div.local div.principal-nav {
     opacity: 0;
     max-width: 300px;
@@ -345,18 +438,98 @@ body > header div.local {
     opacity: 1;
     right: 0; }
   @media only screen and (max-width: 800px) {
-    body > header div.local div.top-nav {
+    body > header div.local div.top-nav > div {
       display: none; }
+    body > header div.local #language {
+      display: inline-block; }
     body > header div.local #simple_logo {
       display: none; } }
+  @media only screen and (max-width: 670px) {
+    body > header div.local {
+      background-color: #FFFFFF;
+      width: 100%;
+      height: 36px;
+      position: fixed;
+      bottom: inherit;
+      box-shadow: 1px 2px 4px rgba(51, 51, 51, 0.5); }
+      body > header div.local > div {
+        margin: 0 auto; }
+      body > header div.local div.top-nav {
+        position: relative;
+        margin: 0;
+        float: right; }
+        body > header div.local div.top-nav #language {
+          margin: 0;
+          padding: 4px 10px; }
+          body > header div.local div.top-nav #language a {
+            color: #333333; }
+          body > header div.local div.top-nav #language div.arrow span {
+            background-color: #333333; }
+          body > header div.local div.top-nav #language ul {
+            background-color: #FFFFFF; }
+            body > header div.local div.top-nav #language ul li {
+              padding: 0 10px; }
+              body > header div.local div.top-nav #language ul li a {
+                color: #333333;
+                padding: 3px; }
+              body > header div.local div.top-nav #language ul li:hover a {
+                color: #333333; }
+            body > header div.local div.top-nav #language ul:hover li a {
+              color: #333333; }
+      body > header div.local #burger {
+        display: inline-block;
+        position: relative;
+        top: inherit;
+        float: right;
+        margin: 9px 13px;
+        height: 18px;
+        width: 24px; }
+        body > header div.local #burger span {
+          background-color: #333333; }
+          body > header div.local #burger span:nth-child(1) {
+            top: 0; }
+          body > header div.local #burger span:nth-child(2), body > header div.local #burger span:nth-child(3) {
+            top: 8px; }
+          body > header div.local #burger span:nth-child(4) {
+            top: 16px; } }
   @media only screen and (max-width: 480px) {
-    body > header div.local #logo_mini {
-      margin: 13px 0 0 15px; }
-    body > header div.local #burger {
-      margin: 15px 15px 0 0; } }
-  @media only screen and (max-width: 400px) {
+    body > header div.local {
+      /*
+            #logo_mini {
+                margin: 13px 0 0 15px;
+            }
+
+            #burger {
+                margin: 15px 15px 0 0;
+            }
+            */ } }
+  @media only screen and (max-width: 420px) {
     body > header div.local div.principal-nav {
-      max-width: inherit; } }
+      max-width: inherit; }
+      body > header div.local div.principal-nav div > ul {
+        padding: 5px 10px 20px; }
+        body > header div.local div.principal-nav div > ul li {
+          text-align: center; }
+          body > header div.local div.principal-nav div > ul li.current-menu-item > a {
+            padding: 2px;
+            border-bottom: 3px solid #E52639;
+            border-left: inherit; }
+          body > header div.local div.principal-nav div > ul li ul li {
+            padding: 5px 0; }
+            body > header div.local div.principal-nav div > ul li ul li a {
+              padding: 2px; }
+            body > header div.local div.principal-nav div > ul li ul li.current-menu-item > a {
+              padding: 2px;
+              border-bottom: 3px solid #E52639;
+              border-left: inherit; }
+        body > header div.local div.principal-nav div > ul > li.current-menu-item > a {
+          padding: 2px;
+          border-bottom: 3px solid #E52639;
+          border-left: inherit; }
+        body > header div.local div.principal-nav div > ul > li.current-menu-item.current-menu-ancestor > a {
+          padding: 2px;
+          border-bottom: inherit;
+          border-left: inherit; } }
 
 body.tax-gc_eventcategory > header div.principal-nav div > ul li.menu-item-object-gc_event > a,
 body.single-gc_event > header div.principal-nav div > ul li.menu-item-object-gc_event > a {
@@ -427,7 +600,11 @@ body > header div.global {
         display: block;
         position: absolute;
         width: 8px;
-        top: 50%; }
+        top: 50%;
+        -webkit-transition: 100ms ease-in-out;
+        -moz-transition: 100ms ease-in-out;
+        -o-transition: 100ms ease-in-out;
+        transition: 100ms ease-in-out; }
         body > header div.global #global-tab div.arrow span:first-of-type {
           transform: rotate(45deg);
           left: 0; }
@@ -437,6 +614,14 @@ body > header div.global {
     @media only screen and (max-width: 800px) {
       body > header div.global #global-tab {
         margin-left: -2px; } }
+    @media only screen and (max-width: 670px) {
+      body > header div.global #global-tab {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        background-color: transparent;
+        padding: 7px 13px; }
+        body > header div.global #global-tab:before {
+          box-shadow: none; } }
   body > header div.global div.global-nav {
     background-color: #FFFFFF;
     width: 100%;
@@ -489,7 +674,10 @@ body > header div.global {
               letter-spacing: 0.05em;
               line-height: 1.2em;
               padding-bottom: 8px;
-              display: block; }
+              display: block;
+              transition: all 100ms ease-in-out; }
+              body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li a:hover {
+                color: #E52639; }
             body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li ul {
               margin-left: 47px;
               break-inside: avoid-column;
@@ -558,7 +746,7 @@ body > header div.global {
             margin: 0; }
           body > header div.global div.global-nav div.content .menu-global-nav-container > ul > li > a {
             display: inline-block;
-            padding-right: 20px; } }
+            padding-right: 47px; } }
   body > header div.global.open {
     transform: translate(0, 0); }
     body > header div.global.open .global-nav:before {
@@ -1646,7 +1834,8 @@ body.page-template-default #content div.platter article.content-page {
     /* Chrome, Safari, Opera */
     column-span: all; }
   body.page-template-default #content div.platter article.content-page div.content div.col_fixed {
-    display: table; }
+    display: table;
+    width: 100%; }
     body.page-template-default #content div.platter article.content-page div.content div.col_fixed div.col {
       display: inline-block;
       width: 46%;
@@ -1733,6 +1922,11 @@ nav.sub-nav {
 
 .nf-form-cont .nf-error-msg {
   font-size: 0.8em; }
+
+.nf-form-cont .nf-help {
+  background-size: contain;
+  width: 10px;
+  height: 10px; }
 
 .nf-multi-cell div.nf-cell {
   padding: 0 2% 0 0; }

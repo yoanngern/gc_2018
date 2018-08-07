@@ -4,11 +4,11 @@ if( function_exists('acf_add_local_field_group') ):
 
 	acf_add_local_field_group(array(
 		'key' => 'group_5a018e60d21ce',
-		'title' => 'Location',
+		'title' => __('Location', 'gc_2018'),
 		'fields' => array(
 			array(
 				'key' => 'field_5a033ef7d8087',
-				'label' => pll__('Name'),
+				'label' => __('Name', 'gc_2018'),
 				'name' => 'name',
 				'type' => 'text',
 				'instructions' => '',
@@ -27,7 +27,7 @@ if( function_exists('acf_add_local_field_group') ):
 			),
 			array(
 				'key' => 'field_5a018e7273a92',
-				'label' => pll__('Address'),
+				'label' => __('Address', 'gc_2018'),
 				'name' => 'address',
 				'type' => 'textarea',
 				'instructions' => '',
@@ -46,7 +46,7 @@ if( function_exists('acf_add_local_field_group') ):
 			),
 			array(
 				'key' => 'field_5a018ee8795c0',
-				'label' => pll__('City'),
+				'label' => __('City', 'gc_2018'),
 				'name' => 'city',
 				'type' => 'text',
 				'instructions' => '',
@@ -65,7 +65,7 @@ if( function_exists('acf_add_local_field_group') ):
 			),
 			array(
 				'key' => 'field_5a018eaa6518b',
-				'label' => pll__('Zip code'),
+				'label' => __('Zip code', 'gc_2018'),
 				'name' => 'zip_code',
 				'type' => 'text',
 				'instructions' => '',
@@ -84,7 +84,7 @@ if( function_exists('acf_add_local_field_group') ):
 			),
 			array(
 				'key' => 'field_5a018eef795c1',
-				'label' => pll__('Country'),
+				'label' => __('Country', 'gc_2018'),
 				'name' => 'country',
 				'type' => 'text',
 				'instructions' => '',

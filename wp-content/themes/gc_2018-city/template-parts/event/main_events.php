@@ -42,7 +42,7 @@ $events = $query->get_posts();
                 <a href="<?php echo $link; ?>">
                     <div class="content">
                         <div class="hover">
-                            <span>En savoir plus</span>
+                            <span><?php _e('Learn more', 'gc_2018') ?></span>
                         </div>
                         <div id="<?php echo $id; ?>" class="image"
                              style="background-image: url('<?php echo $image; ?>')"></div>

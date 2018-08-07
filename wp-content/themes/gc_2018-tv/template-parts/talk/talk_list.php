@@ -1,4 +1,4 @@
-<?php if ( sizeof( $talks ) ): ?>
+<?php if ( sizeof( $talks ) ):?>
 
 
     <section class="talk_list">
@@ -7,8 +7,8 @@
             <div>
                 <h1><?php echo $section_title; ?></h1>
 
-				<?php if ( sizeof( $talks ) > 12 ): ?>
-                    <a href="<?php echo $section_more; ?>" class="more"><?php pll_e('More talks') ?></a>
+				<?php if ( sizeof( $talks ) >= 12 ): ?>
+                    <a href="<?php echo $section_more; ?>" class="more"><?php _e('More talks', 'gc_2018') ?></a>
 				<?php endif; ?>
             </div>
         </div>

@@ -1,0 +1,140 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: GC Docs 2018\n"
+"POT-Creation-Date: 2018-08-07 17:52+0200\n"
+"PO-Revision-Date: 2018-08-07 17:54+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: style.css\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/gc_doc.php:10
+msgid "Docs"
+msgstr "Documents"
+
+#: includes/gc_doc.php:11
+msgid "Doc"
+msgstr "Document"
+
+#: includes/gc_doc.php:12
+msgid "Add a doc"
+msgstr "Ajouter un document"
+
+#: includes/gc_doc.php:13
+msgid "All docs"
+msgstr "Tous les documents"
+
+#: includes/gc_doc.php:14
+msgid "Add New Doc"
+msgstr "Ajouter un nouveau document"
+
+#: includes/gc_doc.php:15
+msgid "Edit Doc"
+msgstr "Modifier Document"
+
+#: includes/gc_doc.php:47
+msgctxt "taxonomy general name"
+msgid "Doc categories"
+msgstr "Catégories de document"
+
+#: includes/gc_doc.php:48
+msgctxt "taxonomy singular name"
+msgid "Category"
+msgstr "Catégorie"
+
+#: includes/gc_doc.php:49
+msgid "Search Category"
+msgstr "Rechercher des catégories"
+
+#: includes/gc_doc.php:50
+msgid "Popular Categories"
+msgstr "Catégories populaires"
+
+#: includes/gc_doc.php:51
+msgid "All Categories"
+msgstr "Toutes les catégories"
+
+#: includes/gc_doc.php:54
+msgid "Edit Category"
+msgstr "Modifier la catégorie"
+
+#: includes/gc_doc.php:55
+msgid "Update Category"
+msgstr "Mettre à jour la catégorie"
+
+#: includes/gc_doc.php:56
+msgid "Add New Category"
+msgstr "Ajouter une nouvelle catégorie"
+
+#: includes/gc_doc.php:57
+msgid "New Category"
+msgstr "Nouvelle Catégorie"
+
+#: includes/gc_doc.php:58
+msgid "Separate categories with commas"
+msgstr "Séparer les catégories avec des virgules"
+
+#: includes/gc_doc.php:59
+msgid "Add or remove categories"
+msgstr "Ajouter ou supprimer des catégories"
+
+#: includes/gc_doc.php:60
+msgid "Choose from the most used categories"
+msgstr "Choisissez parmi les catégories les plus utilisées"
+
+#: includes/gc_doc.php:64
+msgid "Category"
+msgstr "Catégorie"
+
+#: template-parts/doc/doc.php:22
+msgid "Resources"
+msgstr "Ressources"
+
+#: template-parts/doc/index.php:40
+msgid "Categories"
+msgstr "Catégories"
+
+#: template-parts/doc/list.php:29
+msgid "Previous"
+msgstr "Précédent"
+
+#: template-parts/doc/list.php:30
+msgid "Next"
+msgstr "Suivant"
+
+#: template-parts/doc/none.php:3
+msgid "There is no doc"
+msgstr "Il n'y a pas de document"
+
+#. Theme Name of the plugin/theme
+msgid "GC Docs 2018"
+msgstr "GC Docs 2018"
+
+#. Theme URI of the plugin/theme
+msgid "http://gospel-center.org"
+msgstr "http://gospel-center.org"
+
+#. Description of the plugin/theme
+msgid "Template for GC Docs 2018"
+msgstr "Template pour GC Docs 2018"
+
+#. Author of the plugin/theme
+msgid "Yoann Gern"
+msgstr "Yoann Gern"
+
+#. Author URI of the plugin/theme
+msgid "http://gerny-media.ch"
+msgstr "http://gerny-media.ch"

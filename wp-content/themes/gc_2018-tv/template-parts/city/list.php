@@ -8,7 +8,7 @@
 
 	$bg_image = get_field( 'bg_image', $_POST );
 
-	$title = "Les villes";
+	$title = __('Cities', 'gc_2018');
 
 	?>
 
@@ -57,8 +57,8 @@
 
 
             <nav class="nav">
-                <div class="previous"><?php previous_posts_link( pll__('Previous') ); ?></div>
-                <div class="next"><?php next_posts_link( pll__('Next') ); ?></div>
+                <div class="previous"><?php previous_posts_link( __('Previous', 'gc_2018') ); ?></div>
+                <div class="next"><?php next_posts_link( __('Next', 'gc_2018') ); ?></div>
             </nav>
 
 			<?php

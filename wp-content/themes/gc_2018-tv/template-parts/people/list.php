@@ -13,7 +13,7 @@
             <article class="content-page">
 
                 <section class="header">
-                    <h1><?php pll__('Speakers') ?></h1>
+                    <h1><?php _e('Speakers', 'gc_2018') ?></h1>
 
                 </section>
 
@@ -36,8 +36,8 @@
             </article>
 
             <nav class="nav">
-                <div class="previous"><?php previous_posts_link( pll__('Previous') ); ?></div>
-                <div class="next"><?php next_posts_link( pll__('Next') ); ?></div>
+                <div class="previous"><?php previous_posts_link( __('Previous', 'gc_2018') ); ?></div>
+                <div class="next"><?php next_posts_link( __('Next', 'gc_2018') ); ?></div>
             </nav>
         </div>
 

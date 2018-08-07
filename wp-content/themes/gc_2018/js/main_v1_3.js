@@ -79,6 +79,11 @@ $(document).ready(function () {
         $('body > header > .global').toggleClass('open');
     });
 
+    $('#open_lang').click(function (e) {
+        e.preventDefault();
+
+        $('body > header > .local #language').toggleClass('open');
+    });
 
     $("iframe.video, iframe.audio").each(function () {
 

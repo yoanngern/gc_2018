@@ -35,7 +35,7 @@ if ( $events != null ) : ?>
     <div class="related_events">
 
         <section id="listOfEvents" class="small" data-nb="6">
-            <h1>des événements à ne pas manquer</h1>
+            <h1><?php _e('Don\'t miss these events', 'gc_2018') ?></h1>
             <article class="content-page events_table">
 
 				<?php foreach ( $events as $event ) :

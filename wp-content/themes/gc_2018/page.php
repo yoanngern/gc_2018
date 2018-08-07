@@ -2,6 +2,7 @@
 
 <section id="content">
 
+
 	<?php if ( get_field( 'bg_image' ) ): ?>
 
         <article class="title">
@@ -41,7 +42,6 @@
 		// TO SHOW THE PAGE CONTENTS
 		while ( have_posts() ) : the_post(); ?> <!--Because the_content() works only inside a WP Loop -->
             <article class="content-page">
-
 
 				<?php
 				echo '<div class="content">';

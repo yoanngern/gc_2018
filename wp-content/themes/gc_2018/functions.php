@@ -5,12 +5,17 @@
  *
  */
 function gc_theme_enqueue_style() {
-	wp_enqueue_style( 'gc_2018-style', get_template_directory_uri() . '/style_v2.css', false, wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'gc_2018-style', get_template_directory_uri() . '/style.css', false, wp_get_theme()->get( 'Version' ) );
 }
 
 function gc_theme_enqueue_script() {
-	wp_enqueue_script( 'gc_2018-js', get_template_directory_uri() . '/js/main_v1_2.min.js', false );
+	wp_enqueue_script( 'gc_2018-js', get_template_directory_uri() . '/js/main_v1_3.min.js', false );
 }
+
+function gc_theme_load_theme_textdomain() {
+	load_theme_textdomain( 'gc_2018', get_template_directory() . '/languages' );
+}
+add_action( 'after_setup_theme', 'gc_theme_load_theme_textdomain' );
 
 
 add_action( 'wp_enqueue_scripts', 'gc_theme_enqueue_style' );
@@ -23,11 +28,12 @@ require_once( __DIR__ . '/includes/gc_date.php' );
 
 function get_blog_id() {
 	global $blog_id;
-    return $blog_id;
+
+	return $blog_id;
 }
 
 function get_blog_gc_id() {
-    return 1;
+	return 1;
 }
 
 function get_blog_tv_id() {
@@ -54,7 +60,7 @@ function gc_acf_init() {
 
 		) );
 
-		if(get_blog_id() == get_blog_gc_id()) {
+		if ( get_blog_id() == get_blog_gc_id() ) {
 
 			/**
 			 * Gospel Center - Global Nav
@@ -69,29 +75,29 @@ function gc_acf_init() {
 
 			) );
 
-        }
+		}
 
 	}
 }
 
 
-add_filter('wp_nav_menu_objects', 'my_wp_nav_menu_objects', 10, 2);
+add_filter( 'wp_nav_menu_objects', 'my_wp_nav_menu_objects', 10, 2 );
 
 function my_wp_nav_menu_objects( $items, $args ) {
 
 	// loop
-	foreach( $items as &$item ) {
+	foreach ( $items as &$item ) {
 
 		// vars
-		$icon = get_field('icon', $item)['sizes']['thumbnail'];
+		$icon = get_field( 'icon', $item )['sizes']['thumbnail'];
 
 
 		// append icon
-		if( $icon ) {
+		if ( $icon ) {
 
-		    $title_txt = $item->title;
+			$title_txt = $item->title;
 
-			$item->title = '<span class="title">'.$title_txt.'</span> <span class="icon" style="background-image: url(\' '.$icon.' \')"></span>';
+			$item->title = '<span class="title">' . $title_txt . '</span> <span class="icon" style="background-image: url(\' ' . $icon . ' \')"></span>';
 
 		}
 
@@ -133,7 +139,7 @@ function wpos3_hipdi_add_hidpi_file_paths( $paths ) {
 
 		if ( $new_path != null ) {
 			$paths[] = $new_path;
-        }
+		}
 
 
 	}
@@ -144,17 +150,14 @@ function wpos3_hipdi_add_hidpi_file_paths( $paths ) {
 add_filter( 'as3cf_attachment_file_paths', 'wpos3_hipdi_add_hidpi_file_paths' );
 
 
-
-
-
 function register_my_menu() {
-	register_nav_menu( 'principal', __( 'Menu principal', 'gc_2018' ) );
-	register_nav_menu( 'top', __( 'Menu header', 'gc_2018' ) );
+	register_nav_menu( 'principal', __( 'Main menu', 'gc_2018' ) );
+	register_nav_menu( 'top', __( 'Header menu', 'gc_2018' ) );
 
-	if(get_blog_id() == get_blog_gc_id()) {
+	if ( get_blog_id() == get_blog_gc_id() ) {
 
 		register_nav_menu( 'global_nav', __( 'Global Nav', 'gc_2018' ) );
-    }
+	}
 }
 
 add_action( 'init', 'register_my_menu' );

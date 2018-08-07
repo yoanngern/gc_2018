@@ -1,0 +1,227 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Gospel Center TV 2018\n"
+"POT-Creation-Date: 2018-08-07 17:52+0200\n"
+"PO-Revision-Date: 2018-08-07 17:52+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: style.css\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/gc_city.php:11 template-parts/city/list.php:11
+msgid "Cities"
+msgstr "Villes"
+
+#: includes/gc_city.php:12 includes/gc_talk.php:90
+#: template-parts/talk/list.php:82
+msgid "City"
+msgstr "Ville"
+
+#: includes/gc_city.php:13
+msgid "Add a city"
+msgstr "Ajouter une ville"
+
+#: includes/gc_city.php:14
+msgid "All cities"
+msgstr "Toutes les villes"
+
+#: includes/gc_city.php:15
+msgid "Add New City"
+msgstr "Ajouter une nouvelle ville"
+
+#: includes/gc_city.php:16
+msgid "Edit City"
+msgstr "Modifier la ville"
+
+#: includes/gc_people.php:11
+msgid "People"
+msgstr "Personnes"
+
+#: includes/gc_people.php:12
+msgid "Person"
+msgstr "Personne"
+
+#: includes/gc_people.php:13
+msgid "Add a person"
+msgstr "Ajouter une personne"
+
+#: includes/gc_people.php:14
+msgid "All people"
+msgstr "Toutes les personnes"
+
+#: includes/gc_people.php:15
+msgid "Add New Person"
+msgstr "Ajouter nouvelle personne"
+
+#: includes/gc_people.php:16
+msgid "Edit Person"
+msgstr "Modifier Personne"
+
+#: includes/gc_talk.php:10
+msgid "Talks"
+msgstr "Messages"
+
+#: includes/gc_talk.php:11
+msgid "Talk"
+msgstr "Message"
+
+#: includes/gc_talk.php:12
+msgid "Add a talk"
+msgstr "Ajouter un message"
+
+#: includes/gc_talk.php:13 template-parts/talk/list.php:8
+msgid "All talks"
+msgstr "Tous les messages"
+
+#: includes/gc_talk.php:14
+msgid "Add New Talk"
+msgstr "Ajouter un nouveau message"
+
+#: includes/gc_talk.php:15
+msgid "Edit Talk"
+msgstr "Modifier Message"
+
+#: includes/gc_talk.php:48
+msgctxt "taxonomy general name"
+msgid "Categories"
+msgstr "Catégories"
+
+#: includes/gc_talk.php:49
+msgctxt "taxonomy singular name"
+msgid "Category"
+msgstr "Catégorie"
+
+#: includes/gc_talk.php:50
+msgid "Search Category"
+msgstr "Rechercher des catégories"
+
+#: includes/gc_talk.php:51
+msgid "Popular Categories"
+msgstr "Catégories populaires"
+
+#: includes/gc_talk.php:52
+msgid "All Categories"
+msgstr "Toutes les catégories"
+
+#: includes/gc_talk.php:55
+msgid "Edit Category"
+msgstr "Modifier la catégorie"
+
+#: includes/gc_talk.php:56
+msgid "Update Category"
+msgstr "Mettre à jour la catégorie"
+
+#: includes/gc_talk.php:57
+msgid "Add New Category"
+msgstr "Ajouter une nouvelle catégorie"
+
+#: includes/gc_talk.php:58
+msgid "New Category"
+msgstr "Nouvelle Catégorie"
+
+#: includes/gc_talk.php:59
+msgid "Separate categories with commas"
+msgstr "Séparer les catégories avec des virgules"
+
+#: includes/gc_talk.php:60
+msgid "Add or remove categories"
+msgstr "Ajouter ou supprimer des catégories"
+
+#: includes/gc_talk.php:61
+msgid "Choose from the most used categories"
+msgstr "Choisissez parmi les catégories les plus utilisées"
+
+#: includes/gc_talk.php:65 template-parts/talk/list.php:90
+msgid "Category"
+msgstr "Catégorie"
+
+#: includes/gc_talk.php:89
+msgid "Date"
+msgstr "Date"
+
+#: includes/gc_talk.php:91 template-parts/talk/list.php:86
+msgid "Speaker"
+msgstr "Orateur"
+
+#: template-parts/city/list.php:60 template-parts/people/list.php:39
+#: template-parts/talk/list.php:136
+msgid "Previous"
+msgstr "Précédent"
+
+#: template-parts/city/list.php:61 template-parts/people/list.php:40
+#: template-parts/talk/list.php:137
+msgid "Next"
+msgstr "Suivant"
+
+#: template-parts/city/none.php:3
+msgid "There is no city"
+msgstr "Il n'y a pas de ville"
+
+#: template-parts/people/list.php:16
+msgid "Speakers"
+msgstr "Orateurs"
+
+#: template-parts/people/none.php:3
+msgid "There is no people"
+msgstr "Il n'y a pas de personnes"
+
+#: template-parts/talk/list.php:74
+msgid "Talks selection"
+msgstr "Sélection de messages"
+
+#: template-parts/talk/none.php:3
+msgid "There is no talk"
+msgstr "Il n'ya pas de message"
+
+#: template-parts/talk/talk.php:44
+msgid "Talk in audio"
+msgstr "Message en audio"
+
+#: template-parts/talk/talk.php:45
+msgid "Talk in video"
+msgstr "Message en vidéo"
+
+#: template-parts/talk/talk_list.php:11
+msgid "More talks"
+msgstr "Plus de messages"
+
+#. Theme Name of the plugin/theme
+msgid "Gospel Center TV 2018"
+msgstr "Gospel Center TV 2018"
+
+#. Theme URI of the plugin/theme
+msgid "http://gospel-center.org"
+msgstr "http://gospel-center.org"
+
+#. Description of the plugin/theme
+msgid "Template for Gospel Center TV 2018"
+msgstr "Template pour Gospel Center TV 2018"
+
+#. Author of the plugin/theme
+msgid "Yoann Gern"
+msgstr "Yoann Gern"
+
+#. Author URI of the plugin/theme
+msgid "http://gerny-media.ch"
+msgstr "http://gerny-media.ch"
+
+#. Template Name of the plugin/theme
+msgid "TV selection */ ?>"
+msgstr "Sélection TV */? >"
+
+#. Template Name of the plugin/theme
+msgid "TV */ ?>"
+msgstr "TV"

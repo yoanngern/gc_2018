@@ -7,12 +7,12 @@ function create_services() {
 	register_post_type( 'gc_service',
 		array(
 			'labels'              => array(
-				'name'          => __( 'Services' ),
-				'singular_name' => __( 'Service' ),
-				'add_new'       => 'Add a service',
-				'all_items'     => 'All services',
-				'add_new_item'  => 'Add New Service',
-				'edit_item'     => 'Edit Service',
+				'name'          => __( 'Services', 'gc_2018' ),
+				'singular_name' => __( 'Service', 'gc_2018' ),
+				'add_new'       => __( 'Add a service', 'gc_2018' ),
+				'all_items'     => __( 'All services', 'gc_2018' ),
+				'add_new_item'  => __( 'Add New Service', 'gc_2018' ),
+				'edit_item'     => __( 'Edit Service', 'gc_2018' ),
 			),
 			'public'              => true,
 			'can_export'          => true,
@@ -45,24 +45,24 @@ add_action( 'init', 'create_services' );
 function create_servicecategory_taxonomy() {
 
 	$labels = array(
-		'name'                       => _x( 'Service types', 'taxonomy general name' ),
-		'singular_name'              => _x( 'Service type', 'taxonomy singular name' ),
-		'search_items'               => __( 'Search Service Type' ),
-		'popular_items'              => __( 'Popular Service Types' ),
-		'all_items'                  => __( 'All Service types' ),
+		'name'                       => _x( 'Service types', 'taxonomy general name', 'gc_2018' ),
+		'singular_name'              => _x( 'Service type', 'taxonomy singular name', 'gc_2018' ),
+		'search_items'               => __( 'Search Service Type', 'gc_2018' ),
+		'popular_items'              => __( 'Popular Service Types', 'gc_2018' ),
+		'all_items'                  => __( 'All Service types', 'gc_2018' ),
 		'parent_item'                => null,
 		'parent_item_colon'          => null,
-		'edit_item'                  => __( 'Edit Type' ),
-		'update_item'                => __( 'Update Type' ),
-		'add_new_item'               => __( 'Add New Service Type' ),
-		'new_item_name'              => __( 'New Service Type' ),
-		'separate_items_with_commas' => __( 'Separate services with commas' ),
-		'add_or_remove_items'        => __( 'Add or remove services' ),
-		'choose_from_most_used'      => __( 'Choose from the most used services' ),
+		'edit_item'                  => __( 'Edit Type', 'gc_2018' ),
+		'update_item'                => __( 'Update Type', 'gc_2018' ),
+		'add_new_item'               => __( 'Add New Service Type', 'gc_2018' ),
+		'new_item_name'              => __( 'New Service Type', 'gc_2018' ),
+		'separate_items_with_commas' => __( 'Separate services with commas', 'gc_2018' ),
+		'add_or_remove_items'        => __( 'Add or remove services', 'gc_2018' ),
+		'choose_from_most_used'      => __( 'Choose from the most used services', 'gc_2018' ),
 	);
 
 	register_taxonomy( 'gc_servicecategory', 'gc_service', array(
-		'label'        => __( 'Service Type' ),
+		'label'        => __( 'Service Type', 'gc_2018' ),
 		'labels'       => $labels,
 		'hierarchical' => true,
 		'show_ui'      => true,
@@ -99,9 +99,9 @@ function update_service( $post_id ) {
 	}
 
 
-	$title = get_field('title', $post_id);
+	$title = get_field( 'title', $post_id );
 
-	if(!$title) {
+	if ( ! $title ) {
 		$title = get_the_terms( $post_id, array( 'taxonomy' => 'gc_servicecategory' ) )[0]->name;
 	}
 
@@ -110,7 +110,7 @@ function update_service( $post_id ) {
 		'ID'         => $post_id,
 		//'post_title' => date_i18n( get_option( 'date_format' ), strtotime( get_field( 'start', $post_id ) ) ),
 		'post_title' => $title,
-		'post_name' => $post_id
+		'post_name'  => $post_id
 	);
 
 
@@ -143,9 +143,9 @@ function gc_service_column( $columns ) {
 	$columns = array(
 		'cb'               => '<input type="checkbox" />',
 		//'title'           => 'Date',
-		'service_date_col' => 'Date',
-		'service_time_col' => 'Time',
-		'service_speaker'  => 'Speaker',
+		'service_date_col' => __('Date', 'gc_2018'),
+		'service_time_col' => __('Time', 'gc_2018'),
+		'service_speaker'  => __('Speaker', 'gc_2018'),
 		//'service_type'    => 'Type',
 
 	);
@@ -321,7 +321,7 @@ function gc_service_load_value( $field ) {
 
 	$speakers = get_posts(
 		array(
-			'post_type' => 'gc_people',
+			'post_type'   => 'gc_people',
 			'numberposts' => 300,
 		)
 	);

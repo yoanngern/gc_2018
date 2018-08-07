@@ -26,8 +26,8 @@
             </div>
 
             <nav class="nav">
-                <div class="previous"><?php previous_posts_link( 'Previous' ); ?></div>
-                <div class="next"><?php next_posts_link( 'Next' ); ?></div>
+                <div class="previous"><?php previous_posts_link( __('Previous', 'gc_2018') ); ?></div>
+                <div class="next"><?php next_posts_link( __('Next', 'gc_2018') ); ?></div>
             </nav>
         </div>
 

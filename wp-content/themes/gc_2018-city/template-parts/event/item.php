@@ -35,7 +35,7 @@ if ( $event != null ) :
                         <h4><?php echo $time; ?></h4>
                     </div>
                     <div class="button">
-                        <span>En savoir plus</span>
+                        <span><?php _e('Learn more', 'gc_2018') ?></span>
                     </div>
                 </div>
 
