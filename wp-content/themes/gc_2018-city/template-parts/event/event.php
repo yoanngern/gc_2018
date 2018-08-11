@@ -7,8 +7,10 @@
 
 	if ( $location_obj != null ) {
 		$location = get_the_title( $location_obj ) . "<br/>" . get_field( 'address', $location_obj ) . "<br/>" . get_field( 'zip_code', $location_obj ) . " " . get_field( 'city', $location_obj ) . "<br/>" . get_field( 'country', $location_obj );
+		$location_maps = get_the_title( $location_obj ) . " " . get_field( 'address', $location_obj ) . " " . get_field( 'zip_code', $location_obj ) . " " . get_field( 'city', $location_obj ) . " " . get_field( 'country', $location_obj );
 	} else {
 		$location = "";
+		$location_maps = "";
 	}
 
 
@@ -156,7 +158,7 @@
                                 <p class="address"><?php echo $location; ?></p>
 
                                 <a target="_blank" class="direction"
-                                   href="https://www.google.com/maps/search/?api=1&query=<?php echo urlencode( $location ) ?>"><?php _e( 'get directions', 'gc_2018' ) ?></a>
+                                   href="https://www.google.com/maps/search/?api=1&query=<?php echo urlencode( $location_maps ) ?>"><?php _e( 'get directions', 'gc_2018' ) ?></a>
 
                             </div>
 						<?php endif; ?>
