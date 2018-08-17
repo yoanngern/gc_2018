@@ -75,7 +75,7 @@ body.page-template-default {
 
                         div.col {
                             display: inline-block;
-                            width: 46%;
+                            width: 47%;
                             vertical-align: top;
 
                             &:nth-of-type(2n) {
@@ -128,6 +128,42 @@ body.page-template-default {
 
             }
 
+        }
+
+    }
+
+    @media only screen and (max-width: 800px) {
+        #content {
+            div.platter article.content-page {
+                div.content {
+
+                    div.col2 {
+                        margin-bottom: inherit;
+
+                        -webkit-column-count: inherit; /* Chrome, Safari, Opera */
+                        -moz-column-count: inherit; /* Firefox */
+                        column-count: inherit;
+                    }
+
+                    div.col_fixed {
+                        display: block;
+                        width: inherit;
+
+                        div.col {
+                            display: block;
+                            width: inherit;
+
+                            &:nth-of-type(2n) {
+                                padding-left: 0;
+                            }
+
+                            &:nth-of-type(2n+1) {
+                                padding-right: 0;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
     }
