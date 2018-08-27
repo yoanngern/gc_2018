@@ -26,14 +26,14 @@
 
 		$bg_image = get_field( 'bg_image', $default_cat );
 
-		$title = __('Events');
+		$title = __('Events', 'gc_2018');
 
 
 	else:
 
 		$bg_image = get_field_or_parent( 'bg_image', $_POST, 'gc_eventcategory' );
 
-		$title = __('Events');
+		$title = __('Events', 'gc_2018');
 
 	endif;
 
