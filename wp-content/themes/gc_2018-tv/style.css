@@ -14,51 +14,6 @@ Domain Path:    /languages
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
-@font-face {
-  font-family: 'Radikal-Light';
-  src: url("fonts/2B5662_0_0.eot");
-  src: url("fonts/2B5662_0_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_0_0.woff") format("woff"), url("fonts/2B5662_0_0.ttf") format("truetype"); }
-
-@font-face {
-  font-family: 'Radikal-Black';
-  src: url("fonts/2B5662_1_0.eot");
-  src: url("fonts/2B5662_1_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_1_0.woff") format("woff"), url("fonts/2B5662_1_0.ttf") format("truetype"); }
-
-@font-face {
-  font-family: 'Radikal-Bold';
-  src: url("fonts/2B5662_2_0.eot");
-  src: url("fonts/2B5662_2_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_2_0.woff") format("woff"), url("fonts/2B5662_2_0.ttf") format("truetype"); }
-
-@font-face {
-  font-family: 'Radikal';
-  src: url("fonts/2B5662_3_0.eot");
-  src: url("fonts/2B5662_3_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_3_0.woff") format("woff"), url("fonts/2B5662_3_0.ttf") format("truetype"); }
-
-@font-face {
-  font-family: 'Radikal-UltraThin';
-  src: url("fonts/2B5662_4_0.eot");
-  src: url("fonts/2B5662_4_0.eot?#iefix") format("embedded-opentype"), url("fonts/2B5662_4_0.woff") format("woff"), url("fonts/2B5662_4_0.ttf") format("truetype"); }
-
-@font-face {
-  font-family: 'Corbel-BoldItalic';
-  src: url("fonts/34BBF4_0_0.eot");
-  src: url("fonts/34BBF4_0_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_0_0.woff2") format("woff2"), url("fonts/34BBF4_0_0.woff") format("woff"), url("fonts/34BBF4_0_0.ttf") format("truetype"); }
-
-@font-face {
-  font-family: 'Corbel';
-  src: url("fonts/34BBF4_1_0.eot");
-  src: url("fonts/34BBF4_1_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_1_0.woff2") format("woff2"), url("fonts/34BBF4_1_0.woff") format("woff"), url("fonts/34BBF4_1_0.ttf") format("truetype"); }
-
-@font-face {
-  font-family: 'Corbel-Bold';
-  src: url("fonts/34BBF4_2_0.eot");
-  src: url("fonts/34BBF4_2_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_2_0.woff2") format("woff2"), url("fonts/34BBF4_2_0.woff") format("woff"), url("fonts/34BBF4_2_0.ttf") format("truetype"); }
-
-@font-face {
-  font-family: 'Corbel-Italic';
-  src: url("fonts/34BBF4_3_0.eot");
-  src: url("fonts/34BBF4_3_0.eot?#iefix") format("embedded-opentype"), url("fonts/34BBF4_3_0.woff2") format("woff2"), url("fonts/34BBF4_3_0.woff") format("woff"), url("fonts/34BBF4_3_0.ttf") format("truetype"); }
-
 #gc_tv #content .platter {
   top: inherit;
   margin: 50px auto;
