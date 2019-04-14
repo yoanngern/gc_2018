@@ -5,7 +5,7 @@ Author:         Yoann Gern
 Author URI:     http://gerny-media.ch
 Description:    Template for Gospel Center TV 2018
 Template:       gc_2018
-Version:        0.2
+Version:        0.2.1
 License:        GNU General Public License v2 or later
 License URI:    http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:    gc_2018-tv
@@ -143,61 +143,62 @@ Use it to make something cool, have fun, and share what you've learned with othe
     #gc_tv #content .platter article.content-page .selection .item {
       width: 100%; } }
 
-#gc_tv > header div.global {
-  transform: translate(0, -100%); }
-  #gc_tv > header div.global.open {
-    transform: translate(0, 0); }
-  #gc_tv > header div.global #global-tab {
-    padding: 12px 17px; }
-  @media only screen and (max-width: 670px) {
+#gc_tv {
+  margin-top: 36px; }
+  #gc_tv > header div.global {
+    transform: translate(0, -100%); }
+    #gc_tv > header div.global.open {
+      transform: translate(0, 0); }
     #gc_tv > header div.global #global-tab {
-      padding: 7px 13px; } }
-
-#gc_tv > header div.local {
-  background-color: #FFFFFF;
-  width: 100%;
-  height: 36px;
-  position: fixed;
-  bottom: inherit;
-  box-shadow: 1px 2px 4px rgba(51, 51, 51, 0.5); }
-  #gc_tv > header div.local > div {
-    margin: 0 auto; }
-  #gc_tv > header div.local #simple_logo {
-    display: none;
-    margin: 0 auto; }
-  #gc_tv > header div.local div.top-nav,
-  #gc_tv > header div.local #burger {
-    display: inline-block;
-    position: relative;
-    top: inherit;
-    margin: 0; }
-  #gc_tv > header div.local #burger {
-    float: right;
-    margin: 9px 20px;
-    height: 18px;
-    width: 24px; }
-    #gc_tv > header div.local #burger span {
-      background-color: #333333; }
-      #gc_tv > header div.local #burger span:nth-child(1) {
-        top: 0; }
-      #gc_tv > header div.local #burger span:nth-child(2), #gc_tv > header div.local #burger span:nth-child(3) {
-        top: 8px; }
-      #gc_tv > header div.local #burger span:nth-child(4) {
-        top: 16px; }
-  #gc_tv > header div.local div.top-nav {
-    float: right;
-    margin: 1px 10px 0 0; }
-    #gc_tv > header div.local div.top-nav ul li a {
-      color: #333333;
-      font-size: 0.9em; }
-      #gc_tv > header div.local div.top-nav ul li a::before, #gc_tv > header div.local div.top-nav ul li a::after {
+      padding: 12px 17px; }
+    @media only screen and (max-width: 670px) {
+      #gc_tv > header div.global #global-tab {
+        padding: 7px 13px; } }
+  #gc_tv > header div.local {
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 36px;
+    position: fixed;
+    bottom: inherit;
+    box-shadow: 1px 2px 4px rgba(51, 51, 51, 0.5); }
+    #gc_tv > header div.local > div {
+      margin: 0 auto; }
+    #gc_tv > header div.local #simple_logo {
+      display: none;
+      margin: 0 auto; }
+    #gc_tv > header div.local div.top-nav,
+    #gc_tv > header div.local #burger {
+      display: inline-block;
+      position: relative;
+      top: inherit;
+      margin: 0; }
+    #gc_tv > header div.local #burger {
+      float: right;
+      margin: 9px 20px;
+      height: 18px;
+      width: 24px; }
+      #gc_tv > header div.local #burger span {
         background-color: #333333; }
-  @media only screen and (max-width: 900px) {
+        #gc_tv > header div.local #burger span:nth-child(1) {
+          top: 0; }
+        #gc_tv > header div.local #burger span:nth-child(2), #gc_tv > header div.local #burger span:nth-child(3) {
+          top: 8px; }
+        #gc_tv > header div.local #burger span:nth-child(4) {
+          top: 16px; }
     #gc_tv > header div.local div.top-nav {
-      display: none; } }
-  @media only screen and (max-width: 800px) {
-    #gc_tv > header div.local {
-      padding: 0 10px; } }
+      float: right;
+      margin: 1px 10px 0 0; }
+      #gc_tv > header div.local div.top-nav ul li a {
+        color: #333333;
+        font-size: 0.9em; }
+        #gc_tv > header div.local div.top-nav ul li a::before, #gc_tv > header div.local div.top-nav ul li a::after {
+          background-color: #333333; }
+    @media only screen and (max-width: 900px) {
+      #gc_tv > header div.local div.top-nav {
+        display: none; } }
+    @media only screen and (max-width: 800px) {
+      #gc_tv > header div.local {
+        padding: 0 10px; } }
 
 #gc_tv.page-template-page-tv #content .platter {
   top: -15vh;
