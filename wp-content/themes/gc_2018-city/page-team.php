@@ -70,28 +70,53 @@
             <section class="teams">
 				<?php while ( have_rows( 'teams' ) ): the_row();
 
-					$members = get_sub_field( 'team_members' );
+					$members  = get_sub_field( 'team_members' );
+					$show_bio = get_sub_field( 'show_bio' );
+
+					$class = '';
+
+					if ( $show_bio ) {
+						$class .= 'show-bio';
+					}
 
 					?>
 
-                    <article class="team">
+                    <article class="team <?php echo $class; ?>">
                         <h2><?php the_sub_field( 'title' ) ?></h2>
 
 						<?php foreach ( $members as $member ):
 
 							$image = get_people( $member['value'] )['picture'];
 							$name = get_people( $member['value'] )['name'];
+							$bio = get_people( $member['value'] )['bio'];
+
+							$class_has_bio = '';
+
+							if ( $bio ) {
+								$class_has_bio .= 'has-bio';
+							}
 
 							?>
 
-                            <div class="member">
-                                <div class="image">
-                                    <div class="bg"
-                                         style="background-image: url('<?php echo $image['sizes']['speaker'] ?>')"></div>
+                            <div class="member <?php echo $class_has_bio; ?>">
+                                <div class="left">
+                                    <div class="image">
+                                        <div class="bg"
+                                             style="background-image: url('<?php echo $image['sizes']['speaker'] ?>')"></div>
+                                    </div>
                                 </div>
                                 <div class="txt">
-                                    <h3><?php echo $name; ?></h3>
+                                    <h3 class="name"><?php echo $name; ?></h3>
+                                    <div class="bio">
+                                        <div class="close">
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                        <h4><?php echo $name; ?></h4>
+										<?php echo $bio; ?>
+                                    </div>
                                 </div>
+
                             </div>
 
 						<?php endforeach; ?>

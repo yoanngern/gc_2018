@@ -33,6 +33,34 @@ $(document).ready(function () {
 
     }
 
+    $('body.page-template-page-team .team .member.has-bio .image').click(function () {
+
+        parent = $(this).parent().parent();
+
+        var visible = false;
+
+        if($('.bio', parent).hasClass('show')) {
+            visible = true;
+        }
+
+        $('body.page-template-page-team .team .member .bio').removeClass('show');
+
+        if(!visible) {
+            $('.bio', parent).addClass('show');
+        }
+
+
+
+    });
+
+    $('body.page-template-page-team .team .member .close').click(function () {
+
+        parent = $(this).parent();
+
+        $('body.page-template-page-team .team .member .bio').removeClass('show');
+
+    });
+
     $('#services article.service').click(function () {
 
         $('#services article.service').removeClass('current');
