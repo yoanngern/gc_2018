@@ -6,6 +6,7 @@ if ( get_queried_object() instanceof WP_Post_Type ) {
 
 	$post_type = get_queried_object()->name;
 
+
 } else {
 
 	$post_type = get_post_type( $_POST );
